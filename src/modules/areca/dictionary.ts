@@ -1,0 +1,103 @@
+/** 일기 쓰는 사물 문구 사전 (ko / en / ja). */
+
+import type { Dictionary } from '../../core/i18n';
+
+export type ArecaKey =
+  | 'title' | 'summary' | 'capability'
+  | 'today-title' | 'today-note' | 'today-writing'
+  | 'archive-title' | 'archive-note' | 'archive-empty' | 'archive-count'
+  | 'visit-first' | 'visit-nth' | 'visit-since'
+  | 'mood-curious' | 'mood-settled' | 'mood-lonely' | 'mood-restless' | 'mood-content'
+  | 'memory-title' | 'memory-note' | 'memory-forget' | 'memory-forgotten'
+  | 'about-title' | 'about-body' | 'about-vocab'
+  | 'paper-label' | 'paper-note';
+
+export const arecaDictionary: Dictionary<ArecaKey> = {
+  ko: {
+    title: '일기 쓰는 사물',
+    summary: '쓸모는 없습니다. 당신이 언제 왔다 갔는지 알아차리고, 그것을 제 일기에 적을 뿐입니다.',
+    capability: '당신의 방문을 알아차려 일기를 쓰고, 여러 번 오는 동안 그 관계가 쌓이는 것을 보여 준다',
+    'today-title': '오늘 적은 것',
+    'today-note': '이 사물은 당신이 머무는 동안에도 적습니다. 오래 있으면 오늘 일기가 달라집니다.',
+    'today-writing': '적는 중',
+    'archive-title': '지난 일기',
+    'archive-note': '이 기기에만 남습니다. 다른 기기에서는 이 사물이 당신을 알지 못합니다.',
+    'archive-empty': '아직 지난 일기가 없습니다. 다시 오면 오늘 것이 여기로 넘어갑니다.',
+    'archive-count': '장',
+    'visit-first': '처음 온 날',
+    'visit-nth': '번째 방문',
+    'visit-since': '만에',
+    'mood-curious': '궁금해함',
+    'mood-settled': '가라앉음',
+    'mood-lonely': '쓸쓸함',
+    'mood-restless': '들뜸',
+    'mood-content': '흡족함',
+    'memory-title': '기억',
+    'memory-note': '기억은 당신의 브라우저 안에만 있습니다. 어디로도 보내지 않습니다.',
+    'memory-forget': '잊게 하기',
+    'memory-forgotten': '잊었습니다. 다음에 오면 처음 보는 사람이 됩니다.',
+    'about-title': '이 사물에 대하여',
+    'about-body': '이 사물이 알 수 있는 것은 좁습니다. 당신이 언제 왔는지, 얼마 만에 다시 왔는지, 얼마나 머물렀는지. 그것뿐입니다. 아는 문장도 몇 개 되지 않아 같은 말을 자주 합니다. 넓은 어휘로 무엇이든 말할 수 있는 것은 사물이 아니라 비서입니다.',
+    'about-vocab': '이 사물이 아는 문장',
+    'paper-label': '근거 논문',
+    'paper-note': '논문은 일기 쓰는 공기청정기를 여덟 사람의 집에 3주간 두고 관찰한 질적 연구입니다. 이 페이지는 그 방법이 아니라 그 자리 — 쓸모없이 곁에 있으며 알아차리는 사물 — 를 옮겨 놓았습니다.',
+  },
+  en: {
+    title: 'A Thing That Keeps a Diary',
+    summary: 'It is of no use. It notices when you come and go, and writes that down in its diary.',
+    capability: 'Notices your visits, writes a diary about them, and lets a relationship accumulate over repeated visits',
+    'today-title': "Today's entry",
+    'today-note': 'It writes while you are still here. Stay longer and today’s entry changes.',
+    'today-writing': 'writing',
+    'archive-title': 'Past entries',
+    'archive-note': 'Kept on this device only. On another device it does not know you.',
+    'archive-empty': 'No past entries yet. Come again and today’s will move down here.',
+    'archive-count': ' entries',
+    'visit-first': 'first day',
+    'visit-nth': 'th visit',
+    'visit-since': 'after',
+    'mood-curious': 'curious',
+    'mood-settled': 'settled',
+    'mood-lonely': 'lonely',
+    'mood-restless': 'restless',
+    'mood-content': 'content',
+    'memory-title': 'Memory',
+    'memory-note': 'Its memory lives in your browser only. Nothing is sent anywhere.',
+    'memory-forget': 'Make it forget',
+    'memory-forgotten': 'Forgotten. Next time you will be a stranger.',
+    'about-title': 'About this thing',
+    'about-body': 'What it can know is narrow: when you came, how long since last time, how long you stayed. That is all. It knows only a handful of sentences, so it repeats itself. A thing that can say anything with a wide vocabulary is not a thing. It is an assistant.',
+    'about-vocab': 'sentences it knows',
+    'paper-label': 'Based on',
+    'paper-note': 'The paper is a qualitative study that placed a diary-writing air purifier in eight homes for three weeks. This page reproduces not its method but its position — a useless thing that sits beside you and notices.',
+  },
+  ja: {
+    title: '日記を書くもの',
+    summary: '役には立ちません。あなたがいつ来て帰ったかに気づき、それを自分の日記に書くだけです。',
+    capability: 'あなたの訪れに気づいて日記を書き、何度も来るうちに関係が積もっていくのを見せる',
+    'today-title': '今日書いたもの',
+    'today-note': 'あなたがいる間にも書いています。長くいれば今日の日記は変わります。',
+    'today-writing': '書いている',
+    'archive-title': '過去の日記',
+    'archive-note': 'この端末にだけ残ります。別の端末では、このものはあなたを知りません。',
+    'archive-empty': 'まだ過去の日記はありません。また来れば今日の分がここへ移ります。',
+    'archive-count': '枚',
+    'visit-first': '初めて来た日',
+    'visit-nth': '回目の訪れ',
+    'visit-since': 'ぶり',
+    'mood-curious': '気になっている',
+    'mood-settled': '落ち着いている',
+    'mood-lonely': 'さびしい',
+    'mood-restless': 'そわそわ',
+    'mood-content': '満ち足りている',
+    'memory-title': '記憶',
+    'memory-note': '記憶はあなたのブラウザの中だけにあります。どこにも送りません。',
+    'memory-forget': '忘れさせる',
+    'memory-forgotten': '忘れました。次に来たときは初めての人になります。',
+    'about-title': 'このものについて',
+    'about-body': 'このものが知れることは狭いです。いつ来たか、どれくらいぶりか、どれくらいいたか。それだけです。知っている文も数えるほどで、同じことをよく言います。広い語彙で何でも言えるのは、ものではなく秘書です。',
+    'about-vocab': 'このものが知る文',
+    'paper-label': '参照論文',
+    'paper-note': '論文は、日記を書く空気清浄機を8人の家に3週間置いて観察した質的研究です。このページはその方法ではなく、その位置 — 役に立たずそばにいて気づくもの — を移したものです。',
+  },
+};

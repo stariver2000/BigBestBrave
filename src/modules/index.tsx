@@ -12,6 +12,7 @@ import { registerNode, type PageNode } from '../core/tree';
 import type { Locale } from '../core/i18n';
 import { ChromaLab, chromaLabNode } from './chroma-lab';
 import { Redactor, redactorNode } from './redactor';
+import { Areca, arecaNode } from './areca';
 import { Beeper, beeperNode } from './beeper';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
@@ -35,6 +36,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: projectionNode, Page: Reliability },
   { node: beeperNode, Page: Beeper },
   { node: rhythmNode, Page: Rhythm },
+  { node: arecaNode, Page: Areca },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

@@ -9,6 +9,7 @@
 import { blueprintVariables } from './blueprint';
 import { cinemaVariables } from './cinema';
 import { dossierVariables } from './dossier';
+import { gardenVariables } from './garden';
 import { pagerVariables } from './pager';
 import { pulseVariables } from './pulse';
 import { sereneVariables } from './serene';
@@ -24,6 +25,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   blueprint: blueprintVariables,
   pager: pagerVariables,
   pulse: pulseVariables,
+  garden: gardenVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

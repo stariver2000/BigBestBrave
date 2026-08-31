@@ -1,0 +1,193 @@
+/*
+ * 일기 쓰는 사물 — 'garden' 룩.
+ * 가운데에 사물 하나. 그 아래에 지난 일기. 그 밖에는 아무것도 두지 않는다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: center;
+}
+
+.column {
+  inline-size: 100%;
+  max-inline-size: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 2vw, 28px);
+}
+
+.paper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--bbb-space-2);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}
+
+.paperLabel {
+  color: var(--bbb-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: var(--bbb-text-n2);
+}
+
+/* ── 사물 ───────────────────────────────────────────────── */
+
+.stage {
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(16px, 3vw, 36px);
+}
+
+/*
+ * 흰 원기둥. 옆에서 본 모습이라 위아래가 살짝 눌린 타원으로 끝난다.
+ * 좌우의 옅은 그늘이 둥근 면을 만든다.
+ */
+.body {
+  position: relative;
+  border-radius: 84px;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(30 42 34 / 0.09) 0%,
+      rgb(255 255 255 / 0) 18%,
+      rgb(255 255 255 / 0) 78%,
+      rgb(30 42 34 / 0.07) 100%
+    ),
+    var(--bbb-surface-raised);
+  box-shadow: var(--bbb-shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 아주 느리게 숨 쉰다. 살아 있다는 표시는 이 정도면 충분하다. */
+  animation: breathe 7s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* 전자잉크. 빛나지 않고 반사만 하므로 아주 옅은 안쪽 그림자만 준다. */
+.epaper {
+  inline-size: 72%;
+  block-size: 78%;
+  padding: 14px 12px;
+  border-radius: 6px;
+  background: var(--look-epaper, #e4e7de);
+  color: var(--look-epaper-ink, #39423a);
+  box-shadow: inset 0 1px 3px rgb(30 42 34 / 0.14);
+  font-size: 12px;
+  line-height: 1.85;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  /* 작은 화면에 다 들어가지 않는 것은 실제 기기도 마찬가지다.
+     잘린 자리를 딱 끊지 않고 흐리게 지워, 아래에 더 있다는 것을 알린다. */
+  mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+}
+
+.epaperHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 10px;
+  opacity: 0.75;
+}
+
+.epaperLine {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 전자잉크는 한 번에 다시 그려진다. 그 순간을 깜빡임으로 흉내 낸다. */
+.refreshing {
+  animation: eink 420ms steps(2, end);
+}
+
+@keyframes eink {
+  0% { filter: invert(1); }
+  100% { filter: none; }
+}
+
+/* ── 오늘 · 지난 일기 ───────────────────────────────────── */
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.entryHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.mood {
+  padding: 2px 10px;
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-accent-soft);
+  color: var(--bbb-accent);
+}
+
+.entryLine {
+  margin: 0;
+  font-size: var(--bbb-text-0);
+  line-height: 1.9;
+}
+
+.archive {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-4);
+}
+
+.archiveItem {
+  padding-block-end: var(--bbb-space-3);
+  border-block-end: 1px solid var(--bbb-border-color);
+}
+
+.archiveItem:last-child {
+  border-block-end: none;
+  padding-block-end: 0;
+}
+
+.quiet {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.8;
+  color: var(--bbb-fg-muted);
+}
+
+.forget {
+  align-self: flex-start;
+  padding: 8px 18px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-md);
+  background: transparent;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  transition: color var(--bbb-duration-fast) var(--bbb-easing), border-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.forget:hover {
+  color: var(--bbb-accent);
+  border-color: var(--bbb-accent);
+}
+
+.about {
+  font-size: var(--bbb-text-0);
+  line-height: 1.9;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 60ch;
+}

@@ -1,0 +1,80 @@
+/**
+ * 일기 쓰는 사물 페이지의 트리 노드.
+ * 루트에서 갈라진 여섯 번째 가지(사물과 함께 사는 일)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { arecaDictionary } from './dictionary';
+
+export const arecaNode: PageNode = {
+  id: 'areca-diary',
+  slug: 'thing',
+  parentId: ROOT_ID,
+  title: { ko: arecaDictionary.ko.title, en: arecaDictionary.en.title, ja: arecaDictionary.ja.title },
+  summary: { ko: arecaDictionary.ko.summary, en: arecaDictionary.en.summary, ja: arecaDictionary.ja.summary },
+  capability: {
+    ko: arecaDictionary.ko.capability,
+    en: arecaDictionary.en.capability,
+    ja: arecaDictionary.ja.capability,
+  },
+  look: 'garden',
+  keywords: [
+    '사물', '일기', '동거', '감정', '전자잉크', '기억',
+    'thing', 'diary', 'object', 'agency', 'companion',
+    'もの', '日記', '同居',
+  ],
+  traits: {
+    domain: ['craft', 'philosophy', 'design'],
+    audience: ['general'],
+    intent: ['comfort', 'provoke'],
+    stance: ['poetic'],
+    atmosphere: ['serene', 'cozy'],
+    temperature: ['neutral'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['still'],
+    season: ['seasonless'],
+    daytime: ['timeless'],
+    layout: ['single-column'],
+    density: ['airy'],
+    rhythm: ['uniform'],
+    alignment: ['left'],
+    grid: ['col-8'],
+    corner: ['rounded'],
+    border: ['none'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['humanist'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['flat'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['slow-drift'],
+    'motion-duration': ['languid'],
+    easing: ['ease-in-out'],
+    entrance: ['fade'],
+    paradigm: ['click'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['minimal'],
+    // 이 사물의 기억은 기기에만 남는다. 그래서 다른 기기에서는 당신을 모른다.
+    persistence: ['local-storage'],
+    tone: ['poetic', 'deadpan'],
+    person: ['first'],
+    'copy-length': ['short'],
+    jargon: ['none'],
+    'data-presence': ['accent'],
+    imagery: ['none'],
+    ornament: ['none'],
+    'number-format': ['plain'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['device'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
