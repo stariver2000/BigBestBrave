@@ -1,0 +1,78 @@
+/**
+ * 리듬 페이지의 트리 노드.
+ * 루트에서 갈라진 다섯 번째 가지(몸으로 느끼는 것)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { rhythmDictionary } from './dictionary';
+
+export const rhythmNode: PageNode = {
+  id: 'rhythm-kinship',
+  slug: 'rhythm',
+  parentId: ROOT_ID,
+  title: { ko: rhythmDictionary.ko.title, en: rhythmDictionary.en.title, ja: rhythmDictionary.ja.title },
+  summary: { ko: rhythmDictionary.ko.summary, en: rhythmDictionary.en.summary, ja: rhythmDictionary.ja.summary },
+  capability: {
+    ko: rhythmDictionary.ko.capability,
+    en: rhythmDictionary.en.capability,
+    ja: rhythmDictionary.ja.capability,
+  },
+  look: 'pulse',
+  keywords: [
+    '진동', '햅틱', '리듬', '두드리기', '유대감', '동질감',
+    'haptic', 'vibration', 'rhythm', 'similarity', 'kinship',
+    '振動', 'ハプティクス', 'リズム',
+  ],
+  traits: {
+    domain: ['design', 'science', 'music'],
+    audience: ['general', 'creator'],
+    intent: ['explore', 'entertain'],
+    stance: ['earnest'],
+    atmosphere: ['dreamy', 'sensual'],
+    temperature: ['warm'],
+    brightness: ['abyssal'],
+    intensity: ['vivid'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['canvas'],
+    density: ['spacious'],
+    rhythm: ['syncopated'],
+    alignment: ['centered'],
+    grid: ['col-8'],
+    corner: ['pill'],
+    border: ['none'],
+    elevation: ['floating'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['major-third'],
+    'type-contrast': ['gentle'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['organic'],
+    'motion-duration': ['measured'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation', 'gesture'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['haptic'],
+    persistence: ['none'],
+    tone: ['warm', 'poetic'],
+    person: ['second'],
+    'copy-length': ['short'],
+    jargon: ['explained'],
+    'data-presence': ['supporting'],
+    imagery: ['diagram'],
+    ornament: ['none'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['light'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

@@ -1,0 +1,86 @@
+/**
+ * 삐삐 체험 페이지의 트리 노드.
+ * 루트에서 갈라진 네 번째 가지(문화·소통)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { beeperDictionary } from './dictionary';
+
+export const beeperNode: PageNode = {
+  id: 'beeper-redux',
+  slug: 'beeper',
+  parentId: ROOT_ID,
+  title: {
+    ko: beeperDictionary.ko.title,
+    en: beeperDictionary.en.title,
+    ja: beeperDictionary.ja.title,
+  },
+  summary: {
+    ko: beeperDictionary.ko.summary,
+    en: beeperDictionary.en.summary,
+    ja: beeperDictionary.ja.summary,
+  },
+  capability: {
+    ko: beeperDictionary.ko.capability,
+    en: beeperDictionary.en.capability,
+    ja: beeperDictionary.ja.capability,
+  },
+  look: 'pager',
+  keywords: [
+    '삐삐', '무선호출기', '숫자', '암호', '1004', '8282', '90년대', '레트로',
+    'beeper', 'pager', 'retro', 'code', 'nineties',
+    'ポケベル', 'レトロ',
+  ],
+  traits: {
+    domain: ['history', 'craft', 'literature'],
+    audience: ['general', 'creator'],
+    intent: ['entertain', 'provoke', 'archive'],
+    stance: ['nostalgic'],
+    atmosphere: ['cozy', 'ancient'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['vivid'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['kiosk'],
+    density: ['comfortable'],
+    rhythm: ['uniform'],
+    alignment: ['centered'],
+    grid: ['col-8'],
+    corner: ['rounded'],
+    border: ['solid'],
+    elevation: ['layered'],
+    surface: ['plain'],
+    'type-voice': ['mono'],
+    'type-scale': ['major-third'],
+    'type-contrast': ['gentle'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['mechanical'],
+    'motion-duration': ['quick'],
+    easing: ['step'],
+    entrance: ['fade'],
+    paradigm: ['click', 'direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['expressive'],
+    persistence: ['none'],
+    tone: ['warm', 'poetic'],
+    person: ['second'],
+    'copy-length': ['short'],
+    jargon: ['none'],
+    'data-presence': ['accent'],
+    imagery: ['none'],
+    ornament: ['none'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

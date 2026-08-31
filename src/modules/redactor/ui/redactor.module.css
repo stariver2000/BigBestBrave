@@ -1,0 +1,259 @@
+/*
+ * 개인정보 지우개 화면 — 'dossier' 룩.
+ *
+ * 화면을 책상 위 서류처럼 짠다: 위에 도장이 찍힌 고지문, 가운데 서식(설정), 아래 원본과 사본 두 장.
+ * 색·간격은 토큰에서 오지만, 이 배치와 도형은 이 페이지의 주제(문서 정리)에 맞춰 손으로 정했다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.4vw, 36px);
+}
+
+/* ── 고지문 ─────────────────────────────────────────────── */
+
+/* 서류에 찍힌 고무도장. 이 도구를 쓰는 이유가 이 한 칸에 들어 있다. */
+.privacy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  border: 2px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+}
+
+/* 모서리에 찍힌 인장 자국. 네 귀퉁이 중 한 곳만 눌러 인쇄물의 우연함을 남긴다. */
+.privacy::after {
+  content: '';
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-end: -1px;
+  inline-size: 18px;
+  block-size: 18px;
+  border-block-start: 2px solid var(--bbb-accent);
+  border-inline-end: 2px solid var(--bbb-accent);
+}
+
+.privacyTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bbb-accent);
+}
+
+/* 제목 앞의 먹칠 바. 이 페이지가 하는 일을 도형 하나로 보여 준다. */
+.privacyDot {
+  inline-size: 26px;
+  block-size: 9px;
+  border-radius: 0;
+  background: var(--look-bar, currentColor);
+  flex: 0 0 auto;
+}
+
+.privacyBody {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  color: var(--bbb-fg);
+  max-inline-size: 80ch;
+}
+
+/* ── 서식(설정) ─────────────────────────────────────────── */
+
+.controlGrid {
+  display: grid;
+  gap: clamp(16px, 1.6vw, 24px);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .controlGrid {
+    grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.styleNote {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}
+
+/* 검사 항목. 서식의 체크란처럼 네모로 두고, 켜진 칸만 먹으로 표시한다. */
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px dashed var(--bbb-border-strong);
+  background: transparent;
+  color: var(--bbb-fg-muted);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    border-color var(--bbb-duration-fast) var(--bbb-easing),
+    color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.chip:hover {
+  border-color: var(--bbb-fg);
+  color: var(--bbb-fg);
+}
+
+.chipOn {
+  border-style: solid;
+  border-color: var(--bbb-fg);
+  color: var(--bbb-fg);
+}
+
+/* 찾은 개수는 도장처럼 붉게 남긴다. 0건과 미검사를 눈으로 구분하기 위함이다. */
+.chipCount {
+  padding-inline-start: 8px;
+  border-inline-start: 1px solid var(--bbb-border-color);
+  color: var(--bbb-accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 원본과 사본 ────────────────────────────────────────── */
+
+.workspace {
+  display: grid;
+  gap: clamp(16px, 1.6vw, 24px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 1100px) {
+  .workspace {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.textarea {
+  inline-size: 100%;
+  min-block-size: 360px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-strong);
+  background: var(--bbb-surface-raised);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.85;
+  resize: vertical;
+  transition: border-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--bbb-accent);
+  box-shadow: 0 0 0 2px var(--bbb-accent-soft);
+}
+
+/*
+ * 사본은 괘선 노트 위에 인쇄된 것처럼 보이게 한다.
+ * 줄 간격을 본문 행간(1.85em)과 맞춰야 글자가 줄 위에 앉는다.
+ */
+.output {
+  margin: 0;
+  min-block-size: 360px;
+  max-block-size: 640px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-color);
+  background-color: var(--bbb-surface-raised);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(1.85em - 1px),
+    var(--look-grain, transparent) calc(1.85em - 1px),
+    var(--look-grain, transparent) 1.85em
+  );
+  background-position: 0 var(--bbb-space-2);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.85;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: auto;
+}
+
+.outputEmpty {
+  color: var(--bbb-fg-muted);
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--bbb-space-2);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.total {
+  margin-inline-end: 6px;
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+  color: var(--bbb-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ── 다음 문서 ──────────────────────────────────────────── */
+
+/* 서류 끝에 붙는 참조란. 카드가 아니라 한 줄의 색인처럼 둔다. */
+.nextCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px var(--bbb-space-3);
+  align-items: baseline;
+  margin-block-start: clamp(16px, 2vw, 28px);
+  padding: var(--bbb-space-3) 0;
+  border-block: 1px solid var(--bbb-fg);
+  transition: background-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.nextCard:hover {
+  background: var(--bbb-accent-soft);
+}
+
+.nextLabel {
+  grid-row: span 2;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bbb-accent);
+}
+
+.nextTitle {
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-2);
+}
+
+.nextSummary {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 62ch;
+}

@@ -1,0 +1,86 @@
+/**
+ * 산점도 신뢰도 검사 페이지의 트리 노드.
+ * 루트에서 '주제 영역'으로 갈라진 세 번째 가지(데이터·시각화)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { projectionDictionary } from './dictionary';
+
+export const projectionNode: PageNode = {
+  id: 'projection-reliability',
+  slug: 'projection',
+  parentId: ROOT_ID,
+  title: {
+    ko: projectionDictionary.ko.title,
+    en: projectionDictionary.en.title,
+    ja: projectionDictionary.ja.title,
+  },
+  summary: {
+    ko: projectionDictionary.ko.summary,
+    en: projectionDictionary.en.summary,
+    ja: projectionDictionary.ja.summary,
+  },
+  capability: {
+    ko: projectionDictionary.ko.capability,
+    en: projectionDictionary.en.capability,
+    ja: projectionDictionary.ja.capability,
+  },
+  look: 'blueprint',
+  keywords: [
+    '차원축소', '산점도', 't-sne', 'umap', 'pca', '신뢰도', '왜곡', '시각화',
+    'dimensionality reduction', 'projection', 'trustworthiness', 'continuity', 'embedding',
+    '次元削減', '散布図',
+  ],
+  traits: {
+    domain: ['data', 'science', 'design'],
+    audience: ['expert', 'academic', 'professional'],
+    intent: ['measure', 'explore'],
+    stance: ['clinical'],
+    atmosphere: ['sterile', 'futuristic'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['vivid'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['dashboard'],
+    density: ['compact'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['flat'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['gentle'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['snappy'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation', 'hover-reveal'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'academic'],
+    person: ['second'],
+    'copy-length': ['short'],
+    jargon: ['explained'],
+    'data-presence': ['exhaustive'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['moderate'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

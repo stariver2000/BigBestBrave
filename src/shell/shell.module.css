@@ -1,0 +1,671 @@
+/*
+ * 페이지 공통 프레임 — 'serene' 룩.
+ * 구조: 얇은 상단 바 / 넓은 여백의 히어로 / 본문 / 조용한 하단.
+ */
+
+.frame {
+  position: relative;
+  /* 지면 레이어(::before)가 프레임 배경 위에만 얹히도록 쌓임 맥락을 가둔다. */
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+}
+
+/*
+ * 지면 연출. 룩마다 다르며 기본은 'serene'의 빛무리다.
+ * 고정 배치라 스크롤해도 지면이 함께 흐르지 않는다.
+ */
+.frame::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 12% 0%, var(--look-wash-a, transparent) 0%, transparent 62%),
+    radial-gradient(60% 50% at 92% 6%, var(--look-wash-b, transparent) 0%, transparent 60%),
+    radial-gradient(80% 60% at 50% 108%, var(--look-wash-c, transparent) 0%, transparent 66%);
+}
+
+/* ── 상단 바 ─────────────────────────────────────────────── */
+
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--bbb-space-3);
+  padding: var(--bbb-space-2) var(--rail);
+  background: color-mix(in oklab, var(--bbb-bg) 78%, transparent);
+  backdrop-filter: blur(16px) saturate(120%);
+  border-block-end: var(--hairline);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+/* 브랜드 마크는 작은 원 하나. 각진 도형은 이 룩의 인상과 맞지 않는다. */
+.brandMark {
+  inline-size: 10px;
+  block-size: 10px;
+  border-radius: 50%;
+  background: var(--bbb-accent);
+  flex: 0 0 auto;
+}
+
+.brandName {
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-0);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.trail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  scrollbar-width: none;
+}
+
+.trail::-webkit-scrollbar {
+  display: none;
+}
+
+.trailLink {
+  transition: color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.trailLink:hover {
+  color: var(--bbb-accent);
+}
+
+.trailSeparator {
+  color: var(--bbb-border-strong);
+}
+
+.trailCurrent {
+  color: var(--bbb-fg);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--bbb-space-1);
+  margin-inline-start: auto;
+  flex: 0 0 auto;
+}
+
+.ghostButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: var(--hairline);
+  border-radius: var(--bbb-radius-pill);
+  background: var(--bbb-surface);
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color var(--bbb-duration-fast) var(--bbb-easing),
+    border-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.ghostButton:hover {
+  color: var(--bbb-accent);
+  border-color: var(--bbb-accent);
+}
+
+.kbd {
+  font-family: var(--bbb-font-mono);
+  font-size: 11px;
+  color: var(--bbb-fg-muted);
+}
+
+.localeGroup {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--bbb-radius-pill);
+  background: color-mix(in oklab, var(--bbb-fg) 7%, transparent);
+}
+
+.localeButton {
+  padding: 5px 13px;
+  border: none;
+  border-radius: var(--bbb-radius-pill);
+  background: transparent;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  transition:
+    color var(--bbb-duration-fast) var(--bbb-easing),
+    background-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.localeButton:hover {
+  color: var(--bbb-fg);
+}
+
+.localeActive,
+.localeActive:hover {
+  color: var(--bbb-accent);
+  background: var(--bbb-surface);
+  box-shadow: var(--bbb-shadow-sm);
+}
+
+/* ── 히어로 ──────────────────────────────────────────────── */
+
+.hero {
+  padding: clamp(64px, 11vw, 152px) var(--rail) clamp(40px, 6vw, 80px);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-3);
+  inline-size: 100%;
+  max-inline-size: var(--bbb-content-width);
+  margin-inline: auto;
+  animation: riseIn var(--bbb-duration-slow) var(--bbb-easing) both;
+}
+
+.pageTitle {
+  font-size: clamp(46px, 7vw, 88px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+/* 제목 끝의 작은 점. 강조색을 딱 이만큼만 쓴다. */
+.titleDot {
+  color: var(--bbb-accent);
+}
+
+.pageSummary {
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.72;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 52ch;
+}
+
+/* ── 본문 ────────────────────────────────────────────────── */
+
+.main {
+  flex: 1 1 auto;
+  inline-size: 100%;
+  max-inline-size: calc(var(--bbb-content-width) + var(--rail) * 2);
+  margin-inline: auto;
+  padding: 0 var(--rail) clamp(64px, 8vw, 120px);
+}
+
+/* ── 하단 ────────────────────────────────────────────────── */
+
+.footer {
+  border-block-start: var(--hairline);
+  background: color-mix(in oklab, var(--bbb-surface) 55%, transparent);
+}
+
+.footerInner {
+  inline-size: 100%;
+  max-inline-size: calc(var(--bbb-content-width) + var(--rail) * 2);
+  margin-inline: auto;
+  padding: clamp(40px, 5vw, 72px) var(--rail);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-4);
+}
+
+.tagline {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 의견란 ─────────────────────────────────────────────── */
+
+.comments {
+  margin-block-start: clamp(56px, 7vw, 104px);
+  padding-block-start: clamp(32px, 4vw, 56px);
+  border-block-start: var(--hairline);
+  max-inline-size: 74ch;
+}
+
+.commentsHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+}
+
+.commentsTitle {
+  font-size: var(--bbb-text-3);
+  letter-spacing: -0.02em;
+}
+
+.commentsCount {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.commentsNote {
+  margin-block-start: 8px;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}
+
+.commentsEmpty {
+  padding-block: var(--bbb-space-4);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-1);
+  margin-block-start: var(--bbb-space-3);
+  padding: var(--bbb-space-3);
+  border: var(--hairline);
+  border-radius: var(--bbb-radius-lg);
+  background: var(--bbb-surface);
+  box-shadow: var(--bbb-shadow-sm);
+}
+
+.commentAuthorInput,
+.commentBodyInput {
+  inline-size: 100%;
+  padding: 10px var(--bbb-space-2);
+  border: var(--hairline);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-bg);
+  font-family: inherit;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  transition: border-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.commentAuthorInput {
+  max-inline-size: 260px;
+}
+
+.commentBodyInput {
+  resize: vertical;
+  min-block-size: 76px;
+}
+
+.commentAuthorInput:focus,
+.commentBodyInput:focus {
+  outline: none;
+  border-color: var(--bbb-accent);
+  box-shadow: 0 0 0 4px var(--bbb-accent-soft);
+}
+
+.commentFormActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--bbb-space-1);
+}
+
+.commentSubmit {
+  padding: 9px 22px;
+  border: none;
+  border-radius: var(--bbb-radius-pill);
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  transition: filter var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.commentSubmit:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.commentSubmit:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.commentGhost {
+  align-self: flex-start;
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  transition: color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.commentGhost:hover {
+  color: var(--bbb-accent);
+}
+
+.commentError {
+  margin-block-start: var(--bbb-space-1);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-danger);
+}
+
+.commentList {
+  list-style: none;
+  margin: var(--bbb-space-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-3);
+}
+
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.commentHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--bbb-space-1);
+}
+
+.commentAuthor {
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-0);
+}
+
+.commentTime {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.commentBody {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  /* 사용자가 넣은 줄바꿈은 살리되 긴 단어는 강제로 접어 레이아웃을 지킨다. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* 답글은 왼쪽 실선 하나로만 들여쓴다. 상자를 겹치면 깊이가 깊어질수록 지저분해진다. */
+.commentReplies {
+  margin-block-start: var(--bbb-space-2);
+  padding-inline-start: var(--bbb-space-3);
+  border-inline-start: var(--hairline);
+}
+
+/* ── 커맨드 팔레트 ───────────────────────────────────────── */
+
+.paletteBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-block-start: 14vh;
+  background: color-mix(in oklab, var(--bbb-fg) 55%, transparent);
+  backdrop-filter: blur(8px);
+  animation: riseIn var(--bbb-duration-fast) var(--bbb-easing) both;
+}
+
+.paletteBox {
+  inline-size: min(600px, 92vw);
+  border-radius: var(--bbb-radius-lg);
+  background: var(--bbb-surface);
+  box-shadow: var(--bbb-shadow-lg);
+  overflow: hidden;
+}
+
+.paletteInput {
+  inline-size: 100%;
+  padding: var(--bbb-space-4);
+  border: none;
+  border-block-end: var(--hairline);
+  background: transparent;
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-1);
+  outline: none;
+}
+
+.paletteList {
+  list-style: none;
+  margin: 0;
+  padding: var(--bbb-space-1);
+  max-block-size: 46vh;
+  overflow-y: auto;
+}
+
+.paletteItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px var(--bbb-space-2);
+  border-radius: var(--bbb-radius-md);
+  cursor: pointer;
+}
+
+.paletteItemActive {
+  background: var(--bbb-accent-soft);
+}
+
+.paletteEmpty {
+  padding: var(--bbb-space-4);
+  color: var(--bbb-fg-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * 'dossier' 룩 — 서류철의 프레임.
+ * ───────────────────────────────────────────────────────────── */
+
+/* 삐삐의 지면: 플라스틱 표면의 미세한 결. 완전히 매끈하면 화면이 죽어 보인다. */
+[data-look='pager'].frame::before {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgb(255 255 255 / 0.012) 0 1px,
+      transparent 1px 4px
+    );
+}
+
+/* 도면의 지면: 작은 눈금과 큰 눈금 두 겹. 계측하는 화면이라는 인상을 만든다. */
+[data-look='blueprint'].frame::before {
+  background-image:
+    linear-gradient(to right, var(--look-grid-fine, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--look-grid-fine, transparent) 1px, transparent 1px),
+    linear-gradient(to right, var(--look-grid-coarse, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--look-grid-coarse, transparent) 1px, transparent 1px);
+  background-size:
+    var(--look-grid-fine-size, 20px) var(--look-grid-fine-size, 20px),
+    var(--look-grid-fine-size, 20px) var(--look-grid-fine-size, 20px),
+    var(--look-grid-coarse-size, 100px) var(--look-grid-coarse-size, 100px),
+    var(--look-grid-coarse-size, 100px) var(--look-grid-coarse-size, 100px);
+}
+
+/* 상영관의 지면: 빛무리 대신 필름 그레인. 어둠이 완전히 죽지 않을 만큼만 얹는다. */
+[data-look='cinema'].frame::before {
+  background-image: radial-gradient(var(--look-grain, transparent) 0.5px, transparent 0.6px);
+  background-size: 3px 3px;
+}
+
+/* 지면은 빛무리 대신 종이 결. 아주 촘촘한 가로선이라 질감으로만 읽힌다. */
+[data-look='dossier'].frame::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    var(--look-grain, transparent) 3px 4px
+  );
+  opacity: 0.55;
+}
+
+/* 문서의 머리글처럼 이중선으로 닫는다. */
+[data-look='dossier'] .header {
+  border-block-end: 1px solid var(--bbb-fg);
+  background: color-mix(in oklab, var(--bbb-bg) 88%, transparent);
+}
+
+[data-look='dossier'] .header::after {
+  content: '';
+  position: absolute;
+  inset-block-end: -4px;
+  inset-inline: 0;
+  block-size: 1px;
+  background: var(--bbb-fg);
+  opacity: 0.35;
+}
+
+/* 브랜드 마크는 원이 아니라 먹칠 바. 이 페이지의 도형이다. */
+[data-look='dossier'] .brandMark {
+  inline-size: 22px;
+  block-size: 9px;
+  border-radius: 0;
+  background: var(--look-bar);
+}
+
+[data-look='dossier'] .brandName {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] .trail,
+[data-look='dossier'] .ghostButton,
+[data-look='dossier'] .localeButton {
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.06em;
+}
+
+[data-look='dossier'] .ghostButton {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+  background: transparent;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] .ghostButton:hover {
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+  border-color: var(--bbb-fg);
+}
+
+[data-look='dossier'] .localeGroup {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+  padding: 0;
+  gap: 0;
+  background: transparent;
+}
+
+[data-look='dossier'] .localeButton {
+  border-radius: 0;
+  border-inline-start: 1px solid var(--bbb-border-color);
+}
+
+[data-look='dossier'] .localeButton:first-child {
+  border-inline-start: none;
+}
+
+[data-look='dossier'] .localeActive,
+[data-look='dossier'] .localeActive:hover {
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+  box-shadow: none;
+}
+
+/* 표제 위의 이중 괘선. 인쇄물의 표지처럼 제목 덩어리를 연다. */
+[data-look='dossier'] .heroInner::before {
+  content: '';
+  display: block;
+  block-size: 4px;
+  border-block: 1px solid var(--bbb-fg);
+  margin-block-end: var(--bbb-space-3);
+}
+
+[data-look='dossier'] .pageTitle {
+  letter-spacing: -0.015em;
+}
+
+[data-look='dossier'] .titleDot {
+  color: var(--bbb-accent);
+}
+
+[data-look='dossier'] .footer {
+  border-block-start: 1px solid var(--bbb-fg);
+  background: transparent;
+}
+
+[data-look='dossier'] .tagline {
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.08em;
+}
+
+/* 의견란도 서식의 일부처럼. 입력 칸은 종이 위의 빈칸이다. */
+[data-look='dossier'] .comments {
+  border-block-start: 1px solid var(--bbb-fg);
+}
+
+[data-look='dossier'] .commentsTitle {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] .commentForm {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+  box-shadow: var(--bbb-shadow-sm);
+}
+
+[data-look='dossier'] .commentAuthorInput,
+[data-look='dossier'] .commentBodyInput {
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: 0;
+  background: var(--bbb-surface-raised);
+}
+
+[data-look='dossier'] .commentSubmit {
+  border-radius: 0;
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] .commentAuthor {
+  font-family: var(--bbb-font-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+[data-look='dossier'] .commentTime,
+[data-look='dossier'] .commentGhost {
+  font-family: var(--bbb-font-mono);
+}
+
+[data-look='dossier'] .commentReplies {
+  border-inline-start: 1px solid var(--bbb-fg);
+}
+
+[data-look='dossier'] .paletteBox {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+}
+
+[data-look='dossier'] .paletteInput {
+  font-family: var(--bbb-font-mono);
+}
