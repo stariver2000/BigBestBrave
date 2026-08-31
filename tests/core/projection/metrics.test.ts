@@ -146,3 +146,38 @@ describe('통합 평가', () => {
     expect(result.distortions).toHaveLength(20);
   });
 });
+
+/**
+ * 두 지표는 서로 반대 방향의 잘못만 센다. 그 사실을 화면에서 말하려면 자료로 먼저 확인해야 한다.
+ * 아래 두 사례는 서로의 거울이다 — 하나는 붙여 놓은 잘못, 하나는 찢어 놓은 잘못.
+ */
+describe('지표가 놓치는 것', () => {
+  /** 원 위의 점들. 각자의 이웃은 양옆의 호(arc) 이웃뿐이다. */
+  function circle(count: number): number[][] {
+    return Array.from({ length: count }, (_, index) => {
+      const angle = (2 * Math.PI * index) / count;
+      return [Math.cos(angle), Math.sin(angle)];
+    });
+  }
+
+  it('원을 잘라 직선으로 펴면 신뢰도는 남고 연속성만 내려간다', () => {
+    // 직선 위에서 이웃이 되는 점은 원에서도 이웃이었다. 새로 붙는 남이 없으니 신뢰도는 거의 그대로다.
+    // 하지만 잘린 자리의 두 점은 서로를 잃는다. 그 잘못은 연속성만 센다.
+    const high = circle(20);
+    const low: [number, number][] = high.map((_, index) => [index, 0]);
+    const { metrics } = evaluate({ high, low }, 8, false);
+
+    expect(metrics.trustworthiness).toBeGreaterThan(0.9);
+    expect(metrics.continuity).toBeLessThan(metrics.trustworthiness - 0.05);
+  });
+
+  it('같은 그림에서 국소는 멀쩡해도 전체 거리 순서는 크게 어긋난다', () => {
+    // 이것이 거리 순위 상관을 따로 보는 이유다. 이웃만 지키면 전체가 지켜지는 것이 아니다.
+    const high = circle(20);
+    const low: [number, number][] = high.map((_, index) => [index, 0]);
+    const { metrics } = evaluate({ high, low }, 8, false);
+
+    expect(metrics.distanceCorrelation).toBeLessThan(0.8);
+    expect(metrics.trustworthiness).toBeGreaterThan(metrics.distanceCorrelation + 0.15);
+  });
+});

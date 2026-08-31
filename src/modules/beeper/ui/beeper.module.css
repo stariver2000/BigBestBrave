@@ -375,6 +375,31 @@
   color: var(--bbb-fg-muted);
 }
 
+/* ── 보내기: 지나갈 수 있는 것 ─────────────────────────── */
+
+/* 세 수를 나란히 놓는다. 견주는 것이 요점이라 같은 크기, 같은 간격으로 둔다. */
+.gates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-1) var(--bbb-space-3);
+  margin-block-start: var(--bbb-space-3);
+}
+
+.gate {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.gateCount {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  color: var(--bbb-accent);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ── 해독: 어디에 무엇이 걸리는가 ──────────────────────── */
 
 .spots {

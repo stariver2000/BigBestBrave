@@ -224,6 +224,73 @@
 }
 
 /* 두 지표 중 어느 쪽이 약한지에 따라 읽는 법이 달라진다. */
+/* 예시 자료의 사정. 자료 칸 안에 두되, 자료가 아니라 자료에 대한 말임을 선으로 알린다. */
+.sampleNote {
+  margin-block-start: var(--bbb-space-2);
+  padding-inline-start: var(--bbb-space-2);
+  border-inline-start: 2px solid var(--bbb-accent);
+}
+
+.sampleTitle {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+  color: var(--bbb-accent);
+}
+
+.sampleBody {
+  margin: 4px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 80ch;
+}
+
+/* 값의 사정을 적는 줄 — 어떤 k로 쟀는지, 등급 구간이 어디인지. 값 자체가 아니므로 눌러 둔다. */
+.scope {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--bbb-space-2);
+  margin: var(--bbb-space-2) 0 4px;
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.scopeLabel {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scopeItem {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.scopeValue {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg);
+}
+
+/* 무엇을 놓치는지. 재는 것과 같은 카드 안에 두되, 선 하나로 성격이 다른 말임을 알린다. */
+.metricBlind {
+  margin-block-start: 8px;
+  padding-block-start: 8px;
+  border-block-start: 1px solid var(--bbb-border-color);
+  font-size: var(--bbb-text-n2);
+  line-height: 1.65;
+  color: var(--bbb-fg-muted);
+}
+
+.metricBlindLabel {
+  display: block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-danger);
+}
+
 .verdict {
   padding: var(--bbb-space-3);
   border-inline-start: 3px solid var(--bbb-accent);

@@ -43,6 +43,9 @@ export function Reliability({ locale }: { locale: Locale }) {
   const [standardizeColumns, setStandardizeColumns] = useState<boolean>(DEFAULT_SETTINGS.standardize);
 
   const table = useMemo(() => parseCsv(source), [source]);
+  // 예시를 보고 있을 때만 그 예시가 무엇을 보여 주려는 것인지 밝힌다.
+  // 남의 자료에 대고 설명하면 그 자료가 그런 자료라는 뜻이 되어 버린다.
+  const showingSample = source === sampleCsv();
   const numeric = useMemo(() => numericColumnIndices(table), [table]);
 
   const analysis = useMemo(
@@ -206,6 +209,13 @@ export function Reliability({ locale }: { locale: Locale }) {
             </span>
           )}
         </div>
+
+        {showingSample && (
+          <div className={styles.sampleNote}>
+            <p className={styles.sampleTitle}>{t('sample-title')}</p>
+            <p className={styles.sampleBody}>{t('sample-body')}</p>
+          </div>
+        )}
       </Panel>
     </div>
   );

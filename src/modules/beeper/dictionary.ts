@@ -7,6 +7,7 @@ export type BeeperKey =
   | 'mode-send' | 'mode-read'
   | 'send-title' | 'send-note' | 'send-placeholder' | 'send-coverage' | 'send-sent' | 'send-lost'
   | 'send-lost-none' | 'send-overflow' | 'send-empty' | 'send-button' | 'send-going'
+  | 'gate-codes' | 'gate-syllables' | 'gate-hangul' | 'gate-note' | 'digits-note'
   | 'echo-title' | 'echo-note' | 'echo-you-said' | 'echo-they-read'
   | 'echo-same' | 'echo-different' | 'echo-also' | 'echo-nothing'
   | 'read-title' | 'read-note' | 'read-empty' | 'read-ways' | 'read-literal' | 'read-clear'
@@ -35,6 +36,11 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'send-empty': '무언가 적어 보세요.',
     'send-button': '보내기',
     'send-going': '가는 중…',
+    'gate-codes': '개의 말이 통째로 지나갑니다 (코드집)',
+    'gate-syllables': '자가 한 글자씩 지나갑니다 (숫자를 읽는 음절)',
+    'gate-hangul': '자는 한글 음절 전체입니다',
+    'gate-note': '숫자라는 문은 둘뿐입니다. 코드집에 있는 말은 통째로 지나가고, 공·영·일·이·삼·사·오·육·칠·팔·구로 읽히는 글자는 한 글자씩 지나갑니다. 나머지는 전부 문 앞에서 멈춥니다. \'보고싶어\'가 한 글자도 가지 못하는 이유입니다.',
+    'digits-note': '자리라는 한도는 이 화면이 정한 값입니다. 실제 기기와 서비스마다 달랐습니다 — 다만 짧다는 사실만은 어디서나 같았습니다.',
     'echo-title': '되돌아온 말',
     'echo-note': '상대의 액정에는 숫자만 찍힙니다. 그 사람이 그 숫자를 무엇으로 읽었는지가 여기 있습니다.',
     'echo-you-said': '보낸 말',
@@ -69,7 +75,7 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'paper-label': '근거 논문',
     'paper-note': '논문은 옛 기기를 다시 써 보게 한 질적 연구입니다. 이 페이지는 그 방법이 아니라 그 조건 — 숫자만 보낼 수 있다는 제약 — 을 재현합니다.',
     'reflect-title': '해 보면 알게 되는 것',
-    'reflect-body': '숫자로 옮겨지지 않는 말이 훨씬 많습니다. 그래서 그 시절 사람들은 무엇을 보낼지 오래 골랐습니다. 전할 수 있는 말이 적을수록, 고르는 시간은 길어집니다.',
+    'reflect-body': '숫자로 옮겨지지 않는 말이 훨씬 많습니다. 그래서 그 시절 사람들은 무엇을 보낼지 오래 골랐습니다. 전할 수 있는 말이 적을수록, 고르는 시간은 길어집니다. 보내 보면 하나를 더 알게 됩니다 — 도착하는 것은 내가 보낸 말이 아니라 상대가 읽은 말입니다. 그 시절의 대화는 늘 그 두 말 사이 어딘가에서 이뤄졌습니다.',
   },
   en: {
     title: 'Beeper',
@@ -88,6 +94,11 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'send-empty': 'Write something.',
     'send-button': 'Send it',
     'send-going': 'on its way…',
+    'gate-codes': ' phrases pass through whole (the codebook)',
+    'gate-syllables': ' characters pass one at a time (the syllables digits are read as)',
+    'gate-hangul': ' is every Hangul syllable there is',
+    'gate-note': 'There are only two gates. A phrase in the codebook passes through whole; a character read as gong, yeong, il, i, sam, sa, o, yuk, chil, pal or gu passes one at a time. Everything else stops at the gate — which is why "bogosipeo" (I miss you) cannot send a single character.',
+    'digits-note': ' digits is the limit this screen picked. Real devices and services differed — only the shortness was the same everywhere.',
     'echo-title': 'What came back',
     'echo-note': 'Only digits land on their screen. What they read those digits as is here.',
     'echo-you-said': 'You sent',
@@ -122,7 +133,7 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'paper-label': 'Based on',
     'paper-note': 'The paper is a qualitative study that had people use retro devices again. This page reproduces not its method but its condition — that digits are all you get.',
     'reflect-title': 'What you notice',
-    'reflect-body': 'Far more can be said than can be sent. That is why people back then took a long time choosing. The fewer words you can send, the longer you spend picking them.',
+    'reflect-body': 'Far more can be said than can be sent. That is why people back then took a long time choosing. The fewer words you can send, the longer you spend picking them. Send one and you learn something else: what arrives is not the message you sent but the message they read. Every conversation of that era happened somewhere between those two.',
   },
   ja: {
     title: 'ポケベル',
@@ -141,6 +152,11 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'send-empty': '何か書いてみてください。',
     'send-button': '送る',
     'send-going': '送信中…',
+    'gate-codes': '個の言葉がまるごと通ります（コード集）',
+    'gate-syllables': '字が一字ずつ通ります（数字として読まれる音節）',
+    'gate-hangul': '字がハングル音節の全体です',
+    'gate-note': '数字という門は二つだけです。コード集にある言葉はまるごと通り、공·영·일·이·삼·사·오·육·칠·팔·구と読まれる字は一字ずつ通ります。それ以外はすべて門の前で止まります。「보고싶어（会いたい）」が一字も送れないのはそのためです。',
+    'digits-note': '桁という上限はこの画面が決めた値です。実際の機器やサービスごとに違いました — 短いという事実だけはどこでも同じでした。',
     'echo-title': '返ってきた言葉',
     'echo-note': '相手の液晶には数字だけが出ます。その数字を相手が何と読んだかがここにあります。',
     'echo-you-said': '送った言葉',
@@ -175,6 +191,6 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'paper-label': '参照論文',
     'paper-note': '論文は昔の機器を使い直してもらう質的研究です。このページはその方法ではなく、その条件 — 数字しか送れないこと — を再現します。',
     'reflect-title': 'やってみて気づくこと',
-    'reflect-body': '数字に置き換えられない言葉のほうがずっと多いのです。だからあの頃の人は、何を送るか長く選びました。送れる言葉が少ないほど、選ぶ時間は長くなります。',
+    'reflect-body': '数字に置き換えられない言葉のほうがずっと多いのです。だからあの頃の人は、何を送るか長く選びました。送れる言葉が少ないほど、選ぶ時間は長くなります。送ってみるともう一つ分かります — 届くのは自分が送った言葉ではなく、相手が読んだ言葉です。あの頃の会話は、いつもその二つの間のどこかで交わされていました。',
   },
 };

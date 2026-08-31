@@ -5,7 +5,7 @@
  * 그래서 화면은 낱말을 늘어놓는 대신 규칙별로 묶어 보여 준다. 여기 있는 것은 그 묶는 계산이다.
  */
 
-import { CODEBOOK, READING_RULES } from './config';
+import { CODEBOOK, HANGUL_SYLLABLE_COUNT, READING_RULES, SYLLABLE_TO_DIGIT } from './config';
 import type { CodebookEntry, ReadingRule } from './config';
 
 export interface RuleGroup {
@@ -43,4 +43,29 @@ export function isRepeated(digits: string): boolean {
 
 export function repeatedEntries(entries: readonly CodebookEntry[] = CODEBOOK): CodebookEntry[] {
   return entries.filter((entry) => isRepeated(entry.digits));
+}
+
+/** 숫자라는 문을 지나갈 수 있는 것의 수. */
+export interface Passable {
+  /** 통째로 지나가는 말 — 코드집에 있는 뜻. */
+  codes: number;
+  /** 한 글자씩 지나가는 글자 — 숫자를 읽는 음절(공·영·일·이…구). */
+  syllables: number;
+  /** 견줄 대상: 한글 음절 전체. */
+  hangul: number;
+}
+
+/**
+ * 대부분의 말이 왜 못 가는지를 수로 말한다.
+ *
+ * 숫자만 보낼 수 있는 화면에는 문이 둘뿐이다. 코드집에 있는 뜻은 통째로 지나가고,
+ * 숫자를 읽는 음절은 한 글자씩 지나간다. 나머지는 전부 문 앞에서 멈춘다.
+ * 이 셋을 나란히 놓으면 "전해지는 정도" 막대가 왜 늘 낮은지가 설명된다.
+ */
+export function whatPasses(): Passable {
+  return {
+    codes: CODEBOOK.length,
+    syllables: Object.keys(SYLLABLE_TO_DIGIT).length,
+    hangul: HANGUL_SYLLABLE_COUNT,
+  };
 }

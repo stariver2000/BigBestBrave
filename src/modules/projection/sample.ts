@@ -15,7 +15,18 @@ function gaussian(random: () => number): number {
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
+/**
+ * 만들어 둔 예시. 같은 문자열을 다시 만들지 않는다.
+ * 화면이 "지금 보고 있는 것이 예시인가"를 문자열 비교로 판단하므로, 매번 새로 만들면 그 비교가 비싸진다.
+ */
+let cached: string | null = null;
+
 export function sampleCsv(): string {
+  cached ??= buildSampleCsv();
+  return cached;
+}
+
+function buildSampleCsv(): string {
   const random = createRandom(SAMPLE.seed);
   const dimensions = SAMPLE.centers[0].length;
   const header = [...Array.from({ length: dimensions }, (_, index) => `f${index + 1}`), 'label'];

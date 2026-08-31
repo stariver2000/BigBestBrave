@@ -28,9 +28,12 @@ import {
   DOWNLOAD_BASENAME,
   PAPER,
   SAMPLE_SRT,
+  SETTING_ORIGINS,
 } from '../config';
 import { subtitleDictionary, type SubtitleKey } from '../dictionary';
 import { createMeasure } from '../measure';
+import { Outcome } from './Outcome';
+import { Quality } from './Quality';
 import { SettingSlider } from './SettingSlider';
 import { Theater } from './Theater';
 import styles from './subtitle.module.css';
@@ -84,12 +87,11 @@ export function Rechunker({ locale }: { locale: Locale }) {
       maxCps,
     });
 
-    // 원본에서 넘치던 자막 수. 결과에서 남은 넘침을 빼면 "몇 개를 구했는지"가 나온다.
-    const overflowingCues = parsed.cues.filter((cue) => measure(cue.text) > maxWidth).length;
+    // 원본에서 넘치던 자막 수. 결과에 남은 넘침과 견주면 "무엇이 달라졌는지"가 나온다.
+    const overflowBefore = parsed.cues.filter((cue) => measure(cue.text) > maxWidth).length;
     const stats = summarize(chunks, issues);
-    const rescued = Math.max(0, overflowingCues - (stats.counts.overflow ?? 0));
 
-    return { chunks, issues, stats, rescued, maxWidth };
+    return { chunks, issues, stats, overflowBefore, maxWidth };
   }, [parsed, measure, displayWidth, maxLines, maxCps, pauseThreshold]);
 
   const exported = useMemo(
@@ -97,7 +99,8 @@ export function Rechunker({ locale }: { locale: Locale }) {
     [result.chunks, parsed.format],
   );
 
-  const issueCounts = Object.entries(result.stats.counts);
+  // 값의 성격을 사전에서 꺼내 슬라이더에 붙인다. 슬라이더 부품은 성격이 무엇인지 알 필요가 없다.
+  const originOf = (key: keyof typeof SETTING_ORIGINS) => t(`origin-${SETTING_ORIGINS[key]}` as SubtitleKey);
 
   return (
     <div className={styles.layout}>
@@ -128,26 +131,36 @@ export function Rechunker({ locale }: { locale: Locale }) {
       <Panel title={t('settings-title')} note={t('settings-note')}>
         <div className={styles.settingGrid}>
           <SettingSlider
-            label={t('font-size')} value={fontSize} unit="px"
+            label={t('font-size')} value={fontSize} unit="px" origin={originOf('fontSize')}
             min={LIMITS.fontSize.min} max={LIMITS.fontSize.max} step={1} onChange={setFontSize}
           />
           <SettingSlider
-            label={t('display-width')} value={displayWidth} unit="px"
+            label={t('display-width')} value={displayWidth} unit="px" origin={originOf('displayWidth')}
             min={LIMITS.displayWidth.min} max={LIMITS.displayWidth.max} step={20} onChange={setDisplayWidth}
           />
           <SettingSlider
-            label={t('max-lines')} value={maxLines} unit=""
+            label={t('max-lines')} value={maxLines} unit="" origin={originOf('maxLines')}
             min={LIMITS.maxLines.min} max={LIMITS.maxLines.max} step={1} onChange={setMaxLines}
           />
           <SettingSlider
-            label={t('max-cps')} value={maxCps} unit="cps"
+            label={t('max-cps')} value={maxCps} unit="cps" origin={originOf('maxCps')}
             min={LIMITS.maxCps.min} max={LIMITS.maxCps.max} step={1} onChange={setMaxCps}
           />
           <SettingSlider
-            label={t('pause-threshold')} value={pauseThreshold} unit="ms"
+            label={t('pause-threshold')} value={pauseThreshold} unit="ms" origin={originOf('pauseThreshold')}
             min={LIMITS.pauseThreshold.min} max={LIMITS.pauseThreshold.max} step={50} onChange={setPauseThreshold}
           />
         </div>
+
+        {/* 슬라이더가 아닌 값도 결과를 정한다. 조절할 수 없다고 감추면 어디서 온 값인지 알 수 없다. */}
+        <p className={styles.durationRow}>
+          <span>{t('duration-label')}</span>
+          <span className={styles.settingValue}>
+            {(DEFAULTS.minDuration / 1000).toFixed(2)}s – {(DEFAULTS.maxDuration / 1000).toFixed(1)}s
+          </span>
+          <span className={styles.origin}>{originOf('duration')}</span>
+        </p>
+        <p className={styles.originNote}>{t('origin-note')}</p>
       </Panel>
 
       <div className={styles.workspace}>
@@ -204,36 +217,24 @@ export function Rechunker({ locale }: { locale: Locale }) {
           }
         >
           <pre className={styles.output}>{exported.length === 0 ? t('source-empty') : exported}</pre>
-          <div className={styles.meta}>
-            <span>
-              <span className={styles.metaStrong}>{result.stats.chunkCount}</span> {t('result-chunks')}
-            </span>
-            <span>
-              {t('result-peak')}{' '}
-              <span className={styles.metaStrong}>{result.stats.peakCps.toFixed(1)}</span> cps
-            </span>
-            {result.rescued > 0 && (
-              <span>
-                <span className={styles.metaStrong}>{result.rescued}</span> {t('result-rescued')}
-              </span>
-            )}
-          </div>
+          {result.chunks.length > 0 && (
+            <Outcome
+              numbers={{
+                cues: parsed.cues.length,
+                chunks: result.stats.chunkCount,
+                overflowBefore: result.overflowBefore,
+                overflowAfter: result.stats.counts.overflow ?? 0,
+                peakCps: result.stats.peakCps,
+                maxCps,
+              }}
+              t={t}
+            />
+          )}
         </Panel>
       </div>
 
-      <Panel title={t('quality-title')}>
-        {issueCounts.length === 0 ? (
-          <p className={styles.clean}>{t('quality-clean')}</p>
-        ) : (
-          <div className={styles.issueList}>
-            {issueCounts.map(([kind, count]) => (
-              <span key={kind} className={styles.issue}>
-                {t(`issue-${kind}` as SubtitleKey)}
-                <span className={styles.issueCount}>{count}</span>
-              </span>
-            ))}
-          </div>
-        )}
+      <Panel title={t('quality-title')} note={t('quality-note')}>
+        <Quality issues={result.issues} maxWidth={result.maxWidth} t={t} />
       </Panel>
     </div>
   );

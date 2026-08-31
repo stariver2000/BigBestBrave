@@ -9,7 +9,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Button, Panel, Segmented, type SegmentedOption } from '../../../kit';
+import { Panel, Segmented, type SegmentedOption } from '../../../kit';
 import {
   CODEBOOK,
   MAX_DIGITS,
@@ -20,11 +20,12 @@ import {
   segmentations,
 } from '../../../core/pager';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { PAPER, SUGGESTIONS, WELCOME_DIGITS } from '../config';
+import { PAPER, WELCOME_DIGITS } from '../config';
 import { beeperDictionary } from '../dictionary';
 import { Codebook } from './Codebook';
 import { PagerDevice } from './PagerDevice';
 import { Reading } from './Reading';
+import { Sending } from './Sending';
 import { Returned } from './Returned';
 import { useSending } from './useSending';
 import styles from './beeper.module.css';
@@ -61,8 +62,6 @@ export function Beeper({ locale }: { locale: Locale }) {
     { value: 'read', label: t('mode-read') },
   ];
 
-  const lost = echo.sent.pieces.filter((piece) => piece.via === 'lost');
-
   return (
     <div className={styles.layout}>
       <div className={styles.column}>
@@ -95,66 +94,14 @@ export function Beeper({ locale }: { locale: Locale }) {
 
         {mode === 'send' ? (
           <Panel title={t('send-title')} note={t('send-note')}>
-            <input
-              className={styles.input}
-              value={text}
-              placeholder={t('send-placeholder')}
-              onChange={(event) => setText(event.target.value)}
+            <Sending
+              text={text}
+              echo={echo}
+              ringing={sending.ringing}
+              onChange={setText}
+              onSend={sending.send}
+              t={t}
             />
-            <div className={styles.suggestions}>
-              {SUGGESTIONS.map((suggestion) => (
-                <button
-                  key={suggestion}
-                  type="button"
-                  className={styles.suggestion}
-                  onClick={() => setText(suggestion)}
-                >
-                  {suggestion}
-                </button>
-              ))}
-            </div>
-
-            {text.trim().length === 0 ? (
-              <p className={styles.hint}>{t('send-empty')}</p>
-            ) : (
-              <>
-                <div className={styles.coverageRow}>
-                  <span>{t('send-coverage')}</span>
-                  <span className={styles.coverageTrack}>
-                    <span
-                      className={styles.coverageFill}
-                      style={{ inlineSize: `${Math.round(echo.sent.coverage * 100)}%` }}
-                    />
-                  </span>
-                  <span>{Math.round(echo.sent.coverage * 100)}%</span>
-                </div>
-
-                <div className={styles.pieceList}>
-                  {echo.sent.pieces.map((piece, index) => (
-                    <span
-                      key={index}
-                      className={`${styles.piece} ${piece.via === 'lost' ? styles.pieceLost : styles.pieceSent}`}
-                    >
-                      {piece.text}
-                      {piece.digits && <span className={styles.pieceDigits}>{piece.digits}</span>}
-                    </span>
-                  ))}
-                </div>
-
-                <p className={styles.hint}>
-                  {lost.length === 0 ? t('send-lost-none') : `${t('send-lost')} · ${lost.map((piece) => piece.text).join(' ')}`}
-                </p>
-                {echo.sent.overflow && <p className={styles.hint}>{t('send-overflow')}</p>}
-
-                <Button
-                  variant="primary"
-                  disabled={echo.sent.digits.length === 0 || sending.ringing}
-                  onClick={sending.send}
-                >
-                  {sending.ringing ? t('send-going') : t('send-button')}
-                </Button>
-              </>
-            )}
           </Panel>
         ) : (
           <Panel title={t('read-title')} note={t('read-note')}>

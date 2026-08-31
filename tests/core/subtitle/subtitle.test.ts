@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  BREAK_LADDER,
   DEFAULTS,
   charactersPerSecond,
   formatSubtitle,
@@ -182,5 +183,121 @@ describe('내보내기', () => {
     const round = parseSubtitle(formatSubtitle(chunks, 'srt'));
     expect(round.cues).toHaveLength(chunks.length);
     expect(round.skipped).toBe(0);
+  });
+});
+
+/**
+ * 자동 편집은 설명할 수 없으면 믿기 어렵다.
+ * 그래서 덩어리마다 "왜 여기서 끝났는가"를 남기고, 그 근거가 실제 규칙과 맞는지 여기서 잡는다.
+ */
+describe('자른 근거', () => {
+  const cues = [
+    { start: 0, end: 3000, text: '오늘 회의는 여기까지입니다. 다음 안건은 내일 다루겠습니다.' },
+  ];
+
+  it('말이 다 들어가면 자른 것이 아니라 끝난 것이다', () => {
+    const chunks = rechunk(cues, options({ maxWidth: 200 }));
+    expect(chunks).toHaveLength(1);
+    expect(chunks[0].reason).toBe('end');
+  });
+
+  it('문장이 끝나는 자리가 있으면 그 자리를 근거로 삼는다', () => {
+    const chunks = rechunk(cues, options({ maxWidth: 22, maxLines: 1 }));
+    expect(chunks[0].lines.join(' ')).toBe('오늘 회의는 여기까지입니다.');
+    expect(chunks[0].reason).toBe('sentence-end');
+  });
+
+  it('마지막 덩어리의 근거는 언제나 end다', () => {
+    const chunks = rechunk(cues, options({ maxWidth: 22, maxLines: 1 }));
+    expect(chunks[chunks.length - 1].reason).toBe('end');
+  });
+
+  it('말이 쉰 자리에서 자르면 그 사실이 근거로 남는다', () => {
+    // 두 덩어리 사이가 200ms 비어 있다. 쉼 판정 기준(300ms)보다 짧아 한 묶음으로 이어지지만,
+    // 그 자리는 어절 사이(40점)보다 높은 쉼(85점)으로 채점된다.
+    const spoken = [
+      { start: 0, end: 2000, text: '지금 들어온 소식입니다' },
+      { start: 2200, end: 4000, text: '오후 들어 비가 그치겠습니다' },
+    ];
+    const chunks = rechunk(spoken, options({ maxWidth: 24, maxLines: 1 }));
+    expect(chunks[0].reason).toBe('pause');
+    expect(chunks[0].lines.join(' ')).toBe('지금 들어온 소식입니다');
+  });
+
+  it('근거는 모든 덩어리에 붙는다', () => {
+    for (const chunk of rechunk(cues, options({ maxWidth: 16 }))) {
+      expect(chunk.reason).toBeTruthy();
+    }
+  });
+});
+
+describe('자를 자리의 사다리', () => {
+  it('점수가 높은 순으로 늘어서 있다', () => {
+    const scores = BREAK_LADDER.map((step) => step.score);
+    expect([...scores].sort((a, b) => b - a)).toEqual(scores);
+  });
+
+  it('고를 수 있는 근거를 빠짐없이 담는다', () => {
+    const reasons = BREAK_LADDER.map((step) => step.reason);
+    expect(reasons).toEqual([
+      'sentence-end',
+      'pause',
+      'clause-end',
+      'closing-bracket',
+      'whitespace',
+      'character',
+    ]);
+  });
+
+  it('말이 끝난 경우는 고른 자리가 아니므로 사다리에 없다', () => {
+    expect(BREAK_LADDER.some((step) => step.reason === 'end')).toBe(false);
+  });
+});
+
+/**
+ * 화면이 사용자에게 약속하는 것("무엇이 남고 무엇이 사라지는가")을 코드가 실제로 지키는지 잡는다.
+ * 약속과 동작이 갈라지면 도구가 아니라 거짓말이 된다.
+ */
+describe('파일을 지날 때 남는 것과 사라지는 것', () => {
+  it('원본의 줄바꿈은 재분할 대상이라 공백 하나로 접힌다', () => {
+    const parsed = parseSubtitle(`1
+00:00:01,000 --> 00:00:04,000
+첫 줄
+둘째 줄
+`);
+    expect(parsed.cues[0].text).toBe('첫 줄 둘째 줄');
+  });
+
+  it('WebVTT의 큐 이름과 위치 지정자는 버리고 본문만 남긴다', () => {
+    const parsed = parseSubtitle(`WEBVTT
+
+intro
+00:00:01.000 --> 00:00:04.000 line:90% align:center
+안녕하세요
+`);
+    expect(parsed.format).toBe('vtt');
+    expect(parsed.cues).toHaveLength(1);
+    expect(parsed.cues[0].text).toBe('안녕하세요');
+    expect(parsed.skipped).toBe(0);
+  });
+
+  it('NOTE 블록은 자막이 아니므로 실패로 세지 않는다', () => {
+    const parsed = parseSubtitle(`WEBVTT
+
+NOTE 번역 검수 필요
+
+00:00:01.000 --> 00:00:04.000
+안녕하세요
+`);
+    expect(parsed.cues).toHaveLength(1);
+    expect(parsed.skipped).toBe(0);
+  });
+
+  it('태그는 글자로 남는다 — 그래서 폭 계산에도 그대로 들어간다', () => {
+    const cues = [{ start: 0, end: 3000, text: '<i>기울임</i> 자막입니다' }];
+    const chunks = rechunk(cues, options({ maxWidth: 200 }));
+    expect(chunks[0].lines.join(' ')).toContain('<i>');
+    // 눈에 보이지 않는 일곱 글자가 폭에 더해진다는 뜻이다.
+    expect(measure('<i>기울임</i>')).toBe(measure('기울임') + 7);
   });
 });

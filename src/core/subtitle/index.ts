@@ -1,6 +1,7 @@
 /** 자막 코어의 공개 진입점. */
 
 export type {
+  BreakReason,
   Chunk,
   ChunkOptions,
   Cue,
@@ -10,7 +11,7 @@ export type {
   QualityIssue,
   SubtitleFormat,
 } from './types';
-export { DEFAULTS, LIMITS, TAIL_AFTER_LAST } from './config';
+export { BREAK_LADDER, BREAK_SCORE, DEFAULTS, LIMITS, TAIL_AFTER_LAST } from './config';
 export { formatTimecode, parseTimecode } from './timecode';
 export { detectFormat, parseSubtitle } from './parse';
 export { layoutLines, type LayoutResult } from './layout';

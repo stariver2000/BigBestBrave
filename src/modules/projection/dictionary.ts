@@ -15,7 +15,12 @@ export type ProjectionKey =
   | 'metric-continuity' | 'metric-continuity-note'
   | 'metric-hit' | 'metric-hit-note'
   | 'metric-global' | 'metric-global-note'
+  | 'metric-blind'
+  | 'metric-trust-blind' | 'metric-continuity-blind'
+  | 'metric-global-blind' | 'metric-hit-blind'
   | 'grade-excellent' | 'grade-good' | 'grade-fair' | 'grade-poor'
+  | 'grade-scale' | 'grade-note' | 'metric-k' | 'metric-points' | 'metric-k-note'
+  | 'sample-title' | 'sample-body'
   | 'verdict-title' | 'verdict-balanced' | 'verdict-false' | 'verdict-missing'
   | 'lens-kept' | 'lens-imposters' | 'lens-pushed' | 'lens-idle'
   | 'export-report' | 'copy' | 'copied'
@@ -63,10 +68,22 @@ export const projectionDictionary: Dictionary<ProjectionKey> = {
     'metric-hit-note': '2차원 이웃 중 같은 라벨의 비율입니다.',
     'metric-global': '거리 순위 상관',
     'metric-global-note': '국소 이웃이 아니라 전체 구조가 남았는지 봅니다.',
+    'metric-blind': '놓치는 것',
+    'metric-trust-blind': '찢어 놓은 잘못은 세지 않습니다. 원 위의 점들을 잘라 직선으로 펴면 새로 붙는 남이 없어 신뢰도는 거의 그대로지만, 잘린 자리의 두 점은 서로를 잃습니다.',
+    'metric-continuity-blind': '붙여 놓은 잘못은 세지 않습니다. 모든 점을 한자리에 뭉쳐 그리면 연속성이 신뢰도보다 높게 나옵니다.',
+    'metric-global-blind': '국소 이웃은 보지 않습니다. 거꾸로, 이웃이 멀쩡해도 전체 거리 순서는 크게 어긋날 수 있습니다 — 원을 편 그림이 그렇습니다.',
+    'metric-hit-blind': '라벨이 옳다는 전제 위에 서 있습니다. 라벨이 틀렸거나 자료와 무관하면 이 수치도 뜻이 없습니다.',
     'grade-excellent': '충분히 믿을 만함',
     'grade-good': '대체로 믿을 만함',
     'grade-fair': '조심해서 볼 것',
     'grade-poor': '그대로 믿기 어려움',
+    'grade-scale': '등급 기준',
+    'grade-note': '절대적인 합격선은 없습니다. 위 구간은 실무에서 "이 정도면 믿고 본다"고 여겨지는 선을 옮긴 것일 뿐, 어느 기관이 정한 규격이 아닙니다. 같은 0.9라도 점이 적으면 쉽게 나오고, 자료가 복잡하면 어렵게 나옵니다.',
+    'metric-k': '이웃 수',
+    'metric-points': '점',
+    'metric-k-note': '지표는 이웃 수 k와 한 몸입니다. k를 바꾸면 값도 바뀌므로, 숫자만 떼어 인용하면 뜻이 흐려집니다. 작은 k는 아주 가까운 관계만, 큰 k는 더 넓은 이웃을 봅니다.',
+    'sample-title': '지금 보고 있는 예시가 하는 일',
+    'sample-body': '8차원 자료에 세 덩어리가 있습니다. 앞의 두 덩어리는 서로 가깝고, 세 번째만 멀리 떨어져 있습니다. PCA로 두 축에 눌러 담으면 가까운 두 덩어리가 겹쳐 보이는데, 바로 그 상황이 이 검사가 잡아내려는 것입니다. 지표를 보고, 렌즈를 겹친 자리에 올려 보세요.',
     'verdict-title': '읽는 법',
     'verdict-balanced': '두 지표가 비슷합니다. 가까워 보이는 것과 멀어 보이는 것 모두 대체로 실제와 맞습니다.',
     'verdict-false': '신뢰도가 더 낮습니다. 붙어 보이는 점들이 실제로는 남남일 수 있으니, 이 그림만 보고 군집을 주장하지 마세요.',
@@ -118,10 +135,22 @@ export const projectionDictionary: Dictionary<ProjectionKey> = {
     'metric-hit-note': 'Share of 2D neighbours carrying the same label.',
     'metric-global': 'Distance rank correlation',
     'metric-global-note': 'Looks at global structure rather than local neighbourhoods.',
+    'metric-blind': 'blind to',
+    'metric-trust-blind': 'It never counts what got torn apart. Cut a circle of points open and lay it on a line: no strangers are brought together, so trustworthiness barely moves — yet the two points at the cut have lost each other.',
+    'metric-continuity-blind': 'It never counts what got pushed together. Collapse every point onto one spot and continuity comes out higher than trustworthiness.',
+    'metric-global-blind': 'It does not look at local neighbourhoods. And the reverse holds: neighbourhoods can survive while the overall ordering of distances falls apart — the unrolled circle does exactly that.',
+    'metric-hit-blind': 'It stands on the assumption that the labels are right. If they are wrong or unrelated to the data, this number means nothing.',
     'grade-excellent': 'safe to read',
     'grade-good': 'mostly reliable',
     'grade-fair': 'read with care',
     'grade-poor': 'do not take at face value',
+    'grade-scale': 'Grade bands',
+    'grade-note': 'There is no absolute pass mark. These bands echo where practitioners tend to say "close enough to read it", not a spec set by any body. The same 0.9 comes easily with few points and hard with complicated data.',
+    'metric-k': 'neighbours',
+    'metric-points': 'points',
+    'metric-k-note': 'These numbers are inseparable from k. Change the neighbour count and they change too, so a figure quoted without its k means little. A small k watches only the closest ties; a large k takes in a wider neighbourhood.',
+    'sample-title': 'What the loaded sample is doing',
+    'sample-body': 'Three clusters in eight dimensions. The first two sit close to each other and only the third is far away. Pressed onto two axes by PCA, the two near ones come out overlapping — which is exactly the situation this check exists to catch. Read the metrics, then hold the lens over the overlap.',
     'verdict-title': 'How to read this',
     'verdict-balanced': 'Both measures agree. What looks close and what looks far mostly match the original data.',
     'verdict-false': 'Trustworthiness is the weaker one. Points that appear together may be strangers — do not claim clusters from this plot alone.',
@@ -173,10 +202,22 @@ export const projectionDictionary: Dictionary<ProjectionKey> = {
     'metric-hit-note': '2次元の近傍のうち同じラベルの割合です。',
     'metric-global': '距離順位相関',
     'metric-global-note': '局所ではなく全体構造が残っているかを見ます。',
+    'metric-blind': '見落とすもの',
+    'metric-trust-blind': '引き裂かれたものは数えません。円上の点を切って直線に伸ばすと、新たに近づく他人がいないため信頼性はほとんど動きませんが、切れ目の二点は互いを失います。',
+    'metric-continuity-blind': '寄せ集めた誤りは数えません。すべての点を一箇所に潰して描くと、連続性は信頼性より高く出ます。',
+    'metric-global-blind': '局所的な近傍は見ません。逆に、近傍が無事でも全体の距離の順序は大きく崩れることがあります — 円を伸ばした図がそれです。',
+    'metric-hit-blind': 'ラベルが正しいという前提の上にあります。ラベルが誤っていたり、データと無関係なら、この数値にも意味はありません。',
     'grade-excellent': '十分に信頼できる',
     'grade-good': 'おおむね信頼できる',
     'grade-fair': '注意して読むこと',
     'grade-poor': 'そのままは信じにくい',
+    'grade-scale': '等級の区分',
+    'grade-note': '絶対的な合格ラインはありません。上の区分は実務で「これなら見て良い」とされる線を移しただけで、どこかの機関が定めた規格ではありません。同じ 0.9 でも点が少なければ簡単に出て、データが複雑なら難しく出ます。',
+    'metric-k': '近傍数',
+    'metric-points': '点',
+    'metric-k-note': '指標は近傍数 k と一体です。k を変えれば値も変わるので、数字だけを切り離して引用すると意味が薄れます。小さい k はごく近い関係だけを、大きい k はより広い近傍を見ます。',
+    'sample-title': 'いま読み込まれている例が示すもの',
+    'sample-body': '8次元のデータに三つのかたまりがあります。前の二つは互いに近く、三つ目だけが遠く離れています。PCA で二軸に押し込むと近い二つが重なって見えます — まさにこの検査が捕まえようとする状況です。指標を読んでから、重なった場所にレンズを当ててみてください。',
     'verdict-title': '読み方',
     'verdict-balanced': '2つの指標が近い値です。近く見えるものも遠く見えるものも、概ね実際と合っています。',
     'verdict-false': '信頼度の方が低いです。くっついて見える点が実は無関係かもしれません。この図だけでクラスタを主張しないでください。',

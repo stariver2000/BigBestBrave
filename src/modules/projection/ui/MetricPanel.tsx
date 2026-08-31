@@ -26,13 +26,35 @@ function verdictKey(metrics: Metrics): ProjectionKey {
   return metrics.trustworthiness < metrics.continuity ? 'verdict-false' : 'verdict-missing';
 }
 
-function MetricCard({ name, value, note, grade }: { name: string; value: string; note: string; grade?: string }) {
+/**
+ * 지표 한 장. 무엇을 재는지(note)와 함께 **무엇을 놓치는지**(blind)를 같은 자리에 둔다.
+ * 재는 것만 적으면 그 수치 하나로 판단하게 되고, 이 페이지가 하려는 말은 정반대이기 때문이다.
+ */
+function MetricCard({
+  name,
+  value,
+  note,
+  blind,
+  blindLabel,
+  grade,
+}: {
+  name: string;
+  value: string;
+  note: string;
+  blind: string;
+  blindLabel: string;
+  grade?: string;
+}) {
   return (
     <div className={styles.metric}>
       <span className={styles.metricName}>{name}</span>
       <span className={styles.metricValue}>{value}</span>
       {grade && <span className={styles.metricGrade}>{grade}</span>}
       <span className={styles.metricNote}>{note}</span>
+      <span className={styles.metricBlind}>
+        <span className={styles.metricBlindLabel}>{blindLabel}</span>
+        {blind}
+      </span>
     </div>
   );
 }
@@ -54,29 +76,63 @@ export function MetricPanel({
               value={metrics.trustworthiness.toFixed(3)}
               grade={t(gradeKey(metrics.trustworthiness))}
               note={t('metric-trust-note')}
+              blind={t('metric-trust-blind')}
+              blindLabel={t('metric-blind')}
             />
             <MetricCard
               name={t('metric-continuity')}
               value={metrics.continuity.toFixed(3)}
               grade={t(gradeKey(metrics.continuity))}
               note={t('metric-continuity-note')}
+              blind={t('metric-continuity-blind')}
+              blindLabel={t('metric-blind')}
             />
             <MetricCard
               name={t('metric-global')}
               value={metrics.distanceCorrelation.toFixed(3)}
               note={t('metric-global-note')}
+              blind={t('metric-global-blind')}
+              blindLabel={t('metric-blind')}
             />
             {metrics.neighborhoodHit !== null && (
               <MetricCard
                 name={t('metric-hit')}
                 value={metrics.neighborhoodHit.toFixed(3)}
                 note={t('metric-hit-note')}
+                blind={t('metric-hit-blind')}
+                blindLabel={t('metric-blind')}
               />
             )}
           </div>
           <p className={styles.verdict}>
             <strong>{t('verdict-title')}</strong> — {t(verdictKey(metrics))}
           </p>
+
+          {/*
+            지표는 이웃 수 k와 한 몸이고, 등급은 합격선이 아니다. 값 옆에 이 두 사정을 두지 않으면
+            숫자만 떼어 인용되기 쉽다 — 이 페이지가 막으려는 것이 바로 그 인용이다.
+          */}
+          <p className={styles.scope}>
+            <span className={styles.scopeItem}>
+              {t('metric-k')} k = {metrics.k}
+            </span>
+            <span className={styles.scopeItem}>
+              {metrics.pointCount} {t('metric-points')}
+            </span>
+          </p>
+          <p className={styles.metricNote}>{t('metric-k-note')}</p>
+
+          <p className={styles.scope}>
+            <span className={styles.scopeLabel}>{t('grade-scale')}</span>
+            {GRADE_THRESHOLDS.map((grade) => (
+              <span key={grade.key} className={styles.scopeItem}>
+                {t(`grade-${grade.key}` as ProjectionKey)}
+                {/* 가장 낮은 구간은 문턱이 0이라 적을 값이 없다. 0.00을 적으면 기준처럼 읽힌다. */}
+                {grade.min > 0 && <span className={styles.scopeValue}>≥ {grade.min.toFixed(2)}</span>}
+              </span>
+            ))}
+          </p>
+          <p className={styles.metricNote}>{t('grade-note')}</p>
           {/* 지표의 정의를 세운 연구와, 이 페이지의 근거가 된 서베이는 서로 다르다. 둘 다 밝힌다. */}
           <p className={styles.metricNote}>{MEASURE_SOURCE}</p>
         </>

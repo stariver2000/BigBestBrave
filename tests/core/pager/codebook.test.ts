@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { CODEBOOK, READING_RULES, groupByRule, isRepeated, repeatedEntries } from '@core/pager';
+import {
+  CODEBOOK,
+  HANGUL_SYLLABLE_COUNT,
+  READING_RULES,
+  SYLLABLE_TO_DIGIT,
+  groupByRule,
+  isRepeated,
+  repeatedEntries,
+  whatPasses,
+} from '@core/pager';
 
 /**
  * 코드집은 낱말 목록이 아니라 규칙이 있는 언어다.
@@ -70,5 +79,30 @@ describe('겹치기', () => {
     expect(digits).toContain('8282');
     expect(digits).toContain('0404');
     expect(digits).not.toContain('486');
+  });
+});
+
+/**
+ * "대부분의 말은 못 간다"는 이 페이지의 주장이다.
+ * 주장을 수로 말하는 이상, 그 수가 자료에서 나온 것인지 여기서 확인한다.
+ */
+describe('숫자라는 문을 지나갈 수 있는 것', () => {
+  it('통째로 지나가는 말의 수는 코드집의 크기다', () => {
+    expect(whatPasses().codes).toBe(CODEBOOK.length);
+  });
+
+  it('한 글자씩 지나가는 글자는 숫자를 읽는 음절뿐이다', () => {
+    const passable = Object.keys(SYLLABLE_TO_DIGIT);
+    expect(whatPasses().syllables).toBe(passable.length);
+    // 열 개의 숫자에 공/영 두 읽기가 겹쳐 열한 자가 된다.
+    expect(passable).toHaveLength(11);
+    expect(passable).toContain('공');
+    expect(passable).toContain('영');
+  });
+
+  it('견주는 값은 유니코드 한글 음절 블록의 크기다', () => {
+    // U+AC00(가) ~ U+D7A3(힣)
+    expect(HANGUL_SYLLABLE_COUNT).toBe(11172);
+    expect(whatPasses().hangul).toBe(11172);
   });
 });

@@ -13,11 +13,33 @@ export interface Cue {
   text: string;
 }
 
+/**
+ * 이 덩어리가 왜 그 자리에서 끝났는가.
+ *
+ * 재분할은 점수가 가장 높은 자리를 고른다(config의 BREAK_SCORE). 어느 근거가 이겼는지를 남겨 두면
+ * 화면이 "왜 하필 여기서 잘랐는지"를 사용자에게 그대로 말할 수 있다. 설명할 수 없는 자동 편집은
+ * 결과를 믿기 어렵게 만든다.
+ *   end — 자른 것이 아니라 말이 거기서 끝났다.
+ */
+export type BreakReason =
+  | 'sentence-end'
+  | 'pause'
+  | 'clause-end'
+  | 'closing-bracket'
+  | 'whitespace'
+  | 'character'
+  | 'end';
+
 /** 한 번에 화면에 뜨는 자막. 줄바꿈까지 확정된 상태다. */
 export interface Chunk {
   start: number;
   end: number;
   lines: string[];
+  /**
+   * 이 덩어리의 끝을 정한 근거. 재분할이 만든 덩어리에는 항상 붙는다.
+   * 품질 검사처럼 덩어리를 직접 만들어 넘기는 자리에서는 없을 수 있어 선택 항목으로 둔다.
+   */
+  reason?: BreakReason;
 }
 
 export type SubtitleFormat = 'srt' | 'vtt';

@@ -10,7 +10,7 @@
 
 import { useMemo, useState } from 'react';
 import { Button, Segmented, type SegmentedOption } from '../../../kit';
-import { advance, blockAt, buildTimeline, nearestBlock, widestLine } from '../../../core/subtitle';
+import { BREAK_LADDER, advance, blockAt, buildTimeline, nearestBlock, widestLine } from '../../../core/subtitle';
 import type { Chunk, Cue, Measure } from '../../../core/subtitle';
 import { PLAYBACK } from '../config';
 import type { SubtitleKey } from '../dictionary';
@@ -129,6 +129,31 @@ export function Theater({
         />
       </div>
 
+      {/*
+        왜 하필 여기서 잘렸는지. 근거 하나만 보여 주면 "그런가 보다"로 끝나므로,
+        고를 수 있었던 자리들을 점수 사다리로 함께 놓아 이 자리가 왜 이겼는지가 보이게 한다.
+      */}
+      {chunk?.reason && (
+        <div className={styles.reason}>
+          <p className={styles.reasonLine}>
+            <span className={styles.reasonLabel}>{t('break-label')}</span>
+            <span className={styles.reasonText}>{t(`break-${chunk.reason}` as SubtitleKey)}</span>
+          </p>
+          <div className={styles.ladder}>
+            {BREAK_LADDER.map((step) => (
+              <span
+                key={step.reason}
+                className={`${styles.rung} ${step.reason === chunk.reason ? styles.rungActive : ''}`}
+              >
+                {t(`break-${step.reason}` as SubtitleKey)}
+                <span className={styles.rungScore}>{step.score}</span>
+              </span>
+            ))}
+          </div>
+          <p className={styles.ladderNote}>{t('break-ladder')}</p>
+        </div>
+      )}
+
       {/* 시간 막대: 자막 덩어리와 말이 쉰 자리를 같은 축에 얹어, 자른 근거가 보이게 한다. */}
       <div
         className={styles.strip}
@@ -160,6 +185,21 @@ export function Theater({
         ))}
         <span className={styles.playhead} style={{ insetInlineStart: percentOf(time, timeline.duration) }} />
       </div>
+
+      {/*
+        쉼을 몇 군데로 봤는지. 하나도 없으면 그 사실이 곧 이 페이지의 한계 설명이 된다 —
+        논문은 음성에서 쉼을 찾지만 여기는 자막 파일밖에 보지 못한다.
+      */}
+      <p className={styles.ladderNote}>
+        {timeline.pauses.length > 0 ? (
+          <>
+            {timeline.pauses.length}
+            {t('pause-found')}
+          </>
+        ) : (
+          t('pause-none')
+        )}
+      </p>
 
       <input
         className={styles.scrubber}

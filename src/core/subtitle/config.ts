@@ -24,6 +24,8 @@ export const LIMITS = {
   pauseThreshold: { min: 0, max: 2000 },
 } as const;
 
+import type { BreakReason } from './types';
+
 /**
  * 분할점 점수.
  *
@@ -40,6 +42,22 @@ export const BREAK_SCORE = {
   /** 띄어쓰기가 없는 문자열(일본어·중국어)에서 글자 사이를 자를 때. */
   character: 10,
 } as const;
+
+/**
+ * 근거를 점수가 높은 순으로 늘어놓은 사다리.
+ *
+ * 화면이 "어디서 자르는 것이 좋은가"의 순서를 그대로 보여 줄 때 쓴다. 값은 위 표에서 가져오므로
+ * 점수를 고치면 사다리도 함께 움직인다. 'end'(말이 끝남)는 자를 자리를 고른 것이 아니라
+ * 고를 필요가 없었던 경우라서 여기 넣지 않는다.
+ */
+export const BREAK_LADDER: readonly { reason: BreakReason; score: number }[] = [
+  { reason: 'sentence-end', score: BREAK_SCORE.sentenceEnd },
+  { reason: 'pause', score: BREAK_SCORE.pause },
+  { reason: 'clause-end', score: BREAK_SCORE.clauseEnd },
+  { reason: 'closing-bracket', score: BREAK_SCORE.closingBracket },
+  { reason: 'whitespace', score: BREAK_SCORE.whitespace },
+  { reason: 'character', score: BREAK_SCORE.character },
+];
 
 /** 문장이 끝나는 문장부호. 뒤에서 자른다. */
 export const SENTENCE_END = /[.!?。！？…]/;
