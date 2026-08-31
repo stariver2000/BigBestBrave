@@ -13,8 +13,8 @@ import { Button, Panel, Segmented, type SegmentedOption } from '../../../kit';
 import {
   CODEBOOK,
   MAX_DIGITS,
+  READING_RULES,
   codeOfDay,
-  literalReading,
   onlyDigits,
   roundTrip,
   segmentations,
@@ -24,6 +24,7 @@ import { PAPER, SUGGESTIONS, WELCOME_DIGITS } from '../config';
 import { beeperDictionary } from '../dictionary';
 import { Codebook } from './Codebook';
 import { PagerDevice } from './PagerDevice';
+import { Reading } from './Reading';
 import { Returned } from './Returned';
 import { useSending } from './useSending';
 import styles from './beeper.module.css';
@@ -44,6 +45,8 @@ export function Beeper({ locale }: { locale: Locale }) {
   const ways = useMemo(() => (mode === 'read' ? segmentations(digits) : []), [mode, digits]);
 
   const today = CODEBOOK[codeOfDay(new Date())];
+  // 오늘의 암호도 규칙 하나에 속한다. 그 규칙을 함께 보여 줘야 코드집과 같은 이야기로 읽힌다.
+  const todayRule = READING_RULES.find((rule) => rule.id === today.rule);
   const bestReading = ways[0]?.pieces.map((piece) => piece.reading).join(' · ') ?? '';
 
   // 액정에 뜰 숫자와 그 아래 한 줄은 모드마다 나오는 곳이 다르다.
@@ -155,35 +158,7 @@ export function Beeper({ locale }: { locale: Locale }) {
           </Panel>
         ) : (
           <Panel title={t('read-title')} note={t('read-note')}>
-            {digits.length === 0 ? (
-              <p className={styles.hint}>{t('read-empty')}</p>
-            ) : (
-              <>
-                <p className={styles.hint}>
-                  {t('read-literal')} · {literalReading(digits)}
-                </p>
-                <p className={styles.hint}>
-                  {ways.length}
-                  {t('read-ways')}
-                </p>
-                <div className={styles.wayList}>
-                  {ways.map((way, index) => (
-                    <div key={index} className={`${styles.way} ${index === 0 ? styles.wayFirst : ''}`}>
-                      {way.pieces.map((piece, pieceIndex) => (
-                        <span key={pieceIndex} className={styles.wayPiece}>
-                          <span className={styles.wayDigits}>{piece.digits}</span>
-                          <span
-                            className={`${styles.wayReading} ${piece.codeIndex !== null ? styles.wayKnown : ''}`}
-                          >
-                            {piece.reading}
-                          </span>
-                        </span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
+            <Reading digits={digits} ways={ways} locale={locale} t={t} />
           </Panel>
         )}
 
@@ -199,6 +174,12 @@ export function Beeper({ locale }: { locale: Locale }) {
             <span>{today.meaning[locale]}</span>
             <span className={styles.hint}>{today.reason[locale]}</span>
           </div>
+          {todayRule && (
+            <p className={styles.hint}>
+              {t('today-rule')} · {todayRule.name[locale]}
+            </p>
+          )}
+          <p className={styles.context}>{t('today-how')}</p>
         </Panel>
 
         <Panel title={t('codebook-title')} note={t('codebook-note')}>

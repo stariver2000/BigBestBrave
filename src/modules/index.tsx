@@ -14,6 +14,7 @@ import { ChromaLab, chromaLabNode } from './chroma-lab';
 import { Redactor, redactorNode } from './redactor';
 import { Areca, arecaNode } from './areca';
 import { Beeper, beeperNode } from './beeper';
+import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
 import { Rechunker, subtitleNode } from './subtitle';
@@ -37,6 +38,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: beeperNode, Page: Beeper },
   { node: rhythmNode, Page: Rhythm },
   { node: arecaNode, Page: Areca },
+  { node: mistNode, Page: Mist },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

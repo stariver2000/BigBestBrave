@@ -9,6 +9,16 @@ export interface Piece {
   reading: string;
 }
 
+/**
+ * 숫자 줄 안에서 코드집이 걸리는 자리 하나.
+ * start는 0부터 세는 자리, end는 마지막 자리의 다음이다.
+ */
+export interface Occurrence {
+  codeIndex: number;
+  start: number;
+  end: number;
+}
+
 /** 숫자 한 줄을 나눈 한 가지 방법. */
 export interface Segmentation {
   pieces: Piece[];

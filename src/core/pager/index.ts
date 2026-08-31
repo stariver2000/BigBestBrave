@@ -10,7 +10,7 @@ export {
   type ReadingRule,
 } from './config';
 export { groupByRule, isRepeated, repeatedEntries, type RuleGroup } from './codebook';
-export type { Encoded, EncodedPiece, Piece, Segmentation } from './types';
-export { codeOfDay, literalReading, onlyDigits, segmentations } from './decode';
+export type { Encoded, EncodedPiece, Occurrence, Piece, Segmentation } from './types';
+export { codeOfDay, collisions, literalReading, occurrences, onlyDigits, segmentations } from './decode';
 export { encode } from './encode';
 export { roundTrip, type Echo } from './echo';

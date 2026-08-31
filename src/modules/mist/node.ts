@@ -1,0 +1,78 @@
+/**
+ * 뿌리는 소리 페이지의 트리 노드.
+ * 루트에서 갈라진 일곱 번째 가지(소리와 공간)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { mistDictionary } from './dictionary';
+
+export const mistNode: PageNode = {
+  id: 'sprayable-sound',
+  slug: 'mist',
+  parentId: ROOT_ID,
+  title: { ko: mistDictionary.ko.title, en: mistDictionary.en.title, ja: mistDictionary.ja.title },
+  summary: { ko: mistDictionary.ko.summary, en: mistDictionary.en.summary, ja: mistDictionary.ja.summary },
+  capability: {
+    ko: mistDictionary.ko.capability,
+    en: mistDictionary.en.capability,
+    ja: mistDictionary.ja.capability,
+  },
+  look: 'gallery',
+  keywords: [
+    '소리', '분무', '안개', '공간', '설치', '섞기',
+    'sound', 'spray', 'mist', 'spatial audio', 'installation',
+    '音', '霧', '空間',
+  ],
+  traits: {
+    domain: ['music', 'design', 'craft'],
+    audience: ['general', 'creator'],
+    intent: ['entertain', 'create'],
+    stance: ['playful'],
+    atmosphere: ['dreamy', 'sacred'],
+    temperature: ['neutral'],
+    brightness: ['radiant'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['canvas'],
+    density: ['airy'],
+    rhythm: ['fragmented'],
+    alignment: ['centered'],
+    grid: ['fluid'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['flat'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['gentle'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['organic'],
+    'motion-duration': ['measured'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['canvas-manipulation', 'gesture'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['expressive'],
+    persistence: ['none'],
+    tone: ['poetic', 'terse'],
+    person: ['second'],
+    'copy-length': ['short'],
+    jargon: ['none'],
+    'data-presence': ['accent'],
+    imagery: ['generative'],
+    ornament: ['none'],
+    'number-format': ['plain'],
+    'render-mode': ['client'],
+    'compute-budget': ['moderate'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

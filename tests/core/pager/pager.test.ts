@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { CODEBOOK, MAX_DIGITS, codeOfDay, encode, literalReading, onlyDigits, segmentations } from '@core/pager';
+import {
+  CODEBOOK,
+  MAX_DIGITS,
+  codeOfDay,
+  collisions,
+  encode,
+  literalReading,
+  occurrences,
+  onlyDigits,
+  segmentations,
+} from '@core/pager';
 
 describe('숫자 읽기', () => {
   it('한자음으로 그대로 읽는다', () => {
@@ -123,5 +133,52 @@ describe('코드집', () => {
         expect(entry.reason[locale].trim(), `${entry.digits}/${locale}`).toBeTruthy();
       }
     }
+  });
+});
+
+/**
+ * 갈래가 여럿인 이유는 코드집이 같은 자리에서 겹치기 때문이다.
+ * 화면이 그 이유를 설명하려면 겹침을 정확히 세야 한다.
+ */
+describe('코드가 걸리는 자리와 겹침', () => {
+  it('숫자 줄 안에 숨은 코드를 자리와 함께 찾는다', () => {
+    const found = occurrences('1004');
+    const digits = found.map((spot) => CODEBOOK[spot.codeIndex].digits);
+    expect(digits).toContain('1004');
+    expect(digits).toContain('100');
+    expect(found[0].start).toBe(0);
+  });
+
+  it('앞자리 순으로, 같은 자리에서는 긴 코드부터 내놓는다', () => {
+    const found = occurrences('1004');
+    expect(CODEBOOK[found[0].codeIndex].digits).toBe('1004');
+    expect(CODEBOOK[found[1].codeIndex].digits).toBe('100');
+  });
+
+  it('자리가 겹치는 쌍이 곧 갈래가 갈리는 자리다', () => {
+    const collided = collisions('1004');
+    expect(collided.length).toBeGreaterThan(0);
+    // 1004(0~4)와 100(0~3)은 서로 겹친다.
+    const [first, second] = collided[0];
+    expect(second.start).toBeLessThan(first.end);
+    // 겹침이 있으면 읽는 갈래도 둘 이상이다.
+    expect(segmentations('1004').length).toBeGreaterThan(1);
+  });
+
+  it('겹치지 않아도 코드로 읽는 갈래와 그냥 읽는 갈래는 늘 함께 남는다', () => {
+    expect(collisions('486')).toEqual([]);
+    const ways = segmentations('486');
+    expect(ways).toHaveLength(2);
+    expect(ways[0].pieces[0].reading).toBe('사랑해');
+    expect(ways[1].pieces[0].reading).toBe('사팔육');
+  });
+
+  it('코드가 하나도 걸리지 않으면 읽는 방법도 하나뿐이다', () => {
+    expect(segmentations('33333')).toHaveLength(1);
+  });
+
+  it('코드집에 없는 숫자에는 걸리는 자리가 없다', () => {
+    expect(occurrences('33333')).toEqual([]);
+    expect(collisions('33333')).toEqual([]);
   });
 });

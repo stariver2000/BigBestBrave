@@ -10,9 +10,10 @@ export type BeeperKey =
   | 'echo-title' | 'echo-note' | 'echo-you-said' | 'echo-they-read'
   | 'echo-same' | 'echo-different' | 'echo-also' | 'echo-nothing'
   | 'read-title' | 'read-note' | 'read-empty' | 'read-ways' | 'read-literal' | 'read-clear'
+  | 'read-found' | 'read-found-none' | 'read-collide' | 'read-collide-none' | 'read-context'
   | 'device-label' | 'device-theirs' | 'device-digits' | 'device-of'
   | 'codebook-title' | 'codebook-note' | 'codebook-rules' | 'codebook-repeat'
-  | 'today-title' | 'today-note'
+  | 'today-title' | 'today-note' | 'today-rule' | 'today-how'
   | 'paper-label' | 'paper-note'
   | 'reflect-title' | 'reflect-body';
 
@@ -48,6 +49,11 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'read-ways': '가지로 읽힙니다',
     'read-literal': '그냥 읽으면',
     'read-clear': '지우기',
+    'read-found': '이 숫자 안에서 코드집이 걸리는 자리',
+    'read-found-none': '코드집에 걸리는 자리가 없습니다. 그러면 읽는 방법도 하나뿐이라, 그냥 한자음으로 읽습니다.',
+    'read-collide': '군데는 자리가 서로 겹칩니다. 같은 숫자를 어디서 자르느냐에 따라 다른 말이 되고, 갈래는 여기서 생깁니다.',
+    'read-collide-none': '겹치는 자리는 없습니다. 그래도 코드로 읽는 갈래와 숫자를 그냥 읽는 갈래는 늘 함께 남습니다. 받는 사람이 코드를 모르면 후자로 읽었습니다.',
+    'read-context': '그 시절에는 이 갈래를 문맥이 골랐습니다. 누가 보냈는지, 방금 무슨 일이 있었는지를 받는 사람이 이미 알고 있었으니까요. 우리에게는 그 문맥이 없어서 전부 남습니다.',
     'device-label': '수신함',
     'device-theirs': '상대의 수신함',
     'device-digits': '자리',
@@ -58,6 +64,8 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'codebook-repeat': '개는 두 자리를 그대로 겹쳐 만든 것입니다. 겹치기는 이 언어의 문법에 가까웠습니다 — 같은 조각을 두 번 쓰면 뜻이 강해지거나(빨리 → 빨리빨리) 되풀이되는 동작이 됐습니다.',
     'today-title': '오늘의 암호',
     'today-note': '날짜에서 정해집니다. 오늘은 모두에게 같은 암호가 뜹니다.',
+    'today-rule': '읽는 방식',
+    'today-how': '연·월·일을 이어 붙인 수를 코드집 개수로 나눈 나머지가 오늘의 자리입니다. 서버가 없어도 모두에게 같은 것이 뜹니다.',
     'paper-label': '근거 논문',
     'paper-note': '논문은 옛 기기를 다시 써 보게 한 질적 연구입니다. 이 페이지는 그 방법이 아니라 그 조건 — 숫자만 보낼 수 있다는 제약 — 을 재현합니다.',
     'reflect-title': '해 보면 알게 되는 것',
@@ -94,6 +102,11 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'read-ways': ' ways to read it',
     'read-literal': 'read plainly',
     'read-clear': 'Clear',
+    'read-found': 'Where the codebook catches inside these digits',
+    'read-found-none': 'Nothing in the codebook catches here. Then there is only one way to read it — digit by digit, in their Sino-Korean sounds.',
+    'read-collide': ' of those places overlap each other. Cut the same digits at a different point and you get a different phrase — that is where the branches come from.',
+    'read-collide-none': 'Nothing overlaps here. Even so, the code reading and the plain digit reading always stand side by side — if the person did not know the code, the plain one was what they got.',
+    'read-context': 'Back then context picked one of these. Whoever read it knew who had paged them and what had just happened. We do not have that context, so every branch stays.',
     'device-label': 'Inbox',
     'device-theirs': 'Their inbox',
     'device-digits': 'digits',
@@ -104,6 +117,8 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'codebook-repeat': ' of them are simply one pair of digits said twice. Repetition was close to grammar here — saying a piece twice made it stronger (hurry → hurry hurry) or made it a repeating action.',
     'today-title': "Today's code",
     'today-note': 'Chosen from the date. Everyone sees the same one today.',
+    'today-rule': 'read as',
+    'today-how': 'The year, month and day run together, divided by the number of codes — the remainder is today\'s place. No server involved, and everyone still gets the same one.',
     'paper-label': 'Based on',
     'paper-note': 'The paper is a qualitative study that had people use retro devices again. This page reproduces not its method but its condition — that digits are all you get.',
     'reflect-title': 'What you notice',
@@ -140,6 +155,11 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'read-ways': ' 通りに読めます',
     'read-literal': 'そのまま読むと',
     'read-clear': '消す',
+    'read-found': 'この数字の中でコード集が引っかかる位置',
+    'read-found-none': 'コード集に引っかかる位置がありません。その場合は読み方も一つで、漢字音のまま読みます。',
+    'read-collide': '組は位置が重なっています。同じ数字をどこで切るかで別の言葉になり、枝分かれはここから生まれます。',
+    'read-collide-none': '重なる位置はありません。それでもコードとして読む枝と、数字をそのまま読む枝は常に並んで残ります。コードを知らない相手には後者が届きました。',
+    'read-context': '当時はこの枝を文脈が選びました。誰が呼んだのか、直前に何があったのかを受け取る人が知っていたからです。私たちにはその文脈がないので、すべてが残ります。',
     'device-label': '受信箱',
     'device-theirs': '相手の受信箱',
     'device-digits': '桁',
@@ -150,6 +170,8 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'codebook-repeat': '件は二桁をそのまま重ねて作られています。重ねることはこの言語の文法に近いものでした — 同じ断片を二度使うと意味が強くなったり（早く → 早く早く）、繰り返しの動作になりました。',
     'today-title': '今日の暗号',
     'today-note': '日付から決まります。今日は皆に同じ暗号が出ます。',
+    'today-rule': '読み方',
+    'today-how': '年・月・日をつないだ数をコード数で割った余りが今日の位置です。サーバーがなくても皆に同じものが出ます。',
     'paper-label': '参照論文',
     'paper-note': '論文は昔の機器を使い直してもらう質的研究です。このページはその方法ではなく、その条件 — 数字しか送れないこと — を再現します。',
     'reflect-title': 'やってみて気づくこと',

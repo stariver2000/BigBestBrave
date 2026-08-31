@@ -6,7 +6,7 @@
  */
 
 import { CODEBOOK, DIGIT_READINGS, MAX_SEGMENTATIONS } from './config';
-import type { Piece, Segmentation } from './types';
+import type { Occurrence, Piece, Segmentation } from './types';
 
 /** 숫자를 한자음으로 그대로 읽는다. 8282 -> 팔이팔이. */
 export function literalReading(digits: string): string {
@@ -77,6 +77,42 @@ export function segmentations(digits: string): Segmentation[] {
     if (unique.length >= MAX_SEGMENTATIONS) break;
   }
   return unique;
+}
+
+/**
+ * 숫자 줄 안에서 코드집이 걸리는 자리를 모두 찾는다.
+ *
+ * 갈래가 여럿인 이유를 화면에서 설명하려면 "무엇이 어디에 숨어 있는가"를 먼저 보여 줘야 한다.
+ * 앞자리 순으로, 같은 자리에서는 긴 코드부터 내놓는다.
+ */
+export function occurrences(digits: string): Occurrence[] {
+  const found: Occurrence[] = [];
+  for (let start = 0; start < digits.length; start += 1) {
+    CODEBOOK.forEach((entry, codeIndex) => {
+      if (digits.startsWith(entry.digits, start)) {
+        found.push({ codeIndex, start, end: start + entry.digits.length });
+      }
+    });
+  }
+  return found.sort((a, b) => a.start - b.start || b.end - a.end);
+}
+
+/**
+ * 자리가 서로 겹치는 코드 쌍.
+ *
+ * 갈래가 생기는 이유가 바로 이것이다. 1004에는 1004(천사)와 100(빽)이 같은 자리에서 겹쳐 있어,
+ * 어디서 자르느냐에 따라 다른 말이 된다. 겹침이 없으면 읽는 방법도 하나뿐이다.
+ */
+export function collisions(digits: string): [Occurrence, Occurrence][] {
+  const found = occurrences(digits);
+  const pairs: [Occurrence, Occurrence][] = [];
+  for (let i = 0; i < found.length; i += 1) {
+    for (let j = i + 1; j < found.length; j += 1) {
+      // 앞자리 순으로 정렬돼 있으므로 뒤 코드의 시작이 앞 코드의 끝보다 앞이면 겹친 것이다.
+      if (found[j].start < found[i].end) pairs.push([found[i], found[j]]);
+    }
+  }
+  return pairs;
 }
 
 /** 날짜에서 오늘의 암호를 고른다. 서버 없이 모두에게 같은 것이 보이게 하기 위함이다. */
