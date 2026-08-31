@@ -87,9 +87,10 @@ function CommentForm({
   };
 
   return (
-    <div className={styles.commentForm}>
+    <div className={styles.commentForm} data-part="comment-form">
       <input
         className={styles.commentAuthorInput}
+        data-part="comment-author-input"
         value={author}
         maxLength={limits.maxAuthorLength}
         placeholder={t('comments-author-placeholder')}
@@ -98,6 +99,7 @@ function CommentForm({
       />
       <textarea
         className={styles.commentBodyInput}
+        data-part="comment-body-input"
         value={body}
         maxLength={limits.maxBodyLength}
         rows={parentId === null ? 3 : 2}
@@ -106,13 +108,14 @@ function CommentForm({
       />
       <div className={styles.commentFormActions}>
         {onCancel && (
-          <button type="button" className={styles.commentGhost} onClick={onCancel}>
+          <button type="button" className={styles.commentGhost} data-part="comment-ghost" onClick={onCancel}>
             {t('comments-cancel')}
           </button>
         )}
         <button
           type="button"
           className={styles.commentSubmit}
+          data-part="comment-submit"
           onClick={submit}
           disabled={pending || body.trim().length === 0}
         >
@@ -149,10 +152,12 @@ function CommentThread({
       {nodes.map((node) => (
         <li key={node.id} className={styles.commentItem}>
           <div className={styles.commentHead}>
-            <span className={styles.commentAuthor}>
+            <span className={styles.commentAuthor} data-part="comment-author">
               {node.author === ANONYMOUS_AUTHOR ? t('comments-anonymous') : node.author}
             </span>
-            <span className={styles.commentTime}>{formatTime(node.createdAt)}</span>
+            <span className={styles.commentTime} data-part="comment-time">
+              {formatTime(node.createdAt)}
+            </span>
           </div>
           <p className={styles.commentBody}>{node.body}</p>
           {/* 한도에 닿은 깊이에서는 답글 버튼 자체를 숨긴다. 눌러도 실패할 버튼은 두지 않는다. */}
@@ -160,6 +165,7 @@ function CommentThread({
             <button
               type="button"
               className={styles.commentGhost}
+              data-part="comment-ghost"
               onClick={() => onReplyTo(replyTo === node.id ? null : node.id)}
             >
               {t('comments-reply')}
@@ -176,7 +182,7 @@ function CommentThread({
             />
           )}
           {node.replies.length > 0 && (
-            <div className={styles.commentReplies}>
+            <div className={styles.commentReplies} data-part="comment-replies">
               <CommentThread
                 nodes={node.replies}
                 locale={locale}
@@ -258,9 +264,11 @@ export function CommentSection({ path, locale }: { path: string; locale: Locale 
   }, [nodes]);
 
   return (
-    <section className={styles.comments}>
+    <section className={styles.comments} data-part="comments">
       <header className={styles.commentsHead}>
-        <h2 className={styles.commentsTitle}>{t('comments-title')}</h2>
+        <h2 className={styles.commentsTitle} data-part="comments-title">
+          {t('comments-title')}
+        </h2>
         {nodes !== null && total > 0 && (
           <span className={styles.commentsCount}>
             {total}

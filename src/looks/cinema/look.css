@@ -1,0 +1,41 @@
+/*
+ * 'cinema' 룩의 부품 스타일.
+ *
+ * 이 파일은 이 룩만 소유한다. 공유 CSS에 룩마다 규칙을 쌓으면 여러 세션이 같은 파일에서
+ * 부딪히므로, 룩이 자기 파일을 갖는다(AGENTS.md 6장).
+ *
+ * 겨누는 대상은 CSS 모듈의 클래스가 아니라 컴포넌트에 달린 `data-part` 이름표다.
+ * 클래스 이름은 빌드할 때마다 뒤섞이지만 이름표는 그대로이기 때문이다.
+ */
+
+/* ─────────────────────────────────────────────────────────────
+ * 'cinema' 룩 — 어두운 상영관의 부품.
+ * 그림자가 보이지 않는 밝기라 층은 윤곽선으로만 만든다.
+ * ───────────────────────────────────────────────────────────── */
+
+[data-look='cinema'] [data-part='panel'] {
+  border-color: var(--bbb-border-color);
+  background: var(--bbb-surface);
+}
+
+[data-look='cinema'] [data-part='panel']:hover {
+  border-color: color-mix(in oklab, var(--bbb-accent) 30%, var(--bbb-border-color));
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='cinema'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+[data-look='cinema'] [data-part='button'] {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  letter-spacing: 0.04em;
+}
+/* 상영관의 지면: 빛무리 대신 필름 그레인. 어둠이 완전히 죽지 않을 만큼만 얹는다. */
+[data-look='cinema'][data-part='frame']::before {
+  background-image: radial-gradient(var(--look-grain, transparent) 0.5px, transparent 0.6px);
+  background-size: 3px 3px;
+}

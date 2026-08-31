@@ -22,6 +22,7 @@ import {
 import { createTranslator, type Locale } from '../../../core/i18n';
 import { PAPER, SUGGESTIONS, WELCOME_DIGITS } from '../config';
 import { beeperDictionary } from '../dictionary';
+import { Codebook } from './Codebook';
 import { PagerDevice } from './PagerDevice';
 import { Returned } from './Returned';
 import { useSending } from './useSending';
@@ -201,24 +202,15 @@ export function Beeper({ locale }: { locale: Locale }) {
         </Panel>
 
         <Panel title={t('codebook-title')} note={t('codebook-note')}>
-          <div className={styles.codeList}>
-            {CODEBOOK.map((entry) => (
-              <button
-                key={entry.digits}
-                type="button"
-                className={styles.code}
-                onClick={() => {
-                  // 코드를 누르면 지금 모드에 맞는 자리로 넣어 준다. 읽던 흐름이 끊기지 않게 한다.
-                  if (mode === 'read') setDigits(entry.digits);
-                  else setText(entry.meaning.ko);
-                }}
-              >
-                <span className={styles.codeDigits}>{entry.digits}</span>
-                <span className={styles.codeMeaning}>{entry.meaning[locale]}</span>
-                <span className={styles.codeReason}>{entry.reason[locale]}</span>
-              </button>
-            ))}
-          </div>
+          <Codebook
+            locale={locale}
+            t={t}
+            onPick={(entry) => {
+              // 읽던 흐름이 끊기지 않게, 지금 모드에 맞는 자리로 넣어 준다.
+              if (mode === 'read') setDigits(entry.digits);
+              else setText(entry.meaning.ko);
+            }}
+          />
         </Panel>
 
         <Panel title={t('reflect-title')}>

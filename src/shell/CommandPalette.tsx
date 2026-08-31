@@ -89,18 +89,19 @@ export function CommandPalette({ entries, locale }: { entries: PaletteEntry[]; l
 
   return (
     <>
-      <button type="button" className={styles.ghostButton} onClick={() => setOpen(true)}>
+      <button type="button" className={styles.ghostButton} data-part="ghost-button" onClick={() => setOpen(true)}>
         {t('nav-open-palette')}
-        <span className={styles.kbd} aria-hidden>
+        <span className={styles.kbd} data-part="kbd" aria-hidden>
           {t('nav-palette-hint')}
         </span>
       </button>
 
       {open && (
         <div className={styles.paletteBackdrop} onClick={close} role="presentation">
-          <div className={styles.paletteBox} onClick={(event) => event.stopPropagation()}>
+          <div className={styles.paletteBox} data-part="palette-box" onClick={(event) => event.stopPropagation()}>
             <input
               className={styles.paletteInput}
+              data-part="palette-input"
               autoFocus
               value={query}
               placeholder={t('nav-search-placeholder')}

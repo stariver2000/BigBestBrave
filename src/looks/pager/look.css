@@ -1,0 +1,19 @@
+/*
+ * 'pager' 룩의 부품 스타일.
+ *
+ * 이 파일은 이 룩만 소유한다. 공유 CSS에 룩마다 규칙을 쌓으면 여러 세션이 같은 파일에서
+ * 부딪히므로, 룩이 자기 파일을 갖는다(AGENTS.md 6장).
+ *
+ * 겨누는 대상은 CSS 모듈의 클래스가 아니라 컴포넌트에 달린 `data-part` 이름표다.
+ * 클래스 이름은 빌드할 때마다 뒤섞이지만 이름표는 그대로이기 때문이다.
+ */
+
+/* 삐삐의 지면: 플라스틱 표면의 미세한 결. 완전히 매끈하면 화면이 죽어 보인다. */
+[data-look='pager'][data-part='frame']::before {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgb(255 255 255 / 0.012) 0 1px,
+      transparent 1px 4px
+    );
+}

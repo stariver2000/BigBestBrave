@@ -5,6 +5,10 @@
  *
  * 페이지 고유 컴포넌트는 각 모듈 안에 두고, 여기에는 어떤 주제에서도 의미가 통하는 것만 남긴다.
  * 스타일은 토큰 변수만 읽으므로 부품 자체는 특정 색·간격을 알지 못한다.
+ *
+ * 각 요소에 `data-part` 이름표를 단다. CSS 모듈의 클래스 이름은 빌드할 때마다 뒤섞이므로,
+ * 룩이 부품의 생김새를 바꾸려면 흔들리지 않는 이름이 필요하다. 룩은 이 이름만 보고 겨눈다
+ * (`[data-look='x'] [data-part='panel']`). 그래서 룩마다 자기 CSS 파일을 가질 수 있다.
  */
 
 import type { ChangeEvent, ReactNode } from 'react';
@@ -22,12 +26,16 @@ export function Panel({
   children: ReactNode;
 }) {
   return (
-    <section className={styles.panel}>
+    <section className={styles.panel} data-part="panel">
       {(title || actions) && (
-        <header className={styles.panelHeader}>
-          <div className={styles.panelHeading}>
-            {title && <h2 className={styles.panelTitle}>{title}</h2>}
-            {note && <p className={styles.panelNote}>{note}</p>}
+        <header className={styles.panelHeader} data-part="panel-header">
+          <div className={styles.panelHeading} data-part="panel-heading">
+            {title && <h2 className={styles.panelTitle} data-part="panel-title">
+              {title}
+            </h2>}
+            {note && <p className={styles.panelNote} data-part="panel-note">
+              {note}
+            </p>}
           </div>
           {actions}
         </header>
@@ -39,8 +47,10 @@ export function Panel({
 
 export function Field({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
-    <label className={styles.field}>
-      <span className={styles.label}>{label}</span>
+    <label className={styles.field} data-part="field">
+      <span className={styles.label} data-part="label">
+        {label}
+      </span>
       {children}
     </label>
   );
@@ -62,6 +72,8 @@ export function TextInput({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value);
   return (
     <input
+      data-part="input"
+      data-invalid={invalid || undefined}
       className={`${styles.input} ${invalid ? styles.inputInvalid : ''}`}
       value={value}
       onChange={handleChange}
@@ -87,7 +99,15 @@ export function Button({
 }) {
   const className = variant === 'primary' ? `${styles.button} ${styles.buttonPrimary}` : styles.button;
   return (
-    <button type="button" className={className} onClick={onClick} title={title} disabled={disabled}>
+    <button
+      type="button"
+      data-part="button"
+      data-variant={variant}
+      className={className}
+      onClick={onClick}
+      title={title}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
@@ -115,11 +135,17 @@ export function Segmented<T extends string>({
   dense?: boolean;
 }) {
   return (
-    <div className={`${styles.segmented} ${dense ? styles.segmentedDense : ''}`} role="group">
+    <div
+      className={`${styles.segmented} ${dense ? styles.segmentedDense : ''}`}
+      data-part="segmented"
+      role="group"
+    >
       {options.map((option) => (
         <button
           key={option.value}
           type="button"
+          data-part="segment"
+          data-active={option.value === value || undefined}
           title={option.title}
           aria-pressed={option.value === value}
           className={`${styles.segment} ${option.value === value ? styles.segmentActive : ''}`}
@@ -134,5 +160,9 @@ export function Segmented<T extends string>({
 
 export function Badge({ children, tone = 'neutral' }: { children: ReactNode; tone?: 'neutral' | 'pass' | 'fail' }) {
   const toneClass = tone === 'pass' ? styles.badgePass : tone === 'fail' ? styles.badgeFail : '';
-  return <span className={`${styles.badge} ${toneClass}`}>{children}</span>;
+  return (
+    <span className={`${styles.badge} ${toneClass}`} data-part="badge" data-tone={tone}>
+      {children}
+    </span>
+  );
 }

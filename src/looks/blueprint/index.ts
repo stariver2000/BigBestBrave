@@ -1,5 +1,6 @@
 /** 'blueprint' 룩 — 모눈종이 위의 도면. 계측하는 화면을 위한 룩이다. */
 
+import './look.css';
 import { CSS_VAR_PREFIX } from '../../core/traits';
 import { BLUEPRINT_GRID, BLUEPRINT_PALETTE, BLUEPRINT_SHAPE, BLUEPRINT_TYPE, BLUEPRINT_WARN } from './config';
 

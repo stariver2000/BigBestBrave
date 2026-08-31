@@ -5,6 +5,7 @@
  * 같은 컴포넌트가 이 변수들 위에서 전혀 다른 인상으로 나온다.
  */
 
+import './look.css';
 import { CSS_VAR_PREFIX } from '../../core/traits';
 import { DOSSIER_BAR, DOSSIER_GRAIN, DOSSIER_PALETTE, DOSSIER_SHAPE, DOSSIER_TYPE } from './config';
 

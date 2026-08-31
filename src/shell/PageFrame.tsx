@@ -47,17 +47,19 @@ export function PageFrame({
     <LocaleProvider locale={locale}>
       {/* 룩 변수는 문서 루트에 심는다. html·body의 배경까지 같은 값을 읽어야 하기 때문이다. */}
       <style>{variables}</style>
-      <div className={styles.frame} data-look={lookIdOf(node.look)}>
-        <header className={styles.header}>
+      <div className={styles.frame} data-look={lookIdOf(node.look)} data-part="frame">
+        <header className={styles.header} data-part="header">
           <div className={styles.brand}>
-            <span className={styles.brandMark} aria-hidden />
-            <span className={styles.brandName}>{t('site-name')}</span>
+            <span className={styles.brandMark} data-part="brand-mark" aria-hidden />
+            <span className={styles.brandName} data-part="brand-name">
+              {t('site-name')}
+            </span>
           </div>
 
-          <nav className={styles.trail} aria-label={t('nav-root')}>
+          <nav className={styles.trail} data-part="trail" aria-label={t('nav-root')}>
             {trail.map((step, index) => (
               <span key={step.id}>
-                {index > 0 && <span className={styles.trailSeparator}> / </span>}
+                {index > 0 && <span className={styles.trailSeparator} data-part="trail-separator"> / </span>}
                 {index === trail.length - 1 ? (
                   <span className={styles.trailCurrent}>{step.title[locale]}</span>
                 ) : (
@@ -75,13 +77,15 @@ export function PageFrame({
           </div>
         </header>
 
-        <section className={styles.hero}>
-          <div className={styles.heroInner}>
-            <h1 className={styles.pageTitle}>
+        <section className={styles.hero} data-part="hero">
+          <div className={styles.heroInner} data-part="hero-inner">
+            <h1 className={styles.pageTitle} data-part="page-title">
               {node.title[locale]}
-              <span className={styles.titleDot}>.</span>
+              <span className={styles.titleDot} data-part="title-dot">.</span>
             </h1>
-            <p className={styles.pageSummary}>{node.summary[locale]}</p>
+            <p className={styles.pageSummary} data-part="page-summary">
+              {node.summary[locale]}
+            </p>
           </div>
         </section>
 
@@ -90,9 +94,11 @@ export function PageFrame({
           <CommentSection path={path} locale={locale} />
         </main>
 
-        <footer className={styles.footer}>
+        <footer className={styles.footer} data-part="footer">
           <div className={styles.footerInner}>
-            <span className={styles.tagline}>{t('site-tagline')}</span>
+            <span className={styles.tagline} data-part="tagline">
+              {t('site-tagline')}
+            </span>
           </div>
         </footer>
       </div>

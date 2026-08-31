@@ -11,7 +11,7 @@ export type BeeperKey =
   | 'echo-same' | 'echo-different' | 'echo-also' | 'echo-nothing'
   | 'read-title' | 'read-note' | 'read-empty' | 'read-ways' | 'read-literal' | 'read-clear'
   | 'device-label' | 'device-theirs' | 'device-digits' | 'device-of'
-  | 'codebook-title' | 'codebook-note' | 'codebook-insert'
+  | 'codebook-title' | 'codebook-note' | 'codebook-rules' | 'codebook-repeat'
   | 'today-title' | 'today-note'
   | 'paper-label' | 'paper-note'
   | 'reflect-title' | 'reflect-body';
@@ -54,7 +54,8 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'device-of': '중',
     'codebook-title': '코드집',
     'codebook-note': '널리 알려진 것만 모았습니다. 지역과 시기에 따라 다르게 쓰인 것도 많습니다.',
-    'codebook-insert': '넣기',
+    'codebook-rules': '외워야 할 목록이 아니었습니다. 숫자를 읽는 방식이 몇 가지 있었고, 그 방식을 알면 코드집에 없는 숫자도 읽혔습니다. 아래는 그 방식별로 묶은 것입니다.',
+    'codebook-repeat': '개는 두 자리를 그대로 겹쳐 만든 것입니다. 겹치기는 이 언어의 문법에 가까웠습니다 — 같은 조각을 두 번 쓰면 뜻이 강해지거나(빨리 → 빨리빨리) 되풀이되는 동작이 됐습니다.',
     'today-title': '오늘의 암호',
     'today-note': '날짜에서 정해집니다. 오늘은 모두에게 같은 암호가 뜹니다.',
     'paper-label': '근거 논문',
@@ -99,7 +100,8 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'device-of': 'of',
     'codebook-title': 'Codebook',
     'codebook-note': 'Only the widely known ones. Usage varied by region and year.',
-    'codebook-insert': 'Insert',
+    'codebook-rules': 'It was never a list to memorise. There were a few ways of reading digits, and once you knew them you could read numbers the codebook never listed. Below they are grouped by the way they are read.',
+    'codebook-repeat': ' of them are simply one pair of digits said twice. Repetition was close to grammar here — saying a piece twice made it stronger (hurry → hurry hurry) or made it a repeating action.',
     'today-title': "Today's code",
     'today-note': 'Chosen from the date. Everyone sees the same one today.',
     'paper-label': 'Based on',
@@ -144,7 +146,8 @@ export const beeperDictionary: Dictionary<BeeperKey> = {
     'device-of': '中',
     'codebook-title': 'コード集',
     'codebook-note': '広く知られたものだけです。地域や時期で使い方は違いました。',
-    'codebook-insert': '入れる',
+    'codebook-rules': '暗記する一覧ではありませんでした。数字の読み方がいくつかあり、それを知ればコード集にない数字も読めました。以下は読み方ごとにまとめたものです。',
+    'codebook-repeat': '件は二桁をそのまま重ねて作られています。重ねることはこの言語の文法に近いものでした — 同じ断片を二度使うと意味が強くなったり（早く → 早く早く）、繰り返しの動作になりました。',
     'today-title': '今日の暗号',
     'today-note': '日付から決まります。今日は皆に同じ暗号が出ます。',
     'paper-label': '参照論文',

@@ -1,5 +1,6 @@
 /** 'cinema' 룩 — 불 꺼진 상영관의 화면. 자막을 실제 조건에서 보기 위한 룩이다. */
 
+import './look.css';
 import { CSS_VAR_PREFIX } from '../../core/traits';
 import { CINEMA_FILM, CINEMA_PALETTE, CINEMA_SHAPE, CINEMA_TYPE } from './config';
 

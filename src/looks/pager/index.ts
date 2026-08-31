@@ -1,5 +1,6 @@
 /** 'pager' 룩 — 1990년대 무선호출기의 화면. */
 
+import './look.css';
 import { CSS_VAR_PREFIX } from '../../core/traits';
 import { PAGER_LCD, PAGER_PALETTE, PAGER_SHAPE, PAGER_TYPE } from './config';
 

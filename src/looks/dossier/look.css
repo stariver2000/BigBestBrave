@@ -1,0 +1,328 @@
+/*
+ * 'dossier' 룩의 부품 스타일.
+ *
+ * 이 파일은 이 룩만 소유한다. 공유 CSS에 룩마다 규칙을 쌓으면 여러 세션이 같은 파일에서
+ * 부딪히므로, 룩이 자기 파일을 갖는다(AGENTS.md 6장).
+ *
+ * 겨누는 대상은 CSS 모듈의 클래스가 아니라 컴포넌트에 달린 `data-part` 이름표다.
+ * 클래스 이름은 빌드할 때마다 뒤섞이지만 이름표는 그대로이기 때문이다.
+ */
+
+/* ─────────────────────────────────────────────────────────────
+ * 'dossier' 룩 — 서류철의 부품.
+ *
+ * 같은 컴포넌트를 종이 위의 인쇄물처럼 다시 그린다. 모서리를 굴리지 않고, 그림자를 번지게 하지 않고,
+ * 라벨은 고정폭 대문자로 둔다. 화면 속 소프트웨어가 아니라 책상 위 서류로 읽히게 하기 위함이다.
+ * ───────────────────────────────────────────────────────────── */
+
+[data-look='dossier'] [data-part='panel'] {
+  padding: 0;
+  border: 1px solid var(--bbb-fg);
+  background: var(--bbb-surface);
+  box-shadow: var(--bbb-shadow-md);
+  gap: 0;
+}
+
+[data-look='dossier'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-lg);
+}
+
+/* 서류의 머리 칸. 제목 줄과 본문을 굵은 선으로 가른다. */
+[data-look='dossier'] [data-part='panel-header'] {
+  align-items: center;
+  padding: var(--bbb-space-2) var(--bbb-space-3);
+  border-block-end: 1px solid var(--bbb-fg);
+  background: var(--bbb-bg);
+}
+
+[data-look='dossier'] [data-part='panel-heading'] {
+  gap: 2px;
+}
+
+[data-look='dossier'] [data-part='panel-title'] {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='panel-note'] {
+  font-size: var(--bbb-text-n1);
+}
+
+/* 본문 칸은 패널이 직접 여백을 갖지 않으므로 마지막 자식들에 여백을 준다. */
+[data-look='dossier'] [data-part='panel'] > *:not([data-part='panel-header']) {
+  margin-inline: var(--bbb-space-3);
+}
+
+[data-look='dossier'] [data-part='panel'] > *:not([data-part='panel-header']):first-of-type {
+  margin-block-start: var(--bbb-space-3);
+}
+
+[data-look='dossier'] [data-part='panel'] > *:last-child {
+  margin-block-end: var(--bbb-space-3);
+}
+
+[data-look='dossier'] [data-part='panel'] > *:not([data-part='panel-header']) + *:not([data-part='panel-header']) {
+  margin-block-start: var(--bbb-space-2);
+}
+
+[data-look='dossier'] [data-part='label'] {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='input'] {
+  border: 1px solid var(--bbb-border-strong);
+  background: var(--bbb-surface-raised);
+}
+
+[data-look='dossier'] [data-part='input']:focus {
+  border-color: var(--bbb-accent);
+  box-shadow: 0 0 0 2px var(--bbb-accent-soft);
+}
+
+/* 버튼은 도장을 찍듯 눌린다. 뜨는 대신 반전된다. */
+[data-look='dossier'] [data-part='button'] {
+  padding: 7px 14px;
+  border: 1px solid var(--bbb-fg);
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='button']:hover:not(:disabled) {
+  transform: none;
+  border-color: var(--bbb-fg);
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+}
+
+[data-look='dossier'] [data-part='button'][data-variant='primary'] {
+  border-color: var(--bbb-accent);
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  box-shadow: none;
+}
+
+[data-look='dossier'] [data-part='button'][data-variant='primary']:hover:not(:disabled) {
+  border-color: var(--bbb-fg);
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+  filter: none;
+}
+
+/* 선택지는 칸으로 나뉜 서식 항목처럼 둔다. 고른 칸만 먹으로 채운다. */
+[data-look='dossier'] [data-part='segmented'] {
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--bbb-fg);
+  background: transparent;
+}
+
+[data-look='dossier'] [data-part='segment'] {
+  border-radius: 0;
+  border-inline-start: 1px solid var(--bbb-border-color);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='segment']:first-child {
+  border-inline-start: none;
+}
+
+[data-look='dossier'] [data-part='segment'][data-active],
+[data-look='dossier'] [data-part='segment'][data-active]:hover {
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+  box-shadow: none;
+}
+
+[data-look='dossier'] [data-part='badge'] {
+  border: 1px solid var(--bbb-fg);
+  background: transparent;
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.06em;
+}
+
+[data-look='dossier'] [data-part='badge']::before {
+  border-radius: 0;
+}
+
+/* 지면은 빛무리 대신 종이 결. 아주 촘촘한 가로선이라 질감으로만 읽힌다. */
+[data-look='dossier'][data-part='frame']::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    var(--look-grain, transparent) 3px 4px
+  );
+  opacity: 0.55;
+}
+
+/* 문서의 머리글처럼 이중선으로 닫는다. */
+[data-look='dossier'] [data-part='header'] {
+  border-block-end: 1px solid var(--bbb-fg);
+  background: color-mix(in oklab, var(--bbb-bg) 88%, transparent);
+}
+
+[data-look='dossier'] [data-part='header']::after {
+  content: '';
+  position: absolute;
+  inset-block-end: -4px;
+  inset-inline: 0;
+  block-size: 1px;
+  background: var(--bbb-fg);
+  opacity: 0.35;
+}
+
+/* 브랜드 마크는 원이 아니라 먹칠 바. 이 페이지의 도형이다. */
+[data-look='dossier'] [data-part='brand-mark'] {
+  inline-size: 22px;
+  block-size: 9px;
+  border-radius: 0;
+  background: var(--look-bar);
+}
+
+[data-look='dossier'] [data-part='brand-name'] {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='trail'],
+[data-look='dossier'] [data-part='ghost-button'],
+[data-look='dossier'] [data-part='locale-button'] {
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.06em;
+}
+
+[data-look='dossier'] [data-part='ghost-button'] {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+  background: transparent;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='ghost-button']:hover {
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+  border-color: var(--bbb-fg);
+}
+
+[data-look='dossier'] [data-part='locale-group'] {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+  padding: 0;
+  gap: 0;
+  background: transparent;
+}
+
+[data-look='dossier'] [data-part='locale-button'] {
+  border-radius: 0;
+  border-inline-start: 1px solid var(--bbb-border-color);
+}
+
+[data-look='dossier'] [data-part='locale-button']:first-child {
+  border-inline-start: none;
+}
+
+[data-look='dossier'] [data-part='locale-button'][data-active],
+[data-look='dossier'] [data-part='locale-button'][data-active]:hover {
+  background: var(--bbb-fg);
+  color: var(--bbb-surface);
+  box-shadow: none;
+}
+
+/* 표제 위의 이중 괘선. 인쇄물의 표지처럼 제목 덩어리를 연다. */
+[data-look='dossier'] [data-part='hero-inner']::before {
+  content: '';
+  display: block;
+  block-size: 4px;
+  border-block: 1px solid var(--bbb-fg);
+  margin-block-end: var(--bbb-space-3);
+}
+
+[data-look='dossier'] [data-part='page-title'] {
+  letter-spacing: -0.015em;
+}
+
+[data-look='dossier'] [data-part='title-dot'] {
+  color: var(--bbb-accent);
+}
+
+[data-look='dossier'] [data-part='footer'] {
+  border-block-start: 1px solid var(--bbb-fg);
+  background: transparent;
+}
+
+[data-look='dossier'] [data-part='tagline'] {
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.08em;
+}
+
+/* 의견란도 서식의 일부처럼. 입력 칸은 종이 위의 빈칸이다. */
+[data-look='dossier'] [data-part='comments'] {
+  border-block-start: 1px solid var(--bbb-fg);
+}
+
+[data-look='dossier'] [data-part='comments-title'] {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='comment-form'] {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+  box-shadow: var(--bbb-shadow-sm);
+}
+
+[data-look='dossier'] [data-part='comment-author-input'],
+[data-look='dossier'] [data-part='comment-body-input'] {
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: 0;
+  background: var(--bbb-surface-raised);
+}
+
+[data-look='dossier'] [data-part='comment-submit'] {
+  border-radius: 0;
+  font-family: var(--bbb-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-look='dossier'] [data-part='comment-author'] {
+  font-family: var(--bbb-font-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+[data-look='dossier'] [data-part='comment-time'],
+[data-look='dossier'] [data-part='comment-ghost'] {
+  font-family: var(--bbb-font-mono);
+}
+
+[data-look='dossier'] [data-part='comment-replies'] {
+  border-inline-start: 1px solid var(--bbb-fg);
+}
+
+[data-look='dossier'] [data-part='palette-box'] {
+  border: 1px solid var(--bbb-fg);
+  border-radius: 0;
+}
+
+[data-look='dossier'] [data-part='palette-input'] {
+  font-family: var(--bbb-font-mono);
+}

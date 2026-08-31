@@ -1,0 +1,23 @@
+/*
+ * 'blueprint' 룩의 부품 스타일.
+ *
+ * 이 파일은 이 룩만 소유한다. 공유 CSS에 룩마다 규칙을 쌓으면 여러 세션이 같은 파일에서
+ * 부딪히므로, 룩이 자기 파일을 갖는다(AGENTS.md 6장).
+ *
+ * 겨누는 대상은 CSS 모듈의 클래스가 아니라 컴포넌트에 달린 `data-part` 이름표다.
+ * 클래스 이름은 빌드할 때마다 뒤섞이지만 이름표는 그대로이기 때문이다.
+ */
+
+/* 도면의 지면: 작은 눈금과 큰 눈금 두 겹. 계측하는 화면이라는 인상을 만든다. */
+[data-look='blueprint'][data-part='frame']::before {
+  background-image:
+    linear-gradient(to right, var(--look-grid-fine, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--look-grid-fine, transparent) 1px, transparent 1px),
+    linear-gradient(to right, var(--look-grid-coarse, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--look-grid-coarse, transparent) 1px, transparent 1px);
+  background-size:
+    var(--look-grid-fine-size, 20px) var(--look-grid-fine-size, 20px),
+    var(--look-grid-fine-size, 20px) var(--look-grid-fine-size, 20px),
+    var(--look-grid-coarse-size, 100px) var(--look-grid-coarse-size, 100px),
+    var(--look-grid-coarse-size, 100px) var(--look-grid-coarse-size, 100px);
+}

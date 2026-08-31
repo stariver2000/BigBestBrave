@@ -80,10 +80,27 @@ tests/core/<주제>/, tests/modules/<페이지>/
 | --- | --- |
 | `src/modules/index.tsx` | 자기 페이지 한 줄만 추가 |
 | `src/looks/index.ts` | 자기 룩 한 줄만 추가 |
-| `src/kit/ui/ui.module.css` | 자기 룩 블록(`[data-look='<룩>'] ...`)만 파일 끝에 추가 |
+| `src/kit/ui/ui.module.css` | 바탕 스타일만. **룩 규칙을 여기 넣지 않는다** |
 | `src/shell/shell.module.css` | 위와 같음 |
 | `app/globals.css` | 되도록 손대지 않는다. 룩 변수로 해결한다 |
 | `docs/ARCHITECTURE.md` | 자기 페이지 절만 추가 |
+
+### 6.2-1 룩은 자기 CSS 파일을 갖는다
+
+룩이 부품의 생김새를 바꿀 때는 공유 CSS에 규칙을 쌓지 않고 `src/looks/<룩>/look.css`에 쓴다.
+그 파일은 그 룩만 소유하므로 다른 세션과 부딪히지 않는다.
+
+겨누는 대상은 CSS 모듈의 클래스가 아니라 컴포넌트에 달린 `data-part` 이름표다.
+클래스 이름은 빌드할 때마다 뒤섞이지만 이름표는 그대로다.
+
+```css
+/* src/looks/dossier/look.css */
+[data-look='dossier'] [data-part='panel'] { ... }
+[data-look='dossier'][data-part='frame']::before { ... }
+```
+
+이름표가 둘(`[data-look]` + `[data-part]`)이라 바탕 규칙(클래스 하나)보다 우선순위가 높다.
+새 부품에 룩이 손댈 자리가 필요하면 그 컴포넌트에 `data-part`를 달고, 이름은 케밥 표기로 쓴다.
 
 ### 6.3 절대 깨진 채로 두지 않는다
 
