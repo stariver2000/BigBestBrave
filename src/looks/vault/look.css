@@ -1,0 +1,76 @@
+/*
+ * 'vault' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 금고 안쪽의 감각: 두께가 있는 강철판, 위쪽 모서리에 걸린 옅은 빛, 놋쇠 한 점.
+ */
+
+[data-look='vault'][data-part='frame']::before {
+  /* 위에서 비스듬히 떨어지는 빛 한 줄기. 어둠이 평평해 보이지 않게 한다. */
+  background:
+    radial-gradient(120% 70% at 18% -10%, rgb(224 178 105 / 0.07), transparent 62%),
+    radial-gradient(90% 60% at 92% 4%, rgb(110 122 139 / 0.09), transparent 58%);
+}
+
+[data-look='vault'] [data-part='panel'] {
+  background: linear-gradient(180deg, var(--bbb-surface-raised), var(--bbb-surface) 46%);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='vault'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+/* 패널 제목은 금고 문에 새긴 각인처럼 작고 넓게. */
+[data-look='vault'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='vault'] [data-part='label'] {
+  letter-spacing: 0.06em;
+}
+
+/* 입력칸은 눌러 넣은 홈처럼 안쪽으로 파이게. */
+[data-look='vault'] [data-part='input'] {
+  background: #0C1015;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.45);
+}
+
+[data-look='vault'] [data-part='input']:focus-visible {
+  border-color: var(--bbb-accent);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.45), 0 0 0 3px var(--bbb-accent-glow);
+}
+
+[data-look='vault'] [data-part='button'][data-variant='primary'] {
+  background: linear-gradient(180deg, #EDC07A, var(--bbb-accent));
+  color: var(--bbb-accent-fg);
+  border-color: #9C7532;
+  font-weight: 650;
+}
+
+[data-look='vault'] [data-part='button'][data-variant='ghost'] {
+  border-color: var(--bbb-border-color);
+}
+
+[data-look='vault'] [data-part='segmented'] {
+  background: #0C1015;
+  border-color: var(--bbb-border-color);
+}
+
+[data-look='vault'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-fg);
+  box-shadow: inset 0 1px 0 rgb(228 233 240 / 0.08);
+}
+
+[data-look='vault'] [data-part='badge'] {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--bbb-text-n2);
+}

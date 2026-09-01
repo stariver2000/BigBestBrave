@@ -15,6 +15,7 @@ import { pagerVariables } from './pager';
 import { proofVariables } from './proof';
 import { pulseVariables } from './pulse';
 import { sereneVariables } from './serene';
+import { vaultVariables } from './vault';
 
 export { frameStyleSheet, frameVariables } from './resolve';
 
@@ -30,6 +31,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   garden: gardenVariables,
   gallery: galleryVariables,
   proof: proofVariables,
+  vault: vaultVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

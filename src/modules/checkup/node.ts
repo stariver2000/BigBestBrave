@@ -1,0 +1,86 @@
+/**
+ * 유출 확인 페이지의 트리 노드.
+ * 루트에서 갈라진 아홉 번째 가지(내 것을 지키는 법)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { checkupDictionary } from './dictionary';
+
+export const checkupNode: PageNode = {
+  id: 'password-checkup',
+  slug: 'checkup',
+  parentId: ROOT_ID,
+  title: {
+    ko: checkupDictionary.ko.title,
+    en: checkupDictionary.en.title,
+    ja: checkupDictionary.ja.title,
+  },
+  summary: {
+    ko: checkupDictionary.ko.summary,
+    en: checkupDictionary.en.summary,
+    ja: checkupDictionary.ja.summary,
+  },
+  capability: {
+    ko: checkupDictionary.ko.capability,
+    en: checkupDictionary.en.capability,
+    ja: checkupDictionary.ja.capability,
+  },
+  look: 'vault',
+  keywords: [
+    '비밀번호', '유출', '보안', '해시', '익명', '확인', '개인정보',
+    'password', 'breach', 'security', 'hash', 'k-anonymity', 'checkup', 'sha1',
+    'パスワード', '漏洩', 'ハッシュ', '匿名',
+  ],
+  traits: {
+    domain: ['security', 'dev-tools', 'education'],
+    audience: ['general', 'professional'],
+    intent: ['inform', 'comfort', 'measure'],
+    stance: ['earnest'],
+    atmosphere: ['solemn', 'serene'],
+    temperature: ['cool'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['subtle'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['metal'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'warm'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['none'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
