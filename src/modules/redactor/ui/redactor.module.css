@@ -144,8 +144,13 @@
   }
 }
 
+/*
+ * 너비를 100%로 못박지 않는다. 패널은 세로 flex라 자식이 알아서 한 줄을 채우고,
+ * 그렇게 두어야 룩이 자식에 좌우 여백을 줄 때 그 여백만큼 줄어든다.
+ * 100%로 박아 두면 여백이 너비 바깥에 더해져 dossier 룩에서 패널을 19px 밀고 나갔다.
+ */
 .textarea {
-  inline-size: 100%;
+  inline-size: auto;
   min-block-size: 360px;
   padding: var(--bbb-space-2);
   border: 1px solid var(--bbb-border-strong);

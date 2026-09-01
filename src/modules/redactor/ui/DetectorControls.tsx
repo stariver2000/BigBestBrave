@@ -34,7 +34,7 @@ export function DetectorControls({
   return (
     <div className={styles.controlGrid}>
       <Panel title={t('style-title')}>
-        <Segmented options={styleOptions} value={style} onChange={onStyleChange} />
+        <Segmented options={styleOptions} value={style} onChange={onStyleChange} dense />
         <p className={styles.styleNote}>{t(`style-note-${style}` as RedactorKey)}</p>
       </Panel>
 
