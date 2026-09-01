@@ -20,6 +20,7 @@ import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
 import { Rulers, rulersNode } from './rulers';
+import { Nudge, nudgeNode } from './nudge';
 import { Reach, reachNode } from './reach';
 import { Rechunker, subtitleNode } from './subtitle';
 import { Window, windowNode } from './window';
@@ -49,6 +50,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: rulersNode, Page: Rulers },
   { node: reachNode, Page: Reach },
   { node: windowNode, Page: Window },
+  { node: nudgeNode, Page: Nudge },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

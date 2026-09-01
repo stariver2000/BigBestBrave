@@ -1,0 +1,82 @@
+/**
+ * 작은 보상 페이지의 트리 노드.
+ * 루트에서 갈라진 열세 번째 가지(사람을 움직이는 법)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { nudgeDictionary } from './dictionary';
+
+export const nudgeNode: PageNode = {
+  id: 'micro-incentive',
+  slug: 'nudge',
+  parentId: ROOT_ID,
+  title: { ko: nudgeDictionary.ko.title, en: nudgeDictionary.en.title, ja: nudgeDictionary.ja.title },
+  summary: {
+    ko: nudgeDictionary.ko.summary,
+    en: nudgeDictionary.en.summary,
+    ja: nudgeDictionary.ja.summary,
+  },
+  capability: {
+    ko: nudgeDictionary.ko.capability,
+    en: nudgeDictionary.en.capability,
+    ja: nudgeDictionary.ja.capability,
+  },
+  look: 'scale',
+  keywords: [
+    '보상', '동기', '습관', '밴딧', '톰프슨', '파레토', '개인화', '디지털웰빙',
+    'incentive', 'bandit', 'thompson sampling', 'pareto', 'behavior change', 'wellbeing',
+    'インセンティブ', 'バンディット', '行動変容',
+  ],
+  traits: {
+    domain: ['health', 'finance', 'science'],
+    audience: ['general', 'academic'],
+    intent: ['teach', 'measure', 'explore'],
+    stance: ['clinical'],
+    atmosphere: ['austere', 'serene'],
+    temperature: ['neutral'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['subtle'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['paper'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
