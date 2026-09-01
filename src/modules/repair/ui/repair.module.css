@@ -8,3 +8,346 @@
   flex-direction: column;
   gap: var(--bbb-space-5);
 }
+
+.paper a {
+  color: var(--bbb-fg);
+  text-decoration-color: var(--bbb-border-strong);
+  text-underline-offset: 3px;
+  max-width: 62ch;
+}
+
+.paper a:hover {
+  color: var(--bbb-accent);
+}
+
+.note {
+  margin: var(--bbb-space-3) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 깔때기 */
+
+.funnel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-3);
+}
+
+.funnelStep {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--bbb-space-3);
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  overflow: hidden;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.funnelBar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 0;
+  background: var(--bbb-accent-soft);
+}
+
+.funnelStep[data-kind='narrow'] .funnelBar {
+  background: var(--bbb-miss-soft);
+}
+
+.funnelValue,
+.funnelLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.funnelValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-3);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-accent);
+}
+
+.funnelStep[data-kind='narrow'] .funnelValue {
+  color: var(--bbb-miss);
+}
+
+.funnelLabel {
+  font-size: var(--bbb-text-0);
+  word-break: keep-all;
+}
+
+/* 모양 표시 */
+
+.shapeKey {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-2);
+}
+
+.shapeChip {
+  padding: 6px 13px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: 999px;
+  font-size: var(--bbb-text-n1);
+  word-break: keep-all;
+}
+
+.shapeChip[data-shape='peakMiddle'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+  color: var(--bbb-accent);
+  font-weight: 650;
+}
+
+/* 공동체 갈래 */
+
+.focusWhy {
+  margin: var(--bbb-space-3) 0;
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  font-size: var(--bbb-text-0);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.focusWhy[data-verdict='fits'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+}
+
+.focusWhy[data-verdict='misfits'] {
+  background: var(--bbb-miss-soft);
+  border-color: var(--bbb-miss);
+}
+
+/* 축 */
+
+.scope {
+  margin-bottom: var(--bbb-space-4);
+}
+
+.scopeName {
+  margin: 0 0 var(--bbb-space-3);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.axis {
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  margin-bottom: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.axis[data-verdict='fits'] {
+  border-color: var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+}
+
+.axis[data-verdict='misfits'] {
+  border-color: var(--bbb-miss);
+  background: var(--bbb-miss-soft);
+}
+
+.axis[data-blocked='true'] {
+  border-width: 2px;
+}
+
+.axisHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-3);
+  margin-bottom: var(--bbb-space-2);
+}
+
+.axisName {
+  font-size: var(--bbb-text-1);
+  font-weight: 650;
+  word-break: keep-all;
+}
+
+.axisShape {
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+}
+
+.axisVerdict {
+  margin-left: auto;
+  font-size: var(--bbb-text-n1);
+  font-weight: 650;
+}
+
+.axisVerdict[data-verdict='fits'] {
+  color: var(--bbb-accent);
+}
+
+.axisVerdict[data-verdict='misfits'] {
+  color: var(--bbb-miss);
+}
+
+.axisVerdict[data-verdict='edge'] {
+  color: var(--bbb-fg-muted);
+}
+
+/*
+ * 눈금은 다섯 칸으로 못박는다. 논문의 축이 다섯 칸이라서가 아니라 이 화면이 다섯으로
+ * 나누었기 때문이고, 그 수가 바뀌면 판정 규칙도 함께 바뀌어야 한다.
+ */
+.slider {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--bbb-space-3);
+}
+
+@media (max-width: 720px) {
+  .slider {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: var(--bbb-space-2);
+  }
+}
+
+.pole {
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+.slider > .pole:last-child {
+  text-align: right;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, 26px);
+  gap: 8px;
+}
+
+.step {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  background: var(--bbb-surface);
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: 999px;
+  padding: 0;
+}
+
+.step:hover {
+  border-color: var(--bbb-fg);
+}
+
+.step[data-on='true'] {
+  background: var(--bbb-fg);
+  border-color: var(--bbb-fg);
+}
+
+.axis[data-verdict='fits'] .step[data-on='true'] {
+  background: var(--bbb-accent);
+  border-color: var(--bbb-accent);
+}
+
+.axis[data-verdict='misfits'] .step[data-on='true'] {
+  background: var(--bbb-miss);
+  border-color: var(--bbb-miss);
+}
+
+.reason {
+  margin: var(--bbb-space-3) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-miss);
+  word-break: keep-all;
+}
+
+/* 읽어 보면 */
+
+.counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--bbb-space-3);
+}
+
+@media (max-width: 720px) {
+  .counts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+}
+
+.count[data-verdict='fits'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+}
+
+.count[data-verdict='misfits'] {
+  background: var(--bbb-miss-soft);
+  border-color: var(--bbb-miss);
+}
+
+.countValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-4);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.count[data-verdict='fits'] .countValue {
+  color: var(--bbb-accent);
+}
+
+.count[data-verdict='misfits'] .countValue {
+  color: var(--bbb-miss);
+}
+
+.countLabel {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+.blocked {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  padding: var(--bbb-space-4);
+  background: var(--bbb-miss-soft);
+  border: 2px solid var(--bbb-miss);
+  border-radius: var(--bbb-radius-lg);
+}
+
+.blockedHead {
+  font-size: var(--bbb-text-2);
+  font-weight: 700;
+  color: var(--bbb-miss);
+  word-break: keep-all;
+}
+
+.blockedWhy {
+  font-size: var(--bbb-text-0);
+  line-height: 1.75;
+  word-break: keep-all;
+}

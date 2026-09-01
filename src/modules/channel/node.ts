@@ -1,0 +1,86 @@
+/**
+ * 채널 페이지의 트리 노드.
+ * 루트에서 갈라진 스물다섯 번째 가지(눈이 재는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { channelDictionary } from './dictionary';
+
+export const channelNode: PageNode = {
+  id: 'channel-effectiveness',
+  slug: 'channel',
+  parentId: ROOT_ID,
+  title: {
+    ko: channelDictionary.ko.title,
+    en: channelDictionary.en.title,
+    ja: channelDictionary.ja.title,
+  },
+  summary: {
+    ko: channelDictionary.ko.summary,
+    en: channelDictionary.en.summary,
+    ja: channelDictionary.ja.summary,
+  },
+  capability: {
+    ko: channelDictionary.ko.capability,
+    en: channelDictionary.en.capability,
+    ja: channelDictionary.ja.capability,
+  },
+  look: 'prism',
+  keywords: [
+    '시각 채널', '지각', '순위', '튀어나옴', '판별', '시각화', '그래프',
+    'visual channel', 'graphical perception', 'pop-out', 'discriminability', 'ranking', 'visualization',
+    '視覚チャネル', '知覚', 'ポップアウト',
+  ],
+  traits: {
+    domain: ['data', 'science', 'design'],
+    audience: ['professional', 'general'],
+    intent: ['teach', 'inform', 'entertain'],
+    stance: ['earnest'],
+    atmosphere: ['sterile', 'serene'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

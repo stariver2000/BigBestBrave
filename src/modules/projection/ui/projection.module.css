@@ -8,3 +8,340 @@
   flex-direction: column;
   gap: clamp(16px, 1.8vw, 24px);
 }
+
+.main {
+  display: grid;
+  gap: clamp(16px, 1.8vw, 24px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 1180px) {
+  .main {
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 1fr);
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.8vw, 24px);
+  min-width: 0;
+}
+
+/* ── 산점도 ─────────────────────────────────────────────── */
+
+.plotWrap {
+  display: flex;
+  justify-content: center;
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+}
+
+.plot {
+  inline-size: 100%;
+  block-size: auto;
+  display: block;
+}
+
+.axis {
+  stroke: var(--bbb-border-color);
+  stroke-width: 1;
+}
+
+.point {
+  cursor: crosshair;
+  transition: r var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+/* 놓친 이웃을 잇는 선. 원래는 가까웠는데 화면에서 멀어진 관계를 그대로 보여 준다. */
+.link {
+  stroke: var(--look-warn, #c2410c);
+  stroke-width: 1.2;
+  opacity: 0.75;
+}
+
+.plotEmpty {
+  padding: var(--bbb-space-6);
+  text-align: center;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: var(--bbb-space-1);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.legendBar {
+  block-size: 8px;
+  flex: 1 1 auto;
+  max-inline-size: 200px;
+  border: 1px solid var(--bbb-border-color);
+}
+
+.legendMuted {
+  opacity: 0.3;
+}
+
+/* ── 진실의 렌즈 ────────────────────────────────────────── */
+
+/* 렌즈가 켜지면 색이 곧 사실이다. 렌즈 밖의 색 계단과 뜻이 다르므로 아래 판독 줄이 늘 함께 있어야 한다. */
+.pointAnchor {
+  fill: var(--bbb-fg);
+}
+
+.pointKept {
+  fill: var(--bbb-accent);
+}
+
+.pointImposter {
+  fill: var(--bbb-danger);
+}
+
+/* 밀려난 진짜 이웃. 렌즈 밖에 있으므로 속을 비우고 테두리만 남겨 "저기 있다"만 알린다. */
+.pointPushed {
+  fill: var(--bbb-bg);
+  stroke: var(--bbb-accent);
+  stroke-width: 1.5;
+}
+
+.pointFaded {
+  fill: var(--bbb-border-color);
+}
+
+.lensRing {
+  fill: none;
+  stroke: var(--bbb-fg-muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+  opacity: 0.7;
+}
+
+/* 판독 줄. 값이 없을 때도 같은 높이를 지켜 렌즈를 켤 때 화면이 출렁이지 않게 한다. */
+.lensReadout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  margin: 0;
+  min-block-size: 1.6em;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.lensKept {
+  color: var(--bbb-accent);
+  font-weight: 600;
+}
+
+.lensImposter {
+  color: var(--bbb-danger);
+  font-weight: 600;
+}
+
+.lensPushed {
+  color: var(--bbb-fg);
+}
+
+.lensOf {
+  margin-inline-start: auto;
+}
+
+/* ── 계측값 ─────────────────────────────────────────────── */
+
+.metricGrid {
+  display: grid;
+  gap: var(--bbb-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-color);
+  background: var(--bbb-surface-raised);
+}
+
+.metricName {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.metricValue {
+  font-size: var(--bbb-text-3);
+  line-height: 1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.metricGrade {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-accent);
+}
+
+.metricNote {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.5;
+  color: var(--bbb-fg-muted);
+}
+
+/* 두 지표 중 어느 쪽이 약한지에 따라 읽는 법이 달라진다. */
+/* 예시 자료의 사정. 자료 칸 안에 두되, 자료가 아니라 자료에 대한 말임을 선으로 알린다. */
+.sampleNote {
+  margin-block-start: var(--bbb-space-2);
+  padding-inline-start: var(--bbb-space-2);
+  border-inline-start: 2px solid var(--bbb-accent);
+}
+
+.sampleTitle {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+  color: var(--bbb-accent);
+}
+
+.sampleBody {
+  margin: 4px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 80ch;
+}
+
+/* 값의 사정을 적는 줄 — 어떤 k로 쟀는지, 등급 구간이 어디인지. 값 자체가 아니므로 눌러 둔다. */
+.scope {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--bbb-space-2);
+  margin: var(--bbb-space-2) 0 4px;
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.scopeLabel {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scopeItem {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.scopeValue {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg);
+}
+
+/* 무엇을 놓치는지. 재는 것과 같은 카드 안에 두되, 선 하나로 성격이 다른 말임을 알린다. */
+.metricBlind {
+  margin-block-start: 8px;
+  padding-block-start: 8px;
+  border-block-start: 1px solid var(--bbb-border-color);
+  font-size: var(--bbb-text-n2);
+  line-height: 1.65;
+  color: var(--bbb-fg-muted);
+}
+
+.metricBlindLabel {
+  display: block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-danger);
+}
+
+.verdict {
+  padding: var(--bbb-space-3);
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+}
+
+/* ── 제어 ───────────────────────────────────────────────── */
+
+.controlRow {
+  display: grid;
+  gap: var(--bbb-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: end;
+}
+
+.select {
+  inline-size: 100%;
+  padding: 8px var(--bbb-space-1);
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface);
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+}
+
+.slider {
+  inline-size: 100%;
+  accent-color: var(--bbb-accent);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+}
+
+.textarea {
+  inline-size: 100%;
+  min-block-size: 200px;
+  max-block-size: 380px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--bbb-accent);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-2);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.metaStrong {
+  color: var(--bbb-accent);
+  font-weight: 600;
+}
+
+.warn {
+  color: var(--look-warn, #c2410c);
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+

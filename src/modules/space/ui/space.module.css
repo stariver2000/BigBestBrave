@@ -8,3 +8,367 @@
   flex-direction: column;
   gap: var(--bbb-space-5);
 }
+
+.paper a {
+  color: var(--bbb-fg);
+  text-decoration-color: var(--bbb-border-strong);
+  text-underline-offset: 3px;
+  max-width: 62ch;
+}
+
+.paper a:hover {
+  color: var(--bbb-accent);
+}
+
+.note {
+  margin: var(--bbb-space-3) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.sizeLabel {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+/* 공간의 크기 */
+
+.sizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--bbb-space-4);
+}
+
+.size {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.size[data-kind='corpus'] {
+  background: var(--bbb-gap-soft);
+  border-color: var(--bbb-gap-color);
+}
+
+.bigNumber {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-3);
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-accent);
+}
+
+.size[data-kind='corpus'] .bigNumber {
+  color: var(--bbb-gap-color);
+}
+
+.times {
+  font-size: var(--bbb-text-0);
+  font-weight: 400;
+  margin-left: 4px;
+  color: var(--bbb-fg-muted);
+}
+
+.bigNumber sup {
+  font-size: var(--bbb-text-0);
+}
+
+.sizeFine {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+/* 조각보 */
+
+.aspects {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-4);
+}
+
+.aspectHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bbb-space-3);
+  margin-bottom: var(--bbb-space-2);
+}
+
+.aspectName {
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+}
+
+.aspectCount {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+.aspectBarWrap {
+  flex: 1 1 100px;
+  height: 4px;
+  overflow: hidden;
+  background: #0F1116;
+  border: 1px solid var(--bbb-border-color);
+}
+
+.aspectBar {
+  display: block;
+  height: 100%;
+  background: var(--bbb-accent);
+}
+
+/*
+ * 조각의 수는 논문의 표에서 온 값이라 열 수를 고정으로 적는다.
+ * auto-fit을 쓰면 갈래마다 열 수가 달라져 조각보가 어긋난다.
+ */
+.patches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+}
+
+@media (max-width: 900px) {
+  .patches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.patch {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 62px;
+  padding: 8px 9px;
+  text-align: left;
+  cursor: pointer;
+  background: #0F1116;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  color: var(--bbb-fg-muted);
+  font: inherit;
+  transition: border-color 120ms var(--bbb-easing), background 120ms var(--bbb-easing);
+}
+
+.patch:hover {
+  border-color: var(--bbb-border-strong);
+}
+
+.patch[data-decided='true'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+  color: var(--bbb-fg);
+}
+
+.patch[data-thin='true'] {
+  border-color: var(--bbb-gap-color);
+  border-style: dashed;
+}
+
+.patch[data-thin='true'][data-decided='true'] {
+  border-style: solid;
+}
+
+.patch[data-open='true'] {
+  outline: 2px solid var(--bbb-focus);
+  outline-offset: 1px;
+}
+
+.patchName {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--bbb-fg);
+  word-break: keep-all;
+}
+
+.patchCodes {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n2);
+  line-height: 1.35;
+  color: var(--bbb-fg-muted);
+  word-break: break-word;
+}
+
+.patch[data-decided='true'] .patchCodes {
+  color: var(--bbb-accent);
+}
+
+/* 고른 값 */
+
+.openName {
+  margin: 0 0 var(--bbb-space-3);
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+}
+
+.thinTag {
+  margin-left: 6px;
+  color: var(--bbb-gap-color);
+}
+
+.codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.code {
+  padding: 6px 11px;
+  cursor: pointer;
+  background: #0F1116;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+}
+
+.code:hover {
+  border-color: var(--bbb-border-strong);
+}
+
+.code[data-on='true'] {
+  background: var(--bbb-accent);
+  border-color: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  font-weight: 650;
+}
+
+/* 비어 있는 칸 */
+
+/* 두 칸의 키를 맞추지 않는다. 내용이 적은 쪽이 빈 채로 늘어나면 없는 무게가 생긴다. */
+.blindPair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--bbb-space-4);
+  align-items: start;
+}
+
+.blind {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  padding: var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+}
+
+.blind[data-kind='shared'] {
+  background: var(--bbb-gap-soft);
+  border-color: var(--bbb-gap-color);
+}
+
+.blind[data-kind='alone'] {
+  background: var(--bbb-surface-raised);
+}
+
+.blindHead {
+  font-size: var(--bbb-text-0);
+  font-weight: 650;
+  word-break: keep-all;
+}
+
+.blindCount {
+  margin-left: 6px;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.blind[data-kind='shared'] .blindCount {
+  color: var(--bbb-gap-color);
+}
+
+.blind[data-kind='alone'] .blindCount {
+  color: var(--bbb-fg-muted);
+}
+
+.blindList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.blindChip {
+  padding: 4px 9px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n2);
+  word-break: keep-all;
+}
+
+.blindChip[data-kind='shared'] {
+  border-color: var(--bbb-gap-color);
+  color: var(--bbb-gap-color);
+}
+
+.blindChip[data-kind='alone'] {
+  color: var(--bbb-fg-muted);
+}
+
+.blindWhy {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+/* 저자들이 짚은 자리 */
+
+.growth {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  margin-bottom: var(--bbb-space-4);
+}
+
+.growthRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--bbb-space-3);
+}
+
+.growthCell {
+  display: flex;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+}
+
+.growthYear {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.growthValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-3);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-accent);
+}
+
+.arrow {
+  color: var(--bbb-fg-muted);
+}
+
+.namedCodes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+}

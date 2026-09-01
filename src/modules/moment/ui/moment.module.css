@@ -8,3 +8,394 @@
   flex-direction: column;
   gap: var(--bbb-space-5);
 }
+
+/* ── 시연: 화면에 끼어드는 순간 ─────────────────────────── */
+
+/* 휴대폰 한 대. 개입이 뜨는 자리라서 화면 가운데에 두고 크기를 고정한다. */
+.phone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 320px;
+  padding: var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-lg);
+  background: var(--bbb-surface-raised);
+  overflow: hidden;
+}
+
+.phoneIdle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--bbb-space-2);
+  text-align: center;
+}
+
+/* 개입 화면. 덮는다는 인상이 있어야 하므로 기기 안을 가득 채운다. */
+.overlay {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  inline-size: 100%;
+  max-inline-size: 420px;
+  padding: var(--bbb-space-3);
+  border: 1px solid var(--bbb-accent);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+.overlayTitle {
+  margin: 0;
+  font-size: var(--bbb-text-1);
+  font-weight: 600;
+}
+
+.overlayBody {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}
+
+.overlayActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 마찰 과제의 열두 자리. 네 자리씩 띄어 두어 눈이 자리를 잃지 않게 한다. */
+.digits {
+  margin: 0;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-2);
+  letter-spacing: 0.12em;
+  color: var(--bbb-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.digitInput {
+  inline-size: 100%;
+  padding: var(--bbb-space-1) var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-bg);
+  color: var(--bbb-fg);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  letter-spacing: 0.12em;
+}
+
+.digitInput:focus {
+  outline: none;
+  border-color: var(--bbb-accent);
+}
+
+.wrong {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-danger);
+}
+
+/* 왜 지금인지. 설명이 개입의 절반이므로 접었다 펴도 자리를 지킨다. */
+.why {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-accent-soft);
+}
+
+.whyLabel {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.whyChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.whyChip {
+  padding: 3px 10px;
+  border: 1px solid var(--bbb-accent);
+  border-radius: var(--bbb-radius-pill);
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-accent);
+}
+
+.whyDetail {
+  margin: 0;
+  padding-inline-start: var(--bbb-space-3);
+  font-size: var(--bbb-text-n2);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}
+
+.whyLow {
+  color: var(--bbb-fg);
+}
+
+.whyFeature {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg-muted);
+}
+
+.whyToggle {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--bbb-accent);
+  font-family: inherit;
+  font-size: var(--bbb-text-n2);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* 결과 한 줄. 붙잡혔는지 놓여났는지가 색으로 갈린다. */
+.outcome {
+  margin: 0;
+  font-size: var(--bbb-text-1);
+}
+
+.outcome[data-kind='stopped'] {
+  color: var(--bbb-accent);
+}
+
+.outcome[data-kind='passed'] {
+  color: var(--look-warm, var(--bbb-fg-muted));
+}
+
+/* ── 개입 방식의 사다리 ─────────────────────────────────── */
+
+.ladder {
+  display: grid;
+  gap: 8px;
+}
+
+/* 한 칸이 한 방식. 위에서 아래로 ML·적응·설명이 하나씩 더해진다. */
+.rung {
+  display: grid;
+  gap: 4px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface);
+  color: var(--bbb-fg);
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.rung:hover,
+.rung[aria-pressed='true'] {
+  border-color: var(--bbb-accent);
+}
+
+.rungHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.rungName {
+  font-size: var(--bbb-text-0);
+  font-weight: 600;
+}
+
+.rungFlags {
+  display: flex;
+  gap: 6px;
+}
+
+/* 무엇을 갖췄는지 세 조각. 갖춘 것만 또렷하게 둔다. */
+.flag {
+  padding: 2px 8px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-pill);
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+}
+
+.flag[data-on='true'] {
+  border-color: var(--bbb-accent);
+  color: var(--bbb-accent);
+}
+
+.rungDesc {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--bbb-text-n2);
+}
+
+.metricLabel {
+  min-inline-size: 84px;
+  color: var(--bbb-fg-muted);
+}
+
+.metricValue {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.metricNone {
+  color: var(--bbb-fg-muted);
+}
+
+/* 값 막대. 두 지표가 같은 축을 쓰므로 폭만으로 견줄 수 있다. */
+.barWrap {
+  flex: 1 1 auto;
+  block-size: 6px;
+  border-radius: var(--bbb-radius-pill);
+  background: color-mix(in oklab, var(--bbb-fg) 10%, transparent);
+  overflow: hidden;
+}
+
+.bar {
+  display: block;
+  block-size: 100%;
+  background: var(--bbb-accent);
+}
+
+.bar[data-kind='warm'] {
+  background: var(--look-warm, var(--bbb-border-strong));
+}
+
+/* ── 엇갈린 결과 ────────────────────────────────────────── */
+
+.mixed {
+  display: grid;
+  gap: var(--bbb-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .mixed {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.mixedSide {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mixedRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.mixedName {
+  min-inline-size: 148px;
+  font-size: var(--bbb-text-n1);
+}
+
+.mixedValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.mixedValue[data-kind='accent'] {
+  color: var(--bbb-accent);
+}
+
+.mixedValue[data-kind='warm'] {
+  color: var(--look-warm, var(--bbb-fg-muted));
+}
+
+/* ── 되짚기 ─────────────────────────────────────────────── */
+
+.checks {
+  display: grid;
+  gap: var(--bbb-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.check {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: var(--bbb-space-2);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.checkName {
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+}
+
+.checkPair {
+  display: flex;
+  gap: var(--bbb-space-3);
+}
+
+.checkCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  color: var(--bbb-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 공통 ───────────────────────────────────────────────── */
+
+.smallLabel {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.note {
+  margin: var(--bbb-space-2) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.8;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 74ch;
+}
+
+/* 논문에 없는 값이거나 조건이 붙는 값에 다는 잔글씨. */
+.fine {
+  margin: 0;
+  font-size: var(--bbb-text-n2);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+.scale {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  inline-size: 100%;
+}

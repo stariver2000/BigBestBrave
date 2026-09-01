@@ -22,6 +22,7 @@ import { lensVariables } from './lens';
 import { marginVariables } from './margin';
 import { pagerVariables } from './pager';
 import { palmVariables } from './palm';
+import { prismVariables } from './prism';
 import { proofVariables } from './proof';
 import { pulseVariables } from './pulse';
 import { quiltVariables } from './quilt';
@@ -62,6 +63,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   quilt: quiltVariables,
   circle: circleVariables,
   glow: glowVariables,
+  prism: prismVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

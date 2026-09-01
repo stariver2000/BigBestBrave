@@ -8,3 +8,455 @@
   flex-direction: column;
   gap: var(--bbb-space-5);
 }
+
+.paper a {
+  color: var(--bbb-fg);
+  text-decoration-color: var(--bbb-border-strong);
+  text-underline-offset: 3px;
+  max-width: 62ch;
+}
+
+.paper a:hover {
+  color: var(--bbb-accent);
+}
+
+.smallLabel {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.note {
+  margin: var(--bbb-space-3) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 문장 고르기와 가르기 */
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bbb-space-2);
+}
+
+.preset {
+  padding: 6px 10px;
+  cursor: pointer;
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  text-align: left;
+  word-break: keep-all;
+}
+
+.preset:hover {
+  border-color: var(--bbb-border-strong);
+}
+
+.preset[data-on='true'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+  color: var(--bbb-accent);
+  font-weight: 650;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--bbb-space-4);
+}
+
+.parts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--bbb-space-3);
+  margin-top: var(--bbb-space-4);
+  padding-top: var(--bbb-space-3);
+  border-top: 1px solid var(--bbb-border-color);
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.partLabel {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.partValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  color: var(--bbb-accent);
+  word-break: break-word;
+}
+
+.part[data-missing='true'] .partValue {
+  color: var(--bbb-fg-muted);
+  font-style: italic;
+  font-family: var(--bbb-font-body);
+}
+
+/* 스스로 적는 물음 */
+
+.ownRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-2);
+  align-items: center;
+}
+
+.ownRow > :first-child {
+  flex: 1 1 260px;
+}
+
+.ownList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--bbb-space-4);
+}
+
+.ownItem {
+  margin: 0;
+  padding: var(--bbb-space-2) var(--bbb-space-3);
+  background: var(--bbb-own-soft);
+  border-left: 3px solid var(--bbb-own);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-0);
+  color: var(--bbb-own);
+  word-break: keep-all;
+}
+
+/* 열 칸 */
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+}
+
+/*
+ * 네 칸을 반드시 네 열로 둔다.
+ * auto-fit을 쓰면 첫 열(조각 이름)이 자리를 먹은 뒤 남은 폭에 세 칸만 들어가고
+ * 네 번째가 아래로 떨어져 좁은 칸에서 한 글자씩 꺾인다. 열 수는 표에서 온 값이므로
+ * 고정으로 적는 것이 맞다.
+ */
+.gridRow {
+  display: grid;
+  grid-template-columns: 92px repeat(4, minmax(0, 1fr));
+  gap: var(--bbb-space-2);
+  align-items: stretch;
+}
+
+.gridHead {
+  padding: 0 var(--bbb-space-3);
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+/* 폭이 모자라면 한 줄에 한 칸씩 쌓는다. 각 칸이 자기 자리 이름을 달고 있어 뜻이 남는다. */
+@media (max-width: 900px) {
+  .gridRow {
+    grid-template-columns: 1fr;
+  }
+
+  .gridHead {
+    display: none;
+  }
+}
+
+.rowHead {
+  display: flex;
+  align-items: center;
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+  word-break: keep-all;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--bbb-space-3);
+  text-align: left;
+  cursor: pointer;
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  color: var(--bbb-fg);
+  font: inherit;
+  transition: border-color 140ms var(--bbb-easing), background 140ms var(--bbb-easing);
+}
+
+.cell:hover {
+  border-color: var(--bbb-border-strong);
+}
+
+.cell[data-on='true'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+  box-shadow: inset 3px 0 0 var(--bbb-accent);
+}
+
+.cellName {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+.cell[data-on='true'] .cellName {
+  color: var(--bbb-accent);
+}
+
+.cellQuestion {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+.cellEmpty {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--bbb-space-3);
+  border: 1px dashed var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-md);
+  background: transparent;
+}
+
+.cellWhy {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.55;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+/* 그림의 모양 */
+
+.shape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-4);
+  align-items: center;
+}
+
+.shapeFacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: var(--bbb-space-3);
+  flex: 1 1 300px;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.factValue {
+  font-size: var(--bbb-text-1);
+  font-weight: 600;
+}
+
+.factChart {
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-2);
+  font-weight: 700;
+  color: var(--bbb-accent);
+  word-break: keep-all;
+}
+
+.plots {
+  display: flex;
+  gap: var(--bbb-space-2);
+  padding: var(--bbb-space-3);
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+}
+
+.plot {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.axis {
+  stroke: var(--bbb-border-strong);
+  stroke-width: 1;
+}
+
+.barA {
+  fill: var(--bbb-accent);
+}
+
+.barB {
+  fill: var(--bbb-own);
+}
+
+.lineA,
+.lineB,
+.lineC {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lineA {
+  stroke: var(--bbb-accent);
+}
+
+.lineB {
+  stroke: var(--bbb-own);
+}
+
+.lineC {
+  stroke: var(--bbb-border-strong);
+}
+
+/* 근거 표 */
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--bbb-space-4);
+  align-items: start;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-3);
+}
+
+.tableRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bbb-space-2) var(--bbb-space-3);
+  padding-bottom: var(--bbb-space-2);
+  border-bottom: 1px solid var(--bbb-border-color);
+}
+
+.tableName {
+  flex: 1 1 140px;
+  font-size: var(--bbb-text-0);
+  font-weight: 600;
+  word-break: keep-all;
+}
+
+.tableBarWrap {
+  flex: 1 1 120px;
+  height: 8px;
+  overflow: hidden;
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: 999px;
+}
+
+.tableBar {
+  display: block;
+  height: 100%;
+  background: var(--bbb-accent);
+}
+
+.tableNum {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  font-variant-numeric: tabular-nums;
+}
+
+.tableNum[data-kind='tool'] {
+  color: var(--bbb-accent);
+  font-weight: 700;
+}
+
+.tableNum[data-kind='base'] {
+  color: var(--bbb-fg-muted);
+}
+
+.tableFine {
+  flex-basis: 100%;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+}
+
+.swatchTool,
+.swatchBase {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  vertical-align: baseline;
+}
+
+.swatchTool {
+  background: var(--bbb-accent);
+}
+
+.swatchBase {
+  background: var(--bbb-fg-muted);
+}
+
+/* 역효과 */
+
+.quote {
+  margin: 0;
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  background: var(--bbb-surface-raised);
+  border-left: 3px solid var(--bbb-border-strong);
+  font-size: var(--bbb-text-0);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-3);
+  margin-top: var(--bbb-space-3);
+}
+
+.count {
+  padding: var(--bbb-space-2) var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-1);
+  font-variant-numeric: tabular-nums;
+}
+
+.count[data-kind='own'] {
+  background: var(--bbb-own-soft);
+  border-color: var(--bbb-own);
+  color: var(--bbb-own);
+}
+
+.count[data-kind='warn'] {
+  background: var(--bbb-accent-soft);
+  border-color: var(--bbb-accent);
+  color: var(--bbb-accent);
+}

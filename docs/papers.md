@@ -12,6 +12,10 @@
 1. **브라우저 안에서 결정론적으로 돌아갈 것.** 모델 가중치·서버·전용 기기가 필요하면 고르지 않는다.
 2. 알고리즘 논문이면 방법을, 질적 연구면 **연구가 놓은 조건**을 옮긴다.
 3. 무엇을 가져왔고 무엇을 가져오지 않았는지 페이지에 밝힌다.
+4. **논문이 무슨 말을 하려는 것인지 쉬운 말로 적는다.** 열두 살이 읽어도 통하는 문장만 쓴다.
+   `config.ts`의 `PAPER.plain`에 네 줄(걸렸던 것 · 연구가 한 일 · 가져온 것 · 가져오지 않은 것)을
+   ko/en/ja로 두고, 화면은 `PaperCard`가 같은 자리에 그린다.
+   빠뜨리면 `tests/modules/paper-plain.test.ts`가 먼저 깨진다.
 
 ---
 
@@ -42,6 +46,7 @@
 | `/space` | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 (36인 공동 연구) |
 | `/repair` | The Design Space for Online Restorative Justice Tools: A Case Study with ApoloBot | CHI 2025 (KAIST) |
 | `/moment` | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 (KAIST·Tsinghua·CMU·MIT·UW) |
+| `/channel` | Revisiting Channel Effectiveness: A Multi-Dimensional Evaluation with Primitive Visual Stimuli | IEEE VIS 2026 (SNU) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -53,13 +58,15 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
+| 1 | Stop Misusing t-SNE and UMAP for Visual Analytics | IEEE VIS 2026 (SNU) | 투영 그림을 잘못 읽는 법과 바로 읽는 법 |
+| 2 | GhostUI: Unveiling Hidden Interactions in Mobile UI | CHI 2026 (SNU) | 숨은 상호작용의 갈래를 만져 보는 화면 |
+| 3 | Good Fences Make Good Learning: How Self-Directed Language Learners Navigate LLM Delegation Decisions | CHI 2026 (SNU) | 무엇을 맡기고 무엇을 스스로 할지의 울타리 |
+| 4 | Chillbot: Content Moderation in the Backchannel | CSCW 2024 (KAIST) | 뒷무대에서 이루어지는 조정 |
+| 5 | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) | 하우투 영상 속 정보의 갈래 |
 
-목록이 비었다. 다음 회차는 연구실 발표 목록(hci.kaist.ac.kr/publications,
-hcil.snu.ac.kr/publications)에서 최근 1~2년 것 가운데 브라우저 안에서 결정론적으로
-돌아갈 만한 것을 골라 이 표를 다시 채운 뒤 이어 간다.
-
-전문을 구하는 길: arXiv에 없으면 저자 개인 페이지를 찾아본다(`/context`가 그랬다).
-논문이 분류표나 자료집을 따로 공개했으면 그쪽이 정본이다(`/space`가 그랬다).
+2026-09-01에 두 연구실 발표 목록에서 다시 채웠다. 서울대 HCIL은 연구실이 PDF를 직접
+올려 두어(hcil.snu.ac.kr/cms/uploads/...) 전문 걱정이 없다. 목록 페이지는 클라이언트
+렌더링이라 curl로는 비어 나오고 헤드리스 크롬으로 열어야 한다.
 
 ## 건너뛴 것
 

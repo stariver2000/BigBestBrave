@@ -8,3 +8,215 @@
   flex-direction: column;
   gap: clamp(16px, 1.8vw, 24px);
 }
+
+.main {
+  display: grid;
+  gap: clamp(16px, 1.8vw, 24px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 1080px) {
+  .main {
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  }
+}
+
+/* ── 두 그림 ────────────────────────────────────────────── */
+
+.plots {
+  display: grid;
+  gap: var(--bbb-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+}
+
+.plotBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-color);
+  background: var(--bbb-surface);
+}
+
+/* 어긋난 그림에는 붉은 테두리를 두른다. 교정 부호와 같은 뜻이다. */
+.plotFlagged {
+  border-color: var(--bbb-accent);
+}
+
+.plotLabel {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.plotLabelFlagged {
+  color: var(--bbb-accent);
+}
+
+.plotNote {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.plot {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.axis {
+  stroke: var(--bbb-fg);
+  stroke-width: 1;
+}
+
+.tick {
+  fill: var(--bbb-fg-muted);
+  font-size: 11px;
+}
+
+.mark {
+  fill: var(--bbb-fg);
+}
+
+.markLine {
+  fill: none;
+  stroke: var(--bbb-fg);
+  stroke-width: 2;
+}
+
+/* ── 판정 ───────────────────────────────────────────────── */
+
+.verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  padding: var(--bbb-space-2) var(--bbb-space-3);
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+}
+
+.verdictNumber {
+  font-size: var(--bbb-text-3);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--bbb-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.verdictClean {
+  border-inline-start-color: var(--bbb-border-strong);
+  background: transparent;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+}
+
+/* ── 짚은 곳 ────────────────────────────────────────────── */
+
+.findings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+}
+
+.finding {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-block-end: var(--bbb-space-2);
+  border-block-end: 1px solid var(--bbb-border-color);
+}
+
+.finding:last-child {
+  border-block-end: none;
+  padding-block-end: 0;
+}
+
+.findingHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+}
+
+.findingName {
+  font-weight: 600;
+}
+
+.findingFactor {
+  color: var(--bbb-accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.findingSeverity {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.findingWhy {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+  max-inline-size: 64ch;
+}
+
+/* ── 설정 ───────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rowLabel {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.rowValue {
+  color: var(--bbb-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.slider {
+  inline-size: 100%;
+  accent-color: var(--bbb-accent);
+}
+
+.input {
+  inline-size: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--bbb-border-strong);
+  background: var(--bbb-surface);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--bbb-accent);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+}
+
+.quiet {
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+}

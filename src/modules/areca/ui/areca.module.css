@@ -18,6 +18,43 @@
   gap: clamp(18px, 2vw, 28px);
 }
 
+/* ── 사물 ───────────────────────────────────────────────── */
+
+.stage {
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(16px, 3vw, 36px);
+}
+
+/*
+ * 흰 원기둥. 옆에서 본 모습이라 위아래가 살짝 눌린 타원으로 끝난다.
+ * 좌우의 옅은 그늘이 둥근 면을 만든다.
+ */
+.body {
+  position: relative;
+  border-radius: 84px;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(30 42 34 / 0.09) 0%,
+      rgb(255 255 255 / 0) 18%,
+      rgb(255 255 255 / 0) 78%,
+      rgb(30 42 34 / 0.07) 100%
+    ),
+    var(--bbb-surface-raised);
+  box-shadow: var(--bbb-shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 아주 느리게 숨 쉰다. 살아 있다는 표시는 이 정도면 충분하다. */
+  animation: breathe 7s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 /* 전자잉크. 빛나지 않고 반사만 하므로 아주 옅은 안쪽 그림자만 준다. */
 .epaper {
   inline-size: 72%;
