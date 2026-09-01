@@ -8,10 +8,10 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
+import { Panel, PaperCard, SimulationChip, useReach, useSimulation } from '../../../kit';
 import { compare, MODES, SEED, TRIPS, type Mode } from '../../../core/routing';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { PAPER } from '../config';
+import { LIVE_DAY_MS, PAPER } from '../config';
 import { routeDictionary, type RouteKey } from '../dictionary';
 import { CityMap } from './CityMap';
 import styles from './route.module.css';
@@ -21,6 +21,23 @@ export function Route({ locale }: { locale: Locale }) {
 
   const [trips, setTrips] = useState<number>(TRIPS.initial);
   const [seed, setSeed] = useState<number>(SEED);
+
+  // 이 페이지가 통한 순간: 날씨를 바꿔 보고도 같은 갈림이 나오는지 확인한 때.
+  const reach = useReach();
+
+  /*
+   * 세 사람이 계속 다닌다. 한 걸음이 하루이고, 하루가 지날 때마다 셋 다 각자의 태도로 다녀온다.
+   * 지도의 굵기가 갈라지는 것이 이 페이지의 요점이라, 결과를 한 번에 내놓으면 그 갈라짐이 통째로 빠진다.
+   * 끝까지 다닌 뒤에는 날씨를 새로 뽑아 처음부터 다시 다닌다 — 갈림이 우연이 아님은 그때 보인다.
+   * 손잡이를 돌리는 동안에도 계속 다닌다. 그때 무엇이 달라지는지가 볼거리다.
+   */
+  const season = useSimulation(() => {
+    setTrips((day) => {
+      if (day < TRIPS.max) return day + 1;
+      setSeed((old) => old + 1);
+      return TRIPS.min;
+    });
+  }, LIVE_DAY_MS);
 
   const { city, runs } = useMemo(() => compare({ trips, seed }), [trips, seed]);
 
@@ -39,7 +56,11 @@ export function Route({ locale }: { locale: Locale }) {
         locale={locale}
       />
 
-      <Panel title={t('setup-title')} note={t('setup-note')}>
+      <Panel
+        title={t('setup-title')}
+        note={t('setup-note')}
+        actions={<SimulationChip running={season.running} onToggle={season.toggle} locale={locale} />}
+      >
         <div className={styles.controls}>
           <label className={styles.dial}>
             <span className={styles.dialLabel}>
@@ -55,7 +76,14 @@ export function Route({ locale }: { locale: Locale }) {
               onChange={(event) => setTrips(Number(event.target.value))}
             />
           </label>
-          <button type="button" className={styles.reshuffle} onClick={() => setSeed((old) => old + 1)}>
+          <button
+            type="button"
+            className={styles.reshuffle}
+            onClick={() => {
+              reach();
+              setSeed((old) => old + 1);
+            }}
+          >
             {t('reshuffle')}
           </button>
         </div>

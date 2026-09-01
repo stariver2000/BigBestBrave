@@ -24,3 +24,23 @@ describe('맥 저장 설정', () => {
     expect(config.url).toBe('http://127.0.0.1:9000');
   });
 });
+
+describe('postgres를 골랐을 때', () => {
+  it('접속 문자열이 있으면 그대로 쓴다', () => {
+    const config = readPulseConfig(
+      env({ PULSE_DRIVER: 'postgres', PULSE_DATABASE_URL: 'postgres://localhost/bbb' }),
+    );
+    expect(config.driver).toBe('postgres');
+    expect(config.databaseUrl).toBe('postgres://localhost/bbb');
+  });
+
+  it('접속 문자열이 없으면 파일로 물러난다', () => {
+    // postgres라고 적어 두고 주소를 빠뜨리면 아무것도 저장되지 않는다. 그 상태를 만들지 않는다.
+    expect(readPulseConfig(env({ PULSE_DRIVER: 'postgres' })).driver).toBe('file');
+  });
+
+  it('DATABASE_URL도 받아 준다', () => {
+    const config = readPulseConfig(env({ PULSE_DRIVER: 'postgres', DATABASE_URL: 'postgres://x/y' }));
+    expect(config.databaseUrl).toBe('postgres://x/y');
+  });
+});

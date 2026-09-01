@@ -19,6 +19,7 @@ import { hedgeVariables } from './hedge';
 import { hindsightVariables } from './hindsight';
 import { gardenVariables } from './garden';
 import { glowVariables } from './glow';
+import { hushVariables } from './hush';
 import { lensVariables } from './lens';
 import { marginVariables } from './margin';
 import { pagerVariables } from './pager';
@@ -70,6 +71,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   mirage: mirageVariables,
   veil: veilVariables,
   hedge: hedgeVariables,
+  hush: hushVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

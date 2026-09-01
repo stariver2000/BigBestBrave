@@ -56,3 +56,11 @@ export const MAP = { size: 190, pad: 18, dot: 4 } as const;
 
 /** 가장 많이 지난 길의 굵기(px). 지난 횟수에 따라 이만큼까지 굵어진다. */
 export const STROKE = { min: 1, max: 7 } as const;
+
+/**
+ * 하루가 지나는 간격(ms).
+ *
+ * 한 걸음이 하루다. 세 사람이 같은 날씨 속을 각자의 태도로 다녀오고, 지도의 굵기가 조금씩 달라진다.
+ * 빠르면 무엇이 달라졌는지 눈이 못 따라가고, 느리면 갈림이 벌어지기 전에 사람이 떠난다.
+ */
+export const LIVE_DAY_MS = 420;

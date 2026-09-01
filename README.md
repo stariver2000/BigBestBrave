@@ -42,6 +42,20 @@ PULSE_DRIVER=http
 PULSE_URL=http://127.0.0.1:8787
 ```
 
+여럿이 함께 쓸 때는 PostgreSQL로 바꾼다. 스키마는 파일 하나이고 테이블도 하나다.
+
+```bash
+psql "$PULSE_DATABASE_URL" -f services/pulse/schema.sql
+```
+
+```
+PULSE_DRIVER=postgres
+PULSE_DATABASE_URL=postgres://user:pass@host:5432/db
+```
+
+쌓인 것을 읽을 때는 저장소가 무엇이든 `npm run pulse:report -- http://localhost:3000` 처럼
+앱 주소를 주면 된다. 읽는 길은 앱이 이미 알고 있으므로 스크립트에 드라이버를 깔 필요가 없다.
+
 **서비스가 꺼져 있어도 사이트는 그대로 동작한다.** 맥은 덤이고, 쓰기 실패는 조용히 삼킨다.
 읽기는 삼키지 않는다 — 0과 "모른다"는 다른 말이라, 닿지 못하면 503으로 답한다.
 

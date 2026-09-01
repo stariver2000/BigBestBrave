@@ -38,6 +38,7 @@ import { Soften, softenNode } from './soften';
 import { Repair, repairNode } from './repair';
 import { Rechunker, subtitleNode } from './subtitle';
 import { Whatif, whatifNode } from './whatif';
+import { Whisper, whisperNode } from './whisper';
 import { Window, windowNode } from './window';
 
 /** 모든 페이지 컴포넌트가 받는 공통 props. 페이지 고유 상태는 URL에서 스스로 읽는다. */
@@ -81,6 +82,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: distanceNode, Page: Distance },
   { node: hiddenNode, Page: Hidden },
   { node: fenceNode, Page: Fence },
+  { node: whisperNode, Page: Whisper },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

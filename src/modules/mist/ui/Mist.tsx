@@ -10,19 +10,8 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
-import {
-  HEARING,
-  LIQUIDS,
-  add,
-  blending,
-  envelopeAt,
-  listen,
-  spray,
-  step,
-  type Heard,
-  type Particle,
-} from '../../../core/mist';
+import { Panel, PaperCard, SimulationChip, useReach } from '../../../kit';
+import { HEARING, LIQUIDS, add, blending, envelopeAt, listen, spray, startWanderer, step, wander, type Heard, type Particle, type Wanderer } from '../../../core/mist';
 import { createRandom } from '../../../core/random';
 import { createTranslator, type Locale } from '../../../core/i18n';
 import { CANVAS, DROP_RADIUS, PAPER, SPRAY_INTERVAL } from '../config';
@@ -55,9 +44,22 @@ export function Mist({ locale }: { locale: Locale }) {
   const [sound, setSound] = useState(false);
   const [sprayed, setSprayed] = useState(false);
   const [meters, setMeters] = useState<Meters>({ drops: 0, heard: [], blend: 0 });
+  /*
+   * 공간에 손 하나를 둔다. 이 페이지는 뿌리기 전까지 빈 화면이라, 소리를 자리에 둔다는 것이
+   * 무엇인지 아무것도 보이지 않았다. 이제 방이 저 혼자 숨 쉰다 — 천천히 돌아다니며 이따금 뿌리고,
+   * 뿌린 것은 흩어진다. 사람이 뿌리는 동안에는 쉬면서 자리를 내준다.
+   */
+  const [ambient, setAmbient] = useState(true);
+  const ambientRef = useRef(true);
+  const wanderer = useRef<Wanderer | null>(null);
+  // 이 페이지가 통한 순간: 다른 소리 둘이 겹쳐 들린 때. 섞임이 이 연구가 꼽은 즐거움이다.
+  const reach = useReach();
+  const reachRef = useRef(reach);
+  reachRef.current = reach;
 
   liquidRef.current = liquid;
   soundRef.current = sound;
+  ambientRef.current = ambient;
 
   /** 화면 좌표를 뿌리는 자리의 좌표로 옮긴다. 화면이 줄어들어도 계산은 같은 크기에서 한다. */
   const toCanvas = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
@@ -82,6 +84,21 @@ export function Mist({ locale }: { locale: Locale }) {
       previous = now;
 
       particles.current = step(particles.current, dt);
+
+      // 방이 저 혼자 뿌린다. 사람이 뿌리는 동안에는 쉰다 — 조용해지는 것이 아니라 자리를 내주는 것이다.
+      if (ambientRef.current && !pointer.current.down) {
+        wanderer.current ??= startWanderer(CANVAS, now, random.current);
+        const stepped = wander(wanderer.current, now, dt, CANVAS, random.current);
+        wanderer.current = stepped.wanderer;
+        if (stepped.sprays) {
+          const liquidId = LIQUIDS[stepped.wanderer.liquidIndex].id;
+          const angle = random.current() * Math.PI * 2;
+          particles.current = add(
+            particles.current,
+            spray(stepped.wanderer.x, stepped.wanderer.y, angle, liquidId, random.current),
+          );
+        }
+      }
 
       // 누르고 있는 동안 일정 간격으로 계속 뿌린다.
       if (pointer.current.down && now - lastSprayAt.current > SPRAY_INTERVAL) {
@@ -127,6 +144,8 @@ export function Mist({ locale }: { locale: Locale }) {
       if (now - meterAt > METER_INTERVAL) {
         meterAt = now;
         setMeters({ drops: particles.current.length, heard, blend: blending(heard) });
+        // 둘 이상이 겹쳐 들리는 순간이 이 페이지의 요점이다. 한 번만 세어진다.
+        if (heard.length > 1) reachRef.current();
       }
 
       frame = window.requestAnimationFrame(loop);
@@ -156,7 +175,13 @@ export function Mist({ locale }: { locale: Locale }) {
         locale={locale}
       />
 
-      <Panel title={t('canvas-title')} note={t('canvas-note')}>
+      <Panel
+        title={t('canvas-title')}
+        note={t('canvas-note')}
+        actions={
+          <SimulationChip running={ambient} onToggle={() => setAmbient(!ambient)} locale={locale} />
+        }
+      >
         <div
           className={styles.stage}
           onPointerMove={(event) => {

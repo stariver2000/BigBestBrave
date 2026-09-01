@@ -1,0 +1,49 @@
+/*
+ * 'hush' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 낮춘 목소리의 감각: 짙은 남빛 밤, 굴린 모서리, 조용한 번짐.
+ */
+
+[data-look='hush'][data-part='frame']::before {
+  background:
+    radial-gradient(110% 55% at 20% -8%, rgb(139 208 232 / 0.08), transparent 60%),
+    radial-gradient(80% 40% at 90% 4%, rgb(242 160 180 / 0.06), transparent 58%);
+}
+
+[data-look='hush'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='hush'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='hush'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='hush'] [data-part='input'],
+[data-look='hush'] [data-part='segmented'] {
+  background: #101523;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+}
+
+[data-look='hush'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #67AECB;
+  font-weight: 700;
+}
+
+[data-look='hush'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

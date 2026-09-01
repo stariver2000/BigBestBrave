@@ -67,7 +67,11 @@ export const GLANCES = { follow: 6, modify: 3, background: 1 } as const;
  * 없어 '켜 두기'와 구별되지 않는다. 60일쯤부터 셋이 갈리고, 아무도 모든 값에서 이기지 않는
  * 자리가 나온다. 눈금을 왼쪽으로 밀면 아는 것이 없을 때 어떤지도 볼 수 있다.
  */
-export const TRIPS = { min: 5, max: 120, step: 5, initial: 60 } as const;
+/**
+ * 다녀오는 횟수(날 수)의 범위.
+ * 걸음이 하루씩이라 눈금도 하루로 둔다 — 화면이 하루씩 세는데 손잡이가 닷새씩 튀면 어긋나 보인다.
+ */
+export const TRIPS = { min: 5, max: 120, step: 1, initial: 60 } as const;
 
 /** 씨앗. 같은 씨앗이면 같은 날들이 온다. */
 export const SEED = 20250901;

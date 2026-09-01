@@ -14,7 +14,9 @@
     "test:py": "python3 -m unittest discover -s services/pulse"
   },
   "dependencies": {
+    "@types/pg": "^8.23.1",
     "next": "^15.1.0",
+    "pg": "^8.23.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

@@ -59,3 +59,18 @@ export const ENVELOPE = { attack: 0.08, release: 0.45 } as const;
 
 /** 화면에 둘 수 있는 최대 물방울 수. 넘으면 오래된 것부터 사라진다. */
 export const MAX_PARTICLES = 420;
+
+/**
+ * 혼자 뿌리는 손의 성질.
+ *
+ * 사람보다 느리게 움직이고 드물게 뿌린다. 빠르면 화면이 시끄러워지고, 뜸하면 빈 화면으로 돌아간다.
+ * 이 값들은 논문에 있는 수가 아니라 이 화면이 눈으로 맞춘 값이다.
+ */
+export const AMBIENT = {
+  /** 움직이는 빠르기(좌표 단위/초). */
+  speed: 34,
+  /** 한 초에 방향이 흔들리는 폭(라디안). */
+  turn: 1.6,
+  /** 뿌리는 간격(ms). */
+  interval: { min: 1500, max: 2900 },
+} as const;

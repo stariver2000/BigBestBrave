@@ -3,8 +3,12 @@
 서버가 아니라 손으로 돌리는 스크립트다. 이런 일에 서버를 두면 아무도 보지 않는 화면이 하나 늘고,
 그 화면을 살아 있게 하는 일이 또 생긴다. 필요할 때 한 번 돌려 표를 읽는 편이 가볍다.
 
-    python3 services/pulse/report.py                    # SQLite(.data/pulse.sqlite3)
-    python3 services/pulse/report.py .data/pulse.json   # 파일 저장소를 쓸 때
+    python3 services/pulse/report.py                          # SQLite(.data/pulse.sqlite3)
+    python3 services/pulse/report.py .data/pulse.json         # 파일 저장소를 쓸 때
+    python3 services/pulse/report.py http://localhost:3000    # 앱을 거쳐 읽는다(Postgres를 쓸 때)
+
+앱 주소를 주면 어느 저장소를 쓰든 앱의 /api/pulse를 거쳐 읽는다. 그래서 Postgres를 쓰더라도
+이 스크립트에 데이터베이스 드라이버를 설치할 필요가 없다 — 읽는 길은 앱이 이미 알고 있다.
 
 읽는 법: 손이 안 가는 페이지가 위로 온다. 그 페이지가 다음 회차의 대상이다.
 표본이 모자란 페이지에는 비율을 적지 않는다 — 셋이 와서 둘이 만졌다고 67%라 부르면
@@ -16,6 +20,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import sys
+import urllib.request
 from pathlib import Path
 
 # src/core/pulse/config.ts의 MIN_VIEWS와 같아야 한다. 시험이 두 값을 견준다.
@@ -23,7 +28,16 @@ MIN_VIEWS = 20
 KINDS = ("view", "touch", "reach", "stay")
 
 
+def load_over_http(base: str) -> dict[str, dict[str, int]]:
+    """앱의 /api/pulse를 거쳐 읽는다. 저장소가 무엇이든 답의 모양은 같다."""
+    with urllib.request.urlopen(f"{base.rstrip('/')}/api/pulse", timeout=5) as response:
+        body = json.loads(response.read())
+    return {page["path"]: page["tally"] for page in body.get("pages", [])}
+
+
 def load(source: str) -> dict[str, dict[str, int]]:
+    if source.startswith("http://") or source.startswith("https://"):
+        return load_over_http(source)
     path = Path(source)
     if not path.exists():
         return {}
