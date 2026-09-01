@@ -31,6 +31,7 @@
 | `/reach` | Cross, Dwell, or Pinch: Designing and Evaluating Around-Device Selection Methods for Unmodified Smartwatches | CHI 2025 (KAIST) |
 | `/window` | Less Talk, More Trust: Understanding Players' In-game Assessment of Communication Processes in League of Legends | CHI 2025 (KAIST) |
 | `/nudge` | Like Adding a Small Weight to a Scale About to Tip: Personalizing Micro-Financial Incentives for Digital Wellbeing | CHI 2025 (KAIST) |
+| `/whatif` | CounterStress: Enhancing Stress Coping Planning through Counterfactual Explanations in Personal Informatics | CHI 2025 (KAIST) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -42,20 +43,19 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | CounterStress: Enhancing Stress Coping Planning through Counterfactual Explanations in Personal Informatics | CHI 2025 | "그때 이랬다면" 을 직접 돌려 보는 반사실 계산기 |
-| 2 | Peerspective: A Study on Reciprocal Tracking for Self-awareness and Relational Insight | CHI 2025 | 서로가 서로를 기록할 때 생기는 어긋남을 보여 주는 화면 |
-| 3 | Modes of Interaction with Navigation Apps | CHI 2025 | 길찾기를 대하는 여러 방식과 그때 잃는 것 |
-| 4 | AReading with Smartphones: Trade-offs between Enhanced Legibility and Display Switching Costs | CHI 2025 | 읽기 쉬움과 시선 옮김의 맞바꿈을 재어 보는 화면 |
-| 5 | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 | 보는 것이 만지는 것을 바꾸는 착시를 화면에서 |
-| 6 | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 | 진동만으로 물렁함을 느끼게 하는 조건 |
-| 7 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
-| 8 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
-| 9 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
-| 10 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
-| 11 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
-| 12 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 13 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 14 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | Peerspective: A Study on Reciprocal Tracking for Self-awareness and Relational Insight | CHI 2025 | 서로가 서로를 기록할 때 생기는 어긋남을 보여 주는 화면 |
+| 2 | Modes of Interaction with Navigation Apps | CHI 2025 | 길찾기를 대하는 여러 방식과 그때 잃는 것 |
+| 3 | AReading with Smartphones: Trade-offs between Enhanced Legibility and Display Switching Costs | CHI 2025 | 읽기 쉬움과 시선 옮김의 맞바꿈을 재어 보는 화면 |
+| 4 | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 | 보는 것이 만지는 것을 바꾸는 착시를 화면에서 |
+| 5 | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 | 진동만으로 물렁함을 느끼게 하는 조건 |
+| 6 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
+| 7 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
+| 8 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
+| 9 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
+| 10 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
+| 11 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
+| 12 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 13 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
 ## 어렵다고 본 것
 

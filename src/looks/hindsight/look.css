@@ -1,0 +1,52 @@
+/*
+ * 'hindsight' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 되짚는 화면의 감각: 차가운 빛, 얕은 층, 장식 없음.
+ */
+
+[data-look='hindsight'][data-part='frame']::before {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.55), transparent 30%);
+}
+
+[data-look='hindsight'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='hindsight'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='hindsight'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='hindsight'] [data-part='input'],
+[data-look='hindsight'] [data-part='segmented'] {
+  background: var(--bbb-surface-raised);
+  border-color: var(--bbb-border-strong);
+}
+
+[data-look='hindsight'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #1F2865;
+  font-weight: 650;
+}
+
+[data-look='hindsight'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-surface);
+  color: var(--bbb-accent);
+  box-shadow: inset 0 -2px 0 var(--bbb-accent);
+}
+
+[data-look='hindsight'] [data-part='badge'] {
+  letter-spacing: 0.08em;
+  font-size: var(--bbb-text-n2);
+}

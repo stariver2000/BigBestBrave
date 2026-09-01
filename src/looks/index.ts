@@ -12,6 +12,7 @@ import { cinemaVariables } from './cinema';
 import { dossierVariables } from './dossier';
 import { galleryVariables } from './gallery';
 import { gaugeVariables } from './gauge';
+import { hindsightVariables } from './hindsight';
 import { gardenVariables } from './garden';
 import { pagerVariables } from './pager';
 import { proofVariables } from './proof';
@@ -40,6 +41,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   gauge: gaugeVariables,
   signal: signalVariables,
   scale: scaleVariables,
+  hindsight: hindsightVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

@@ -1,0 +1,82 @@
+/**
+ * 반사실 페이지의 트리 노드.
+ * 루트에서 갈라진 열네 번째 가지(지난 일을 되짚는 법)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { whatifDictionary } from './dictionary';
+
+export const whatifNode: PageNode = {
+  id: 'counterfactual-stress',
+  slug: 'whatif',
+  parentId: ROOT_ID,
+  title: { ko: whatifDictionary.ko.title, en: whatifDictionary.en.title, ja: whatifDictionary.ja.title },
+  summary: {
+    ko: whatifDictionary.ko.summary,
+    en: whatifDictionary.en.summary,
+    ja: whatifDictionary.ja.summary,
+  },
+  capability: {
+    ko: whatifDictionary.ko.capability,
+    en: whatifDictionary.en.capability,
+    ja: whatifDictionary.ja.capability,
+  },
+  look: 'hindsight',
+  keywords: [
+    '반사실', '스트레스', '자기기록', '섀플리', '인과', '짝짓기', '설명',
+    'counterfactual', 'stress', 'personal informatics', 'shapley', 'causal', 'matching',
+    '反事実', 'ストレス', '因果',
+  ],
+  traits: {
+    domain: ['health', 'data', 'science'],
+    audience: ['general', 'academic'],
+    intent: ['inform', 'explore', 'comfort'],
+    stance: ['earnest'],
+    atmosphere: ['serene', 'melancholic'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['dusk'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['subtle'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'warm'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
