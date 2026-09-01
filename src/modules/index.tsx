@@ -20,6 +20,7 @@ import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
 import { Rulers, rulersNode } from './rulers';
+import { Reach, reachNode } from './reach';
 import { Rechunker, subtitleNode } from './subtitle';
 
 /** 모든 페이지 컴포넌트가 받는 공통 props. 페이지 고유 상태는 URL에서 스스로 읽는다. */
@@ -45,6 +46,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: chartNode, Page: ChartAudit },
   { node: checkupNode, Page: Checkup },
   { node: rulersNode, Page: Rulers },
+  { node: reachNode, Page: Reach },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

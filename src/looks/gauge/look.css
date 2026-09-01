@@ -1,0 +1,58 @@
+/*
+ * 'gauge' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 계측기의 감각: 유리 아래의 깊이, 새겨 넣은 눈금, 그리고 켜진 것 하나.
+ */
+
+[data-look='gauge'][data-part='frame']::before {
+  /* 유리에 비친 빛 한 줄. 위쪽에서 비스듬히 떨어진다. */
+  background:
+    radial-gradient(110% 60% at 22% -8%, rgb(243 178 82 / 0.07), transparent 58%),
+    radial-gradient(80% 50% at 88% 0%, rgb(99 214 168 / 0.06), transparent 55%);
+}
+
+[data-look='gauge'] [data-part='panel'] {
+  background: linear-gradient(180deg, var(--bbb-surface-raised), var(--bbb-surface) 52%);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='gauge'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+/* 패널 제목은 계기판에 새긴 글자처럼 작고 넓게. */
+[data-look='gauge'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='gauge'] [data-part='input'],
+[data-look='gauge'] [data-part='segmented'] {
+  background: #081A1D;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+[data-look='gauge'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #A97527;
+  font-weight: 650;
+}
+
+[data-look='gauge'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-accent);
+  box-shadow: inset 0 1px 0 rgb(230 242 241 / 0.09);
+}
+
+[data-look='gauge'] [data-part='badge'] {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--bbb-text-n2);
+}

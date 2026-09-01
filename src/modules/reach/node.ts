@@ -1,0 +1,82 @@
+/**
+ * 선택 방식 실험 페이지의 트리 노드.
+ * 루트에서 갈라진 열한 번째 가지(몸으로 하는 일)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { reachDictionary } from './dictionary';
+
+export const reachNode: PageNode = {
+  id: 'selection-triggers',
+  slug: 'reach',
+  parentId: ROOT_ID,
+  title: { ko: reachDictionary.ko.title, en: reachDictionary.en.title, ja: reachDictionary.ja.title },
+  summary: {
+    ko: reachDictionary.ko.summary,
+    en: reachDictionary.en.summary,
+    ja: reachDictionary.ja.summary,
+  },
+  capability: {
+    ko: reachDictionary.ko.capability,
+    en: reachDictionary.en.capability,
+    ja: reachDictionary.ja.capability,
+  },
+  look: 'gauge',
+  keywords: [
+    '선택', '피츠', '크로싱', '드웰', '핀치', '손목시계', '입력', '실험',
+    'selection', 'fitts', 'crossing', 'dwell', 'pinch', 'smartwatch', 'input', 'throughput',
+    '選択', 'フィッツ', '入力', '腕時計',
+  ],
+  traits: {
+    domain: ['science', 'hardware', 'education'],
+    audience: ['general', 'professional'],
+    intent: ['teach', 'measure', 'entertain'],
+    stance: ['clinical'],
+    atmosphere: ['futuristic', 'serene'],
+    temperature: ['cool'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['taut'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['subtle'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['glass'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['snappy'],
+    'motion-duration': ['instant'],
+    easing: ['linear'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['haptic'],
+    persistence: ['none'],
+    tone: ['technical', 'casual'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['session'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
