@@ -1,0 +1,52 @@
+/*
+ * 'palm' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 손바닥의 감각: 넉넉히 굴린 모서리, 얕고 부드러운 그림자, 살빛 지면.
+ */
+
+[data-look='palm'][data-part='frame']::before {
+  background: radial-gradient(120% 60% at 25% -10%, rgb(168 54 94 / 0.06), transparent 62%);
+}
+
+[data-look='palm'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='palm'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='palm'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='palm'] [data-part='input'],
+[data-look='palm'] [data-part='segmented'] {
+  background: var(--bbb-surface-raised);
+  border-color: var(--bbb-border-strong);
+}
+
+[data-look='palm'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #7C2745;
+  font-weight: 650;
+}
+
+[data-look='palm'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-surface);
+  color: var(--bbb-accent);
+  box-shadow: inset 0 -2px 0 var(--bbb-accent);
+}
+
+[data-look='palm'] [data-part='badge'] {
+  letter-spacing: 0.08em;
+  font-size: var(--bbb-text-n2);
+}

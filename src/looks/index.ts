@@ -18,6 +18,7 @@ import { hindsightVariables } from './hindsight';
 import { gardenVariables } from './garden';
 import { lensVariables } from './lens';
 import { pagerVariables } from './pager';
+import { palmVariables } from './palm';
 import { proofVariables } from './proof';
 import { pulseVariables } from './pulse';
 import { scaleVariables } from './scale';
@@ -48,6 +49,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   dyad: dyadVariables,
   atlas: atlasVariables,
   lens: lensVariables,
+  palm: palmVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

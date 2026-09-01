@@ -16,6 +16,7 @@ import { Areca, arecaNode } from './areca';
 import { Beeper, beeperNode } from './beeper';
 import { ChartAudit, chartNode } from './chart';
 import { Checkup, checkupNode } from './checkup';
+import { Grip, gripNode } from './grip';
 import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
@@ -59,6 +60,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: peerNode, Page: Peer },
   { node: routeNode, Page: Route },
   { node: readingNode, Page: Reading },
+  { node: gripNode, Page: Grip },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

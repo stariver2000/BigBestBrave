@@ -1,0 +1,82 @@
+/**
+ * 크기 착시 페이지의 트리 노드.
+ * 루트에서 갈라진 열여덟 번째 가지(몸이 속는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { gripDictionary } from './dictionary';
+
+export const gripNode: PageNode = {
+  id: 'size-illusion',
+  slug: 'grip',
+  parentId: ROOT_ID,
+  title: { ko: gripDictionary.ko.title, en: gripDictionary.en.title, ja: gripDictionary.ja.title },
+  summary: {
+    ko: gripDictionary.ko.summary,
+    en: gripDictionary.en.summary,
+    ja: gripDictionary.ja.summary,
+  },
+  capability: {
+    ko: gripDictionary.ko.capability,
+    en: gripDictionary.en.capability,
+    ja: gripDictionary.ja.capability,
+  },
+  look: 'palm',
+  keywords: [
+    '착시', '촉각', '크기', '지각', '문턱', '가상현실', '손',
+    'illusion', 'haptic', 'size', 'perception', 'threshold', 'virtual reality', 'grip',
+    '錯覚', '触覚', '大きさ',
+  ],
+  traits: {
+    domain: ['science', 'design', 'health'],
+    audience: ['general', 'academic'],
+    intent: ['inform', 'teach', 'provoke'],
+    stance: ['earnest'],
+    atmosphere: ['cozy', 'serene'],
+    temperature: ['warm'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'warm'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
