@@ -46,7 +46,7 @@
   font-weight: 600;
 }
 
-[data-look='signal'] [data-part='segmented-option'][data-active='true'] {
+[data-look='signal'] [data-part='segment'][data-active='true'] {
   background: transparent;
   color: var(--bbb-accent);
   box-shadow: inset 0 -2px 0 var(--bbb-accent);

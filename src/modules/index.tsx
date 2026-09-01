@@ -30,6 +30,7 @@ import { Peer, peerNode } from './peer';
 import { Reach, reachNode } from './reach';
 import { Reading, readingNode } from './reading';
 import { Soften, softenNode } from './soften';
+import { Repair, repairNode } from './repair';
 import { Rechunker, subtitleNode } from './subtitle';
 import { Whatif, whatifNode } from './whatif';
 import { Window, windowNode } from './window';
@@ -69,6 +70,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: againNode, Page: Again },
   { node: contextNode, Page: Context },
   { node: spaceNode, Page: Space },
+  { node: repairNode, Page: Repair },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

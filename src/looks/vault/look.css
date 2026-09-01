@@ -63,7 +63,7 @@
   border-color: var(--bbb-border-color);
 }
 
-[data-look='vault'] [data-part='segmented-option'][data-active='true'] {
+[data-look='vault'] [data-part='segment'][data-active='true'] {
   background: var(--bbb-surface-raised);
   color: var(--bbb-fg);
   box-shadow: inset 0 1px 0 rgb(228 233 240 / 0.08);

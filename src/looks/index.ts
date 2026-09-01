@@ -10,6 +10,7 @@ import { atlasVariables } from './atlas';
 import { benchVariables } from './bench';
 import { blueprintVariables } from './blueprint';
 import { cinemaVariables } from './cinema';
+import { circleVariables } from './circle';
 import { dossierVariables } from './dossier';
 import { dyadVariables } from './dyad';
 import { galleryVariables } from './gallery';
@@ -58,6 +59,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   thread: threadVariables,
   margin: marginVariables,
   quilt: quiltVariables,
+  circle: circleVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

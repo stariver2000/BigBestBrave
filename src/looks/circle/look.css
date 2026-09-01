@@ -1,0 +1,49 @@
+/*
+ * 'circle' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 둘러앉은 자리의 감각: 넉넉히 굴린 모서리, 얕고 넓은 그림자, 옅은 풀빛 지면.
+ */
+
+[data-look='circle'][data-part='frame']::before {
+  background:
+    radial-gradient(120% 58% at 20% -10%, rgb(16 107 98 / 0.07), transparent 62%),
+    radial-gradient(80% 40% at 92% 4%, rgb(160 68 42 / 0.05), transparent 58%);
+}
+
+[data-look='circle'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='circle'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='circle'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--bbb-fg);
+}
+
+[data-look='circle'] [data-part='input'],
+[data-look='circle'] [data-part='segmented'] {
+  background: var(--bbb-surface-raised);
+  border-color: var(--bbb-border-color);
+  box-shadow: none;
+}
+
+[data-look='circle'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #0B554E;
+  font-weight: 650;
+}
+
+[data-look='circle'] [data-part='segment'][data-active='true'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

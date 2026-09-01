@@ -1,0 +1,86 @@
+/**
+ * 회복 페이지의 트리 노드.
+ * 루트에서 갈라진 스물세 번째 가지(다친 뒤를 다루는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { repairDictionary } from './dictionary';
+
+export const repairNode: PageNode = {
+  id: 'restorative-justice',
+  slug: 'repair',
+  parentId: ROOT_ID,
+  title: {
+    ko: repairDictionary.ko.title,
+    en: repairDictionary.en.title,
+    ja: repairDictionary.ja.title,
+  },
+  summary: {
+    ko: repairDictionary.ko.summary,
+    en: repairDictionary.en.summary,
+    ja: repairDictionary.ja.summary,
+  },
+  capability: {
+    ko: repairDictionary.ko.capability,
+    en: repairDictionary.en.capability,
+    ja: repairDictionary.ja.capability,
+  },
+  look: 'circle',
+  keywords: [
+    '회복적 정의', '사과', '중재', '공동체', '운영', '갈등', '디스코드',
+    'restorative justice', 'apology', 'moderation', 'community', 'harm', 'discord',
+    '修復的司法', '謝罪', '調停',
+  ],
+  traits: {
+    domain: ['design', 'education', 'philosophy'],
+    audience: ['professional', 'general'],
+    intent: ['teach', 'inform', 'persuade'],
+    stance: ['earnest'],
+    atmosphere: ['serene', 'cozy'],
+    temperature: ['warm'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['morning'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['pill'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['humanist'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

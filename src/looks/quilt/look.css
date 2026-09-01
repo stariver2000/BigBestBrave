@@ -43,7 +43,7 @@
   font-weight: 700;
 }
 
-[data-look='quilt'] [data-part='segmented-option'][data-active='true'] {
+[data-look='quilt'] [data-part='segment'][data-active='true'] {
   background: var(--bbb-accent);
   color: var(--bbb-accent-fg);
 }

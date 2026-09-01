@@ -44,7 +44,7 @@
   font-weight: 650;
 }
 
-[data-look='margin'] [data-part='segmented-option'][data-active='true'] {
+[data-look='margin'] [data-part='segment'][data-active='true'] {
   background: var(--bbb-accent);
   color: var(--bbb-accent-fg);
 }

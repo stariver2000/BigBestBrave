@@ -45,7 +45,7 @@
   font-weight: 650;
 }
 
-[data-look='gauge'] [data-part='segmented-option'][data-active='true'] {
+[data-look='gauge'] [data-part='segment'][data-active='true'] {
   background: var(--bbb-surface-raised);
   color: var(--bbb-accent);
   box-shadow: inset 0 1px 0 rgb(230 242 241 / 0.09);

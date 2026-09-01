@@ -43,7 +43,7 @@
   font-weight: 650;
 }
 
-[data-look='ripple'] [data-part='segmented-option'][data-active='true'] {
+[data-look='ripple'] [data-part='segment'][data-active='true'] {
   background: var(--bbb-surface-raised);
   color: var(--bbb-accent);
 }

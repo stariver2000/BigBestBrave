@@ -40,6 +40,7 @@
 | `/again` | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics, and the Effect of Knowledge Level | IUI 2024 (KAIST·SNU·KDI) |
 | `/context` | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 (KAIST·HCMUT·SUTD) |
 | `/space` | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 (36인 공동 연구) |
+| `/repair` | The Design Space for Online Restorative Justice Tools: A Case Study with ApoloBot | CHI 2025 (KAIST) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -51,17 +52,16 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 2 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 3 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 2 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
-arXiv에 전문이 있는 것: 1번(2502.18861), 3번(doi:10.1145/3613904.3642747).
-2번은 arXiv 제목 검색으로 나오지 않았다.
+2번은 arXiv에 전문이 있다(doi:10.1145/3613904.3642747). 1번은 arXiv 제목 검색으로 나오지 않았다.
 
-전문을 구하는 길이 arXiv만은 아니다. `/context`의 DataDive는 저자 한 사람의 개인
-페이지에 PDF가 있었다. `/space`는 arXiv에 전문이 있었고, 분류표는 저자들이 따로 공개한
-자료(writing-assistant.github.io)에서 가져왔다. 논문이 함께 낸 자료가 있으면 그쪽이
-정본이다 - 산문은 코드 이름을 풀어 써서 뭉갠다.
+목록이 거의 다 되었다. 다음 회차부터는 연구실 발표 목록(hci.kaist.ac.kr/publications,
+hcil.snu.ac.kr/publications)에서 새로 골라 이 표를 다시 채워야 한다.
+
+전문을 구하는 길: arXiv에 없으면 저자 개인 페이지를 찾아본다(`/context`가 그랬다).
+논문이 분류표나 자료집을 따로 공개했으면 그쪽이 정본이다(`/space`가 그랬다).
 
 ## 건너뛴 것
 

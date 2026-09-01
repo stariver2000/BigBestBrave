@@ -47,7 +47,7 @@
   font-weight: 650;
 }
 
-[data-look='dyad'] [data-part='segmented-option'][data-active='true'] {
+[data-look='dyad'] [data-part='segment'][data-active='true'] {
   background: var(--bbb-surface-raised);
   color: var(--bbb-accent);
 }
