@@ -1,0 +1,86 @@
+/**
+ * 읽기 쉬움과 시선 옮김 페이지의 트리 노드.
+ * 루트에서 갈라진 열일곱 번째 가지(보는 일)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { readingDictionary } from './dictionary';
+
+export const readingNode: PageNode = {
+  id: 'ar-reading',
+  slug: 'reading',
+  parentId: ROOT_ID,
+  title: {
+    ko: readingDictionary.ko.title,
+    en: readingDictionary.en.title,
+    ja: readingDictionary.ja.title,
+  },
+  summary: {
+    ko: readingDictionary.ko.summary,
+    en: readingDictionary.en.summary,
+    ja: readingDictionary.ja.summary,
+  },
+  capability: {
+    ko: readingDictionary.ko.capability,
+    en: readingDictionary.en.capability,
+    ja: readingDictionary.ja.capability,
+  },
+  look: 'lens',
+  keywords: [
+    '증강현실', '가독성', '대비', '시력', '초점', '읽기', '화면',
+    'augmented reality', 'legibility', 'contrast', 'acuity', 'reading', 'display switching',
+    '拡張現実', '可読性', '対比',
+  ],
+  traits: {
+    domain: ['science', 'design', 'hardware'],
+    audience: ['general', 'professional'],
+    intent: ['inform', 'measure', 'teach'],
+    stance: ['clinical'],
+    atmosphere: ['futuristic', 'serene'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['glass'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
