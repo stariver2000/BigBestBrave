@@ -8,7 +8,10 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "pulse": "python3 services/pulse/server.py",
+    "pulse:report": "python3 services/pulse/report.py",
+    "test:py": "python3 -m unittest discover -s services/pulse"
   },
   "dependencies": {
     "next": "^15.1.0",

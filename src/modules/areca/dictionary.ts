@@ -4,7 +4,9 @@ import type { Dictionary } from '../../core/i18n';
 
 export type ArecaKey =
   | 'title' | 'summary' | 'capability'
-  | 'today-title' | 'today-note' | 'today-writing'
+  | 'today-title' | 'today-note'
+  | 'watch-title' | 'watch-note' | 'watch-visit' | 'watch-stay' | 'watch-away' | 'watch-mood'
+  | 'watch-next' | 'watch-next-none' | 'today-writing'
   | 'archive-title' | 'archive-note' | 'archive-empty' | 'archive-count'
   | 'visit-first' | 'visit-nth' | 'visit-since'
   | 'mood-curious' | 'mood-settled' | 'mood-lonely' | 'mood-restless' | 'mood-content'
@@ -19,6 +21,14 @@ export const arecaDictionary: Dictionary<ArecaKey> = {
     capability: '당신의 방문을 알아차려 일기를 쓰고, 여러 번 오는 동안 그 관계가 쌓이는 것을 보여 준다',
     'today-title': '오늘 적은 것',
     'today-note': '이 사물은 당신이 머무는 동안에도 적습니다. 오래 있으면 오늘 일기가 달라집니다.',
+    'watch-title': '지금 알아차리는 것',
+    'watch-note': '사물이 아는 것은 이 넷뿐입니다. 당신이 여기 있는 동안 계속 보고 있고, 머문 구간이 바뀌면 오늘 일기를 다시 씁니다.',
+    'watch-visit': '몇 번째 방문',
+    'watch-stay': '머문 시간',
+    'watch-away': '자리를 비운 횟수',
+    'watch-mood': '지금 기분',
+    'watch-next': '다시 쓰기까지',
+    'watch-next-none': '더 넘어갈 구간이 없습니다',
     'today-writing': '적는 중',
     'archive-title': '지난 일기',
     'archive-note': '이 기기에만 남습니다. 다른 기기에서는 이 사물이 당신을 알지 못합니다.',
@@ -48,6 +58,14 @@ export const arecaDictionary: Dictionary<ArecaKey> = {
     capability: 'Notices your visits, writes a diary about them, and lets a relationship accumulate over repeated visits',
     'today-title': "Today's entry",
     'today-note': 'It writes while you are still here. Stay longer and today’s entry changes.',
+    'watch-title': 'What it notices right now',
+    'watch-note': 'These four are all it knows. It keeps watching while you are here, and rewrites today when the length of your stay crosses into another band.',
+    'watch-visit': 'Which visit',
+    'watch-stay': 'Time here',
+    'watch-away': 'Times you stepped away',
+    'watch-mood': 'Mood right now',
+    'watch-next': 'Until it rewrites',
+    'watch-next-none': 'no further band to cross',
     'today-writing': 'writing',
     'archive-title': 'Past entries',
     'archive-note': 'Kept on this device only. On another device it does not know you.',
@@ -77,6 +95,14 @@ export const arecaDictionary: Dictionary<ArecaKey> = {
     capability: 'あなたの訪れに気づいて日記を書き、何度も来るうちに関係が積もっていくのを見せる',
     'today-title': '今日書いたもの',
     'today-note': 'あなたがいる間にも書いています。長くいれば今日の日記は変わります。',
+    'watch-title': '今、気づいていること',
+    'watch-note': 'この四つがこの物の知るすべてです。あなたがここにいる間ずっと見ていて、滞在の区分が変わると今日の日記を書き直します。',
+    'watch-visit': '何回目の訪問',
+    'watch-stay': 'いた時間',
+    'watch-away': '席を外した回数',
+    'watch-mood': '今の気分',
+    'watch-next': '書き直しまで',
+    'watch-next-none': 'これ以上越える区分はありません',
     'today-writing': '書いている',
     'archive-title': '過去の日記',
     'archive-note': 'この端末にだけ残ります。別の端末では、このものはあなたを知りません。',

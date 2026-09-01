@@ -25,18 +25,23 @@ export async function GET(request: Request) {
   const path = new URL(request.url).searchParams.get('path');
   const store = pulseStore();
 
-  // 경로를 주면 그 페이지만, 주지 않으면 전부. 어느 쪽이든 나가는 것은 셈과 비율뿐이다.
-  if (path === null) {
-    const all = await store.readAll();
-    const pages = Object.entries(all).map(([at, tally]) => ({ path: at, tally, reading: readingOf(tally) }));
-    return NextResponse.json({ pages });
-  }
-
-  if (!knownPath(path)) {
+  if (path !== null && !knownPath(path)) {
     return NextResponse.json({ error: 'unknown-path' }, { status: 404 });
   }
-  const tally = await store.read(path);
-  return NextResponse.json({ path, tally, reading: readingOf(tally) });
+
+  try {
+    // 경로를 주면 그 페이지만, 주지 않으면 전부. 어느 쪽이든 나가는 것은 셈과 비율뿐이다.
+    if (path === null) {
+      const all = await store.readAll();
+      const pages = Object.entries(all).map(([at, tally]) => ({ path: at, tally, reading: readingOf(tally) }));
+      return NextResponse.json({ pages });
+    }
+    const tally = await store.read(path);
+    return NextResponse.json({ path, tally, reading: readingOf(tally) });
+  } catch {
+    // 저장소에 닿지 못했다. 0을 돌려주면 "아무도 오지 않았다"로 읽히므로 모른다고 답한다.
+    return NextResponse.json({ error: 'store-unreachable' }, { status: 503 });
+  }
 }
 
 export async function POST(request: Request) {

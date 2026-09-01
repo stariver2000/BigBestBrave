@@ -124,11 +124,21 @@ export const INTENT: readonly Localized[] = [
   line('이만 접는다. 접는다는 말을 써 보고 싶었다.', 'I will close here. I wanted to use the word close.', 'ここで閉じる。閉じるという言葉を使ってみたかった。'),
 ];
 
-/** 기분을 정하는 기준. 관찰이 이 조건에 맞으면 그 기분이 된다. */
+/**
+ * 자리를 이만큼 비웠다 돌아오면 사물이 안절부절못한다.
+ *
+ * 다른 탭으로 갔다 오는 것을 사물은 "잠깐 나갔다 왔다"로 느낀다. 한 번은 그러려니 하고,
+ * 두 번째부터 마음이 들뜬다고 정했다. 논문에 있는 수가 아니라 이 페이지가 고른 값이며,
+ * 사물의 기분 어휘 전체가 그렇다.
+ */
+export const AWAY_RESTLESS = 2;
+
+/** 기분을 정하는 기준. 관찰이 이 조건에 맞으면 그 기분이 된다. 위에 있는 것이 먼저 이긴다. */
 export const MOOD_RULES = [
   { mood: 'curious', when: 'first' },
   { mood: 'restless', when: 'soon' },
   { mood: 'lonely', when: 'distant' },
+  { mood: 'restless', when: 'awayOften' },
   { mood: 'content', when: 'longStay' },
   { mood: 'settled', when: 'default' },
 ] as const;

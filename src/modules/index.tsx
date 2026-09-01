@@ -20,6 +20,7 @@ import { ChartAudit, chartNode } from './chart';
 import { Checkup, checkupNode } from './checkup';
 import { Context, contextNode } from './context';
 import { Distance, distanceNode } from './distance';
+import { Fence, fenceNode } from './fence';
 import { Grip, gripNode } from './grip';
 import { Hidden, hiddenNode } from './hidden';
 import { Mist, mistNode } from './mist';
@@ -79,6 +80,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: channelNode, Page: Channel },
   { node: distanceNode, Page: Distance },
   { node: hiddenNode, Page: Hidden },
+  { node: fenceNode, Page: Fence },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

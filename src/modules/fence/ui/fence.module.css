@@ -1,0 +1,350 @@
+/*
+ * 울타리 화면의 스타일.
+ * 색은 전부 토큰에서 온다. 스스로 하는 것은 accent, 맡기는 것은 hay로만 쓴다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-5);
+}
+
+.paper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.paperLabel {
+  padding: 2px 8px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.paper a {
+  color: var(--bbb-fg);
+  text-decoration-color: var(--bbb-border-strong);
+  text-underline-offset: 3px;
+  max-width: 62ch;
+}
+
+.paper a:hover {
+  color: var(--bbb-accent);
+}
+
+.paperMeta {
+  flex-basis: 100%;
+  font-size: var(--bbb-text-n2);
+  word-break: break-all;
+}
+
+.note {
+  margin: var(--bbb-space-3) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.8;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 지도: 세 국면은 논문의 구조라 세 열로 못박는다. */
+
+.phases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--bbb-space-4);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .phases {
+    grid-template-columns: 1fr;
+  }
+}
+
+.phase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-3);
+}
+
+.phaseName {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--bbb-space-3);
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+}
+
+.categoryName {
+  font-size: var(--bbb-text-0);
+  font-weight: 700;
+  color: var(--bbb-accent);
+  word-break: keep-all;
+}
+
+.subtask {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 56px 22px;
+  align-items: center;
+  gap: var(--bbb-space-2);
+  padding: 6px 8px;
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--bbb-radius-sm);
+  color: var(--bbb-fg);
+  font: inherit;
+  transition: border-color 120ms var(--bbb-easing), background 120ms var(--bbb-easing);
+}
+
+.subtask:hover {
+  border-color: var(--bbb-border-strong);
+}
+
+.subtask[data-on='true'] {
+  background: var(--bbb-hay-soft);
+  border-color: var(--bbb-hay);
+}
+
+.subtaskName {
+  font-size: var(--bbb-text-n1);
+  word-break: keep-all;
+}
+
+.subtask[data-on='true'] .subtaskName {
+  color: var(--bbb-hay);
+  font-weight: 650;
+}
+
+.subtaskBarWrap {
+  height: 7px;
+  overflow: hidden;
+  background: #0C130E;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: 999px;
+}
+
+.subtaskBar {
+  display: block;
+  height: 100%;
+  background: var(--bbb-hay);
+}
+
+.subtaskCount {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--bbb-fg-muted);
+}
+
+.picked {
+  margin: var(--bbb-space-4) 0 0;
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  background: var(--bbb-hay-soft);
+  border-left: 3px solid var(--bbb-hay);
+  font-size: var(--bbb-text-0);
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.picked strong {
+  color: var(--bbb-hay);
+}
+
+/* 세 저울 */
+
+.scales {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--bbb-space-3);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .scales {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+}
+
+.scaleName {
+  font-size: var(--bbb-text-1);
+  font-weight: 700;
+  color: var(--bbb-accent);
+  word-break: keep-all;
+}
+
+.scaleBody {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.scaleQuote {
+  margin: 0;
+  padding: var(--bbb-space-2) var(--bbb-space-3);
+  border-left: 2px solid var(--bbb-border-strong);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-fg-muted);
+  word-break: keep-all;
+}
+
+/* 걸림돌 */
+
+.obstacles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+}
+
+.obstacle {
+  margin: 0;
+  padding: var(--bbb-space-2) var(--bbb-space-3);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  font-size: var(--bbb-text-0);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.meta {
+  margin: var(--bbb-space-3) 0 0;
+  padding: var(--bbb-space-3) var(--bbb-space-4);
+  background: var(--bbb-hay-soft);
+  border-left: 3px solid var(--bbb-hay);
+  font-size: var(--bbb-text-0);
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+/* 여섯 달 */
+
+.months {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--bbb-space-3);
+  align-items: end;
+}
+
+@media (max-width: 720px) {
+  .months {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.monthBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  min-height: 124px;
+}
+
+.monthBar {
+  display: block;
+  width: 16px;
+  min-height: 2px;
+  border-radius: 3px 3px 0 0;
+}
+
+.monthBar[data-kind='posts'] {
+  background: var(--bbb-accent);
+}
+
+.monthBar[data-kind='comments'] {
+  background: var(--bbb-hay);
+}
+
+.monthTotal {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+}
+
+.monthName {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+}
+
+.event {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--bbb-accent);
+  word-break: keep-all;
+}
+
+.legendPosts {
+  color: var(--bbb-accent);
+}
+
+.legendComments {
+  color: var(--bbb-hay);
+}
+
+/* 낱말 */
+
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2) var(--bbb-space-4);
+}
+
+.word {
+  font-weight: 650;
+  word-break: keep-all;
+}
+
+.word[data-group='generic'] {
+  color: var(--bbb-accent);
+}
+
+.word[data-group='agent'] {
+  color: var(--bbb-hay);
+}
+
+.wordCount {
+  margin-left: 3px;
+  font-family: var(--bbb-font-mono);
+  font-size: 0.55em;
+  color: var(--bbb-fg-muted);
+}

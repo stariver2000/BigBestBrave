@@ -1,0 +1,86 @@
+/**
+ * 울타리 페이지의 트리 노드.
+ * 루트에서 갈라진 스물여덟 번째 가지(맡김과 지킴을 가르는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { fenceDictionary } from './dictionary';
+
+export const fenceNode: PageNode = {
+  id: 'llm-delegation',
+  slug: 'fence',
+  parentId: ROOT_ID,
+  title: {
+    ko: fenceDictionary.ko.title,
+    en: fenceDictionary.en.title,
+    ja: fenceDictionary.ja.title,
+  },
+  summary: {
+    ko: fenceDictionary.ko.summary,
+    en: fenceDictionary.en.summary,
+    ja: fenceDictionary.ja.summary,
+  },
+  capability: {
+    ko: fenceDictionary.ko.capability,
+    en: fenceDictionary.en.capability,
+    ja: fenceDictionary.ja.capability,
+  },
+  look: 'hedge',
+  keywords: [
+    '언어 학습', '위임', '자기주도', '울타리', '학습 전략', '홀로서기',
+    'language learning', 'delegation', 'self-directed', 'LLM', 'agency', 'strategy',
+    '言語学習', '委任', '自己主導',
+  ],
+  traits: {
+    domain: ['education', 'ai', 'literature'],
+    audience: ['general', 'professional'],
+    intent: ['teach', 'inform', 'persuade'],
+    stance: ['earnest'],
+    atmosphere: ['pastoral', 'serene'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['dusk'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['humanist'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

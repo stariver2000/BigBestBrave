@@ -10,9 +10,11 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
+import { Panel, PaperCard, SimulationChip, useReach, useSimulation } from '../../../kit';
 import {
   composeEntry,
+  moodOf,
+  nextStayBand,
   renderEntry,
   stayBand,
   upsertEntry,
@@ -51,6 +53,27 @@ export function Areca({ locale }: { locale: Locale }) {
   // 이번 방문이 시작된 시각과, 마지막으로 쓴 머문 구간. 다시 쓸지 판단하는 기준이다.
   const arrivedAt = useRef<number>(Date.now());
   const writtenBand = useRef<string>('');
+  /*
+   * 사물이 지금 알아차리고 있는 것. 일기는 구간이 바뀔 때만 다시 쓰이지만, 사물은 그사이에도
+   * 계속 보고 있다. 그 보는 일을 화면에 내놓지 않으면 사물은 가만히 있는 것처럼 보인다.
+   */
+  const [attention, setAttention] = useState<Observation | null>(null);
+  // 다른 탭으로 갔다 돌아온 횟수. 사물이 느낄 수 있는 몇 안 되는 것 중 하나다.
+  const awayCount = useRef(0);
+  const memoryRef = useRef<Memory | null>(null);
+  // 이 페이지가 통한 순간: 사물이 당신을 알아본 채로 다시 만난 때.
+  const reach = useReach();
+
+  const observeNow = useCallback(
+    (base: Memory): Observation => ({
+      visitCount: base.visitCount,
+      hour: new Date(arrivedAt.current).getHours(),
+      sinceLast: base.lastVisitAt === null ? null : arrivedAt.current - base.lastVisitAt,
+      stay: Date.now() - arrivedAt.current,
+      away: awayCount.current,
+    }),
+    [],
+  );
 
   /** 지금까지의 관찰로 오늘 일기를 다시 쓴다. 구간이 그대로면 아무것도 하지 않는다. */
   const write = useCallback(
@@ -60,13 +83,7 @@ export function Areca({ locale }: { locale: Locale }) {
       if (!force && band === writtenBand.current) return;
       writtenBand.current = band;
 
-      const observation: Observation = {
-        visitCount: base.visitCount,
-        hour: new Date(arrivedAt.current).getHours(),
-        sinceLast: base.lastVisitAt === null ? null : arrivedAt.current - base.lastVisitAt,
-        stay,
-        away: 0,
-      };
+      const observation = observeNow(base);
       const entry = composeEntry(observation, arrivedAt.current);
       setToday(entry);
       if (!force) {
@@ -81,8 +98,20 @@ export function Areca({ locale }: { locale: Locale }) {
         entries: upsertEntry(base.entries, entry),
       });
     },
-    [],
+    [observeNow],
   );
+
+  /*
+   * 사물이 지켜보는 일 자체. 짜인 순서를 트는 것이 아니라 계속 도는 과정이라,
+   * 사람이 손을 대도 멈추지 않는다. 보이지 않는 탭에서는 쉰다 — 그때 사물이 아는 것은
+   * "당신이 자리를 비웠다"뿐이고, 그건 돌아올 때 한 번 세면 된다.
+   */
+  const simulation = useSimulation(() => {
+    const base = memoryRef.current;
+    if (!base) return;
+    setAttention(observeNow(base));
+    write(base, false);
+  }, TICK_MS);
 
   useEffect(() => {
     const stored = loadMemory();
@@ -93,11 +122,19 @@ export function Areca({ locale }: { locale: Locale }) {
       entries: stored.entries,
     };
     setMemory(base);
+    memoryRef.current = base;
     write(base, true);
+    setAttention(observeNow(base));
+    // 다시 만난 것 자체가 이 페이지의 요점이다. 처음 온 사람에게는 아직 아무 일도 일어나지 않았다.
+    if (base.visitCount > 1) reach();
 
-    const timer = window.setInterval(() => write(base, false), TICK_MS);
-    return () => window.clearInterval(timer);
-  }, [write]);
+    // 자리를 비웠다 돌아오는 것을 센다. 나갈 때가 아니라 돌아올 때 세야 "돌아왔다"가 된다.
+    const noticeReturn = () => {
+      if (!document.hidden) awayCount.current += 1;
+    };
+    document.addEventListener('visibilitychange', noticeReturn);
+    return () => document.removeEventListener('visibilitychange', noticeReturn);
+  }, [write, observeNow, reach]);
 
   const past = useMemo(() => (memory ? [...memory.entries].reverse() : []), [memory]);
 
@@ -137,6 +174,47 @@ export function Areca({ locale }: { locale: Locale }) {
             </div>
           </div>
         </div>
+
+        {/*
+          사물이 지금 알아차리고 있는 것. 아는 것이 넷뿐이라는 사실이 그대로 보이도록,
+          일기보다 앞이 아니라 옆에 둔다. 좁다는 것이 이 사물의 성격이다.
+        */}
+        <Panel
+          title={t('watch-title')}
+          note={t('watch-note')}
+          actions={<SimulationChip running={simulation.running} onToggle={simulation.toggle} locale={locale} />}
+        >
+          {attention && (
+            <div className={styles.watch}>
+              <p className={styles.watchRow}>
+                <span className={styles.watchLabel}>{t('watch-visit')}</span>
+                <span className={styles.watchValue}>
+                  {attention.visitCount <= 1 ? t('visit-first') : `${attention.visitCount}${t('visit-nth')}`}
+                </span>
+              </p>
+              <p className={styles.watchRow}>
+                <span className={styles.watchLabel}>{t('watch-stay')}</span>
+                <span className={styles.watchValue}>{Math.floor(attention.stay / 1000)}s</span>
+              </p>
+              <p className={styles.watchRow}>
+                <span className={styles.watchLabel}>{t('watch-away')}</span>
+                <span className={styles.watchValue}>{attention.away}</span>
+              </p>
+              <p className={styles.watchRow}>
+                <span className={styles.watchLabel}>{t('watch-mood')}</span>
+                <span className={styles.watchValue}>{t(`mood-${moodOf(attention)}` as ArecaKey)}</span>
+              </p>
+              <p className={styles.watchRow}>
+                <span className={styles.watchLabel}>{t('watch-next')}</span>
+                <span className={styles.watchValue}>
+                  {nextStayBand(attention.stay)
+                    ? `${Math.ceil((nextStayBand(attention.stay)?.inMs ?? 0) / 1000)}s`
+                    : t('watch-next-none')}
+                </span>
+              </p>
+            </div>
+          )}
+        </Panel>
 
         <Panel title={t('today-title')} note={t('today-note')}>
           {today && (

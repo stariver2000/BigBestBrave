@@ -174,3 +174,34 @@
   color: var(--bbb-fg-muted);
   max-inline-size: 60ch;
 }
+
+/* ── 지금 알아차리는 것 ─────────────────────────────────── */
+
+/*
+ * 사물이 아는 넷을 한 줄씩 늘어놓는다. 표로 그리지 않는 이유는 이것이 자료가 아니라
+ * 사물의 감각이기 때문이다. 값만 바뀌고 자리는 흔들리지 않도록 라벨 폭을 고정한다.
+ */
+.watch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.watchRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+}
+
+.watchLabel {
+  min-inline-size: 132px;
+  color: var(--bbb-fg-muted);
+}
+
+.watchValue {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg);
+  font-variant-numeric: tabular-nums;
+}

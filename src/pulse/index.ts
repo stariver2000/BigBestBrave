@@ -2,6 +2,7 @@
 
 import { readPulseConfig } from './config';
 import { FilePulseStore } from './file-store';
+import { HttpPulseStore } from './http-store';
 import { MemoryPulseStore } from './memory-store';
 import type { PulseStore } from './store';
 
@@ -14,6 +15,8 @@ let store: PulseStore | null = null;
 export function pulseStore(): PulseStore {
   if (store) return store;
   const config = readPulseConfig();
-  store = config.driver === 'memory' ? new MemoryPulseStore() : new FilePulseStore(config.filePath);
+  if (config.driver === 'memory') store = new MemoryPulseStore();
+  else if (config.driver === 'http') store = new HttpPulseStore(config.url);
+  else store = new FilePulseStore(config.filePath);
   return store;
 }

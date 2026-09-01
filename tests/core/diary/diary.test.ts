@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  AWAY_RESTLESS,
   composeEntry,
+  nextStayBand,
   upsertEntry,
   hourBand,
   moodOf,
@@ -139,5 +141,48 @@ describe('일기 짓기', () => {
     const size = vocabularySize();
     expect(size).toBeGreaterThan(20);
     expect(size).toBeLessThan(60);
+  });
+});
+
+/**
+ * 사물이 느낄 수 있어야 하는 것: 당신이 자리를 비웠다 왔다는 사실.
+ * 자료형에만 있고 아무 데도 쓰이지 않으면 그것은 감각이 아니라 빈칸이다.
+ */
+describe('자리를 비우면 사물이 안절부절못한다', () => {
+  const watching = (away: number, stay: number): Observation => ({
+    visitCount: 3,
+    hour: 14,
+    // 어제 왔다 온 간격. 'soon'도 'distant'도 아닌 자리를 골라 away만 보이게 한다.
+    sinceLast: 1000 * 60 * 60 * 20,
+    stay,
+    away,
+  });
+
+  it('한 번 비운 것은 그러려니 한다', () => {
+    expect(moodOf(watching(AWAY_RESTLESS - 1, 1000 * 200))).toBe('content');
+  });
+
+  it('두 번째부터는 오래 머물렀어도 차분해지지 않는다', () => {
+    expect(moodOf(watching(AWAY_RESTLESS, 1000 * 200))).toBe('restless');
+  });
+
+  it('다시 온 간격이 먼저 걸리면 그쪽이 이긴다', () => {
+    const justCameBack: Observation = { ...watching(5, 1000), sinceLast: 1000 * 60 };
+    expect(moodOf(justCameBack)).toBe('restless');
+  });
+});
+
+describe('다음 구간까지', () => {
+  it('남은 시간을 알려 준다', () => {
+    // 20초까지가 'brief'이므로, 5초 머문 지금은 15초 뒤에 구간이 바뀐다.
+    expect(nextStayBand(5000)).toEqual({ id: 'normal', inMs: 15000 });
+  });
+
+  it('구간이 막 바뀌면 다음 것을 가리킨다', () => {
+    expect(nextStayBand(21000)?.id).toBe('long');
+  });
+
+  it('마지막 구간에서는 더 넘어갈 곳이 없다', () => {
+    expect(nextStayBand(1000 * 60 * 60)).toBeNull();
   });
 });

@@ -49,6 +49,7 @@
 | `/channel` | Revisiting Channel Effectiveness: A Multi-Dimensional Evaluation with Primitive Visual Stimuli | IEEE VIS 2026 (SNU) |
 | `/distance` | Stop Misusing t-SNE and UMAP for Visual Analytics | IEEE VIS 2026 (SNU) |
 | `/hidden` | GhostUI: Unveiling Hidden Interactions in Mobile UI | CHI 2026 (SNU) |
+| `/fence` | Good Fences Make Good Learning: How Self-Directed Language Learners Navigate LLM Delegation Decisions | CHI 2026 (SNU) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -60,9 +61,8 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | Good Fences Make Good Learning: How Self-Directed Language Learners Navigate LLM Delegation Decisions | CHI 2026 (SNU) | 무엇을 맡기고 무엇을 스스로 할지의 울타리 |
-| 2 | Chillbot: Content Moderation in the Backchannel | CSCW 2024 (KAIST) | 뒷무대에서 이루어지는 조정 |
-| 3 | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) | 하우투 영상 속 정보의 갈래 |
+| 1 | Chillbot: Content Moderation in the Backchannel | CSCW 2024 (KAIST) | 뒷무대에서 이루어지는 조정 |
+| 2 | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) | 하우투 영상 속 정보의 갈래 |
 
 2026-09-01에 두 연구실 발표 목록에서 다시 채웠다. 서울대 HCIL은 연구실이 PDF를 직접
 올려 두어(hcil.snu.ac.kr/cms/uploads/...) 전문 걱정이 없다. 목록 페이지는 클라이언트

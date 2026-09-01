@@ -1,0 +1,49 @@
+/*
+ * 'hedge' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 생울타리의 감각: 짙은 초록의 밭, 도톰한 모서리, 안쪽 실선 한 줄.
+ */
+
+[data-look='hedge'][data-part='frame']::before {
+  background:
+    radial-gradient(110% 55% at 18% -8%, rgb(143 217 168 / 0.08), transparent 60%),
+    radial-gradient(80% 40% at 90% 4%, rgb(232 194 122 / 0.06), transparent 58%);
+}
+
+[data-look='hedge'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='hedge'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='hedge'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='hedge'] [data-part='input'],
+[data-look='hedge'] [data-part='segmented'] {
+  background: #0C130E;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+}
+
+[data-look='hedge'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #6BB489;
+  font-weight: 700;
+}
+
+[data-look='hedge'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}
