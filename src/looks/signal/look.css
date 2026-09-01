@@ -1,0 +1,60 @@
+/*
+ * 'signal' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 계기의 감각: 곡선 없음, 그림자 없음, 얇은 선과 켜진 것 하나.
+ */
+
+[data-look='signal'][data-part='frame']::before {
+  /* 무늬를 두지 않는다. 화면에서 눈에 드는 것이 하나뿐이어야 한다. */
+  background: none;
+}
+
+[data-look='signal'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: none;
+}
+
+[data-look='signal'] [data-part='panel']:hover {
+  box-shadow: none;
+}
+
+[data-look='signal'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='signal'] [data-part='input'],
+[data-look='signal'] [data-part='segmented'] {
+  background: #0D0D0D;
+  border-color: var(--bbb-border-color);
+  box-shadow: none;
+}
+
+[data-look='signal'] [data-part='button'] {
+  border-radius: 0;
+}
+
+[data-look='signal'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: var(--bbb-accent);
+  font-weight: 600;
+}
+
+[data-look='signal'] [data-part='segmented-option'][data-active='true'] {
+  background: transparent;
+  color: var(--bbb-accent);
+  box-shadow: inset 0 -2px 0 var(--bbb-accent);
+}
+
+[data-look='signal'] [data-part='badge'] {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: var(--bbb-text-n2);
+  border-radius: 0;
+}

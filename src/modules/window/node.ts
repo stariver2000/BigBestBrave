@@ -1,0 +1,82 @@
+/**
+ * 말할 틈 페이지의 트리 노드.
+ * 루트에서 갈라진 열두 번째 가지(사람 사이의 일)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { windowDictionary } from './dictionary';
+
+export const windowNode: PageNode = {
+  id: 'speaking-window',
+  slug: 'window',
+  parentId: ROOT_ID,
+  title: { ko: windowDictionary.ko.title, en: windowDictionary.en.title, ja: windowDictionary.ja.title },
+  summary: {
+    ko: windowDictionary.ko.summary,
+    en: windowDictionary.en.summary,
+    ja: windowDictionary.ja.summary,
+  },
+  capability: {
+    ko: windowDictionary.ko.capability,
+    en: windowDictionary.en.capability,
+    ja: windowDictionary.ja.capability,
+  },
+  look: 'signal',
+  keywords: [
+    '소통', '게임', '팀', '신뢰', '침묵', '핑', '기대값', '결정',
+    'communication', 'game', 'team', 'trust', 'silence', 'ping', 'expected value',
+    'コミュニケーション', 'チーム', '沈黙', '信頼',
+  ],
+  traits: {
+    domain: ['game', 'philosophy', 'science'],
+    audience: ['general', 'hobbyist'],
+    intent: ['inform', 'measure', 'provoke'],
+    stance: ['earnest'],
+    atmosphere: ['tense', 'austere'],
+    temperature: ['ambient'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['taut'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['flat'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['snappy'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'deadpan'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

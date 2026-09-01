@@ -22,6 +22,7 @@ import { Rhythm, rhythmNode } from './rhythm';
 import { Rulers, rulersNode } from './rulers';
 import { Reach, reachNode } from './reach';
 import { Rechunker, subtitleNode } from './subtitle';
+import { Window, windowNode } from './window';
 
 /** 모든 페이지 컴포넌트가 받는 공통 props. 페이지 고유 상태는 URL에서 스스로 읽는다. */
 export interface PageProps {
@@ -47,6 +48,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: checkupNode, Page: Checkup },
   { node: rulersNode, Page: Rulers },
   { node: reachNode, Page: Reach },
+  { node: windowNode, Page: Window },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();
