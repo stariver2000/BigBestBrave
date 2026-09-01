@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { AutopilotChip, Button, Field, Panel, PaperCard, useAutopilot, useClipboard } from '../../../kit';
+import { AutopilotChip, Button, Field, Panel, PaperCard, useAutopilot, useClipboard, useReach } from '../../../kit';
 import { LIMITS } from '../../../core/projection';
 import { parseCsv } from '../../../core/table';
 import { createTranslator, type Locale } from '../../../core/i18n';
@@ -47,6 +47,8 @@ export function Reliability({ locale }: { locale: Locale }) {
    * 그래서 예시를 스스로 넣고, 진실의 렌즈를 겹쳐 보이는 자리들로 천천히 데려간다.
    * 렌즈가 지나가는 동안 색이 사실로 바뀌는 것이 이 페이지가 하려는 말 전부다.
    */
+  // 이 페이지가 통한 순간: 진실의 렌즈를 자기 손으로 켠 때.
+  const reach = useReach();
   const [focus, setFocus] = useState<{ x: number; y: number } | null>(null);
   const autopilot = useAutopilot([
     { wait: 0, run: () => setSource(sampleCsv()) },
@@ -122,7 +124,10 @@ export function Reliability({ locale }: { locale: Locale }) {
               accentHex={BLUEPRINT_PALETTE.accent}
               labels={lensLabels}
               focus={autopilot.running ? focus : null}
-              onTakeOver={autopilot.stop}
+              onTakeOver={() => {
+                reach();
+                autopilot.stop();
+              }}
             />
           ) : (
             <p className={styles.plotEmpty}>{table.rows.length === 0 ? t('plot-empty') : t('data-need')}</p>

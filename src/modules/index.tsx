@@ -21,6 +21,7 @@ import { Checkup, checkupNode } from './checkup';
 import { Context, contextNode } from './context';
 import { Distance, distanceNode } from './distance';
 import { Grip, gripNode } from './grip';
+import { Hidden, hiddenNode } from './hidden';
 import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
@@ -77,6 +78,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: momentNode, Page: Moment },
   { node: channelNode, Page: Channel },
   { node: distanceNode, Page: Distance },
+  { node: hiddenNode, Page: Hidden },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

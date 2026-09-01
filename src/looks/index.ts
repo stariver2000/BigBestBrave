@@ -33,6 +33,7 @@ import { sereneVariables } from './serene';
 import { threadVariables } from './thread';
 import { signalVariables } from './signal';
 import { vaultVariables } from './vault';
+import { veilVariables } from './veil';
 
 export { frameStyleSheet, frameVariables } from './resolve';
 
@@ -66,6 +67,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   glow: glowVariables,
   prism: prismVariables,
   mirage: mirageVariables,
+  veil: veilVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

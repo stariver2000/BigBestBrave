@@ -9,7 +9,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
+import { Panel, PaperCard, SimulationChip, useSimulation } from '../../../kit';
 import {
   AMOUNTS,
   compare,
@@ -27,7 +27,7 @@ import {
 } from '../../../core/incentive';
 import { createRandom } from '../../../core/random';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { DIALS, PAPER } from '../config';
+import { DIALS, LIVE_STEP_MS, PAPER } from '../config';
 import { nudgeDictionary, type NudgeKey } from '../dictionary';
 import { Spend } from './Spend';
 import styles from './nudge.module.css';
@@ -41,6 +41,16 @@ export function Nudge({ locale }: { locale: Locale }) {
   const [rounds, setRounds] = useState<number>(ROUNDS.initial);
   const [context, setContext] = useState<Context>('off');
   const [drawSeed, setDrawSeed] = useState(0);
+
+  /*
+   * 스스로 도는 계산. 이 페이지의 알맹이는 알고리즘이 사람에 맞춰 금액을 배워 가는 과정인데,
+   * 결과만 한 번에 내놓으면 배우는 장면이 통째로 빠진다. 그래서 한 회씩 늘려 가며 다시 계산한다 —
+   * 팔들이 뾰족해지고 금액이 자리를 잡는 것이 눈앞에서 벌어진다. 끝까지 가면 처음부터 다시 배운다.
+   * 시연과 달리 손을 대도 멈추지 않는다. 손잡이를 돌리는 동안 알고리즘이 어떻게 흔들리는지가 볼거리다.
+   */
+  const simulation = useSimulation(() => {
+    setRounds((current) => (current >= ROUNDS.max ? ROUNDS.min : current + ROUNDS.step));
+  }, LIVE_STEP_MS);
 
   const responder: Responder = useMemo(
     () => ({ base, lift, enough, contextShift: INITIAL_RESPONDER.contextShift }),
@@ -116,7 +126,11 @@ export function Nudge({ locale }: { locale: Locale }) {
         </div>
       </Panel>
 
-      <Panel title={t('arms-title')} note={t('arms-note')}>
+      <Panel
+        title={t('arms-title')}
+        note={t('arms-note')}
+        actions={<SimulationChip running={simulation.running} onToggle={simulation.toggle} locale={locale} />}
+      >
         <div className={styles.contexts}>
           {CONTEXTS.map((id) => (
             <button

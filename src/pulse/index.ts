@@ -1,0 +1,19 @@
+/** 맥 저장 계층의 공개 진입점. */
+
+import { readPulseConfig } from './config';
+import { FilePulseStore } from './file-store';
+import { MemoryPulseStore } from './memory-store';
+import type { PulseStore } from './store';
+
+export { readPulseConfig, type PulseConfig } from './config';
+export type { PulseStore } from './store';
+
+let store: PulseStore | null = null;
+
+/** 설정이 고른 저장소 하나를 프로세스 안에서 나눠 쓴다. */
+export function pulseStore(): PulseStore {
+  if (store) return store;
+  const config = readPulseConfig();
+  store = config.driver === 'memory' ? new MemoryPulseStore() : new FilePulseStore(config.filePath);
+  return store;
+}

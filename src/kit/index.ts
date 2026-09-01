@@ -9,13 +9,18 @@ export { Badge, Button, Field, Panel, Segmented, TextInput, type SegmentedOption
 export {
   AutopilotChip,
   AUTOPILOT_LABELS,
+  SIMULATION_LABELS,
+  SimulationChip,
   nextIndex,
   useAutopilot,
+  useSimulation,
   waitFor,
   type Autopilot,
   type AutopilotStep,
+  type Simulation,
 } from './autopilot';
 export { PaperCard, PLAIN_LABELS, type Localized, type PlainPaper } from './paper';
+export { PulseProvider, useReach } from './pulse';
 export { useClipboard } from './state/use-clipboard';
 export {
   booleanField,

@@ -12,6 +12,7 @@ import { createTranslator, type Locale } from '../core/i18n';
 import { allNodes, pathOf, trailOf, type PageNode } from '../core/tree';
 import { lookIdOf } from '../looks';
 import { frameStyleSheet } from '../looks/resolve';
+import { PulseProvider } from '../kit';
 import { CommandPalette, type PaletteEntry } from './CommandPalette';
 import { LocaleProvider } from './locale-context';
 import { CommentSection } from './CommentSection';
@@ -90,7 +91,8 @@ export function PageFrame({
         </section>
 
         <main className={styles.main}>
-          {children}
+          {/* 페이지의 맥을 재는 자리. 프레임이 한 번 감싸면 모든 페이지가 같은 방식으로 세어진다. */}
+          <PulseProvider path={path}>{children}</PulseProvider>
           <CommentSection path={path} locale={locale} />
         </main>
 

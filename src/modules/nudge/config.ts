@@ -69,3 +69,11 @@ export const DIALS = {
   lift: { min: 0, max: 70 },
   enough: { min: 25, max: 100, step: 25 },
 } as const;
+
+/**
+ * 한 회를 더 도는 간격(ms).
+ *
+ * 사람이 팔의 모양이 달라지는 것을 눈으로 좇을 수 있을 만큼 느리게, 그러나 배우는 데 한나절이
+ * 걸리지 않을 만큼 빠르게 잡았다. 한 걸음이 곧 한 번의 제안과 한 번의 성패다.
+ */
+export const LIVE_STEP_MS = 260;

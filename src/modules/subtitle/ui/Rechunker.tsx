@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { AutopilotChip, Button, Panel, PaperCard, useAutopilot, useClipboard } from '../../../kit';
+import { AutopilotChip, Button, Panel, PaperCard, useAutopilot, useClipboard, useReach } from '../../../kit';
 import {
   DEFAULTS,
   LIMITS,
@@ -53,6 +53,8 @@ function download(text: string, filename: string): void {
 export function Rechunker({ locale }: { locale: Locale }) {
   const t = createTranslator(subtitleDictionary, locale);
   const { copiedKey, copy } = useClipboard();
+  // 이 페이지가 통한 순간: 다시 자른 자막을 자기 것으로 가져갈 때.
+  const reach = useReach();
 
   const [source, setSource] = useState('');
   const [fontSize, setFontSize] = useState<number>(DEFAULT_SETTINGS.fontSize);
@@ -220,13 +222,13 @@ export function Rechunker({ locale }: { locale: Locale }) {
               <Button
                 variant="primary"
                 disabled={exported.length === 0}
-                onClick={() => copy(exported, RESULT_COPY_KEY)}
+                onClick={() => { reach(); copy(exported, RESULT_COPY_KEY); }}
               >
                 {copiedKey === RESULT_COPY_KEY ? t('result-copied') : t('result-copy')}
               </Button>
               <Button
                 disabled={exported.length === 0}
-                onClick={() => download(exported, `${DOWNLOAD_BASENAME}.${parsed.format}`)}
+                onClick={() => { reach(); download(exported, `${DOWNLOAD_BASENAME}.${parsed.format}`); }}
               >
                 {t('result-download')}
               </Button>

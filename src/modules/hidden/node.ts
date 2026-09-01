@@ -1,0 +1,86 @@
+/**
+ * 숨은 손짓 페이지의 트리 노드.
+ * 루트에서 갈라진 스물일곱 번째 가지(장막을 걷는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { hiddenDictionary } from './dictionary';
+
+export const hiddenNode: PageNode = {
+  id: 'hidden-interactions',
+  slug: 'hidden',
+  parentId: ROOT_ID,
+  title: {
+    ko: hiddenDictionary.ko.title,
+    en: hiddenDictionary.en.title,
+    ja: hiddenDictionary.ja.title,
+  },
+  summary: {
+    ko: hiddenDictionary.ko.summary,
+    en: hiddenDictionary.en.summary,
+    ja: hiddenDictionary.ja.summary,
+  },
+  capability: {
+    ko: hiddenDictionary.ko.capability,
+    en: hiddenDictionary.en.capability,
+    ja: hiddenDictionary.ja.capability,
+  },
+  look: 'veil',
+  keywords: [
+    '숨은 기능', '제스처', '모바일', '발견 가능성', '자료집', '길게 누르기', '스와이프',
+    'hidden interaction', 'gesture', 'mobile UI', 'discoverability', 'dataset', 'long press', 'swipe',
+    '隠れた機能', 'ジェスチャー', 'モバイル',
+  ],
+  traits: {
+    domain: ['design', 'ai', 'dev-tools'],
+    audience: ['general', 'professional'],
+    intent: ['entertain', 'teach', 'inform'],
+    stance: ['earnest'],
+    atmosphere: ['mysterious', 'cozy'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['glass'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

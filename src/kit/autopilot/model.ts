@@ -31,6 +31,30 @@ export function waitFor(steps: readonly AutopilotStep[], index: number, firstWai
   return index === 0 ? firstWait : steps[index % steps.length].wait;
 }
 
+/** 스스로 도는 계산의 표시. 시연과 달리 사람이 직접 멈추고 다시 돌린다. */
+export const SIMULATION_LABELS: Record<'running' | 'paused' | 'pause' | 'play', Record<Locale, string>> = {
+  running: {
+    ko: '계산이 돌고 있습니다',
+    en: 'The computation is running',
+    ja: '計算が動いています',
+  },
+  paused: {
+    ko: '멈춰 있습니다',
+    en: 'Paused',
+    ja: '止まっています',
+  },
+  pause: {
+    ko: '멈추기',
+    en: 'Pause',
+    ja: '止める',
+  },
+  play: {
+    ko: '다시 돌리기',
+    en: 'Run it again',
+    ja: 'もう一度動かす',
+  },
+};
+
 export const AUTOPILOT_LABELS: Record<'running' | 'stopped' | 'resume', Record<Locale, string>> = {
   running: {
     ko: '혼자 돌아가는 중 — 손대면 멈춥니다',

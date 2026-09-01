@@ -8,8 +8,8 @@
  * 그 사람이 그것을 무엇으로 읽었는지가 돌아온다. 그 왕복에서 무엇이 사라지는지 보게 된다.
  */
 
-import { useMemo, useState } from 'react';
-import { AutopilotChip, Panel, PaperCard, Segmented, useAutopilot, type SegmentedOption } from '../../../kit';
+import { useEffect, useMemo, useState } from 'react';
+import { AutopilotChip, Panel, PaperCard, Segmented, useAutopilot, useReach, type SegmentedOption } from '../../../kit';
 import {
   CODEBOOK,
   MAX_DIGITS,
@@ -42,7 +42,14 @@ export function Beeper({ locale }: { locale: Locale }) {
   const [digits, setDigits] = useState(WELCOME_DIGITS);
 
   const echo = useMemo(() => roundTrip(text), [text]);
+  // 이 페이지가 통한 순간: 보낸 말이 무엇이 되어 돌아왔는지 본 때.
+  const reach = useReach();
   const sending = useSending(echo.sent.digits);
+
+  // 도착한 순간에만 한 번 찍는다. 렌더마다 부르면 같은 사람이 여러 번 세어진다.
+  useEffect(() => {
+    if (sending.delivered) reach();
+  }, [sending.delivered, reach]);
   const ways = useMemo(() => (mode === 'read' ? segmentations(digits) : []), [mode, digits]);
 
   const today = CODEBOOK[codeOfDay(new Date())];
