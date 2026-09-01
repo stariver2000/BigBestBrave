@@ -19,6 +19,7 @@ import { Checkup, checkupNode } from './checkup';
 import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
+import { Route, routeNode } from './route';
 import { Rulers, rulersNode } from './rulers';
 import { Nudge, nudgeNode } from './nudge';
 import { Peer, peerNode } from './peer';
@@ -55,6 +56,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: nudgeNode, Page: Nudge },
   { node: whatifNode, Page: Whatif },
   { node: peerNode, Page: Peer },
+  { node: routeNode, Page: Route },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

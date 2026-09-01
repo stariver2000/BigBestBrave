@@ -1,0 +1,359 @@
+/*
+ * 길찾기 태도 화면의 스타일.
+ * 색은 전부 토큰 변수에서 온다. 길은 road, 내 자취는 accent로만 쓴다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-5);
+}
+
+.paper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.paperLabel {
+  padding: 2px 8px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.paper a {
+  color: var(--bbb-fg);
+  text-decoration-color: var(--bbb-border-strong);
+  text-underline-offset: 3px;
+}
+
+.paper a:hover {
+  color: var(--bbb-accent);
+}
+
+.paperMeta {
+  flex-basis: 100%;
+  font-size: var(--bbb-text-n2);
+}
+
+.quiet {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+/* --- 설정 --- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--bbb-space-4);
+  margin-bottom: var(--bbb-space-4);
+}
+
+.dial {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 14rem;
+}
+
+.dialLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--bbb-space-2);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.dialValue {
+  font-family: var(--bbb-font-mono, ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.dial input[type='range'] {
+  width: 100%;
+  accent-color: var(--bbb-accent);
+}
+
+.reshuffle {
+  padding: 6px 16px;
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-accent);
+  background: transparent;
+  border: 1px solid var(--bbb-accent);
+  border-radius: var(--bbb-radius-sm);
+  cursor: pointer;
+}
+
+.reshuffle:hover {
+  background: var(--bbb-accent-soft);
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--bbb-space-3);
+}
+
+.modeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--bbb-space-3);
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.modeName {
+  font-size: var(--bbb-text-0);
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.modeNote {
+  font-size: var(--bbb-text-n2);
+  line-height: 1.55;
+  color: var(--bbb-fg-muted);
+}
+
+/* --- 지도 --- */
+
+.maps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--bbb-space-4);
+}
+
+.mapBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.map {
+  width: 100%;
+  max-width: 13rem;
+  height: auto;
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.road {
+  stroke: var(--bbb-road-soft, var(--bbb-border-color));
+  stroke-width: 1.5;
+}
+
+.road[data-arterial] {
+  stroke: var(--bbb-road, var(--bbb-border-strong));
+  stroke-width: 2.5;
+  opacity: 0.45;
+}
+
+.used {
+  stroke: var(--bbb-accent);
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.dot {
+  fill: var(--bbb-border-strong);
+}
+
+.dot[data-end='start'] {
+  fill: var(--bbb-road, var(--bbb-fg));
+}
+
+.dot[data-end='goal'] {
+  fill: var(--bbb-accent);
+}
+
+.mapName {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  color: var(--bbb-fg);
+  text-align: center;
+}
+
+.mapStat {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--bbb-text-n2);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px var(--bbb-space-3);
+  margin: var(--bbb-space-4) 0 0;
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+}
+
+.legendLine {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legendLine[data-kind='road'] {
+  background: var(--bbb-road, var(--bbb-border-strong));
+  opacity: 0.45;
+}
+
+.legendLine[data-kind='used'] {
+  background: var(--bbb-accent);
+}
+
+.legendDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.legendDot[data-end='start'] {
+  background: var(--bbb-road, var(--bbb-fg));
+}
+
+.legendDot[data-end='goal'] {
+  background: var(--bbb-accent);
+}
+
+/* --- 표 --- */
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.table th,
+.table td {
+  padding: var(--bbb-space-3);
+  text-align: right;
+  vertical-align: top;
+  border-bottom: 1px solid var(--bbb-border-color);
+}
+
+.table thead th {
+  font-size: var(--bbb-text-n2);
+  font-weight: 500;
+  color: var(--bbb-fg-muted);
+  border-bottom-color: var(--bbb-border-strong);
+}
+
+.table tbody th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.strong[data-best] {
+  color: var(--bbb-accent);
+}
+
+.table td[data-calm] {
+  color: var(--bbb-road, var(--bbb-fg));
+  font-weight: 650;
+}
+
+.marks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 3px;
+}
+
+.mark {
+  font-size: var(--bbb-text-n2);
+  font-weight: 400;
+  color: var(--bbb-accent);
+  white-space: normal;
+}
+
+.mark[data-calm] {
+  color: var(--bbb-road, var(--bbb-fg-muted));
+}
+
+/* --- 잃는 것 / 앎 / 주의 --- */
+
+.lost,
+.how,
+.took {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  padding-top: var(--bbb-space-4);
+  border-top: 1px solid var(--bbb-border-color);
+}
+
+.lost {
+  border-top-color: var(--bbb-border-strong);
+}
+
+.lostTitle {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+.lostItem,
+.how p,
+.took p {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  color: var(--bbb-fg-muted);
+  max-width: 68ch;
+}
+
+.lostName {
+  display: inline-block;
+  min-width: 4.5rem;
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.warning {
+  margin: 0;
+  padding: var(--bbb-space-3);
+  border-left: 2px solid var(--bbb-accent);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.75;
+  color: var(--bbb-fg-muted);
+  max-width: 68ch;
+}

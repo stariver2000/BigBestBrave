@@ -1,0 +1,82 @@
+/**
+ * 길찾기 태도 페이지의 트리 노드.
+ * 루트에서 갈라진 열여섯 번째 가지(길 위의 일)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { routeDictionary } from './dictionary';
+
+export const routeNode: PageNode = {
+  id: 'navigation-modes',
+  slug: 'route',
+  parentId: ROOT_ID,
+  title: { ko: routeDictionary.ko.title, en: routeDictionary.en.title, ja: routeDictionary.ja.title },
+  summary: {
+    ko: routeDictionary.ko.summary,
+    en: routeDictionary.en.summary,
+    ja: routeDictionary.ja.summary,
+  },
+  capability: {
+    ko: routeDictionary.ko.capability,
+    en: routeDictionary.en.capability,
+    ja: routeDictionary.ja.capability,
+  },
+  look: 'atlas',
+  keywords: [
+    '길찾기', '내비게이션', '지도', '습관', '주의', '최단경로', '후회',
+    'navigation', 'wayfinding', 'map', 'habit', 'attention', 'shortest path', 'regret',
+    'ナビ', '地図', '経路',
+  ],
+  traits: {
+    domain: ['travel', 'data', 'science'],
+    audience: ['general', 'hobbyist'],
+    intent: ['inform', 'measure', 'explore'],
+    stance: ['earnest'],
+    atmosphere: ['pastoral', 'serene'],
+    temperature: ['neutral'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['paper'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'casual'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
