@@ -187,6 +187,13 @@
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.025em;
+  /*
+   * 한국어와 일본어는 낱말 사이에 띄어쓰기가 없어도 줄이 바뀐다. 그대로 두면
+   * "보여 주 / 지 않고"처럼 낱말 한가운데가 갈린다. keep-all로 띄어쓰기에서만 끊고,
+   * 끊을 곳이 없는 긴 낱말은 overflow-wrap이 받아 준다(가로 넘침 방지).
+   */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* 제목 끝의 작은 점. 강조색을 딱 이만큼만 쓴다. */
@@ -199,6 +206,9 @@
   line-height: 1.72;
   color: var(--bbb-fg-muted);
   max-inline-size: 52ch;
+  /* 제목과 같은 이유. .pageTitle 주석 참고. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ── 본문 ────────────────────────────────────────────────── */

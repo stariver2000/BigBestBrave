@@ -6,6 +6,7 @@
  * 이 계층이 있어야 페이지가 수백 개로 늘어도 "공식이 뽑아낸 밋밋한 화면"이 반복되지 않는다.
  */
 
+import { benchVariables } from './bench';
 import { blueprintVariables } from './blueprint';
 import { cinemaVariables } from './cinema';
 import { dossierVariables } from './dossier';
@@ -32,6 +33,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   gallery: galleryVariables,
   proof: proofVariables,
   vault: vaultVariables,
+  bench: benchVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

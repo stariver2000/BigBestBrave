@@ -1,0 +1,86 @@
+/**
+ * 지표 비교 페이지의 트리 노드.
+ * 루트에서 갈라진 열 번째 가지(자료를 읽는 눈)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { rulersDictionary } from './dictionary';
+
+export const rulersNode: PageNode = {
+  id: 'metric-rulers',
+  slug: 'rulers',
+  parentId: ROOT_ID,
+  title: {
+    ko: rulersDictionary.ko.title,
+    en: rulersDictionary.en.title,
+    ja: rulersDictionary.ja.title,
+  },
+  summary: {
+    ko: rulersDictionary.ko.summary,
+    en: rulersDictionary.en.summary,
+    ja: rulersDictionary.ja.summary,
+  },
+  capability: {
+    ko: rulersDictionary.ko.capability,
+    en: rulersDictionary.en.capability,
+    ja: rulersDictionary.ja.capability,
+  },
+  look: 'bench',
+  keywords: [
+    '지표', '평가', '상관', '군집', '차원축소', '산점도', '중복',
+    'metric', 'evaluation', 'correlation', 'clustering', 'dimensionality reduction', 'bias',
+    '指標', '評価', '相関', '次元削減',
+  ],
+  traits: {
+    domain: ['data', 'science', 'education'],
+    audience: ['professional', 'expert'],
+    intent: ['inform', 'measure', 'teach'],
+    stance: ['clinical'],
+    atmosphere: ['sterile', 'austere'],
+    temperature: ['neutral'],
+    brightness: ['balanced'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['compact'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
