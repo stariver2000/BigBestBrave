@@ -1,0 +1,49 @@
+/*
+ * 'thread' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 대화창의 감각: 넉넉히 굴린 모서리, 얕은 그림자, 흰 종이 위의 옅은 파랑.
+ */
+
+[data-look='thread'][data-part='frame']::before {
+  background:
+    radial-gradient(120% 55% at 15% -10%, rgb(31 79 216 / 0.07), transparent 62%),
+    radial-gradient(80% 40% at 92% 4%, rgb(168 67 12 / 0.05), transparent 58%);
+}
+
+[data-look='thread'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='thread'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='thread'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='thread'] [data-part='input'],
+[data-look='thread'] [data-part='segmented'] {
+  background: var(--bbb-surface-raised);
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 2px rgb(22 24 29 / 0.05);
+}
+
+[data-look='thread'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #1A44BC;
+  font-weight: 650;
+}
+
+[data-look='thread'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

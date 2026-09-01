@@ -1,0 +1,86 @@
+/**
+ * 다시 묻기 페이지의 트리 노드.
+ * 루트에서 갈라진 스무 번째 가지(말이 어긋나는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { againDictionary } from './dictionary';
+
+export const againNode: PageNode = {
+  id: 'llm-dissatisfaction',
+  slug: 'again',
+  parentId: ROOT_ID,
+  title: {
+    ko: againDictionary.ko.title,
+    en: againDictionary.en.title,
+    ja: againDictionary.ja.title,
+  },
+  summary: {
+    ko: againDictionary.ko.summary,
+    en: againDictionary.en.summary,
+    ja: againDictionary.ja.summary,
+  },
+  capability: {
+    ko: againDictionary.ko.capability,
+    en: againDictionary.en.capability,
+    ja: againDictionary.ja.capability,
+  },
+  look: 'thread',
+  keywords: [
+    '불만', '프롬프트', '다시 묻기', '언어모델', '대화', '효과',
+    'dissatisfaction', 'prompt', 'follow-up', 'chatgpt', 'llm', 'tactic', 'knowledge',
+    '不満', 'プロンプト', '聞き直す',
+  ],
+  traits: {
+    domain: ['ai', 'data', 'education'],
+    audience: ['general', 'professional'],
+    intent: ['inform', 'teach', 'persuade'],
+    stance: ['earnest'],
+    atmosphere: ['serene', 'austere'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['morning'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['paper'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

@@ -12,6 +12,7 @@ import { registerNode, type PageNode } from '../core/tree';
 import type { Locale } from '../core/i18n';
 import { ChromaLab, chromaLabNode } from './chroma-lab';
 import { Redactor, redactorNode } from './redactor';
+import { Again, againNode } from './again';
 import { Areca, arecaNode } from './areca';
 import { Beeper, beeperNode } from './beeper';
 import { ChartAudit, chartNode } from './chart';
@@ -63,6 +64,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: readingNode, Page: Reading },
   { node: gripNode, Page: Grip },
   { node: softenNode, Page: Soften },
+  { node: againNode, Page: Again },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

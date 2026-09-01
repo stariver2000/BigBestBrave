@@ -37,6 +37,7 @@
 | `/reading` | AReading with Smartphones: Trade-offs between Enhanced Legibility and Display Switching Costs | CHI 2025 (KAIST) · 전문을 못 구해 초록의 짜임만 옮김 |
 | `/grip` | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 (KAIST·MSR) |
 | `/soften` | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 (KAIST) · 유료라 초록의 짜임만 옮김 |
+| `/again` | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics, and the Effect of Knowledge Level | IUI 2024 (KAIST·SNU·KDI) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -48,14 +49,32 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
-| 2 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
-| 3 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
-| 4 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
-| 5 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
-| 6 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 7 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 8 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
+| 2 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
+| 3 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
+| 4 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 5 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+
+arXiv에 전문이 있는 것: 2번(2403.14117), 3번(2502.18861), 5번(doi:10.1145/3613904.3642747,
+arXiv에 같은 제목으로 올라와 있다). 1번과 4번은 arXiv 제목 검색으로 나오지 않았다.
+
+## 건너뛴 것
+
+저자와 DOI까지 확인했지만 화면으로 옮길 알맹이를 구하지 못해 건너뛴 것이다.
+나중에 전문을 구하면 다시 집는다.
+
+- `Why I Choose This Sticker When Chatting with You` (CSCW 2024,
+  Gahyeon Bae, Daehyun Kwak, Youn-kyung Lim, KAIST, doi:10.1145/3687063).
+  CC-BY로 열려 있으나 유일한 소장처인 ACM DL이 봇 검사로 막혀 있어 전문을 구하지 못했다
+  (Unpaywall과 OpenAlex 모두 다른 소장처가 없다고 답한다). 초록은 "세 가지 공통된
+  고려사항을 밝혔다"까지만 말하고 그 셋이 무엇인지 밝히지 않는다. 그 셋을 내가 지어내면
+  논문에서 나온 페이지가 아니라 논문 이름을 빌린 페이지가 되므로 건너뛴다.
+- `Investigating the Potential of Group Recommendation Systems As a Medium of Social
+  Interactions` (CHI 2024, Daehyun Kwak, Soobin Park, Inha Cha, Hankyung Kim,
+  Youn-kyung Lim, KAIST, doi:10.1145/3613904.3642544). 같은 이유다. 초록은 "암묵적인
+  사회적 상호작용"까지만 말하고 그 설계 속성을 밝히지 않는다. 집단 추천의 계산 방법
+  (평균, 최소 불행, 보르다)은 이 논문이 아니라 그 분야의 일반적인 것이라, 그것으로
+  페이지를 만들면 이 논문의 것이 아닌 것을 이 논문의 것처럼 적게 된다.
 
 ## 전문을 못 구한 것
 
@@ -65,6 +84,9 @@
 - `AReading with Smartphones` (CHI 2025) -> `/reading`
 - `Effects of Waveform, Time Delay, and Vibration Axis...` (IJHCI 2024) -> `/soften`
   (저자는 Semantic Scholar API로 확인했다. 웹 검색만으로는 저자 이름이 나오지 않았다.)
+
+`/again`은 반대의 경우다. arXiv에 전문이 있어 표 여섯 개를 끝까지 읽고 옮겼고,
+논문이 적어 둔 카이제곱 검정값으로 옮겨 적기가 옳았는지 되짚어 확인했다.
 
 ## 어렵다고 본 것
 
