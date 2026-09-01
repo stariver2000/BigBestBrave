@@ -17,6 +17,7 @@ import { Areca, arecaNode } from './areca';
 import { Beeper, beeperNode } from './beeper';
 import { ChartAudit, chartNode } from './chart';
 import { Checkup, checkupNode } from './checkup';
+import { Context, contextNode } from './context';
 import { Grip, gripNode } from './grip';
 import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
@@ -65,6 +66,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: gripNode, Page: Grip },
   { node: softenNode, Page: Soften },
   { node: againNode, Page: Again },
+  { node: contextNode, Page: Context },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

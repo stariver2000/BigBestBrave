@@ -1,0 +1,50 @@
+/*
+ * 'margin' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 난외의 감각: 거의 각진 모서리, 얕은 그림자, 종이 결의 따뜻한 지면, 제목은 세리프.
+ */
+
+[data-look='margin'][data-part='frame']::before {
+  background:
+    radial-gradient(120% 55% at 18% -10%, rgb(110 58 140 / 0.06), transparent 62%),
+    radial-gradient(70% 36% at 94% 6%, rgb(30 122 79 / 0.05), transparent 58%);
+}
+
+[data-look='margin'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='margin'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='margin'] [data-part='panel-title'] {
+  font-family: var(--bbb-font-heading);
+  font-size: var(--bbb-text-0);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--bbb-fg);
+}
+
+[data-look='margin'] [data-part='input'],
+[data-look='margin'] [data-part='segmented'] {
+  background: var(--bbb-surface-raised);
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 2px rgb(28 26 22 / 0.05);
+}
+
+[data-look='margin'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #572C70;
+  font-weight: 650;
+}
+
+[data-look='margin'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

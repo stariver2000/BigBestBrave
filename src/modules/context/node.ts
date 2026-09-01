@@ -1,0 +1,86 @@
+/**
+ * 맥락 페이지의 트리 노드.
+ * 루트에서 갈라진 스물한 번째 가지(숫자를 견주는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { contextDictionary } from './dictionary';
+
+export const contextNode: PageNode = {
+  id: 'statistical-context',
+  slug: 'context',
+  parentId: ROOT_ID,
+  title: {
+    ko: contextDictionary.ko.title,
+    en: contextDictionary.en.title,
+    ja: contextDictionary.ja.title,
+  },
+  summary: {
+    ko: contextDictionary.ko.summary,
+    en: contextDictionary.en.summary,
+    ja: contextDictionary.ja.summary,
+  },
+  capability: {
+    ko: contextDictionary.ko.capability,
+    en: contextDictionary.en.capability,
+    ja: contextDictionary.ja.capability,
+  },
+  look: 'margin',
+  keywords: [
+    '통계', '맥락', '견주기', '읽기', '지표', '자료', '그림',
+    'statistic', 'context', 'comparison', 'reading', 'indicator', 'chart', 'data',
+    '統計', '文脈', '比較',
+  ],
+  traits: {
+    domain: ['data', 'education', 'literature'],
+    audience: ['general', 'professional'],
+    intent: ['teach', 'inform', 'persuade'],
+    stance: ['earnest'],
+    atmosphere: ['austere', 'cozy'],
+    temperature: ['warm'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['morning'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['paper'],
+    'type-voice': ['old-style-serif'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['academic', 'warm'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

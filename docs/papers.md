@@ -38,6 +38,7 @@
 | `/grip` | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 (KAIST·MSR) |
 | `/soften` | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 (KAIST) · 유료라 초록의 짜임만 옮김 |
 | `/again` | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics, and the Effect of Knowledge Level | IUI 2024 (KAIST·SNU·KDI) |
+| `/context` | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 (KAIST·HCMUT·SUTD) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -49,14 +50,17 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
-| 2 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
-| 3 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 4 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 5 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
+| 2 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
+| 3 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 4 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
-arXiv에 전문이 있는 것: 2번(2403.14117), 3번(2502.18861), 5번(doi:10.1145/3613904.3642747,
-arXiv에 같은 제목으로 올라와 있다). 1번과 4번은 arXiv 제목 검색으로 나오지 않았다.
+arXiv에 전문이 있는 것: 1번(2403.14117), 2번(2502.18861), 4번(doi:10.1145/3613904.3642747).
+3번은 arXiv 제목 검색으로 나오지 않았다.
+
+전문을 구하는 길이 arXiv만은 아니다. `/context`의 DataDive는 arXiv에 없지만 저자 한 사람의
+개인 페이지(dhkim16.github.io/pdf/datadive.pdf)에 PDF가 올라와 있었다. ACM이 막혀 있으면
+저자 이름으로 한 번 더 찾아볼 것.
 
 ## 건너뛴 것
 
