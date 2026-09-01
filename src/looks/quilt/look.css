@@ -1,0 +1,49 @@
+/*
+ * 'quilt' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 조각보의 감각: 거의 각진 모서리, 그림자 대신 안쪽 실선 한 줄, 조각마다 또렷한 테두리.
+ */
+
+[data-look='quilt'][data-part='frame']::before {
+  background:
+    radial-gradient(110% 55% at 12% -8%, rgb(111 211 196 / 0.07), transparent 60%),
+    radial-gradient(80% 42% at 90% 4%, rgb(255 161 132 / 0.06), transparent 58%);
+}
+
+[data-look='quilt'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='quilt'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='quilt'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='quilt'] [data-part='input'],
+[data-look='quilt'] [data-part='segmented'] {
+  background: #0F1116;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.5);
+}
+
+[data-look='quilt'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #4FAE9F;
+  font-weight: 700;
+}
+
+[data-look='quilt'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

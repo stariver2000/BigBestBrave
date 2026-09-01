@@ -39,6 +39,7 @@
 | `/soften` | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 (KAIST) · 유료라 초록의 짜임만 옮김 |
 | `/again` | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics, and the Effect of Knowledge Level | IUI 2024 (KAIST·SNU·KDI) |
 | `/context` | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 (KAIST·HCMUT·SUTD) |
+| `/space` | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 (36인 공동 연구) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -50,17 +51,17 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
-| 2 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 3 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 4 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
+| 2 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 3 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
-arXiv에 전문이 있는 것: 1번(2403.14117), 2번(2502.18861), 4번(doi:10.1145/3613904.3642747).
-3번은 arXiv 제목 검색으로 나오지 않았다.
+arXiv에 전문이 있는 것: 1번(2502.18861), 3번(doi:10.1145/3613904.3642747).
+2번은 arXiv 제목 검색으로 나오지 않았다.
 
-전문을 구하는 길이 arXiv만은 아니다. `/context`의 DataDive는 arXiv에 없지만 저자 한 사람의
-개인 페이지(dhkim16.github.io/pdf/datadive.pdf)에 PDF가 올라와 있었다. ACM이 막혀 있으면
-저자 이름으로 한 번 더 찾아볼 것.
+전문을 구하는 길이 arXiv만은 아니다. `/context`의 DataDive는 저자 한 사람의 개인
+페이지에 PDF가 있었다. `/space`는 arXiv에 전문이 있었고, 분류표는 저자들이 따로 공개한
+자료(writing-assistant.github.io)에서 가져왔다. 논문이 함께 낸 자료가 있으면 그쪽이
+정본이다 - 산문은 코드 이름을 풀어 써서 뭉갠다.
 
 ## 건너뛴 것
 

@@ -24,6 +24,7 @@ import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
 import { Route, routeNode } from './route';
 import { Rulers, rulersNode } from './rulers';
+import { Space, spaceNode } from './space';
 import { Nudge, nudgeNode } from './nudge';
 import { Peer, peerNode } from './peer';
 import { Reach, reachNode } from './reach';
@@ -67,6 +68,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: softenNode, Page: Soften },
   { node: againNode, Page: Again },
   { node: contextNode, Page: Context },
+  { node: spaceNode, Page: Space },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

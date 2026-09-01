@@ -1,0 +1,86 @@
+/**
+ * 설계 공간 페이지의 트리 노드.
+ * 루트에서 갈라진 스물두 번째 가지(안 보고 있는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { spaceDictionary } from './dictionary';
+
+export const spaceNode: PageNode = {
+  id: 'writing-design-space',
+  slug: 'space',
+  parentId: ROOT_ID,
+  title: {
+    ko: spaceDictionary.ko.title,
+    en: spaceDictionary.en.title,
+    ja: spaceDictionary.ja.title,
+  },
+  summary: {
+    ko: spaceDictionary.ko.summary,
+    en: spaceDictionary.en.summary,
+    ja: spaceDictionary.ja.summary,
+  },
+  capability: {
+    ko: spaceDictionary.ko.capability,
+    en: spaceDictionary.en.capability,
+    ja: spaceDictionary.ja.capability,
+  },
+  look: 'quilt',
+  keywords: [
+    '설계 공간', '글쓰기', '보조 도구', '분류', '차원', '사각지대', '문헌',
+    'design space', 'writing assistant', 'taxonomy', 'dimension', 'blind spot', 'survey',
+    '設計空間', '執筆支援', '分類',
+  ],
+  traits: {
+    domain: ['ai', 'design', 'literature'],
+    audience: ['professional', 'expert'],
+    intent: ['inform', 'teach', 'persuade'],
+    stance: ['earnest'],
+    atmosphere: ['austere', 'futuristic'],
+    temperature: ['cool'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['compact'],
+    rhythm: ['uniform'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['flat'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
