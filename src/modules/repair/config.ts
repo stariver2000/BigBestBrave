@@ -33,6 +33,32 @@ export const PAPER = {
   affiliation: 'KAIST',
   link: 'https://arxiv.org/abs/2502.18861',
   fullText: 'arXiv:2502.18861v1',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '온라인에서 누가 누구를 다치게 했을 때, 보통은 지우거나 막고 끝냅니다. 그런데 그것은 다친 사람에게 아무것도 돌려주지 않습니다. 사과와 회복을 도울 수는 없을까요?',
+      en: 'When someone gets hurt online, the usual answer is to delete or ban and move on. But that gives the hurt person nothing back. Could a tool help with apology and repair instead?',
+      ja: 'オンラインで誰かが誰かを傷つけたとき、たいていは削除か遮断で終わります。しかしそれは傷ついた人に何も返しません。謝罪と回復を助けることはできないでしょうか。',
+    },
+    work: {
+      ko: '연구진은 사과를 돕는 봇을 만들어 열여섯 개 공동체에 건네고, 어떤 공동체에서·어떤 운영 방식으로·어떤 상황에서 그런 도구가 통하는지를 여덟 개의 축으로 정리했습니다. 열여섯 곳 중 여섯 곳이 설치했고, 두 곳만 실제로 썼습니다.',
+      en: 'They built a bot that helps with apologies, offered it to sixteen communities, and mapped where such a tool fits — which community, which way of running it, which situation — along eight axes. Of the sixteen, six installed it and only two really used it.',
+      ja: '研究者は謝罪を助けるボットを作って十六のコミュニティに渡し、どんな共同体で・どんな運営で・どんな状況でそうした道具が働くのかを八つの軸で整理しました。十六のうち六つが導入し、実際に使ったのは二つだけでした。',
+    },
+    took: {
+      ko: '그 여덟 축과 양 끝, 그리고 중간에 그만둔 사과가 무엇을 남기는지 아직 모른다는 논문의 고백까지 가져왔습니다.',
+      en: 'The eight axes and both of their ends — and the paper\'s own admission that nobody yet knows what an apology abandoned halfway leaves behind.',
+      ja: 'その八つの軸と両端、そして途中でやめた謝罪が何を残すのかまだ分からないという論文自身の告白まで受け取りました。',
+    },
+    left: {
+      ko: '점수는 없습니다. 질적 연구라 축에 눈금이 없고, 몇 점 같은 것을 만들면 논문에 없는 저울을 세우는 일이 됩니다. 참가한 공동체의 신상도 옮기지 않았습니다.',
+      en: 'There are no scores. This is qualitative work — the axes have no tick marks, and inventing points would be building a scale the paper never had. The participating communities are not described here either.',
+      ja: '点数はありません。質的研究なので軸に目盛りがなく、点を作れば論文にない秤を立てることになります。参加した共同体の情報も持ち込んでいません。',
+    },
+  },
 } as const;
 
 /**

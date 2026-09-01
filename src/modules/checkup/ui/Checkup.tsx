@@ -10,7 +10,7 @@
  */
 
 import { Fragment, useMemo, useState } from 'react';
-import { Panel } from '../../../kit';
+import { Panel, PaperCard } from '../../../kit';
 import { checkPassword } from '../../../core/checkup';
 import { createTranslator, type Locale } from '../../../core/i18n';
 import { CORPUS_SLIDER, HASH_GROUP, INITIAL_PASSWORD, PAPER, SAMPLES } from '../config';
@@ -41,15 +41,14 @@ export function Checkup({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.link} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.authors} · {PAPER.venue}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.venue}`}
+        href={PAPER.link}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('input-title')} note={t('input-note')}>
         <div className={styles.entry}>

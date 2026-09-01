@@ -12,7 +12,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Badge, Panel, Segmented, type SegmentedOption } from '../../../kit';
+import { Badge, Panel, PaperCard, Segmented, type SegmentedOption } from '../../../kit';
 import {
   AXES,
   FOCUS_KINDS,
@@ -59,15 +59,14 @@ export function Repair({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.link} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.authors} · {PAPER.affiliation} · {PAPER.venue} · {t('full-text')} {PAPER.fullText}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.affiliation} · ${PAPER.venue} · ${PAPER.fullText}`}
+        href={PAPER.link}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('funnel-title')} note={t('funnel-note')}>
         <div className={styles.funnel}>

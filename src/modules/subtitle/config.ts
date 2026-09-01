@@ -19,6 +19,32 @@ export const PAPER = {
   affiliation: 'KAIST',
   doi: 'https://doi.org/10.1145/3706598.3714199',
   project: 'https://w-dlee.github.io/optisub',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '휴대폰에서 글씨를 키우면 자막이 화면 밖으로 밀려 나가거나 엉뚱한 데서 뚝 끊깁니다. 자막은 대개 \'한 줄에 몇 글자\'로 만들어져 있어서, 보는 화면과 글씨 크기가 달라지면 어긋나기 때문입니다.',
+      en: 'Turn the font size up on a phone and subtitles slide off the screen or snap in odd places. Subtitles are usually written as "so many characters per line", so they come apart the moment the screen or the font size changes.',
+      ja: 'スマホで文字を大きくすると、字幕が画面からはみ出したり、変なところで切れたりします。字幕はたいてい「一行に何文字」で作られているので、画面や文字サイズが変わるとずれてしまうのです。',
+    },
+    work: {
+      ko: '연구자들은 화면 크기와 글씨 크기에 맞춰 자막을 다시 끊어 주는 방법을 만들었습니다. 끊는 자리는 아무 데나가 아니라, 말하는 사람이 숨을 고르며 잠깐 멈추는 자리를 먼저 골랐습니다.',
+      en: 'The researchers built a way to re-cut subtitles to fit the screen and font size at hand. And not just anywhere: they cut first at the places where the speaker pauses for breath.',
+      ja: '研究者は、画面と文字サイズに合わせて字幕を切り直す方法を作りました。切る場所はどこでもよいのではなく、話し手が息をついて少し止まるところを先に選びます。',
+    },
+    took: {
+      ko: '생각 두 가지를 가져왔습니다 — 글자 수가 아니라 실제로 차지하는 폭을 재고, 말이 쉬는 자리를 먼저 자른다. 이 페이지는 그 둘을 자막 파일 하나만으로 해 봅니다.',
+      en: 'Two ideas: measure the width the text really takes, not the number of characters, and cut at pauses first. This page does both with nothing but a subtitle file.',
+      ja: '二つの考えを受け取りました — 文字数ではなく実際に占める幅で測ること、そして話が休むところを先に切ること。このページは字幕ファイルだけでそれをやってみます。',
+    },
+    left: {
+      ko: '논문은 영상의 목소리를 들어서 쉼을 찾습니다. 이 페이지는 자막 파일밖에 보지 못하므로, 자막과 자막 사이의 빈 시간을 쉼으로 칩니다. 논문의 계산식을 그대로 옮긴 것도 아닙니다.',
+      en: 'The paper listens to the audio to find the pauses. This page only ever sees the subtitle file, so it treats the silence between cues as the pause. It is not a port of the optimisation in the paper either.',
+      ja: '論文は映像の音声を聞いて休止を見つけます。このページは字幕ファイルしか見られないので、字幕と字幕の間の空白時間を休止とみなします。論文の数式をそのまま移したものでもありません。',
+    },
+  },
 } as const;
 
 /**

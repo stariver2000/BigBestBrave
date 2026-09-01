@@ -41,6 +41,7 @@
 | `/context` | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 (KAIST·HCMUT·SUTD) |
 | `/space` | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 (36인 공동 연구) |
 | `/repair` | The Design Space for Online Restorative Justice Tools: A Case Study with ApoloBot | CHI 2025 (KAIST) |
+| `/moment` | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 (KAIST·Tsinghua·CMU·MIT·UW) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -52,13 +53,10 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 2 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
-2번은 arXiv에 전문이 있다(doi:10.1145/3613904.3642747). 1번은 arXiv 제목 검색으로 나오지 않았다.
-
-목록이 거의 다 되었다. 다음 회차부터는 연구실 발표 목록(hci.kaist.ac.kr/publications,
-hcil.snu.ac.kr/publications)에서 새로 골라 이 표를 다시 채워야 한다.
+목록이 비었다. 다음 회차는 연구실 발표 목록(hci.kaist.ac.kr/publications,
+hcil.snu.ac.kr/publications)에서 최근 1~2년 것 가운데 브라우저 안에서 결정론적으로
+돌아갈 만한 것을 골라 이 표를 다시 채운 뒤 이어 간다.
 
 전문을 구하는 길: arXiv에 없으면 저자 개인 페이지를 찾아본다(`/context`가 그랬다).
 논문이 분류표나 자료집을 따로 공개했으면 그쪽이 정본이다(`/space`가 그랬다).
@@ -76,7 +74,12 @@ hcil.snu.ac.kr/publications)에서 새로 골라 이 표를 다시 채워야 한
   논문에서 나온 페이지가 아니라 논문 이름을 빌린 페이지가 되므로 건너뛴다.
 - `Investigating the Potential of Group Recommendation Systems As a Medium of Social
   Interactions` (CHI 2024, Daehyun Kwak, Soobin Park, Inha Cha, Hankyung Kim,
-  Youn-kyung Lim, KAIST, doi:10.1145/3613904.3642544). 같은 이유다. 초록은 "암묵적인
+  Youn-kyung Lim, KAIST, doi:10.1145/3613904.3642544). 같은 이유다.
+- `Understanding Practical Challenges and Enablers for Embedding Environmental
+  Perspectives in Digital Product Design and Development` (CHI 2025, Minha Lee,
+  Soyeong Min, Gahyeon Kim, Sangsu Lee, KAIST, doi:10.1145/3706598.3713144).
+  같은 이유다. CC-BY인데 소장처가 ACM뿐이고, 여덟 실무자 면접의 질적 연구인데
+  초록이 "복잡한 도전과 동기 유발 요인"이라고 이름만 말하고 내용을 밝히지 않는다. 초록은 "암묵적인
   사회적 상호작용"까지만 말하고 그 설계 속성을 밝히지 않는다. 집단 추천의 계산 방법
   (평균, 최소 불행, 보르다)은 이 논문이 아니라 그 분야의 일반적인 것이라, 그것으로
   페이지를 만들면 이 논문의 것이 아닌 것을 이 논문의 것처럼 적게 된다.

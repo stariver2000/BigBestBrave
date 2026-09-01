@@ -9,7 +9,7 @@
  */
 
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Panel } from '../../../kit';
+import { Panel, PaperCard } from '../../../kit';
 import {
   buildTrials,
   PAPER_BINARY,
@@ -131,15 +131,14 @@ export function Reach({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.link} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.authors} · {PAPER.affiliation} · {PAPER.venue}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.affiliation} · ${PAPER.venue}`}
+        href={PAPER.link}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('setup-title')} note={t('setup-note')}>
         <div className={styles.choices}>

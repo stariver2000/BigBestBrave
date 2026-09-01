@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Button, Panel, useClipboard } from '../../../kit';
+import { Button, Panel, PaperCard, useClipboard } from '../../../kit';
 import {
   DEFAULTS,
   LIMITS,
@@ -104,15 +104,14 @@ export function Rechunker({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a className={styles.paperTitle} href={PAPER.doi} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.authors} · {PAPER.affiliation} · {PAPER.venue}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.affiliation} · ${PAPER.venue}`}
+        href={PAPER.doi}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('theater-title')} note={t('theater-note')}>
         <Theater

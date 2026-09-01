@@ -35,6 +35,32 @@ export const PAPER = {
   link: 'https://doi.org/10.1145/3613904.3642697',
   fullText: 'arXiv:2403.14117v2',
   taxonomy: 'writing-assistant.github.io',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '글쓰기를 돕는 인공지능이 쏟아지는데, 서로 무엇이 다른지 말하기가 어렵습니다. 다들 \'글을 도와준다\'고만 하니까요.',
+      en: 'AI writing helpers keep arriving, and it is hard to say how any two differ — they all just say they "help you write".',
+      ja: '文章を助けるAIが次々に出てきますが、互いに何が違うのかを言うのは難しい。どれも「書くのを助ける」としか言わないからです。',
+    },
+    work: {
+      ko: '서른여섯 명의 연구자가 논문 115편을 훑어, 이런 도구를 설명할 좌표계를 만들었습니다 — 다섯 갈래, 서른아홉 개의 축, 백아흔여섯 개의 값. 그리고 어느 축이 아직 거의 다뤄지지 않았는지도 짚었습니다.',
+      en: 'Thirty-six researchers read 115 papers and built a coordinate system for describing such tools: five branches, thirty-nine dimensions, one hundred and ninety-six codes. They also pointed at which dimensions almost nobody has worked on.',
+      ja: '三十六人の研究者が115編の論文を読み、この種の道具を説明する座標系を作りました — 五つの枝、三十九の次元、百九十六のコード。そして、どの次元がまだほとんど扱われていないかも指摘しました。',
+    },
+    took: {
+      ko: '그 분류표 전부와, 논문이 문장으로 짚은 빈자리(독자, 규모, 그리고 신뢰·투명성·통제·윤리)를 가져왔습니다.',
+      en: 'The whole taxonomy, and the gaps the paper names in its prose: audience, scalability, and trust, transparency, controllability, ethics.',
+      ja: 'その分類表のすべてと、論文が文章で指摘した空白（読者、規模、そして信頼・透明性・制御・倫理）を受け取りました。',
+    },
+    left: {
+      ko: '그림에만 실린 막대값은 가져오지 않았습니다. 115편 각각의 분류도 옮기지 않았습니다. 차원과 값의 이름은 논문의 말 그대로 두었습니다 — 옮기면 논문에 없는 말이 생기니까요.',
+      en: 'Bar values that appear only in figures are left out, and so is the coding of each of the 115 papers. Dimension and code names are kept in the paper\'s own words — translating them would invent terms the paper never used.',
+      ja: '図にしかない棒の値は取っていません。115編それぞれの分類も持ち込みません。次元とコードの名前は論文の言葉のままにしてあります — 訳せば論文にない言葉が生まれるからです。',
+    },
+  },
 } as const;
 
 /**

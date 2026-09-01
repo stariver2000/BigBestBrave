@@ -29,6 +29,32 @@ export const PAPER = {
   venue: 'CHI 2025',
   affiliation: 'Sungkyunkwan University · KAIST · Samsung Research',
   link: 'https://doi.org/10.1145/3706598.3713284',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '비밀번호가 유출됐는지 확인해 주는 서비스가 있는데도 사람들은 잘 쓰지 않습니다. \'내 비밀번호를 넘겨주는 것 아닌가\' 싶어서이기도 하고, 알림을 받아도 그리 급하게 느껴지지 않아서이기도 합니다.',
+      en: 'Services that tell you whether your password has leaked exist, yet few people use them. Partly it feels like handing your password over, and partly the warning never feels urgent.',
+      ja: 'パスワードが漏れたか確認してくれるサービスがあるのに、人はあまり使いません。「自分のパスワードを渡すのでは」と思うからでもあり、通知が来てもそれほど急ぎに感じないからでもあります。',
+    },
+    work: {
+      ko: '238명에게 묻고 50명을 직접 살펴, 무엇이 사람을 망설이게 하는지 찾았습니다. 쓸모에 대한 인식, 쉬움, 그리고 \'나도 할 수 있다\'는 자신감이 갈림길이었습니다.',
+      en: 'They surveyed 238 people and studied 50 more closely to find what holds people back: whether it seems useful, whether it seems easy, and whether people believe they can do it themselves.',
+      ja: '238人に尋ね、50人を実際に観察して、何が人をためらわせるのかを探りました。役に立つと思えるか、簡単そうか、そして「自分にもできる」という自信が分かれ目でした。',
+    },
+    took: {
+      ko: '세 가지를 화면으로 옮겼습니다 — 확인이 어떻게 이뤄지는지 글자 단위로 보여 의심을 지우고, 경고를 늘어놓는 대신 할 일을 한 줄로 주고, \'유출됨\'이라는 딱지 대신 몇 번째 시도에 걸리는지를 셉니다.',
+      en: 'Three things: show letter by letter how the check works so the suspicion can go; give one line of what to do instead of a pile of alarms; and count at which guess a password falls, instead of stamping it "breached".',
+      ja: '三つを画面に移しました — 確認がどう行われるかを文字単位で見せて疑いを消し、警告を並べる代わりにやることを一行で示し、「漏洩」という札の代わりに何回目の試行で破られるかを数えます。',
+    },
+    left: {
+      ko: '설문과 사용자 연구의 수치는 가져오지 않았습니다. 실제 유출 목록도 조회하지 않습니다 — 이 페이지는 밖으로 아무것도 보내지 않습니다.',
+      en: 'The survey and study numbers are not carried over, and no real breach list is queried — this page sends nothing anywhere.',
+      ja: '調査やユーザー研究の数値は持ち込んでいません。実際の漏洩リストも照会しません — このページは外へ何も送りません。',
+    },
+  },
 } as const;
 
 /** 처음 놓여 있는 예시. 사람들이 가장 흔히 하는 손질(첫 글자 대문자 + 연도 + 느낌표)이다. */

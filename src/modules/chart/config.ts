@@ -19,6 +19,32 @@ export const PAPER = {
   venue: 'IEEE PacificVis 2025',
   affiliation: 'Seoul National University',
   link: 'https://ieeexplore.ieee.org/document/11021031/',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '같은 숫자라도 그림을 어떻게 그리느냐에 따라 전혀 다르게 보입니다. 세로축을 0에서 시작하지 않으면 작은 차이가 산더미처럼 보이죠. 문제는 그런 그림이 거짓말을 하지 않으면서도 사람을 속인다는 것입니다.',
+      en: 'The same numbers can look completely different depending on how they are drawn. Start the axis somewhere above zero and a tiny gap looks like a mountain. The trouble is that such a chart fools people without ever lying.',
+      ja: '同じ数字でも描き方しだいで全く違って見えます。縦軸を0から始めなければ、小さな差が山のように見えます。厄介なのは、そうした図が嘘をつかないまま人を欺くことです。',
+    },
+    work: {
+      ko: '연구진은 차트 그림에서 부분들을 자동으로 찾아낸 뒤, 그중 어느 부분이 해석을 비트는지 짚어 주는 방법을 만들었습니다. \'이 차트는 이상하다\'에서 멈추지 않고 어디가 문제인지까지 가려냅니다.',
+      en: 'They built a pipeline that finds the parts of a chart image automatically and then points at which part bends the reading. It does not stop at "this chart is off" — it says where.',
+      ja: '研究者はチャート画像から要素を自動で見つけ、どの要素が解釈を曲げているかを指し示す方法を作りました。「この図はおかしい」で終わらず、どこが問題かまで示します。',
+    },
+    took: {
+      ko: '같은 물음을 가져왔습니다 — 어느 요소가 얼마나 어긋나게 만드는가. 이 페이지는 차트 설정을 직접 받아 왜곡의 크기를 어림이 아니라 계산으로 냅니다.',
+      en: 'The same question: which element distorts, and by how much. This page takes the chart settings directly and computes the distortion instead of estimating it.',
+      ja: '同じ問いを受け取りました — どの要素がどれだけ歪ませるのか。このページは図の設定を直接受け取り、歪みの大きさを目分量ではなく計算で出します。',
+    },
+    left: {
+      ko: '그림에서 요소를 찾아내는 부분(이미지 인식)은 없습니다. 그래서 남이 만든 차트 이미지는 검사할 수 없습니다.',
+      en: 'The part that detects elements inside an image is not here, so it cannot inspect someone else\'s chart picture.',
+      ja: '画像から要素を検出する部分（画像認識）はありません。ですから他人が作ったチャート画像は検査できません。',
+    },
+  },
 } as const;
 
 /** 그림 크기(px). 세로는 사용자가 움직인다. */

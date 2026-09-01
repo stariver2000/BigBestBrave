@@ -28,6 +28,32 @@ export const PAPER = {
   venue: 'CHI 2024',
   affiliation: 'KAIST · Microsoft Research',
   link: 'https://doi.org/10.1145/3613904.3642254',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '손에 쥔 물건이 커졌다 작아졌다 하는 느낌을 내려면 진짜로 크기가 변하는 기계가 있어야 할 것 같습니다. 그런데 꼭 그럴까요?',
+      en: 'To make something in your hand feel like it is growing or shrinking, you would think you need a machine that really changes size. But do you?',
+      ja: '手に持った物が大きくなったり小さくなったりする感覚を出すには、本当に大きさが変わる機械が要りそうです。でも、本当にそうでしょうか。',
+    },
+    work: {
+      ko: '연구진은 크기가 변하지 않는 손잡이를 만들고, 손가락이 닿는 자리만 옮겨서 \'커졌다\'는 느낌을 냈습니다. 열두 명에게 얼마나 옮겨야 알아차리는지를 재어 표로 남겼습니다.',
+      en: 'They built a handle that never changes size and created the feeling of growth just by moving where the fingers sit. With twelve people they measured how far it has to move before you notice, and put it in a table.',
+      ja: '研究者は大きさの変わらない取っ手を作り、指の当たる位置を動かすだけで「大きくなった」感覚を生みました。十二人に、どれだけ動かせば気づくかを測り、表に残しました。',
+    },
+    took: {
+      ko: '그 표의 문턱값을 밀리미터 그대로 가져왔습니다. 이 페이지는 그 숫자로 당신의 손이 언제 속는지를 보여 줍니다.',
+      en: 'The thresholds from that table, in millimetres exactly as published. The page uses those numbers to show when a hand gets fooled.',
+      ja: 'その表のしきい値をミリメートルのまま受け取りました。このページはその数字で、手がいつ騙されるのかを示します。',
+    },
+    left: {
+      ko: '손잡이 기계도 없고, 움직이는 화면과 함께 본 두 번째 실험도 없습니다. 첫 번째 실험의 문턱만 다룹니다.',
+      en: 'There is no handle device here, and no second study with moving visuals. Only the thresholds from the first study.',
+      ja: '取っ手の装置もなく、動く映像と一緒に見た二つ目の実験もありません。一つ目の実験のしきい値だけを扱います。',
+    },
+  },
 } as const;
 
 /** 자 그림의 크기(px). */

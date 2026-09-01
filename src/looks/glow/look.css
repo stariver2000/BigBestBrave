@@ -1,0 +1,49 @@
+/*
+ * 'glow' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 불 꺼진 방의 감각: 굴린 모서리, 그림자 대신 빛 번짐, 어둠 속에 뜬 판.
+ */
+
+[data-look='glow'][data-part='frame']::before {
+  background:
+    radial-gradient(100% 52% at 24% -8%, rgb(168 199 255 / 0.10), transparent 60%),
+    radial-gradient(70% 38% at 88% 6%, rgb(255 196 107 / 0.06), transparent 56%);
+}
+
+[data-look='glow'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='glow'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='glow'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='glow'] [data-part='input'],
+[data-look='glow'] [data-part='segmented'] {
+  background: #0B0B0F;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+[data-look='glow'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #7FA3E0;
+  font-weight: 700;
+}
+
+[data-look='glow'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

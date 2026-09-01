@@ -21,6 +21,32 @@ export const PAPER = {
   affiliation: 'Seoul National University HCI Lab',
   doi: 'https://doi.org/10.1145/3706598.3713551',
   preprint: 'https://arxiv.org/abs/2501.10168',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '자료 하나에는 재는 항목이 수십 개일 수 있습니다(키, 몸무게, 점수…). 그림으로 그리려면 그것을 평면 두 방향으로 눌러 담아야 하는데, 누르는 순간 원래 멀리 있던 점들이 옆에 붙어 버리기도 합니다. 그런데 사람들은 그 그림을 보고 \'이 둘은 비슷하구나\'라고 말해 버립니다.',
+      en: 'One dataset can measure dozens of things at once — height, weight, scores. To draw it you have to press all of that onto two directions, and in the pressing, points that were far apart can end up side by side. People then look at the picture and say "these two are alike".',
+      ja: '一つのデータには測る項目が何十個もあります（身長、体重、点数…）。図に描くにはそれを平面の二方向に押し込むしかなく、押した瞬間、本当は遠かった点が隣り合ってしまうことがあります。それでも人はその図を見て「この二つは似ている」と言ってしまいます。',
+    },
+    work: {
+      ko: '이 연구는 그런 그림을 믿어도 되는지 확인하는 방법들을, 흩어져 있던 여러 연구에서 모아 한자리에 정리했습니다. 새 도구를 만든 것이 아니라 함정과 확인법의 지도를 그린 연구(서베이)입니다.',
+      en: 'This study gathers, from many scattered papers, the ways to check whether such a picture can be trusted. It does not build a new tool — it maps the traps and the checks in one place (a survey).',
+      ja: 'この研究は、そうした図を信じてよいか確かめる方法を、散らばっていた多くの研究から集めて一か所に整理しました。新しい道具を作ったのではなく、落とし穴と確認法の地図を描いた研究（サーベイ）です。',
+    },
+    took: {
+      ko: '그중 널리 쓰이는 확인 지표 몇 개를 브라우저에서 직접 계산합니다. 당신이 만든 산점도에서 가까워 보이는 것을 믿어도 되는지, 숫자와 그림으로 함께 보여 줍니다.',
+      en: 'A few of the widely used checks, computed right here in the browser. It shows — in numbers and in the picture — whether the closeness you see in your scatterplot can be believed.',
+      ja: 'その中で広く使われる確認指標をいくつか、ブラウザの中で直接計算します。あなたの散布図で近く見えるものを信じてよいかを、数値と図の両方で示します。',
+    },
+    left: {
+      ko: '서베이가 세운 분류 체계나 작업 흐름 모델은 구현하지 않았습니다. 지표의 정의도 이 서베이가 아니라 Venna와 Kaski가 세운 표준 정의를 따릅니다.',
+      en: 'The taxonomy and workflow model from the survey are not implemented here. The metric definitions follow the standard ones from Venna and Kaski, not the survey itself.',
+      ja: 'サーベイが立てた分類体系やワークフローのモデルは実装していません。指標の定義も、このサーベイではなく Venna と Kaski の標準的な定義に従っています。',
+    },
+  },
 } as const;
 
 /** 신뢰도·연속성의 표준 정의를 세운 연구. 지표 설명에 함께 밝힌다. */

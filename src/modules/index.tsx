@@ -25,6 +25,7 @@ import { Rhythm, rhythmNode } from './rhythm';
 import { Route, routeNode } from './route';
 import { Rulers, rulersNode } from './rulers';
 import { Space, spaceNode } from './space';
+import { Moment, momentNode } from './moment';
 import { Nudge, nudgeNode } from './nudge';
 import { Peer, peerNode } from './peer';
 import { Reach, reachNode } from './reach';
@@ -71,6 +72,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: contextNode, Page: Context },
   { node: spaceNode, Page: Space },
   { node: repairNode, Page: Repair },
+  { node: momentNode, Page: Moment },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

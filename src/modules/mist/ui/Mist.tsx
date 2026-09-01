@@ -10,7 +10,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Panel } from '../../../kit';
+import { Panel, PaperCard } from '../../../kit';
 import {
   HEARING,
   LIQUIDS,
@@ -147,15 +147,14 @@ export function Mist({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.doi} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span>
-          {PAPER.authors} · {PAPER.affiliation} · {PAPER.venue}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.affiliation} · ${PAPER.venue}`}
+        href={PAPER.doi}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('canvas-title')} note={t('canvas-note')}>
         <div

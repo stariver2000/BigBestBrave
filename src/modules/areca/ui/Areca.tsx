@@ -10,7 +10,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Panel } from '../../../kit';
+import { Panel, PaperCard } from '../../../kit';
 import {
   composeEntry,
   renderEntry,
@@ -109,15 +109,14 @@ export function Areca({ locale }: { locale: Locale }) {
   return (
     <div className={styles.layout}>
       <div className={styles.column}>
-        <p className={styles.paper}>
-          <span className={styles.paperLabel}>{t('paper-label')}</span>
-          <a href={PAPER.doi} target="_blank" rel="noreferrer">
-            {PAPER.title}
-          </a>
-          <span>
-            {PAPER.authors} · {PAPER.affiliation} · {PAPER.venue}
-          </span>
-        </p>
+        <PaperCard
+          label={t('paper-label')}
+          title={PAPER.title}
+          meta={`${PAPER.authors} · ${PAPER.affiliation} · ${PAPER.venue}`}
+          href={PAPER.doi}
+          plain={PAPER.plain}
+          locale={locale}
+        />
 
         <div className={styles.stage}>
           <div className={styles.body} style={{ inlineSize: BODY.width, blockSize: BODY.height }}>

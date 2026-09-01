@@ -17,6 +17,7 @@ import { galleryVariables } from './gallery';
 import { gaugeVariables } from './gauge';
 import { hindsightVariables } from './hindsight';
 import { gardenVariables } from './garden';
+import { glowVariables } from './glow';
 import { lensVariables } from './lens';
 import { marginVariables } from './margin';
 import { pagerVariables } from './pager';
@@ -60,6 +61,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   margin: marginVariables,
   quilt: quiltVariables,
   circle: circleVariables,
+  glow: glowVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

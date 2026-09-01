@@ -11,7 +11,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Button, Panel } from '../../../kit';
+import { Button, Panel, PaperCard } from '../../../kit';
 import {
   ASPECTS,
   CORPUS,
@@ -66,16 +66,14 @@ export function Space({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.link} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.authors} · {PAPER.venue} · {t('full-text')} {PAPER.fullText} · {t('taxonomy-label')}{' '}
-          {PAPER.taxonomy}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.venue} · ${PAPER.fullText} · ${PAPER.taxonomy}`}
+        href={PAPER.link}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('size-title')} note={t('size-note')}>
         <div className={styles.sizes}>

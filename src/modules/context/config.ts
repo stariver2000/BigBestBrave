@@ -37,6 +37,32 @@ export const PAPER = {
   affiliation: 'KAIST · HCMUT · SUTD',
   link: 'https://doi.org/10.1145/3640543.3645155',
   fullText: 'dhkim16.github.io/pdf/datadive.pdf',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '뉴스에서 \'실업률 4퍼센트\'라는 문장을 보면 그게 높은 건지 낮은 건지 알기 어렵습니다. 옆 나라와 견주거나 작년과 견줘야 뜻이 생기는데, 읽는 사람에게는 대개 그럴 자료가 없습니다.',
+      en: 'When the news says "unemployment is 4 percent", it is hard to tell whether that is high or low. It only means something next to another country or another year — and the reader usually has neither at hand.',
+      ja: 'ニュースで「失業率4パーセント」という文を見ても、それが高いのか低いのかは分かりません。他の国や去年と並べて初めて意味が出ますが、読む人にはたいていその材料がありません。',
+    },
+    work: {
+      ko: '연구진은 통계 문장을 \'누구·무엇을 잰 것·언제\' 세 조각으로 가르고, 각 조각을 다른 것과 견줄 수 있게 자료 탐색으로 이어 주는 도구를 만들었습니다.',
+      en: 'They built a tool that splits a statistical sentence into three pieces — who, what is measured, and when — and lets the reader swap each piece to compare against something else.',
+      ja: '研究者は統計の文を「誰が・何を測ったか・いつ」の三つに分け、それぞれを別のものと比べられるようにデータ探索へつなぐ道具を作りました。',
+    },
+    took: {
+      ko: '문장을 세 조각으로 가르는 짜임과, 맥락을 만들 수 있는 자리 열 칸을 가져왔습니다. 논문이 스스로 밝힌 역효과 — 밑줄과 물음이 오히려 수동적으로 읽게 만든다는 것 — 도 함께 적어 두었습니다.',
+      en: 'The way a sentence is split into three, and the ten places where context can be built. Also the backfire the paper reported on itself: underlines and ready-made questions can make people read more passively.',
+      ja: '文を三つに分ける仕組みと、文脈を作れる十の場所を受け取りました。論文が自ら記した逆効果 — 下線と問いがかえって受け身の読み方を招くこと — も併せて書いてあります。',
+    },
+    left: {
+      ko: '물음을 지어내고 순위를 매기는 부분은 큰 모델이 필요해 빼고, 열 칸을 모두 펼쳐 둔 채 고르는 일은 읽는 사람에게 맡깁니다. 실제 통계 자료도 싣지 않아 그림은 값이 아니라 모양만 보여 줍니다.',
+      en: 'Generating and ranking the questions needs a large model, so it is left out: all ten places are laid open and the choosing is yours. No real statistics are bundled either, so the charts show shape, not values.',
+      ja: '問いを作って順位を付ける部分は大きなモデルが要るので外し、十の場所をすべて開いたまま選ぶのは読む人に任せます。実際の統計データも載せないので、図は値ではなく形だけを示します。',
+    },
+  },
 } as const;
 
 /**

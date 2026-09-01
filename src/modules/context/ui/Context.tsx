@@ -12,7 +12,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Badge, Button, Panel, Segmented, TextInput, type SegmentedOption } from '../../../kit';
+import { Badge, Button, Panel, PaperCard, Segmented, TextInput, type SegmentedOption } from '../../../kit';
 import {
   ALPHA,
   AXES,
@@ -88,15 +88,14 @@ export function Context({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.link} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.authors} · {PAPER.affiliation} · {PAPER.venue} · {t('full-text')} {PAPER.fullText}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.authors} · ${PAPER.affiliation} · ${PAPER.venue} · ${PAPER.fullText}`}
+        href={PAPER.link}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <Panel title={t('stmt-title')} note={t('stmt-note')}>
         <div className={styles.presets}>

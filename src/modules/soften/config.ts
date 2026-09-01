@@ -32,6 +32,32 @@ export const PAPER = {
   venue: 'IJHCI 2024',
   affiliation: 'KAIST',
   link: 'https://doi.org/10.1080/10447318.2024.2385184',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '유리처럼 딱딱한 화면인데, 누르면 말랑하게 눌리는 느낌이 들 때가 있습니다. 진동을 어떻게 주느냐에 따라 손끝이 속는 것인데, 무엇이 그 느낌을 만들까요?',
+      en: 'The screen is hard glass, yet sometimes a press feels soft and yielding. The fingertip is being fooled by how the vibration is delivered — but by which part of it?',
+      ja: 'ガラスのように硬い画面なのに、押すとやわらかく沈む感じがすることがあります。振動の与え方で指先が騙されているのですが、何がその感覚を作るのでしょう。',
+    },
+    work: {
+      ko: '연구진은 세 가지를 바꿔 가며 물었습니다 — 진동의 파형, 누른 뒤 진동까지의 시간 차, 진동의 방향. 시간 차는 25밀리초를 넘으면 느낌이 달라졌고, 파형은 손끝으로 잘 갈리지 않았습니다.',
+      en: 'They varied three things: the waveform of the vibration, the delay between press and vibration, and the axis it shakes along. Past 25 milliseconds of delay the feeling changed; the waveform, the fingertip could hardly tell apart.',
+      ja: '研究者は三つを変えて尋ねました — 振動の波形、押してから振動までの時間差、振動の方向。時間差は25ミリ秒を超えると感覚が変わり、波形は指先ではほとんど区別できませんでした。',
+    },
+    took: {
+      ko: '세 물음과 그 답, 그리고 초록이 밝힌 유일한 수치인 25밀리초를 가져왔습니다.',
+      en: 'The three questions and their answers, plus the one number the abstract gives: 25 milliseconds.',
+      ja: '三つの問いとその答え、そして要旨が示す唯一の数値である25ミリ秒を受け取りました。',
+    },
+    left: {
+      ko: '이 논문은 유료라 전문을 보지 못했습니다. 그래서 실험의 평균이나 검정값은 없고, \'뜻있는 영향이 있었다\'까지만 옮겼습니다. 영향의 방향은 지어내지 않았습니다.',
+      en: 'The paper is behind a paywall, so the full text was not read. There are no means or test statistics here — only that the effects were significant. Which way they pointed is not invented.',
+      ja: 'この論文は有料で全文を読めませんでした。ですから実験の平均や検定値はなく、「有意な影響があった」までを移しています。影響の向きは作り話にしていません。',
+    },
+  },
 } as const;
 
 /** 파형 그림의 크기(px). */

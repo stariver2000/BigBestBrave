@@ -35,6 +35,32 @@ export const PAPER = {
   affiliation: 'KAIST · SNU · KDI',
   link: 'https://doi.org/10.1145/3640543.3645148',
   fullText: 'arXiv:2311.07434v3',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '챗봇의 답이 마음에 안 들 때가 있습니다. 그런데 대개는 무엇이 마음에 안 드는지 딱 집어 말하지 못하고 \'다시\'라고만 합니다. 연구자들은 사람들이 어떤 점에 불만을 갖고, 그때 어떻게 다시 묻는지 알고 싶었습니다.',
+      en: 'Sometimes a chatbot\'s answer is not what you wanted. Most of the time we cannot say exactly what is wrong — we just say "try again". The researchers wanted to know what people are actually unhappy about, and how they ask again.',
+      ja: 'チャットボットの答えが気に入らないことがあります。でもたいていは何が不満なのかを言えず、「もう一度」とだけ言います。研究者は、人が何に不満を持ち、どうやって聞き直すのかを知りたかったのです。',
+    },
+    work: {
+      ko: '사람들이 챗봇과 나눈 대화를 모아, 불만을 일곱 갈래로 나누고 다시 묻는 방법을 열세 가지로 정리했습니다. 끝까지 풀린 경우가 얼마나 되는지도 셌습니다 — 열에 셋이 채 되지 않았습니다.',
+      en: 'They collected real conversations, sorted the complaints into seven kinds, and the ways of asking again into thirteen. They also counted how often the problem actually got solved — fewer than three in ten.',
+      ja: '人とチャットボットの実際の会話を集め、不満を七つに、聞き直し方を十三に整理しました。最後まで解決した割合も数えました — 十のうち三にも届きませんでした。',
+    },
+    took: {
+      ko: '그 일곱 갈래와 열세 가지 방법, 그리고 논문이 표로 밝힌 숫자들을 가져왔습니다. 지금 무엇이 불만인지 고르면, 어떻게 다시 물으면 좋을지 짚어 줍니다.',
+      en: 'The seven kinds, the thirteen tactics, and the numbers the paper put in its tables. Pick what is bothering you and the page points to a way of asking again.',
+      ja: '七つの種類、十三の聞き直し方、そして論文が表で示した数値を受け取りました。今の不満を選ぶと、どう聞き直せばよいかを示します。',
+    },
+    left: {
+      ko: '논문이 그림으로만 실은 숫자는 가져오지 않았습니다. 그림을 눈으로 재서 적으면 그것은 논문의 값이 아니라 제가 잰 값이 됩니다. 다시 물을 문장도 논문에는 없는, 이 페이지가 지은 것입니다.',
+      en: 'Numbers that appear only inside figures are left out — reading them off a picture would make them my measurements, not the paper\'s. The sentences you can send are written here, not in the paper.',
+      ja: '図の中にしかない数値は取っていません。図から目分量で読み取れば、それは論文の値ではなく私が測った値になります。聞き直しの文そのものも論文にはなく、このページが書いたものです。',
+    },
+  },
 } as const;
 
 /** 점수 눈금. 논문은 불만도도 효과도 1~10으로 받았다. */

@@ -19,6 +19,32 @@ export const PAPER = {
   venue: 'ACM CHI 2025',
   affiliation: 'KAIST',
   doi: 'https://doi.org/10.1145/3706598.3713228',
+  /**
+   * 쉬운 말로. 열두 살이 읽어도 통하는 문장만 쓴다.
+   * 논문이 무슨 말을 하려는 것인지 먼저 전하고, 이 페이지가 어디까지 가져왔는지를 밝힌다.
+   */
+  plain: {
+    problem: {
+      ko: '물건이 생각과 마음을 말하기 시작하면 우리는 그것을 어떻게 대할까요? 공기청정기가 \'오늘은 이런 기분이었다\'고 적어 둔다면, 그건 여전히 그냥 기계일까요?',
+      en: 'What happens when a thing starts telling you its thoughts and feelings? If an air purifier wrote down how its day felt, would it still be just an appliance?',
+      ja: '物が考えや気持ちを話し始めたら、私たちはそれをどう扱うでしょうか。空気清浄機が「今日はこんな気分だった」と書き残したら、それはまだただの機械でしょうか。',
+    },
+    work: {
+      ko: '연구진은 일기를 쓰는 공기청정기를 여덟 사람의 집에 3주 동안 두고, 매주 무엇을 느꼈는지 물었습니다. 어떤 사람은 정이 들었고, 어떤 사람은 시들해졌습니다.',
+      en: 'They placed a diary-writing air purifier in eight homes for three weeks and asked each week what it felt like. Some people grew attached; for others the feeling faded.',
+      ja: '研究者は日記を書く空気清浄機を八人の家に三週間置き、毎週どう感じたかを聞きました。情がわいた人もいれば、冷めていった人もいました。',
+    },
+    took: {
+      ko: '그 자리를 웹으로 옮겼습니다. 쓸모는 없지만 당신을 알아차리고 그것을 적어 두는 사물 하나. 3주의 동거는 여러 번의 방문으로 대신합니다.',
+      en: 'The situation, moved onto the web: one thing with no use, which notices you and writes it down. Three weeks of living together become several visits.',
+      ja: 'その状況をウェブに移しました。役には立たないが、あなたに気づいて書き留める物が一つ。三週間の同居は何度かの訪問で置き換えます。',
+    },
+    left: {
+      ko: '여덟 사람의 인터뷰와 3주의 생활은 옮길 수 없습니다. 이 페이지는 연구를 재현하지 않고, 그 자리만 다시 만들어 둡니다.',
+      en: 'Eight people\'s interviews and three weeks of living cannot be ported. This page does not reproduce the study; it only rebuilds the situation.',
+      ja: '八人のインタビューと三週間の生活は移せません。このページは研究を再現せず、その状況だけを作り直します。',
+    },
+  },
 } as const;
 
 /**

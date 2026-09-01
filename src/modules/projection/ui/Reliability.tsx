@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Button, Panel, Field, useClipboard } from '../../../kit';
+import { Button, Field, Panel, PaperCard, useClipboard } from '../../../kit';
 import { LIMITS } from '../../../core/projection';
 import { parseCsv } from '../../../core/table';
 import { createTranslator, type Locale } from '../../../core/i18n';
@@ -85,15 +85,14 @@ export function Reliability({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a className={styles.paperTitle} href={PAPER.doi} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span className={styles.paperMeta}>
-          {PAPER.affiliation} · {PAPER.venue}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.affiliation} · ${PAPER.venue}`}
+        href={PAPER.doi}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <div className={styles.main}>
         <Panel title={t('plot-title')} note={t('plot-note')}>

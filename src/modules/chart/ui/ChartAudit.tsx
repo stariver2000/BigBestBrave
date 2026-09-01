@@ -9,7 +9,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Panel } from '../../../kit';
+import { Panel, PaperCard } from '../../../kit';
 import { audit, extent, honest, type ChartKind, type ChartSpec } from '../../../core/chartaudit';
 import { createTranslator, type Locale } from '../../../core/i18n';
 import { FACTOR_CAP, PAPER, PLOT, SAMPLE_VALUES } from '../config';
@@ -59,15 +59,14 @@ export function ChartAudit({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.layout}>
-      <p className={styles.paper}>
-        <span className={styles.paperLabel}>{t('paper-label')}</span>
-        <a href={PAPER.link} target="_blank" rel="noreferrer">
-          {PAPER.title}
-        </a>
-        <span>
-          {PAPER.affiliation} · {PAPER.venue}
-        </span>
-      </p>
+      <PaperCard
+        label={t('paper-label')}
+        title={PAPER.title}
+        meta={`${PAPER.affiliation} · ${PAPER.venue}`}
+        href={PAPER.link}
+        plain={PAPER.plain}
+        locale={locale}
+      />
 
       <div className={styles.main}>
         <Panel title={t('controls-title')} note={t('controls-note')}>

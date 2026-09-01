@@ -6,6 +6,7 @@
  */
 
 export { Badge, Button, Field, Panel, Segmented, TextInput, type SegmentedOption } from './ui/primitives';
+export { PaperCard, PLAIN_LABELS, type Localized, type PlainPaper } from './paper';
 export { useClipboard } from './state/use-clipboard';
 export {
   booleanField,

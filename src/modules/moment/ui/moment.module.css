@@ -1,0 +1,10 @@
+/*
+ * 끼어드는 때 화면의 스타일.
+ * 색은 전부 토큰에서 온다. 붙잡는 빛은 accent, 놓아 주는 빛은 warm으로만 쓴다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-5);
+}

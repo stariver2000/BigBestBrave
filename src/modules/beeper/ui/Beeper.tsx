@@ -9,7 +9,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Panel, Segmented, type SegmentedOption } from '../../../kit';
+import { Panel, PaperCard, Segmented, type SegmentedOption } from '../../../kit';
 import {
   CODEBOOK,
   MAX_DIGITS,
@@ -65,15 +65,14 @@ export function Beeper({ locale }: { locale: Locale }) {
   return (
     <div className={styles.layout}>
       <div className={styles.column}>
-        <p className={styles.paper}>
-          <span className={styles.paperLabel}>{t('paper-label')}</span>
-          <a href={PAPER.listing} target="_blank" rel="noreferrer">
-            {PAPER.title}
-          </a>
-          <span>
-            {PAPER.affiliation} · {PAPER.venue}
-          </span>
-        </p>
+        <PaperCard
+          label={t('paper-label')}
+          title={PAPER.title}
+          meta={`${PAPER.affiliation} · ${PAPER.venue}`}
+          href={PAPER.listing}
+          plain={PAPER.plain}
+          locale={locale}
+        />
 
         <div className={styles.modes}>
           <Segmented options={modeOptions} value={mode} onChange={setMode} />
