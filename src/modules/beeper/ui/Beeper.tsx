@@ -9,7 +9,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Panel, PaperCard, Segmented, type SegmentedOption } from '../../../kit';
+import { AutopilotChip, Panel, PaperCard, Segmented, useAutopilot, type SegmentedOption } from '../../../kit';
 import {
   CODEBOOK,
   MAX_DIGITS,
@@ -57,6 +57,22 @@ export function Beeper({ locale }: { locale: Locale }) {
       ? { digits: sending.digits, meaning: sending.delivered ? echo.returned : text.trim() }
       : { digits, meaning: bestReading };
 
+  /*
+   * 스스로 도는 시연. 이 페이지의 요점은 "말이 숫자를 지나며 깎인다"인데, 그건 직접 보내 봐야 안다.
+   * 그래서 화면이 먼저 보낸다 — 통째로 지나가는 말, 한 글자도 못 가는 말, 그리고 돌아온 말.
+   * 손을 대면 그 자리에서 멈추고 자리를 내준다.
+   */
+  const autopilot = useAutopilot([
+    { wait: 0, run: () => { setMode('send'); setText('사랑해'); } },
+    { wait: 2200, run: () => sending.send() },
+    { wait: 4200, run: () => setText('보고싶어') },
+    { wait: 3600, run: () => setText('빨리빨리 일찍와') },
+    { wait: 2400, run: () => sending.send() },
+    { wait: 5200, run: () => { setMode('read'); setDigits('1004'); } },
+    { wait: 4600, run: () => setDigits('8282') },
+    { wait: 4200, run: () => { setMode('send'); setText(''); } },
+  ]);
+
   const modeOptions: SegmentedOption<Mode>[] = [
     { value: 'send', label: t('mode-send') },
     { value: 'read', label: t('mode-read') },
@@ -77,6 +93,7 @@ export function Beeper({ locale }: { locale: Locale }) {
         <div className={styles.modes}>
           <Segmented options={modeOptions} value={mode} onChange={setMode} />
         </div>
+        <AutopilotChip running={autopilot.running} onRestart={autopilot.restart} locale={locale} />
 
         <PagerDevice
           digits={screen.digits}

@@ -6,6 +6,15 @@
  */
 
 export { Badge, Button, Field, Panel, Segmented, TextInput, type SegmentedOption } from './ui/primitives';
+export {
+  AutopilotChip,
+  AUTOPILOT_LABELS,
+  nextIndex,
+  useAutopilot,
+  waitFor,
+  type Autopilot,
+  type AutopilotStep,
+} from './autopilot';
 export { PaperCard, PLAIN_LABELS, type Localized, type PlainPaper } from './paper';
 export { useClipboard } from './state/use-clipboard';
 export {

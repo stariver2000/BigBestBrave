@@ -1,0 +1,49 @@
+/*
+ * 'mirage' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 신기루의 감각: 모래빛 지면, 굴린 모서리, 열기처럼 옅게 번지는 그림자.
+ */
+
+[data-look='mirage'][data-part='frame']::before {
+  background:
+    radial-gradient(110% 55% at 20% -8%, rgb(158 70 7 / 0.07), transparent 60%),
+    radial-gradient(80% 40% at 90% 4%, rgb(14 107 112 / 0.06), transparent 58%);
+}
+
+[data-look='mirage'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='mirage'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='mirage'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='mirage'] [data-part='input'],
+[data-look='mirage'] [data-part='segmented'] {
+  background: var(--bbb-surface-raised);
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 2px rgb(29 26 20 / 0.05);
+}
+
+[data-look='mirage'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #0A5257;
+  font-weight: 650;
+}
+
+[data-look='mirage'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

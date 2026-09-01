@@ -8,8 +8,8 @@
  * 손을 뗀 순간 마당이 움직여야 "내 리듬이 이걸 끌어당겼다"는 감각이 생긴다.
  */
 
-import { useCallback, useMemo, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { AutopilotChip, Panel, PaperCard, useAutopilot } from '../../../kit';
 import {
   INTENSITY_STEPS,
   PATTERNS,
@@ -45,6 +45,9 @@ export function Rhythm({ locale }: { locale: Locale }) {
   const mine: Pattern = useMemo(() => ({ id: MINE_ID, pulses }), [pulses]);
   const matches = useMemo(() => rank(mine), [mine]);
   const closest = matches[0];
+  // 시연이 "지금 가장 가까운 리듬"을 짚을 때 쓴다. 단계는 미리 짜이므로 그때의 값을 참조로 읽는다.
+  const closestId = useRef<string | null>(null);
+  closestId.current = closest?.patternId ?? null;
 
   const addPulse = useCallback(
     (pulse: Pulse) => {
@@ -57,6 +60,22 @@ export function Rhythm({ locale }: { locale: Locale }) {
     },
     [borrowed],
   );
+
+  /*
+   * 스스로 도는 시연. 마당은 리듬이 놓일 때마다 다시 배치되는데, 그 움직임이 이 페이지의 요점이다.
+   * 그래서 화면이 먼저 두드린다 — 한 박씩 놓일 때마다 이름 붙은 리듬들이 가까워지고 멀어진다.
+   * 두드리는 간격이 곧 리듬이라, 각 단계의 기다림이 그대로 그 리듬의 쉼이 된다.
+   */
+  const autopilot = useAutopilot([
+    { wait: 0, run: () => setPulses([]) },
+    { wait: 400, run: () => addPulse({ duration: 90, intensity: 0.7, gap: 0 }) },
+    { wait: 240, run: () => addPulse({ duration: 90, intensity: 0.7, gap: 240 }) },
+    { wait: 620, run: () => addPulse({ duration: 90, intensity: 0.4, gap: 620 }) },
+    { wait: 240, run: () => addPulse({ duration: 90, intensity: 0.7, gap: 240 }) },
+    { wait: 620, run: () => addPulse({ duration: 90, intensity: 0.7, gap: 620 }) },
+    { wait: 3600, run: () => setSelectedId(closestId.current) },
+    { wait: 4200, run: () => { setSelectedId(null); setBorrowed(true); setPulses([...starter.pulses]); } },
+  ]);
 
   const nameOf = useCallback(
     (patternId: string) => t(`name-${patternId}` as RhythmKey),
@@ -147,7 +166,11 @@ export function Rhythm({ locale }: { locale: Locale }) {
           )}
         </Panel>
 
-        <Panel title={t('field-title')} note={t('field-note')}>
+        <Panel
+          title={t('field-title')}
+          note={t('field-note')}
+          actions={<AutopilotChip running={autopilot.running} onRestart={autopilot.restart} locale={locale} />}
+        >
           <RhythmField
             matches={matches}
             selectedId={selectedId}

@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Button, Panel, PaperCard, useClipboard } from '../../../kit';
+import { AutopilotChip, Button, Panel, PaperCard, useAutopilot, useClipboard } from '../../../kit';
 import {
   DEFAULTS,
   LIMITS,
@@ -60,6 +60,19 @@ export function Rechunker({ locale }: { locale: Locale }) {
   const [maxLines, setMaxLines] = useState<number>(DEFAULT_SETTINGS.maxLines);
   const [maxCps, setMaxCps] = useState<number>(DEFAULT_SETTINGS.maxCps);
   const [pauseThreshold, setPauseThreshold] = useState<number>(DEFAULT_SETTINGS.pauseThreshold);
+
+  /*
+   * 스스로 도는 시연. 빈 화면과 단추만 있으면 무엇을 넣어야 움직이는지 모르는 채로 나가게 된다.
+   * 그래서 예시를 스스로 넣고, 재생하고, 글씨를 키운다 — 글씨가 커질수록 원본이 화면 밖으로
+   * 밀려 나가고 재분할본만 남는 장면이 이 페이지의 논거 전부다. 손을 대면 그 자리에서 멈춘다.
+   */
+  const autopilot = useAutopilot([
+    { wait: 0, run: () => setSource(SAMPLE_SRT) },
+    { wait: 1200, run: () => setFontSize(28) },
+    { wait: 5200, run: () => setFontSize(40) },
+    { wait: 5200, run: () => setFontSize(56) },
+    { wait: 5200, run: () => setFontSize(34) },
+  ]);
 
   const parsed = useMemo(() => parseSubtitle(source), [source]);
 
@@ -113,7 +126,11 @@ export function Rechunker({ locale }: { locale: Locale }) {
         locale={locale}
       />
 
-      <Panel title={t('theater-title')} note={t('theater-note')}>
+      <Panel
+        title={t('theater-title')}
+        note={t('theater-note')}
+        actions={<AutopilotChip running={autopilot.running} onRestart={autopilot.restart} locale={locale} />}
+      >
         <Theater
           cues={parsed.cues}
           chunks={result.chunks}
@@ -123,6 +140,7 @@ export function Rechunker({ locale }: { locale: Locale }) {
           captionWidth={result.maxWidth}
           fontStack={CAPTION_FONT_STACK}
           fontWeight={CAPTION_FONT_WEIGHT}
+          autoplay={autopilot.running}
           t={t}
         />
       </Panel>

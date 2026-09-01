@@ -315,3 +315,53 @@
   color: var(--bbb-fg);
   max-inline-size: 62ch;
 }
+
+/* ── 스스로 도는 시연 ───────────────────────────────────── */
+
+/*
+ * 화면이 저절로 움직이는 동안 켜지는 표시. 시연을 가리지 않도록 작게 두되,
+ * 맥이 뛰듯 깜빡여 "지금 움직이는 중"이 글자를 읽지 않아도 전해지게 한다.
+ */
+.autopilot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--bbb-text-n2);
+  color: var(--bbb-fg-muted);
+}
+
+.autopilotPulse {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: var(--bbb-radius-pill);
+  background: var(--bbb-accent);
+  animation: autopilotBeat 1.6s ease-in-out infinite;
+}
+
+@keyframes autopilotBeat {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .autopilotPulse {
+    animation: none;
+  }
+}
+
+.autopilotIdle {
+  color: var(--bbb-fg-muted);
+}
+
+.autopilotButton {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--bbb-accent);
+  font-family: inherit;
+  font-size: var(--bbb-text-n2);
+  text-decoration: underline;
+  cursor: pointer;
+}

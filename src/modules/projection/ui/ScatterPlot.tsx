@@ -11,7 +11,7 @@
  * 밀려난 진짜 이웃에게는 실이 이어진다. 손을 움직이는 동안 그림이 어디서 거짓말을 하는지 보인다.
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { oklchToDisplayable, parseColor, srgbToOklch, toHex } from '../../../core/color';
 import type { PointDistortion } from '../../../core/projection';
 import { LENS_RADIUS, PLOT_PADDING, PLOT_SIZE, POINT_RADIUS } from '../config';
@@ -85,14 +85,22 @@ export function ScatterPlot({
   neighbors,
   accentHex,
   labels,
+  focus = null,
+  onTakeOver,
 }: {
   points: readonly [number, number][];
   distortions: readonly PointDistortion[];
   neighbors: number;
   accentHex: string;
   labels: LensLabels;
+  /** 스스로 도는 시연이 렌즈를 데려가는 자리. 없으면 렌즈는 사람의 손만 따른다. */
+  focus?: { x: number; y: number } | null;
+  /** 사람이 그림에 손을 댔다. 시연은 여기서 물러난다. */
+  onTakeOver?: () => void;
 }) {
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
+  // 렌즈가 지금 있는 자리. 미끄러지는 동안 프레임마다 읽어야 해서 상태와 따로 참조로도 들고 있는다.
+  const glide = useRef<{ x: number; y: number } | null>(null);
   const scales = useMemo(() => buildScales(points), [points]);
   const scale = useMemo(() => buildScale(accentHex), [accentHex]);
 
@@ -107,16 +115,41 @@ export function ScatterPlot({
     (distortion) => (distortion.missingNeighbors + distortion.falseNeighbors) / (neighbors * 2),
   );
 
+  /*
+   * 시연이 데려가는 자리로 렌즈가 미끄러진다. 순간이동시키면 무엇이 달라졌는지 눈이 못 좇는다.
+   * 남은 거리의 일부씩 좁히므로 다가갈수록 느려지고, 도착하면 스스로 멈춘다.
+   */
+  useEffect(() => {
+    if (focus === null) return;
+    let handle = 0;
+    const tick = () => {
+      const current = glide.current ?? focus;
+      const dx = focus.x - current.x;
+      const dy = focus.y - current.y;
+      const arrived = Math.hypot(dx, dy) < 0.6;
+      const next = arrived ? focus : { x: current.x + dx * 0.08, y: current.y + dy * 0.08 };
+      glide.current = next;
+      setCursor(next);
+      if (!arrived) handle = requestAnimationFrame(tick);
+    };
+    handle = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(handle);
+  }, [focus]);
+
   const view = cursor === null ? null : lookThrough(positions, distortions, cursor, LENS_RADIUS);
   const roles = rolesOf(view);
 
   /** 마우스 위치를 그림 좌표로 옮긴다. SVG는 늘어나 그려지므로 비율로 환산해야 한다. */
   const trackCursor = (clientX: number, clientY: number, element: SVGSVGElement) => {
     const bounds = element.getBoundingClientRect();
-    setCursor({
+    const at = {
       x: ((clientX - bounds.left) / bounds.width) * PLOT_SIZE,
       y: ((clientY - bounds.top) / bounds.height) * PLOT_SIZE,
-    });
+    };
+    glide.current = at;
+    setCursor(at);
+    // 사람이 그림 위에서 움직이면 시연은 그 자리에서 물러난다.
+    onTakeOver?.();
   };
 
   const classOf = (index: number): string => {

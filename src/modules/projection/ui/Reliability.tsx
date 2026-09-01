@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Button, Field, Panel, PaperCard, useClipboard } from '../../../kit';
+import { AutopilotChip, Button, Field, Panel, PaperCard, useAutopilot, useClipboard } from '../../../kit';
 import { LIMITS } from '../../../core/projection';
 import { parseCsv } from '../../../core/table';
 import { createTranslator, type Locale } from '../../../core/i18n';
@@ -41,6 +41,20 @@ export function Reliability({ locale }: { locale: Locale }) {
   const [choice, setChoice] = useState<ColumnChoice>({ x: null, y: null, label: null });
   const [neighbors, setNeighbors] = useState<number>(DEFAULT_SETTINGS.neighbors);
   const [standardizeColumns, setStandardizeColumns] = useState<boolean>(DEFAULT_SETTINGS.standardize);
+
+  /*
+   * 스스로 도는 시연. 빈 화면에서는 이 페이지가 무엇을 하는 물건인지 알 길이 없다.
+   * 그래서 예시를 스스로 넣고, 진실의 렌즈를 겹쳐 보이는 자리들로 천천히 데려간다.
+   * 렌즈가 지나가는 동안 색이 사실로 바뀌는 것이 이 페이지가 하려는 말 전부다.
+   */
+  const [focus, setFocus] = useState<{ x: number; y: number } | null>(null);
+  const autopilot = useAutopilot([
+    { wait: 0, run: () => setSource(sampleCsv()) },
+    { wait: 1600, run: () => setFocus({ x: 330, y: 300 }) },
+    { wait: 4200, run: () => setFocus({ x: 208, y: 344 }) },
+    { wait: 4200, run: () => setFocus({ x: 352, y: 208 }) },
+    { wait: 4200, run: () => setFocus({ x: 262, y: 262 }) },
+  ]);
 
   const table = useMemo(() => parseCsv(source), [source]);
   // 예시를 보고 있을 때만 그 예시가 무엇을 보여 주려는 것인지 밝힌다.
@@ -95,7 +109,11 @@ export function Reliability({ locale }: { locale: Locale }) {
       />
 
       <div className={styles.main}>
-        <Panel title={t('plot-title')} note={t('plot-note')}>
+        <Panel
+          title={t('plot-title')}
+          note={t('plot-note')}
+          actions={<AutopilotChip running={autopilot.running} onRestart={autopilot.restart} locale={locale} />}
+        >
           {analysis ? (
             <ScatterPlot
               points={analysis.low}
@@ -103,6 +121,8 @@ export function Reliability({ locale }: { locale: Locale }) {
               neighbors={neighbors}
               accentHex={BLUEPRINT_PALETTE.accent}
               labels={lensLabels}
+              focus={autopilot.running ? focus : null}
+              onTakeOver={autopilot.stop}
             />
           ) : (
             <p className={styles.plotEmpty}>{table.rows.length === 0 ? t('plot-empty') : t('data-need')}</p>

@@ -19,6 +19,7 @@ import { Channel, channelNode } from './channel';
 import { ChartAudit, chartNode } from './chart';
 import { Checkup, checkupNode } from './checkup';
 import { Context, contextNode } from './context';
+import { Distance, distanceNode } from './distance';
 import { Grip, gripNode } from './grip';
 import { Mist, mistNode } from './mist';
 import { Reliability, projectionNode } from './projection';
@@ -75,6 +76,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: repairNode, Page: Repair },
   { node: momentNode, Page: Moment },
   { node: channelNode, Page: Channel },
+  { node: distanceNode, Page: Distance },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

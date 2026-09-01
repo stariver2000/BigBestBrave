@@ -8,7 +8,7 @@
  * 흘러나가는 장면이 이 페이지가 하는 말 전부이며, 설명보다 그 장면이 빠르다.
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, Segmented, type SegmentedOption } from '../../../kit';
 import { BREAK_LADDER, advance, blockAt, buildTimeline, nearestBlock, widestLine } from '../../../core/subtitle';
 import type { Chunk, Cue, Measure } from '../../../core/subtitle';
@@ -38,6 +38,7 @@ export function Theater({
   captionWidth,
   fontStack,
   fontWeight,
+  autoplay,
   t,
 }: {
   cues: readonly Cue[];
@@ -48,12 +49,19 @@ export function Theater({
   captionWidth: number;
   fontStack: string;
   fontWeight: number;
+  /** 스스로 도는 시연이 재생을 걸 때 참이 된다. 사람이 멈추면 다시 걸지 않는다. */
+  autoplay: boolean;
   t: (key: SubtitleKey) => string;
 }) {
   const [time, setTime] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<number>(PLAYBACK.defaultSpeed);
   const [compare, setCompare] = useState(true);
+
+  // 바깥에서 재생을 걸어 주는 경우. 멈추는 것은 언제나 사람 쪽이 이긴다.
+  useEffect(() => {
+    if (autoplay) setPlaying(true);
+  }, [autoplay]);
 
   const timeline = useMemo(() => buildTimeline(cues, pauseThreshold), [cues, pauseThreshold]);
   const running = playing && timeline.duration > 0;

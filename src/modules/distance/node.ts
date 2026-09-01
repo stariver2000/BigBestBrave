@@ -1,0 +1,86 @@
+/**
+ * 거리 페이지의 트리 노드.
+ * 루트에서 갈라진 스물여섯 번째 가지(그림을 의심하는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { distanceDictionary } from './dictionary';
+
+export const distanceNode: PageNode = {
+  id: 'dr-misuse',
+  slug: 'distance',
+  parentId: ROOT_ID,
+  title: {
+    ko: distanceDictionary.ko.title,
+    en: distanceDictionary.en.title,
+    ja: distanceDictionary.ja.title,
+  },
+  summary: {
+    ko: distanceDictionary.ko.summary,
+    en: distanceDictionary.en.summary,
+    ja: distanceDictionary.ja.summary,
+  },
+  capability: {
+    ko: distanceDictionary.ko.capability,
+    en: distanceDictionary.en.capability,
+    ja: distanceDictionary.ja.capability,
+  },
+  look: 'mirage',
+  keywords: [
+    '차원 축소', '투영', '오용', '거리', '군집', '시각 분석',
+    't-SNE', 'UMAP', 'dimensionality reduction', 'projection', 'misuse', 'cluster distance',
+    '次元削減', '投影', '誤用',
+  ],
+  traits: {
+    domain: ['data', 'science', 'education'],
+    audience: ['professional', 'expert'],
+    intent: ['persuade', 'teach', 'inform'],
+    stance: ['earnest'],
+    atmosphere: ['austere', 'mysterious'],
+    temperature: ['warm'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['paper'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['academic', 'urgent'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
