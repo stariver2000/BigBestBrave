@@ -1,0 +1,54 @@
+/*
+ * 'ripple' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 떨림의 감각: 어두운 유리, 굴린 모서리, 번지는 보랏빛.
+ */
+
+[data-look='ripple'][data-part='frame']::before {
+  background:
+    radial-gradient(110% 60% at 20% -8%, rgb(196 176 250 / 0.09), transparent 60%),
+    radial-gradient(90% 50% at 88% 2%, rgb(126 212 176 / 0.06), transparent 56%);
+}
+
+[data-look='ripple'] [data-part='panel'] {
+  background: linear-gradient(180deg, var(--bbb-surface-raised), var(--bbb-surface) 52%);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='ripple'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='ripple'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 650;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='ripple'] [data-part='input'],
+[data-look='ripple'] [data-part='segmented'] {
+  background: #101018;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+}
+
+[data-look='ripple'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #8E76CC;
+  font-weight: 650;
+}
+
+[data-look='ripple'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-accent);
+}
+
+[data-look='ripple'] [data-part='badge'] {
+  letter-spacing: 0.08em;
+  font-size: var(--bbb-text-n2);
+}

@@ -21,6 +21,7 @@ import { pagerVariables } from './pager';
 import { palmVariables } from './palm';
 import { proofVariables } from './proof';
 import { pulseVariables } from './pulse';
+import { rippleVariables } from './ripple';
 import { scaleVariables } from './scale';
 import { sereneVariables } from './serene';
 import { signalVariables } from './signal';
@@ -50,6 +51,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   atlas: atlasVariables,
   lens: lensVariables,
   palm: palmVariables,
+  ripple: rippleVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

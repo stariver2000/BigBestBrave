@@ -36,6 +36,7 @@
 | `/route` | Modes of Interaction with Navigation Apps | CHI 2025 (KAIST) |
 | `/reading` | AReading with Smartphones: Trade-offs between Enhanced Legibility and Display Switching Costs | CHI 2025 (KAIST) · 전문을 못 구해 초록의 짜임만 옮김 |
 | `/grip` | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 (KAIST·MSR) |
+| `/soften` | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 (KAIST) · 유료라 초록의 짜임만 옮김 |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -47,15 +48,14 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 | 진동만으로 물렁함을 느끼게 하는 조건 |
-| 2 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
-| 3 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
-| 4 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
-| 5 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
-| 6 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
-| 7 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 8 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 9 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
+| 2 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
+| 3 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
+| 4 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
+| 5 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
+| 6 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
+| 7 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 8 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
 ## 전문을 못 구한 것
 
@@ -63,6 +63,8 @@
 옮기고, 화면의 수치가 논문에서 온 것이 아님을 그 페이지에 적어 두었다.
 
 - `AReading with Smartphones` (CHI 2025) -> `/reading`
+- `Effects of Waveform, Time Delay, and Vibration Axis...` (IJHCI 2024) -> `/soften`
+  (저자는 Semantic Scholar API로 확인했다. 웹 검색만으로는 저자 이름이 나오지 않았다.)
 
 ## 어렵다고 본 것
 

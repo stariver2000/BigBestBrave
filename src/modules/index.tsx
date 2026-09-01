@@ -26,6 +26,7 @@ import { Nudge, nudgeNode } from './nudge';
 import { Peer, peerNode } from './peer';
 import { Reach, reachNode } from './reach';
 import { Reading, readingNode } from './reading';
+import { Soften, softenNode } from './soften';
 import { Rechunker, subtitleNode } from './subtitle';
 import { Whatif, whatifNode } from './whatif';
 import { Window, windowNode } from './window';
@@ -61,6 +62,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: routeNode, Page: Route },
   { node: readingNode, Page: Reading },
   { node: gripNode, Page: Grip },
+  { node: softenNode, Page: Soften },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();
