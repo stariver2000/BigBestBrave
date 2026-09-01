@@ -1,0 +1,78 @@
+/**
+ * 차트 왜곡 검사 페이지의 트리 노드.
+ * 루트에서 갈라진 여덟 번째 가지(자료를 읽는 눈)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { chartDictionary } from './dictionary';
+
+export const chartNode: PageNode = {
+  id: 'chart-audit',
+  slug: 'chart',
+  parentId: ROOT_ID,
+  title: { ko: chartDictionary.ko.title, en: chartDictionary.en.title, ja: chartDictionary.ja.title },
+  summary: { ko: chartDictionary.ko.summary, en: chartDictionary.en.summary, ja: chartDictionary.ja.summary },
+  capability: {
+    ko: chartDictionary.ko.capability,
+    en: chartDictionary.en.capability,
+    ja: chartDictionary.ja.capability,
+  },
+  look: 'proof',
+  keywords: [
+    '차트', '그래프', '왜곡', '잘린축', '통계', '오해', '시각화',
+    'chart', 'misleading', 'lie factor', 'truncated axis', 'visualization',
+    'グラフ', '歪み', '可視化',
+  ],
+  traits: {
+    domain: ['data', 'politics', 'education'],
+    audience: ['general', 'professional'],
+    intent: ['inform', 'measure', 'provoke'],
+    stance: ['clinical'],
+    atmosphere: ['sterile', 'austere'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['saturated'],
+    tension: ['taut'],
+    daytime: ['noon'],
+    layout: ['split-screen'],
+    density: ['compact'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['sharp'],
+    border: ['hairline'],
+    elevation: ['flat'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['snappy'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['technical', 'deadpan'],
+    person: ['second'],
+    'copy-length': ['short'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

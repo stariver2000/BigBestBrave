@@ -25,6 +25,7 @@
 | `/rhythm` | Birds of a Rhythm: The Effects of Haptic Pattern Similarity on People's Social Perceptions in Virtual Reality | CHI 2025 |
 | `/thing` | Living Alongside Areca: Exploring Human Experiences with Things Expressing Thoughts and Emotions | CHI 2025 |
 | `/mist` | Sprayable Sound: Exploring the Experiential and Design Potential of Physically Spraying Sound Interaction | CHI 2025 |
+| `/chart` | Automated Pipeline for Detecting and Analyzing Misleading Visual Elements | PacificVis 2025 (SNU) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -36,26 +37,25 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | Automated Pipeline for Detecting and Analyzing Misleading Visual Elements | PacificVis 2025 (SNU) | 차트의 오해 유발 요소(잘린 축, 왜곡된 비율, 이중 축, 넓이 대신 반지름) 검사기 |
-| 2 | Understanding and Improving User Adoption and Security Awareness in Password Checkup Services | CHI 2025 | k-익명성으로 유출 확인이 어떻게 안전한지 직접 보여 주는 화면 |
-| 3 | Metric Design != Metric Behavior: Improving Metric Selection for the Unbiased Evaluation of Dimensionality Reduction | VIS 2025 (SNU) | 지표가 서로 얼마나 다르게 굴러가는지 비교하는 화면 |
-| 4 | Cross, Dwell, or Pinch: Designing and Evaluating Around-Device Selection Methods for Unmodified Smartwatches | CHI 2025 | 세 가지 선택 방식을 직접 겪고 자기 수치를 재는 놀이 |
-| 5 | Less Talk, More Trust: Understanding Players' In-game Assessment of Communication Processes in League of Legends | CHI 2025 | 말 없이 신호만으로 뜻을 전해 보는 체험 |
-| 6 | Like Adding a Small Weight to a Scale About to Tip: Personalizing Micro-Financial Incentives for Digital Wellbeing | CHI 2025 | 아주 작은 유인이 저울을 기울이는 순간을 만져 보는 화면 |
-| 7 | CounterStress: Enhancing Stress Coping Planning through Counterfactual Explanations in Personal Informatics | CHI 2025 | "그때 이랬다면" 을 직접 돌려 보는 반사실 계산기 |
-| 8 | Peerspective: A Study on Reciprocal Tracking for Self-awareness and Relational Insight | CHI 2025 | 서로가 서로를 기록할 때 생기는 어긋남을 보여 주는 화면 |
-| 9 | Modes of Interaction with Navigation Apps | CHI 2025 | 길찾기를 대하는 여러 방식과 그때 잃는 것 |
-| 10 | AReading with Smartphones: Trade-offs between Enhanced Legibility and Display Switching Costs | CHI 2025 | 읽기 쉬움과 시선 옮김의 맞바꿈을 재어 보는 화면 |
-| 11 | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 | 보는 것이 만지는 것을 바꾸는 착시를 화면에서 |
-| 12 | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 | 진동만으로 물렁함을 느끼게 하는 조건 |
-| 13 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
-| 14 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
-| 15 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
-| 16 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
-| 17 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
-| 18 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
-| 19 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
-| 20 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
+| 1 | Understanding and Improving User Adoption and Security Awareness in Password Checkup Services | CHI 2025 | k-익명성으로 유출 확인이 어떻게 안전한지 직접 보여 주는 화면 |
+| 2 | Metric Design != Metric Behavior: Improving Metric Selection for the Unbiased Evaluation of Dimensionality Reduction | VIS 2025 (SNU) | 지표가 서로 얼마나 다르게 굴러가는지 비교하는 화면 |
+| 3 | Cross, Dwell, or Pinch: Designing and Evaluating Around-Device Selection Methods for Unmodified Smartwatches | CHI 2025 | 세 가지 선택 방식을 직접 겪고 자기 수치를 재는 놀이 |
+| 4 | Less Talk, More Trust: Understanding Players' In-game Assessment of Communication Processes in League of Legends | CHI 2025 | 말 없이 신호만으로 뜻을 전해 보는 체험 |
+| 5 | Like Adding a Small Weight to a Scale About to Tip: Personalizing Micro-Financial Incentives for Digital Wellbeing | CHI 2025 | 아주 작은 유인이 저울을 기울이는 순간을 만져 보는 화면 |
+| 6 | CounterStress: Enhancing Stress Coping Planning through Counterfactual Explanations in Personal Informatics | CHI 2025 | "그때 이랬다면" 을 직접 돌려 보는 반사실 계산기 |
+| 7 | Peerspective: A Study on Reciprocal Tracking for Self-awareness and Relational Insight | CHI 2025 | 서로가 서로를 기록할 때 생기는 어긋남을 보여 주는 화면 |
+| 8 | Modes of Interaction with Navigation Apps | CHI 2025 | 길찾기를 대하는 여러 방식과 그때 잃는 것 |
+| 9 | AReading with Smartphones: Trade-offs between Enhanced Legibility and Display Switching Costs | CHI 2025 | 읽기 쉬움과 시선 옮김의 맞바꿈을 재어 보는 화면 |
+| 10 | Big or Small, It's All in Your Head: Visuo-Haptic Illusion of Size-Change Using Finger-Repositioning | CHI 2024 | 보는 것이 만지는 것을 바꾸는 착시를 화면에서 |
+| 11 | Effects of Waveform, Time Delay, and Vibration Axis on the Perception of Vibrotactile Compliance Illusions | IJHCI 2024 | 진동만으로 물렁함을 느끼게 하는 조건 |
+| 12 | Why I Choose This Sticker When Chatting with You | CSCW 2024 | 무엇을 고르느냐가 관계를 드러내는 화면 |
+| 13 | Investigating the Potential of Group Recommendation Systems As a Medium of Social Interactions (Spotify Blend) | CHI 2024 | 두 사람의 취향을 섞을 때 누구의 것이 남는가 |
+| 14 | Understanding Users' Dissatisfaction with ChatGPT Responses: Types, Resolving Tactics | IUI 2024 | 불만의 종류를 갈라 보는 화면 |
+| 15 | DataDive: Supporting Readers' Contextualization of Statistical Statements with Data Exploration | IUI 2024 | 문장 속 통계를 맥락에 놓아 보는 화면 |
+| 16 | A Design Space for Intelligent and Interactive Writing Assistants | CHI 2024 | 설계 공간 자체를 만져 보는 지도 |
+| 17 | The Design Space for Online Restorative Justice Tools | CHI 2025 | 갈등을 다루는 방식들의 지도 |
+| 18 | Understanding Practical Challenges and Enablers for Embedding Environmental Perspectives in Digital Product Design | CHI 2025 | 화면 하나가 쓰는 자원을 계산해 보는 화면 |
+| 19 | Time2Stop: Adaptive and Explainable Human-AI Loop for Smartphone Overuse Intervention | CHI 2024 | 언제 끼어드는 것이 옳은가를 조절해 보는 화면 |
 
 ## 어렵다고 본 것
 

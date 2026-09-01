@@ -1,0 +1,31 @@
+/*
+ * 'proof' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 교정지에는 장식이 없다. 각진 모서리, 얇은 선, 그리고 붉은 표시뿐이다.
+ */
+
+[data-look='proof'][data-part='frame']::before {
+  background: none;
+}
+
+[data-look='proof'] [data-part='panel'] {
+  border-color: var(--bbb-border-color);
+  box-shadow: none;
+}
+
+[data-look='proof'] [data-part='panel']:hover {
+  box-shadow: none;
+}
+
+/* 패널 제목은 교정지의 항목 번호처럼 작고 곧게. */
+[data-look='proof'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+[data-look='proof'] [data-part='button'] {
+  border-radius: 0;
+}
