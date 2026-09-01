@@ -21,6 +21,7 @@ import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
 import { Rulers, rulersNode } from './rulers';
 import { Nudge, nudgeNode } from './nudge';
+import { Peer, peerNode } from './peer';
 import { Reach, reachNode } from './reach';
 import { Rechunker, subtitleNode } from './subtitle';
 import { Whatif, whatifNode } from './whatif';
@@ -53,6 +54,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: windowNode, Page: Window },
   { node: nudgeNode, Page: Nudge },
   { node: whatifNode, Page: Whatif },
+  { node: peerNode, Page: Peer },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

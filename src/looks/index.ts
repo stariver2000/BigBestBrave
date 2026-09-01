@@ -10,6 +10,7 @@ import { benchVariables } from './bench';
 import { blueprintVariables } from './blueprint';
 import { cinemaVariables } from './cinema';
 import { dossierVariables } from './dossier';
+import { dyadVariables } from './dyad';
 import { galleryVariables } from './gallery';
 import { gaugeVariables } from './gauge';
 import { hindsightVariables } from './hindsight';
@@ -42,6 +43,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   signal: signalVariables,
   scale: scaleVariables,
   hindsight: hindsightVariables,
+  dyad: dyadVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

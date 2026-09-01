@@ -1,0 +1,58 @@
+/*
+ * 'dyad' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 마주 앉은 방의 감각: 따뜻한 어둠, 굴린 모서리, 등불 하나와 창빛 하나.
+ */
+
+[data-look='dyad'][data-part='frame']::before {
+  background:
+    radial-gradient(100% 60% at 20% -6%, rgb(217 179 108 / 0.09), transparent 58%),
+    radial-gradient(90% 55% at 88% 2%, rgb(175 189 226 / 0.07), transparent 56%);
+}
+
+[data-look='dyad'] [data-part='panel'] {
+  background: linear-gradient(180deg, var(--bbb-surface-raised), var(--bbb-surface) 50%);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='dyad'] [data-part='panel']:hover {
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='dyad'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 650;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='dyad'] [data-part='input'] {
+  background: #17120F;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+}
+
+[data-look='dyad'] [data-part='input']:focus-visible {
+  border-color: var(--bbb-accent);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45), 0 0 0 3px var(--bbb-accent-glow);
+}
+
+[data-look='dyad'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #A07E3C;
+  font-weight: 650;
+}
+
+[data-look='dyad'] [data-part='segmented-option'][data-active='true'] {
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-accent);
+}
+
+[data-look='dyad'] [data-part='badge'] {
+  letter-spacing: 0.08em;
+  font-size: var(--bbb-text-n2);
+}

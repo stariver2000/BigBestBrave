@@ -1,0 +1,82 @@
+/**
+ * 서로 기록하기 페이지의 트리 노드.
+ * 루트에서 갈라진 열다섯 번째 가지(사람 사이의 일)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { peerDictionary } from './dictionary';
+
+export const peerNode: PageNode = {
+  id: 'reciprocal-tracking',
+  slug: 'peer',
+  parentId: ROOT_ID,
+  title: { ko: peerDictionary.ko.title, en: peerDictionary.en.title, ja: peerDictionary.ja.title },
+  summary: {
+    ko: peerDictionary.ko.summary,
+    en: peerDictionary.en.summary,
+    ja: peerDictionary.ja.summary,
+  },
+  capability: {
+    ko: peerDictionary.ko.capability,
+    en: peerDictionary.en.capability,
+    ja: peerDictionary.ja.capability,
+  },
+  look: 'dyad',
+  keywords: [
+    '조하리', '창', '자기인식', '관계', '되먹임', '사각지대', '짝',
+    'johari', 'window', 'self-awareness', 'blind spot', 'reciprocal', 'peer', 'feedback',
+    'ジョハリの窓', '自己認識', '死角',
+  ],
+  traits: {
+    domain: ['philosophy', 'health', 'science'],
+    audience: ['general', 'hobbyist'],
+    intent: ['inform', 'explore', 'comfort'],
+    stance: ['earnest'],
+    atmosphere: ['cozy', 'solemn'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['dusk'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['relaxed'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'academic'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
