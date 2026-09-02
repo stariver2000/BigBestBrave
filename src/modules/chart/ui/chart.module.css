@@ -220,3 +220,17 @@
   line-height: 1.7;
   color: var(--bbb-fg-muted);
 }
+
+.climb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-2);
+  margin-bottom: var(--bbb-space-3);
+}
+
+.climbNote {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}

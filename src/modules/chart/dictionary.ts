@@ -5,6 +5,8 @@ import type { Dictionary } from '../../core/i18n';
 export type ChartKey =
   | 'title' | 'summary' | 'capability'
   | 'controls-title' | 'controls-note'
+  | 'climb-idle' | 'climb-start' | 'climb-axis' | 'climb-height' | 'climb-scale'
+  | 'climb-top' | 'climb-undone'
   | 'kind' | 'kind-bar' | 'kind-line' | 'kind-bubble'
   | 'axis-min' | 'axis-max' | 'axis-auto' | 'height' | 'invert' | 'radius-scale'
   | 'values' | 'values-note'
@@ -25,7 +27,14 @@ export const chartDictionary: Dictionary<ChartKey> = {
     summary: '같은 자료로 그린 두 그림을 나란히 놓습니다. 어느 요소가 몇 배로 부풀리는지 계산해 짚어 드립니다.',
     capability: '차트의 어느 요소가 자료를 몇 배로 어긋나게 보이는지 계산해 짚어 준다',
     'controls-title': '차트 설정',
-    'controls-note': '뉴스에서 보던 수법을 하나씩 켜 보세요. 오른쪽 그림이 어떻게 달라지는지 보시면 됩니다.',
+    'controls-note': '손잡이가 스스로 돌아가며 같은 자료를 점점 더 부풀립니다. 아무거나 잡으면 멈추고, 그때부터는 당신 차례입니다.',
+    'climb-idle': '손잡이가 멈춰 있습니다. 이제 직접 돌려 보세요.',
+    'climb-start': '처음으로 돌아왔습니다. 이 그림이 자료가 실제로 말하는 것입니다.',
+    'climb-axis': '축 시작값을 올리는 중 — 숫자는 그대로입니다.',
+    'climb-height': '그림을 늘려 기울기를 세우는 중 — 숫자는 그대로입니다.',
+    'climb-scale': '값을 반지름에 잇는 중 — 숫자는 그대로입니다.',
+    'climb-top': '여기까지가 이 자료로 부풀릴 수 있는 끝입니다.',
+    'climb-undone': '되돌리셨습니다. 이 그림이 자료가 실제로 말하는 것입니다.',
     kind: '종류',
     'kind-bar': '막대',
     'kind-line': '선',
@@ -70,7 +79,14 @@ export const chartDictionary: Dictionary<ChartKey> = {
     summary: 'Two pictures of the same data, side by side. It computes which element inflates the difference, and by how many times.',
     capability: 'Computes which element of a chart distorts the data, and by what factor',
     'controls-title': 'Chart settings',
-    'controls-note': 'Turn on the tricks you have seen in the news. Watch the picture on the right change.',
+    'controls-note': 'The knobs turn by themselves, inflating the same data further and further. Grab any of them and they stop — then it is your turn.',
+    'climb-idle': 'The knobs have stopped. Your turn to turn them.',
+    'climb-start': 'Back to the start. This picture is what the data actually says.',
+    'climb-axis': 'Raising the axis start — the numbers are untouched.',
+    'climb-height': 'Stretching the picture to steepen the slope — the numbers are untouched.',
+    'climb-scale': 'Tying the value to the radius — the numbers are untouched.',
+    'climb-top': 'That is as far as this data can be inflated.',
+    'climb-undone': 'You put it back. This picture is what the data actually says.',
     kind: 'Kind',
     'kind-bar': 'bars',
     'kind-line': 'line',
@@ -115,7 +131,14 @@ export const chartDictionary: Dictionary<ChartKey> = {
     summary: '同じデータで描いた二つの絵を並べます。どの要素が何倍に膨らませるかを計算して指し示します。',
     capability: 'グラフのどの要素がデータを何倍に歪めて見せるかを計算して指し示す',
     'controls-title': 'グラフの設定',
-    'controls-note': 'ニュースで見た手口を一つずつオンにしてみてください。右の絵がどう変わるか見てください。',
+    'controls-note': 'つまみがひとりでに回り、同じデータをどんどん膨らませます。どれかに触れると止まり、そこからはあなたの番です。',
+    'climb-idle': 'つまみは止まっています。今度はご自分で回してみてください。',
+    'climb-start': '最初に戻りました。この絵がデータの本当の姿です。',
+    'climb-axis': '軸の開始値を上げています — 数字はそのままです。',
+    'climb-height': '絵を伸ばして傾きを立てています — 数字はそのままです。',
+    'climb-scale': '値を半径につないでいます — 数字はそのままです。',
+    'climb-top': 'このデータで膨らませられるのはここまでです。',
+    'climb-undone': '戻しましたね。この絵がデータの本当の姿です。',
     kind: '種類',
     'kind-bar': '棒',
     'kind-line': '線',

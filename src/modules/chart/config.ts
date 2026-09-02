@@ -47,8 +47,25 @@ export const PAPER = {
   },
 } as const;
 
-/** 그림 크기(px). 세로는 사용자가 움직인다. */
-export const PLOT = { width: 380, minHeight: 90, maxHeight: 460 } as const;
+/** 그림 크기(px). 세로는 사용자와 오르막이 함께 움직인다. */
+export const PLOT = { width: 380, minHeight: 90, maxHeight: 460, startHeight: 200 } as const;
+
+/**
+ * 거짓말 오르막이 도는 방식.
+ *
+ * 손잡이가 스스로 돌아가며 같은 자료를 점점 더 부풀려 보여 준다. 사람이 볼 것은 결과가 아니라
+ * 그 과정이다 — 숫자를 하나도 바꾸지 않고도 그림이 어디까지 갈 수 있는지.
+ */
+export const CLIMB = {
+  /** 한 걸음에 축을 올리는 양. 자료의 가장 작은 값에 대한 비율로 잡아 어떤 자료에서도 열 걸음 남짓 걷는다. */
+  axisFraction: 0.08,
+  /** 한 걸음에 그림을 늘리는 높이(px). */
+  heightStep: 30,
+  /** 한 걸음의 시간(ms). 눈이 변화를 따라올 만큼 느리게. */
+  intervalMs: 900,
+  /** 꼭대기에서 쉬는 걸음 수. 다 부푼 그림을 볼 시간을 준 뒤 처음으로 돌아간다. */
+  restTicks: 4,
+} as const;
 
 /**
  * 처음 놓여 있는 자료.

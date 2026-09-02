@@ -8,16 +8,29 @@
  * 같은 자료가 이렇게 달라 보인다는 것을 옆에 놓고 보아야 안다.
  */
 
-import { useMemo, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
-import { audit, extent, honest, type ChartKind, type ChartSpec } from '../../../core/chartaudit';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Panel, PaperCard, SimulationChip, useReach, useSimulation } from '../../../kit';
+import {
+  audit,
+  extent,
+  honest,
+  nextLie,
+  undone,
+  type ChartKind,
+  type ChartSpec,
+  type KnobId,
+  type KnobRange,
+} from '../../../core/chartaudit';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { FACTOR_CAP, PAPER, PLOT, SAMPLE_VALUES } from '../config';
+import { CLIMB, FACTOR_CAP, PAPER, PLOT, SAMPLE_VALUES } from '../config';
 import { chartDictionary, type ChartKey } from '../dictionary';
 import { Plot } from './Plot';
 import styles from './chart.module.css';
 
 const KINDS: ChartKind[] = ['bar', 'line', 'bubble'];
+
+/** 화면 위쪽 한 줄이 지금 무슨 일이 일어나는지 말한다. 손잡이 이름이거나, 꼭대기이거나, 사람 차례다. */
+type Status = KnobId | 'top' | 'start' | 'idle' | 'undone';
 
 /** 사람이 적은 자료를 숫자로 읽는다. 읽히지 않는 것은 버리고, 하나도 없으면 예시로 되돌린다. */
 function parseValues(text: string): number[] {
@@ -34,9 +47,11 @@ export function ChartAudit({ locale }: { locale: Locale }) {
   const [kind, setKind] = useState<ChartKind>('bar');
   const [text, setText] = useState(SAMPLE_VALUES.join(', '));
   const [axisMin, setAxisMin] = useState<number | null>(null);
-  const [height, setHeight] = useState(200);
+  const [height, setHeight] = useState<number>(PLOT.startHeight);
   const [inverted, setInverted] = useState(false);
   const [radiusScale, setRadiusScale] = useState(false);
+
+  const [status, setStatus] = useState<Status>('idle');
 
   const values = useMemo(() => parseValues(text), [text]);
   const bounds = useMemo(() => extent(values), [values]);
@@ -57,6 +72,60 @@ export function ChartAudit({ locale }: { locale: Locale }) {
   const worst = Number.isFinite(report.worst) ? report.worst : FACTOR_CAP;
   const flagged = report.findings.length > 0;
 
+  const range: KnobRange = {
+    // 걸음의 크기를 자료에 맞춰 잡는다. 100짜리 자료든 3짜리 자료든 열 걸음 남짓 걸으며 부풀도록.
+    axisStep: Math.max(1, Math.round(bounds.min * CLIMB.axisFraction)),
+    heightStep: CLIMB.heightStep,
+    maxHeight: PLOT.maxHeight,
+  };
+
+  // 꼭대기에서 쉰 걸음 수. 다 부푼 그림을 잠깐 두었다가 처음으로 돌아간다.
+  const rest = useRef(0);
+  const peak = useRef(1);
+  const reach = useReach();
+
+  const climb = useSimulation(() => {
+    const step = nextLie(shown, range);
+    if (step !== null) {
+      setAxisMin(step.spec.axisMin);
+      setHeight(step.spec.height);
+      setRadiusScale(step.spec.bubbleScale === 'radius');
+      setStatus(step.knob);
+      rest.current = 0;
+      return;
+    }
+
+    setStatus('top');
+    rest.current += 1;
+    if (rest.current > CLIMB.restTicks) {
+      rest.current = 0;
+      setAxisMin(null);
+      setHeight(PLOT.startHeight);
+      setRadiusScale(false);
+      // 한 바퀴는 정직한 그림에서 시작한다. 부풀린 것과 견줄 자리가 있어야 부풀린 것이 보인다.
+      setStatus('start');
+    }
+  }, CLIMB.intervalMs);
+
+  // 손잡이는 하나뿐이다. 사람이 잡으면 계산은 손을 뗀다.
+  const halt = () => {
+    if (climb.running) climb.stop();
+    if (status !== 'undone') setStatus('idle');
+  };
+
+  useEffect(() => {
+    if (climb.running) {
+      peak.current = Math.max(peak.current, worst);
+      return;
+    }
+    // 알아차리는 자리 — 부풀어 있던 그림을 자기 손으로 정직한 자리까지 되돌려 놓은 때.
+    if (undone(peak.current, worst)) {
+      peak.current = 1;
+      setStatus('undone');
+      reach();
+    }
+  }, [worst, climb.running, reach]);
+
   return (
     <div className={styles.layout}>
       <PaperCard
@@ -70,7 +139,11 @@ export function ChartAudit({ locale }: { locale: Locale }) {
 
       <div className={styles.main}>
         <Panel title={t('controls-title')} note={t('controls-note')}>
-          <div className={styles.controls}>
+          <div className={styles.climb}>
+            <SimulationChip running={climb.running} onToggle={climb.toggle} locale={locale} />
+            <p className={styles.climbNote}>{t(`climb-${status}` as ChartKey)}</p>
+          </div>
+          <div className={styles.controls} onPointerDownCapture={halt} onKeyDownCapture={halt}>
             <div className={styles.row}>
               <span className={styles.rowLabel}>{t('kind')}</span>
               <div className={styles.plots} style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>

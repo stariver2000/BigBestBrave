@@ -4,10 +4,13 @@ import {
   bankedHeight,
   clippedCount,
   honest,
+  nextLie,
   radiusFactor,
   slopeFactor,
   truncationFactor,
+  undone,
   type ChartSpec,
+  type KnobRange,
 } from '@core/chartaudit';
 
 const spec = (over: Partial<ChartSpec> = {}): ChartSpec => ({
@@ -138,5 +141,109 @@ describe('바로잡기', () => {
   it('바로잡은 차트에는 어긋난 곳이 없다', () => {
     const messy = spec({ kind: 'bubble', values: [10, 40], axisMin: 5, bubbleScale: 'radius', inverted: true });
     expect(audit(honest(messy)).findings).toHaveLength(0);
+  });
+});
+
+/**
+ * 오르막은 이 페이지의 논지 그 자체다 — 숫자를 하나도 바꾸지 않고 그림만으로 얼마나 부풀릴 수 있는가.
+ * 그러니 걸음이 숫자를 건드리는 순간 페이지가 하는 말이 거짓이 된다. 아래 첫 시험이 그것을 지킨다.
+ */
+describe('거짓말 오르막', () => {
+  const range: KnobRange = { axisStep: 8, heightStep: 40, maxHeight: 460 };
+
+  it('숫자는 한 톨도 바꾸지 않는다', () => {
+    let current = spec();
+    for (let guard = 0; guard < 100; guard += 1) {
+      const step = nextLie(current, range);
+      if (step === null) break;
+      expect(step.spec.values).toEqual(current.values);
+      current = step.spec;
+    }
+    expect(current.values).toEqual([100, 104, 108, 112]);
+  });
+
+  it('한 걸음마다 더 부풀어 보인다', () => {
+    const first = nextLie(spec(), range);
+    expect(first).not.toBeNull();
+    expect(first!.worst).toBeGreaterThan(audit(spec()).worst);
+
+    const second = nextLie(first!.spec, range);
+    expect(second!.worst).toBeGreaterThan(first!.worst);
+  });
+
+  it('막대는 축을 올려 부풀린다', () => {
+    expect(nextLie(spec(), range)?.knob).toBe('axis');
+  });
+
+  it('자료가 다 잘려 나갈 만큼은 올리지 않는다', () => {
+    // 최소값이 100이고 한 걸음이 8이면 92까지 올릴 수 있고, 여덟씩 딛으므로 88에서 멈춘다.
+    // 그 위로 올리면 그림에 자료가 한 걸음치도 남지 않는다.
+    let current = spec();
+    for (let guard = 0; guard < 100; guard += 1) {
+      const step = nextLie(current, range);
+      if (step === null) break;
+      current = step.spec;
+    }
+    expect(current.axisMin).toBe(88);
+    expect(Number.isFinite(audit(current).worst)).toBe(true);
+  });
+
+  it('반드시 멈춘다', () => {
+    let current = spec({ kind: 'line' });
+    let steps = 0;
+    while (steps < 200) {
+      const step = nextLie(current, range);
+      if (step === null) break;
+      current = step.spec;
+      steps += 1;
+    }
+    expect(nextLie(current, range)).toBeNull();
+    expect(steps).toBeLessThan(200);
+  });
+
+  it('원 그래프는 반지름에 값을 잇는 손잡이도 쓴다', () => {
+    const bubble = spec({ kind: 'bubble', values: [10, 90] });
+    const knobs = new Set<string>();
+    let current = bubble;
+    for (let guard = 0; guard < 50; guard += 1) {
+      const step = nextLie(current, range);
+      if (step === null) break;
+      knobs.add(step.knob);
+      current = step.spec;
+    }
+    expect(knobs.has('scale')).toBe(true);
+    expect(current.bubbleScale).toBe('radius');
+  });
+
+  it('선 그래프는 높이로도 기울기를 세운다', () => {
+    const line = spec({ kind: 'line', height: 100 });
+    const knobs: string[] = [];
+    let current = line;
+    for (let guard = 0; guard < 50; guard += 1) {
+      const step = nextLie(current, range);
+      if (step === null) break;
+      knobs.push(step.knob);
+      current = step.spec;
+    }
+    expect(knobs).toContain('height');
+  });
+
+  it('이미 꼭대기면 더 갈 곳이 없다', () => {
+    const topped = spec({ axisMin: 88, height: 460 });
+    expect(nextLie(topped, range)).toBeNull();
+  });
+});
+
+describe('사람이 되돌려 놓기', () => {
+  it('크게 부풀었던 것을 정직한 자리로 되돌리면 알아차린 것이다', () => {
+    expect(undone(12.5, 1)).toBe(true);
+  });
+
+  it('반쯤 되돌린 것으로는 아직 아니다', () => {
+    expect(undone(12.5, 2)).toBe(false);
+  });
+
+  it('처음부터 부풀지 않았으면 되돌릴 것도 없다', () => {
+    expect(undone(1, 1)).toBe(false);
   });
 });
