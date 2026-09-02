@@ -59,5 +59,24 @@ export const RANGE = {
   reposition: { min: 0, max: 60, step: 0.5 },
 } as const;
 
+/**
+ * 계단법의 설정.
+ *
+ * 이 값들은 이 페이지가 정한 것이다. 논문이 쓴 계단법의 걸음과 되돌이 횟수는 본문에 실려 있지 않아
+ * 옮겨 오지 않았다. 여기서는 화면 앞의 사람이 지루해지기 전에 끝나도록 골랐다.
+ */
+export const STAIRCASE = {
+  /** 처음 걸음(mm). */
+  step: 12,
+  /** 되돌아설 때마다 걸음에 곱하는 값. */
+  shrink: 0.5,
+  /** 이보다 작은 걸음은 쓰지 않는다(mm). 더 잘게 물어도 사람이 답할 수 없다. */
+  minStep: 0.5,
+  /** 이만큼 되돌아서면 계단이 끝난다. */
+  reversals: 6,
+  /** 문턱은 마지막 이만큼의 되돌이를 평균해서 낸다. 처음 몇 번은 걸음이 커서 거칠다. */
+  average: 4,
+} as const;
+
 /** 처음 놓여 있는 값. 논문의 기기와 같게 둔다. */
 export const INITIAL = { device: DEVICE_MM, reposition: REPOSITION_MM.mean } as const;

@@ -368,3 +368,114 @@
   color: var(--bbb-fg-muted);
   max-width: 68ch;
 }
+
+/* 문턱을 재는 계단 */
+
+.whoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bbb-space-3);
+  margin-bottom: var(--bbb-space-4);
+}
+
+.circles {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--bbb-space-6);
+  padding: var(--bbb-space-4) 0;
+}
+
+.circleBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--bbb-space-2);
+  margin: 0;
+}
+
+.disc {
+  display: block;
+  border-radius: 50%;
+  background: var(--bbb-fg);
+  transition: width 180ms ease-out, height 180ms ease-out;
+}
+
+.discSeen {
+  background: var(--bbb-accent);
+}
+
+.circleLabel {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.askRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bbb-space-3);
+  margin-bottom: var(--bbb-space-4);
+}
+
+.ask {
+  font-size: var(--bbb-text-0);
+}
+
+.answer {
+  padding: var(--bbb-space-2) var(--bbb-space-5);
+  font: inherit;
+  color: var(--bbb-accent);
+  background: transparent;
+  border: 1px solid var(--bbb-accent);
+  border-radius: var(--bbb-radius-sm);
+  cursor: pointer;
+}
+
+.answer:hover {
+  background: var(--bbb-accent);
+  color: var(--bbb-bg);
+}
+
+.plot {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto var(--bbb-space-4);
+  overflow: visible;
+}
+
+.plotLine {
+  fill: none;
+  stroke: var(--bbb-fg-muted);
+  stroke-width: 1.5;
+}
+
+.plotDot {
+  fill: var(--bbb-accent);
+}
+
+.plotMark {
+  stroke: var(--bbb-accent);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.mineResult {
+  margin-top: var(--bbb-space-4);
+  padding-top: var(--bbb-space-4);
+  border-top: 1px solid var(--bbb-border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+  align-items: flex-start;
+}
+
+.mineLine {
+  margin: 0;
+  font-size: var(--bbb-text-0);
+  font-variant-numeric: tabular-nums;
+}

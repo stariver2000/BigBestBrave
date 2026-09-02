@@ -61,3 +61,18 @@ export const RULER = { width: 560, height: 132, pad: 26 } as const;
 
 /** 자에 그릴 수 있는 가장 큰 크기(mm). 이보다 크면 눈금이 벗어난다. */
 export const RULER_MAX_MM = 190;
+
+/** 계단이 한 번 묻고 답하는 데 걸리는 시간(ms). 눈이 원의 크기 차이를 알아볼 만큼 느리게. */
+export const CLIMB_MS = 620;
+
+/** 계단이 오르내릴 수 있는 크기의 끝(mm). 두 원이 좁은 화면에서도 나란히 보이도록 잡았다. */
+export const LIMITS = { min: 20, max: 120 } as const;
+
+/** 계단이 출발하는 자리(mm). 올려 가며 잴 때는 아래에서, 내려 가며 잴 때는 위에서 시작한다. */
+export const START = { low: 28, high: 112 } as const;
+
+/** 밀리미터를 화면의 픽셀로 옮기는 배율. 실제 크기가 아니라 견주기 위한 크기다. */
+export const PX_PER_MM = 1.2;
+
+/** 계단이 걸어온 길을 그리는 그림의 크기와, 한 번에 보여 줄 걸음 수. */
+export const PLOT = { width: 240, height: 90, steps: 40, minSteps: 12 } as const;

@@ -29,3 +29,30 @@ export interface Reach {
   /** largest / smallest. 몇 배까지 흉내 낼 수 있는가. */
   span: number;
 }
+
+/** 계단법에서 한 번의 대답. 보이는 것이 쥔 것보다 큰가 작은가. */
+export type Answer = 'bigger' | 'smaller';
+
+/** 계단이 지금 걸어가는 쪽. */
+export type Direction = 'up' | 'down';
+
+/** 계단이 오르내릴 수 있는 크기의 끝(mm). */
+export interface RunLimits {
+  min: number;
+  max: number;
+}
+
+/** 계단 하나. 문턱 하나를 찾는 동안의 상태 전부다. */
+export interface Run {
+  /** 지금 보이는 크기(mm). */
+  level: number;
+  /** 지금 걸음의 크기(mm). 되돌아설 때마다 반으로 줄어든다. */
+  step: number;
+  /** 지금 걸어가는 쪽. 아직 한 걸음도 걷지 않았으면 null. */
+  moving: Direction | null;
+  /** 되돌아선 자리들(mm). */
+  reversals: number[];
+  /** 지나온 자리 전부(mm). 화면이 걸어온 길을 그린다. */
+  trail: number[];
+  done: boolean;
+}

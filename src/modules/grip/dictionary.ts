@@ -11,6 +11,10 @@ export type GripKey =
   | 'two-title' | 'two-bias' | 'two-bias-note' | 'two-width' | 'two-width-note'
   | 'so-title' | 'so-body'
   | 'reach-title' | 'reach-note' | 'reach-haptic' | 'reach-visual' | 'reach-span' | 'times'
+  | 'stair-title' | 'stair-note' | 'who-machine' | 'who-human' | 'take-over' | 'give-back'
+  | 'held' | 'seen' | 'ask' | 'yes' | 'no' | 'plot-alt'
+  | 'leg' | 'seq' | 'dir-up' | 'dir-down' | 'reversals' | 'found' | 'matches'
+  | 'your-window' | 'your-bias' | 'paper-bias' | 'your-lesson' | 'again'
   | 'table-title' | 'table-note'
   | 'col-seq' | 'col-asc' | 'col-desc' | 'col-ratio' | 'se'
   | 'prior-title' | 'prior-rigid' | 'prior-compliant' | 'prior-here'
@@ -64,6 +68,30 @@ export const gripDictionary: Dictionary<GripKey> = {
     'reach-span': '가장 큰 것 나누기 가장 작은 것',
     times: '배',
 
+    'stair-title': '문턱은 이렇게 잽니다',
+    'stair-note': '크기를 조금씩 바꿔 가며 묻고, 대답이 뒤집히면 걸음을 반으로 줄입니다. 되돌아선 자리들을 평균한 것이 문턱입니다. 표의 숫자 하나하나가 이렇게 나왔습니다.',
+    'who-machine': '논문의 문턱을 감춰 둔 가상의 손이 대답하는 중입니다. 계단이 그 자리를 찾아냅니다.',
+    'who-human': '이번엔 당신이 대답합니다. 두 원을 눈으로만 견주세요.',
+    'take-over': '내가 대답할래요',
+    'give-back': '가상의 손에게 돌려주기',
+    'held': '쥔 것',
+    'seen': '보이는 것',
+    'ask': '오른쪽이 왼쪽보다 큽니까?',
+    'yes': '크다',
+    'no': '작다',
+    'plot-alt': '계단이 오르내리며 문턱에 좁혀 드는 길',
+    'leg': '지금',
+    'seq': '차례',
+    'dir-up': '올려 가며',
+    'dir-down': '내려 가며',
+    'reversals': '되돌이',
+    'found': '찾아낸 문턱',
+    'matches': '표의 값',
+    'your-window': '당신의 창',
+    'your-bias': '당신의 치우침',
+    'paper-bias': '손에 쥐었을 때',
+    'your-lesson': '눈으로만 두 원을 견주면 치우침이 거의 없습니다. 그런데 왼쪽이 그림이 아니라 손에 쥔 물건이 되면, 사람은 오른쪽이 40%쯤 커야 같은 크기라고 느낍니다. 눈과 손 사이에서만 생기는 어긋남입니다.',
+    'again': '다시 재 보기',
     'table-title': '논문이 잰 값',
     'table-note':
       '연구 1, 참가자 열두 명. 손가락을 옮기는 여섯 가지 차례마다 계단법으로 문턱을 재었습니다. 논문은 반복측정 분산분석에서 차례들 사이에 뜻있는 차이가 없다고 밝혔습니다(p = .472). 그래서 이 페이지는 여섯을 평균해 씁니다.',
@@ -134,6 +162,30 @@ export const gripDictionary: Dictionary<GripKey> = {
     'reach-span': 'largest over smallest',
     times: '×',
 
+    'stair-title': 'This is how a threshold is measured',
+    'stair-note': 'Change the size a little, ask, and halve the step whenever the answer flips. Average the turning points and that is the threshold. Every number in the table below was made this way.',
+    'who-machine': 'A virtual hand with the paper’s threshold hidden inside is answering. Watch the staircase find it.',
+    'who-human': 'Your turn to answer. Compare the two circles with your eyes only.',
+    'take-over': 'Let me answer',
+    'give-back': 'Give it back to the virtual hand',
+    'held': 'Held',
+    'seen': 'Seen',
+    'ask': 'Is the right one bigger than the left?',
+    'yes': 'Bigger',
+    'no': 'Smaller',
+    'plot-alt': 'The staircase walking up and down, closing in on the threshold',
+    'leg': 'Now',
+    'seq': 'Sequence',
+    'dir-up': 'ascending',
+    'dir-down': 'descending',
+    'reversals': 'Turning points',
+    'found': 'Threshold found',
+    'matches': 'In the table',
+    'your-window': 'Your window',
+    'your-bias': 'Your bias',
+    'paper-bias': 'held in the hand',
+    'your-lesson': 'Comparing two circles by eye, your bias is close to nothing. But when the left one stops being a picture and becomes an object in your hand, the right one has to be about 40% bigger before it feels the same size. That gap lives only between eye and hand.',
+    'again': 'Measure again',
     'table-title': 'What the paper measured',
     'table-note':
       'Study 1, twelve participants. A staircase found the threshold for each of six finger-repositioning sequences. A repeated-measures ANOVA found no significant difference between sequences (p = .472), so this page averages the six.',
@@ -204,6 +256,30 @@ export const gripDictionary: Dictionary<GripKey> = {
     'reach-span': '最大割る最小',
     times: '倍',
 
+    'stair-title': 'しきい値はこうやって測ります',
+    'stair-note': '大きさを少しずつ変えて尋ね、答えが裏返るたびに歩幅を半分にします。折り返した地点を平均したものがしきい値です。下の表の数字は一つ一つこうして生まれました。',
+    'who-machine': '論文のしきい値を隠し持った仮想の手が答えています。階段がその場所を見つけ出します。',
+    'who-human': '今度はあなたが答えます。二つの円を目だけで見比べてください。',
+    'take-over': '私が答えます',
+    'give-back': '仮想の手に返す',
+    'held': '握っているもの',
+    'seen': '見えているもの',
+    'ask': '右は左より大きいですか。',
+    'yes': '大きい',
+    'no': '小さい',
+    'plot-alt': '階段が上下しながらしきい値に迫っていく道',
+    'leg': '今',
+    'seq': '順番',
+    'dir-up': '上げながら',
+    'dir-down': '下げながら',
+    'reversals': '折り返し',
+    'found': '見つけたしきい値',
+    'matches': '表の値',
+    'your-window': 'あなたの窓',
+    'your-bias': 'あなたの偏り',
+    'paper-bias': '手に握ったとき',
+    'your-lesson': '目だけで二つの円を見比べると、偏りはほとんどありません。ところが左が絵ではなく手に握った物になると、右が40%ほど大きくないと同じ大きさに感じられません。目と手のあいだにだけ生まれるずれです。',
+    'again': 'もう一度測る',
     'table-title': '論文が測った値',
     'table-note':
       '研究1、参加者十二名。指を動かす六つの手順ごとに階段法で閾値を測りました。反復測定分散分析では手順間に有意差はありませんでした(p = .472)。ですからこのページは六つを平均します。',

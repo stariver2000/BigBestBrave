@@ -26,6 +26,7 @@ import {
 import { createTranslator, type Locale } from '../../../core/i18n';
 import { PAPER, RULER, RULER_MAX_MM } from '../config';
 import { gripDictionary, type GripKey } from '../dictionary';
+import { Staircase } from './Staircase';
 import styles from './grip.module.css';
 
 export function Grip({ locale }: { locale: Locale }) {
@@ -208,6 +209,10 @@ export function Grip({ locale }: { locale: Locale }) {
             </dd>
           </div>
         </dl>
+      </Panel>
+
+      <Panel title={t('stair-title')} note={t('stair-note')}>
+        <Staircase locale={locale} />
       </Panel>
 
       <Panel title={t('table-title')} note={t('table-note')}>

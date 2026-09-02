@@ -12,7 +12,9 @@ export {
   RANGE,
   REPORTED,
   REPOSITION_MM,
+  STAIRCASE,
   THRESHOLDS,
 } from './config';
 export { FELT_RATIO, hapticFor, LOWER_RATIO, reachOf, UPPER_RATIO, windowOf } from './window';
-export type { Reach, Window } from './types';
+export { answer, startRun, thresholdOf, virtualAnswer } from './staircase';
+export type { Answer, Direction, Reach, Run, RunLimits, Window } from './types';

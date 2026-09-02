@@ -71,7 +71,7 @@ export const gripNode: PageNode = {
     ornament: ['rule-lines'],
     'number-format': ['tabular'],
     'render-mode': ['client'],
-    'compute-budget': ['zero'],
+    'compute-budget': ['light'],
     'llm-usage': ['none'],
     'state-scope': ['stateless'],
     offline: ['full'],

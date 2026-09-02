@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  answer,
   DEVICE_MM,
   FELT_RATIO,
   hapticFor,
@@ -8,9 +9,15 @@ import {
   reachOf,
   REPORTED,
   REPOSITION_MM,
+  STAIRCASE,
+  startRun,
   THRESHOLDS,
+  thresholdOf,
   UPPER_RATIO,
+  virtualAnswer,
   windowOf,
+  type Answer,
+  type Run,
 } from '../../../src/core/illusion';
 
 /**
@@ -165,5 +172,87 @@ describe('되짚기', () => {
     const wanted = 90;
     const haptic = hapticFor(55, 26.6, wanted);
     expect(haptic).toBeCloseTo(wanted / FELT_RATIO, 9);
+  });
+});
+
+/**
+ * 계단법은 이 페이지가 보여 주려는 방법 그 자체다. 문턱은 한 번 물어서 나오지 않고
+ * 되돌아선 자리들을 평균해서 나온다 — 그 걸음이 정말 문턱을 찾아가는지 여기서 붙든다.
+ */
+describe('계단법', () => {
+  const limits = { min: 20, max: 200 };
+
+  /** 문턱이 hidden인 가상의 손에게 계단이 끝날 때까지 묻는다. */
+  function walk(hidden: number, from: number): Run {
+    let run = startRun(from, STAIRCASE.step);
+    for (let guard = 0; guard < 500 && !run.done; guard += 1) {
+      run = answer(run, virtualAnswer(run.level, hidden), limits);
+    }
+    return run;
+  }
+
+  it('가상의 손은 자기 문턱보다 큰 것만 크다고 답한다', () => {
+    expect(virtualAnswer(80, 79.865)).toBe('bigger');
+    expect(virtualAnswer(79, 79.865)).toBe('smaller');
+  });
+
+  it('크다고 답하면 작은 쪽으로, 작다고 답하면 큰 쪽으로 간다', () => {
+    const start = startRun(60, 12);
+    expect(answer(start, 'bigger', limits).level).toBe(48);
+    expect(answer(start, 'smaller', limits).level).toBe(72);
+  });
+
+  it('대답이 뒤집힌 자리가 되돌이이고, 그때 걸음이 반으로 준다', () => {
+    let run = startRun(60, 12);
+    run = answer(run, 'smaller', limits); // 72로 올라간다
+    expect(run.reversals).toHaveLength(0);
+    run = answer(run, 'bigger', limits); // 여기서 되돌아선다
+    expect(run.reversals).toEqual([72]);
+    expect(run.step).toBe(6);
+  });
+
+  it('걸음은 가장 작은 걸음보다 잘아지지 않는다', () => {
+    let run = startRun(60, STAIRCASE.minStep);
+    run = answer(run, 'smaller', limits);
+    run = answer(run, 'bigger', limits);
+    expect(run.step).toBe(STAIRCASE.minStep);
+  });
+
+  it('정해 둔 만큼 되돌아서면 끝난다', () => {
+    const run = walk(79.865, 40);
+    expect(run.done).toBe(true);
+    expect(run.reversals).toHaveLength(STAIRCASE.reversals);
+  });
+
+  it('끝난 계단은 더 묻지 않는다', () => {
+    const run = walk(79.865, 40);
+    expect(answer(run, 'bigger', limits)).toBe(run);
+  });
+
+  it('논문의 문턱을 감춰 두면 계단이 그 자리를 찾아낸다', () => {
+    // 여섯 차례를 모두 걸어 본다. 어느 자리에서 출발하든 찾아낸 값이 문턱에 붙어야 한다.
+    for (const row of THRESHOLDS) {
+      const up = thresholdOf(walk(row.ascending, 40))!;
+      const down = thresholdOf(walk(row.descending, 120))!;
+      expect(Math.abs(up - row.ascending)).toBeLessThan(1);
+      expect(Math.abs(down - row.descending)).toBeLessThan(1);
+    }
+  });
+
+  it('아직 되돌아서지 않았으면 문턱이 없다', () => {
+    expect(thresholdOf(startRun(60, 12))).toBeNull();
+  });
+
+  it('끝을 넘어가지 않는다', () => {
+    let run = startRun(limits.max, 12);
+    const said: Answer = 'smaller'; // 계속 큰 쪽으로 밀어 본다
+    for (let i = 0; i < 10; i += 1) run = answer(run, said, limits);
+    expect(run.level).toBe(limits.max);
+  });
+
+  it('걸어온 길을 남긴다', () => {
+    const run = walk(79.865, 40);
+    expect(run.trail.length).toBeGreaterThan(run.reversals.length);
+    expect(run.trail[0]).toBe(40);
   });
 });
