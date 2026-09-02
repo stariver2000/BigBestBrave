@@ -112,6 +112,21 @@ tests/core/<주제>/, tests/modules/<페이지>/
  import를 남겨 두면 그 순간부터 저장소 전체가 컴파일되지 않는다.
 4. 한 덩어리 작업을 마칠 때마다 `npx tsc --noEmit`과 `npx vitest run`을 돌려 초록인지 확인한다.
 
+### 6.3-1 서버는 제 빌드 디렉토리로 띄운다
+
+여러 세션이 동시에 `next dev`나 `next start`를 띄우면 **같은 `.next`를 서로 덮어**
+모든 라우트가 500으로 죽는다(2026-09-03에 실제로 났다: `Cannot find module './331.js'`).
+컴파일도 시험도 초록인데 화면만 죽으므로 원인을 찾기 어렵다.
+
+```bash
+NEXT_DIST_DIR=.next-<세션> PORT=<빈 포트> npm run dev
+```
+
+`next.config.mjs`의 `distDir`이 `NEXT_DIST_DIR`을 읽는다. `.next-*`는 `.gitignore`에 있다.
+
+끌 때는 **자기 PID만** 끈다. `pkill -f "next dev"`는 남의 서버까지 죽인다(같은 날 실제로 났다).
+띄울 때 `pgrep -f "next dev --port <포트>"`로 PID를 적어 두고 그것만 `kill`한다.
+
 ### 6.4 커밋
 
 작업이 초록일 때마다 커밋한다. 커밋이 없으면 누가 무엇을 언제 바꿨는지 되짚을 수 없고,
