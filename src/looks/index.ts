@@ -26,6 +26,7 @@ import { matVariables } from './mat';
 import { pagerVariables } from './pager';
 import { mirageVariables } from './mirage';
 import { palmVariables } from './palm';
+import { plateVariables } from './plate';
 import { prismVariables } from './prism';
 import { proofVariables } from './proof';
 import { pulseVariables } from './pulse';
@@ -75,6 +76,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   hedge: hedgeVariables,
   hush: hushVariables,
   reel: reelVariables,
+  plate: plateVariables,
   mat: matVariables,
 };
 

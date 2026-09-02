@@ -1,0 +1,384 @@
+/*
+ * 그림 계획 페이지의 배치.
+ *
+ * 왼쪽은 짜는 자리(계획·진단), 오른쪽은 읽는 자리(갈래표·말뭉치)다.
+ * 네 갈래의 표식색은 config.ts의 CATEGORY_COLORS에서 --cat 변수로 들어온다.
+ * 갈래표는 자기 컨테이너 안에서 가로 스크롤한다 - 페이지 몸통은 절대
+ * 가로로 흐르지 않는다. 좁은 화면(<1080px)에서는 한 기둥으로 접힌다.
+ */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.planColumn,
+.readColumn {
+  display: grid;
+  gap: 20px;
+  min-inline-size: 0;
+}
+
+@media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.dot {
+  inline-size: 9px;
+  block-size: 9px;
+  border-radius: 50%;
+  background: var(--cat);
+  flex-shrink: 0;
+}
+
+.empty {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.noteTitle {
+  margin: 12px 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+}
+
+/* ── 계획 판 ── */
+
+.planList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.planItem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.planName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--bbb-text-0);
+  min-inline-size: 0;
+  flex-wrap: wrap;
+}
+
+.planArrow {
+  color: var(--bbb-fg-muted);
+}
+
+.planCorpus {
+  grid-column: 1;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.planBadges {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.planRemove {
+  padding: 3px 8px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: none;
+  color: var(--bbb-fg-muted);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+}
+
+.addBlock {
+  margin-block-start: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.addLabel {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+  color: var(--bbb-fg-muted);
+}
+
+.typeGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.typeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--bbb-border-color);
+  border-inline-start: 3px solid var(--cat);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  text-align: start;
+}
+
+.typeButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.encodingRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ── 진단 판 ── */
+
+.mixRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.mixChips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mixChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cat) 12%, transparent);
+  font-size: var(--bbb-text-n1);
+}
+
+.qualLine {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.observationList {
+  margin: 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.unseenLine {
+  margin: 10px 0 0;
+  display: grid;
+  gap: 4px;
+}
+
+.unseenItem {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 갈래표 판 ── */
+
+.matrixScroll {
+  overflow-x: auto;
+  outline: none;
+}
+
+.matrixScroll:focus-visible {
+  box-shadow: 0 0 0 2px var(--bbb-focus);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.matrix {
+  border-collapse: collapse;
+  font-size: var(--bbb-text-n1);
+  min-inline-size: 440px;
+  inline-size: 100%;
+}
+
+.matrix th {
+  text-align: start;
+  font-weight: 600;
+  color: var(--bbb-fg-muted);
+  padding: 4px 4px;
+  border-block-end: 1px solid var(--bbb-border-strong);
+}
+
+.matrix td {
+  padding: 2px 3px;
+  border-block-end: 1px solid var(--bbb-border-color);
+}
+
+.matrixRowHead {
+  min-inline-size: 7em;
+}
+
+.matrixRowName {
+  white-space: nowrap;
+  font-weight: 500 !important;
+  color: var(--bbb-fg) !important;
+}
+
+.matrixRowName .dot {
+  display: inline-block;
+  margin-inline-end: 6px;
+}
+
+.num {
+  text-align: end !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding-inline-end: 4px !important;
+}
+
+.matrixCellWrap {
+  text-align: end;
+}
+
+.matrixCell {
+  inline-size: 100%;
+  min-inline-size: 2.2em;
+  padding: 4px 4px;
+  border: 1px solid transparent;
+  border-radius: var(--bbb-radius-sm);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  cursor: pointer;
+}
+
+.matrixCell[data-selected] {
+  border-color: var(--bbb-accent);
+  box-shadow: 0 0 0 1.5px var(--bbb-accent);
+}
+
+.matrixTotals td,
+.matrixTotals th {
+  border-block-start: 1px solid var(--bbb-border-strong);
+  border-block-end: none;
+  color: var(--bbb-fg-muted);
+}
+
+.keyboardHint {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.cellDetail {
+  margin-block-start: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.cellLine {
+  margin: 4px 0 0;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+}
+
+.cellNote {
+  margin: 6px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-accent);
+}
+
+.cellDefinition {
+  margin: 6px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.cellKinds {
+  margin: 6px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 말뭉치 판과 밝힘 ── */
+
+.corpusFacts {
+  margin: 0 0 8px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.pinList {
+  margin: 8px 0;
+  padding: 8px 10px 8px 26px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  font-size: var(--bbb-text-n1);
+  display: grid;
+  gap: 6px;
+}
+
+.siteNote {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.notes .noteTitle {
+  margin-block-start: 0;
+}
+
+.noteList {
+  margin: 0;
+  padding-inline-start: 18px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.relatedLink {
+  color: var(--bbb-accent);
+  text-underline-offset: 2px;
+}
