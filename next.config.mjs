@@ -20,11 +20,23 @@
 
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
 
-/** 개발 서버가 뜬 포트. `--port`/`-p` 플래그가 PORT 환경변수보다 앞선다. */
-function devPort() {
-  const flagAt = process.argv.findIndex((arg) => arg === '--port' || arg === '-p');
-  const fromFlag = flagAt >= 0 ? process.argv[flagAt + 1] : undefined;
-  return fromFlag ?? process.env.PORT ?? '3000';
+/**
+ * 개발 서버가 뜬 포트. 명령줄 플래그가 PORT 환경변수보다 앞선다.
+ *
+ * 네 꼴을 모두 읽어야 한다: `--port 3006` `-p 3006` `--port=3006` `-p=3006`.
+ * 등호꼴을 빠뜨리면 next는 3006에 붙는데 여기는 '3000'으로 떨어져,
+ * `--port=3006`과 `--port=3007`이 같은 디렉토리를 물고 서로를 죽인다 -
+ * 이 파일이 막으려는 바로 그 사고다. `devPort`를 내보내 시험이 붙든다.
+ */
+export function devPort(argv = process.argv, env = process.env) {
+  const flags = argv.filter((arg) => arg.startsWith('-'));
+  for (const arg of flags) {
+    const equals = /^(?:--port|-p)=(.+)$/.exec(arg);
+    if (equals !== null) return equals[1];
+  }
+  const spaced = argv.findIndex((arg) => arg === '--port' || arg === '-p');
+  if (spaced >= 0 && argv[spaced + 1] !== undefined) return argv[spaced + 1];
+  return env.PORT ?? '3000';
 }
 
 /** @type {import('next').NextConfig} */
