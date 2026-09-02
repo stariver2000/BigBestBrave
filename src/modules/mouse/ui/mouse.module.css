@@ -1,0 +1,269 @@
+/*
+ * 마우스의 배꼽 화면 스타일.
+ * 판(pad)은 매트의 어둠(#12151A) 위에 궤적만 빛나게 두고, 나머지는 토큰 변수를 읽는다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-5, 20px);
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 그리는 판 ─────────────────────────────────────────── */
+
+.pad {
+  display: block;
+  width: 100%;
+  aspect-ratio: 300 / 170;
+  margin-top: 10px;
+  background: #12151a;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.trace {
+  fill: none;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+
+.traceCustom {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+.slider input[type='range'] {
+  flex: 1;
+  min-width: 120px;
+  accent-color: var(--bbb-accent);
+}
+
+.sliderLabel {
+  font-weight: 600;
+}
+
+.sliderEnd {
+  color: var(--bbb-fg-muted);
+}
+
+.readout {
+  margin: 12px 0 0;
+  font-size: var(--bbb-text-0);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg);
+}
+
+/* ── 수식 ─────────────────────────────────────────────── */
+
+.equations {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.equation {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.equation dt {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.equation dd {
+  margin: 0;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-0);
+  color: var(--bbb-fg);
+}
+
+/* ── 실험 셈 ──────────────────────────────────────────── */
+
+.measures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.measureCaption {
+  margin: 0 0 8px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+  color: var(--bbb-fg-muted);
+}
+
+.measureRow {
+  display: grid;
+  grid-template-columns: 5.5em 1fr 3.5em auto;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.measureLabel {
+  color: var(--bbb-fg);
+}
+
+.barWrap {
+  height: 8px;
+  background: rgb(255 255 255 / 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  background: var(--bbb-accent);
+  opacity: 0.8;
+  border-radius: 4px;
+}
+
+.measureValue {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg);
+}
+
+/* ── 여섯 사람 ────────────────────────────────────────── */
+
+.humans {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.humanHead,
+.humanRow {
+  display: grid;
+  grid-template-columns: 5em 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--bbb-text-n1);
+}
+
+.humanHead {
+  color: var(--bbb-fg-muted);
+}
+
+.humanRow[data-average] {
+  border-top: 1px solid var(--bbb-border-color);
+  padding-top: 6px;
+  font-weight: 600;
+}
+
+.humanId {
+  color: var(--bbb-fg);
+}
+
+.humanId em {
+  font-style: normal;
+  color: var(--bbb-fg-muted);
+  font-size: 0.85em;
+}
+
+.slopeWrap {
+  position: relative;
+  display: block;
+  height: 10px;
+  background: rgb(255 255 255 / 0.05);
+  border-radius: 5px;
+}
+
+.slopeBar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--bbb-accent);
+  opacity: 0.75;
+  border-radius: 5px;
+}
+
+.slopeTick {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 1px;
+  background: var(--bbb-border-strong);
+}
+
+.slopeValue {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg);
+}
+
+/* ── 로봇 표 ──────────────────────────────────────────── */
+
+.robotTable {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.robotRow {
+  display: grid;
+  grid-template-columns: minmax(7em, auto) 1fr 1fr;
+  gap: 10px;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+}
+
+.robotLabel {
+  color: var(--bbb-fg-muted);
+}
+
+.robotCell {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg);
+}

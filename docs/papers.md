@@ -52,6 +52,7 @@
 | `/fence` | Good Fences Make Good Learning: How Self-Directed Language Learners Navigate LLM Delegation Decisions | CHI 2026 (SNU) |
 | `/whisper` | Chillbot: Content Moderation in the Backchannel | CSCW 2024 (KAIST·Stanford) |
 | `/script` | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) |
+| `/mouse` | Optimal Sensor Position for a Computer Mouse | CHI 2020 (Aalto·KAIST·DGIST) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 

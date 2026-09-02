@@ -1,0 +1,86 @@
+/**
+ * 마우스의 배꼽 페이지의 트리 노드.
+ * 루트에서 갈라진 서른한 번째 가지(손과 커서 사이의 번역을 뜯어보는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { mouseDictionary } from './dictionary';
+
+export const mouseNode: PageNode = {
+  id: 'mouse-sensor',
+  slug: 'mouse',
+  parentId: ROOT_ID,
+  title: {
+    ko: mouseDictionary.ko.title,
+    en: mouseDictionary.en.title,
+    ja: mouseDictionary.ja.title,
+  },
+  summary: {
+    ko: mouseDictionary.ko.summary,
+    en: mouseDictionary.en.summary,
+    ja: mouseDictionary.ja.summary,
+  },
+  capability: {
+    ko: mouseDictionary.ko.capability,
+    en: mouseDictionary.en.capability,
+    ja: mouseDictionary.ja.capability,
+  },
+  look: 'mat',
+  keywords: [
+    '마우스', '센서', '포인팅', '커서', '회전', '피츠 법칙', '게이밍',
+    'mouse', 'sensor position', 'pointing', 'cursor', 'rotation', 'Fitts', 'throughput', 'gaming',
+    'マウス', 'センサー', 'ポインティング', 'カーソル',
+  ],
+  traits: {
+    domain: ['design', 'ai', 'dev-tools'],
+    audience: ['general', 'professional'],
+    intent: ['entertain', 'teach', 'inform'],
+    stance: ['earnest'],
+    atmosphere: ['mysterious', 'cozy'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['glass'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
