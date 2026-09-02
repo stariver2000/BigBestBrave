@@ -1,0 +1,331 @@
+/*
+ * 엉킨 갈고리 화면 스타일.
+ * 그림의 부호색(상태·프롭·이펙트·경고)은 config의 NODE_COLORS가 들고 있고,
+ * 여기는 배치와 토큰 변수만 다룬다. 그림과 코드는 제 칸 안에서 가로 스크롤한다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-5, 20px);
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* ── 붙여 넣기 ───────────────────────────────────────── */
+
+.editor {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface);
+  color: var(--bbb-fg);
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.parseErrors {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+/* ── 코드 보기 ───────────────────────────────────────── */
+
+.codeGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, 3fr) minmax(220px, 2fr);
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .codeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.code {
+  margin: 0;
+  padding: 14px;
+  overflow-x: auto;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-fg);
+  font-family: var(--bbb-font-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.chipColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chipGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chipComponent {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: 999px;
+  background: var(--bbb-surface);
+  color: var(--bbb-fg);
+  font-family: var(--bbb-font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.chip[data-picked] {
+  border-color: var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  box-shadow: 0 0 0 1px var(--bbb-accent);
+}
+
+.chip[data-flagged] {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 1px #dc2626;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+/* ── 그림 보기 ───────────────────────────────────────── */
+
+.diagramScroll {
+  overflow-x: auto;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface);
+}
+
+.diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.edge {
+  fill: none;
+  stroke: var(--bbb-border-strong);
+  stroke-width: 1.3;
+}
+
+.edge[data-flagged] {
+  stroke-width: 2;
+}
+
+.componentBox {
+  fill: var(--bbb-surface);
+  stroke-width: 1.4;
+}
+
+.componentName {
+  font-family: var(--bbb-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--bbb-fg);
+}
+
+.node {
+  cursor: pointer;
+}
+
+.nodeName {
+  font-family: var(--bbb-font-mono);
+  font-size: 10px;
+  fill: var(--bbb-fg);
+}
+
+.flagBack {
+  opacity: 0.14;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dashSwatch {
+  width: 18px;
+  border-top: 2px dashed var(--bbb-border-strong);
+}
+
+/* ── 채점 ───────────────────────────────────────────── */
+
+.pickedLine {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.scoreBlock {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.scoreLine {
+  margin: 0;
+  font-size: var(--bbb-text-0);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg);
+}
+
+.truthTitle {
+  margin: 10px 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.findings {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+/* ── 갈래·실험 ──────────────────────────────────────── */
+
+.patterns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+
+.pattern dt {
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.pattern dd {
+  margin: 4px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+.studyRows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.studyPattern {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+.f1Row {
+  display: grid;
+  grid-template-columns: minmax(7em, 11em) 1fr 3.2em;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-size: var(--bbb-text-n1);
+}
+
+.f1Label {
+  color: var(--bbb-fg-muted);
+}
+
+.barWrap {
+  height: 9px;
+  background: var(--bbb-surface-raised);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  background: var(--bbb-border-strong);
+  border-radius: 5px;
+}
+
+.bar[data-strong] {
+  background: var(--bbb-accent);
+}
+
+.f1Value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg);
+}
+
+.studyPr {
+  margin: 2px 0 0;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+.llmChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

@@ -1,0 +1,87 @@
+/**
+ * 엉킨 갈고리 페이지의 트리 노드.
+ * 루트에서 갈라진 서른세 번째 가지(코드를 상자와 화살표로 옮겨 그리는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { hooksDictionary } from './dictionary';
+
+export const hooksNode: PageNode = {
+  id: 'tangled-hooks',
+  slug: 'hooks',
+  parentId: ROOT_ID,
+  title: {
+    ko: hooksDictionary.ko.title,
+    en: hooksDictionary.en.title,
+    ja: hooksDictionary.ja.title,
+  },
+  summary: {
+    ko: hooksDictionary.ko.summary,
+    en: hooksDictionary.en.summary,
+    ja: hooksDictionary.ja.summary,
+  },
+  capability: {
+    ko: hooksDictionary.ko.capability,
+    en: hooksDictionary.en.capability,
+    ja: hooksDictionary.ja.capability,
+  },
+  look: 'board',
+  keywords: [
+    '리액트', '훅', '앤티패턴', '코드 시각화', '프롭 드릴링', '리팩터링',
+    'React', 'Hooks', 'anti-pattern', 'software visualization', 'prop drilling', 'refactoring',
+    'useState', 'useEffect',
+    'リアクト', 'フック', 'アンチパターン',
+  ],
+  traits: {
+    domain: ['design', 'ai', 'dev-tools'],
+    audience: ['general', 'professional'],
+    intent: ['entertain', 'teach', 'inform'],
+    stance: ['earnest'],
+    atmosphere: ['mysterious', 'cozy'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['glass'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

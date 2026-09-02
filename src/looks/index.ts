@@ -18,6 +18,7 @@ import { gaugeVariables } from './gauge';
 import { hedgeVariables } from './hedge';
 import { hindsightVariables } from './hindsight';
 import { gardenVariables } from './garden';
+import { boardVariables } from './board';
 import { glowVariables } from './glow';
 import { hushVariables } from './hush';
 import { lensVariables } from './lens';
@@ -78,6 +79,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   reel: reelVariables,
   plate: plateVariables,
   mat: matVariables,
+  board: boardVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

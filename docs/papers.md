@@ -54,6 +54,7 @@
 | `/script` | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) |
 | `/figure` | A Scoping Review on How HCI Researchers Visualize Results of Thematic Analysis | CHI EA 2026 (SNU·KAIST·RIT) |
 | `/mouse` | Optimal Sensor Position for a Computer Mouse | CHI 2020 (Aalto·KAIST·DGIST) |
+| `/hooks` | HookLens: Visual Analytics for Understanding React Hooks Structures | PacificVis 2026 (SNU) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -65,7 +66,6 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | HookLens: Visual Analytics for Understanding React Hooks Structures | PacificVis 2026 (SNU) | 훅 구조를 코드에서 뽑아 보여 주기 (작업 중: bigbestbrave-d6) |
 | 3 | Distortion-aware Brushing for Reliable Cluster Analysis in Multidimensional Projections | TVCG 2026 (SNU 외) | 왜곡을 아는 브러싱 |
 | 4 | Towards More Explainable Nonlinear Dimensionality Reduction: A Feature-Driven Interaction Approach | TVCG 2026 (SNU) | 특징으로 설명하는 투영 |
 | 5 | Readability vs. Faithfulness: Unveiling Correlations between Graph Aesthetics and DR Quality | EuroVis 2026 GDxDR (SNU) | 보기 좋음과 충실함의 상관 |
