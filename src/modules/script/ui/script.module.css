@@ -1,0 +1,601 @@
+/*
+ * 대본 진단 페이지의 배치.
+ *
+ * 왼쪽은 일하는 자리(대본과 라벨 판), 오른쪽은 읽는 자리(비율·자리·조언)다.
+ * 여덟 갈래의 표식색은 config.ts의 CATEGORY_COLORS에서 --cat 변수로 들어온다.
+ * 좁은 화면(<1080px)에서는 한 기둥으로 접힌다.
+ */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.workColumn,
+.readColumn {
+  display: grid;
+  gap: 20px;
+  min-inline-size: 0;
+}
+
+@media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── 대본 입력 ── */
+
+.textarea {
+  inline-size: 100%;
+  box-sizing: border-box;
+  margin-block-start: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-0);
+  resize: vertical;
+}
+
+.urlNote {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-accent);
+}
+
+.empty {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.splitRule {
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 갈래 필터 ── */
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-block-end: 8px;
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: 999px;
+  background: var(--bbb-surface);
+  color: var(--bbb-fg-muted);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+}
+
+.filterChip[data-on] {
+  border-color: var(--cat);
+  color: var(--bbb-fg);
+}
+
+/* 꺼진 갈래의 점은 속을 비워 "여기 없음"을 그린다. */
+.filterChip:not([data-on]) .dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--cat);
+}
+
+.filterReset {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--bbb-accent);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.hiddenNote {
+  margin: 0 0 8px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.dot {
+  inline-size: 9px;
+  block-size: 9px;
+  border-radius: 50%;
+  background: var(--cat);
+  flex-shrink: 0;
+}
+
+/* ── 문장 판 ── */
+
+.board {
+  display: grid;
+  gap: 6px;
+  outline: none;
+}
+
+.board:focus-visible {
+  box-shadow: 0 0 0 2px var(--bbb-focus);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.row {
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+.row[data-selected] {
+  border-color: var(--bbb-border-strong);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+.rowMain {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  inline-size: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+/* 좁은 화면에서는 칩이 문장 폭을 다 뺏는다. 번호·칩을 윗줄로, 문장을 아랫줄 전체 폭으로. */
+@media (max-width: 560px) {
+  .rowMain {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+
+  .rowText {
+    order: 2;
+    min-inline-size: 100%;
+  }
+
+  .typeChip,
+  .unsetChip {
+    margin-inline-start: auto;
+  }
+}
+
+.rowIndex {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  min-inline-size: 1.6em;
+}
+
+.rowText {
+  flex: 1;
+  font-size: var(--bbb-text-0);
+  line-height: 1.55;
+}
+
+.typeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cat) 12%, transparent);
+  color: var(--bbb-fg);
+  font-size: var(--bbb-text-n1);
+  white-space: nowrap;
+}
+
+.unsetChip {
+  padding: 2px 8px;
+  border: 1px dashed var(--bbb-border-strong);
+  border-radius: 999px;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+  white-space: nowrap;
+}
+
+.suggestRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 12px 8px 38px;
+}
+
+.suggestText {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 유형 고르기 ── */
+
+.picker {
+  border-block-start: 1px solid var(--bbb-border-color);
+  padding: 8px 12px 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.pickerCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pickerCategory {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  border-inline-start: 3px solid var(--cat);
+}
+
+.pickerCategory[data-open] {
+  background: color-mix(in srgb, var(--cat) 12%, transparent);
+  border-color: var(--cat);
+}
+
+.pickerClear {
+  padding: 4px 9px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: none;
+  color: var(--bbb-fg-muted);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+}
+
+.pickerDigit {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.pickerTypes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+@media (max-width: 560px) {
+  .pickerTypes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.pickerType {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 9px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface);
+  color: var(--bbb-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  text-align: start;
+  cursor: pointer;
+}
+
+.pickerType[data-current] {
+  border-color: var(--cat);
+  background: color-mix(in srgb, var(--cat) 12%, transparent);
+}
+
+.typeDefinition {
+  display: block;
+  color: var(--bbb-fg-muted);
+  font-size: var(--bbb-text-n1);
+}
+
+.keyboardHint {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 구성 비율 ── */
+
+.bar {
+  display: flex;
+  block-size: 22px;
+  border-radius: var(--bbb-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--bbb-border-color);
+}
+
+.barSegment {
+  display: block;
+  block-size: 100%;
+}
+
+.table {
+  inline-size: 100%;
+  margin-block-start: 12px;
+  border-collapse: collapse;
+  font-size: var(--bbb-text-n1);
+}
+
+.table th {
+  text-align: start;
+  font-weight: 600;
+  color: var(--bbb-fg-muted);
+  padding: 4px 8px 4px 0;
+  border-block-end: 1px solid var(--bbb-border-strong);
+}
+
+.table td {
+  padding: 5px 8px 5px 0;
+  border-block-end: 1px solid var(--bbb-border-color);
+  vertical-align: baseline;
+}
+
+.num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cellName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.absentNote {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 자리 살피기 ── */
+
+.lanes {
+  display: grid;
+  gap: 8px;
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: 5.5em minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.lane[data-absent] {
+  opacity: 0.45;
+}
+
+.laneName {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  white-space: nowrap;
+}
+
+.laneTrack {
+  position: relative;
+  block-size: 16px;
+  border-radius: 999px;
+  background: var(--bbb-bg);
+  border: 1px solid var(--bbb-border-color);
+}
+
+.laneBand {
+  position: absolute;
+  inset-block: 2px;
+  border-radius: 999px;
+}
+
+.laneDot {
+  position: absolute;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+}
+
+/* 띠 밖의 점은 고리를 둘러 눈에 걸리게 한다. 잘못이 아니라 "여기 좀 봐"다. */
+.laneDot[data-outside] {
+  box-shadow: 0 0 0 2px var(--bbb-surface), 0 0 0 3.5px var(--bbb-fg);
+}
+
+.laneLegend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin: 12px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.legendBand {
+  inline-size: 18px;
+  block-size: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bbb-accent) 16%, transparent);
+}
+
+.legendDot {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--bbb-accent);
+}
+
+.legendOutside {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--bbb-accent);
+  box-shadow: 0 0 0 2px var(--bbb-surface), 0 0 0 3.5px var(--bbb-fg);
+}
+
+/* ── 지은이 조언 ── */
+
+.checkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.check {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2px 10px;
+  padding-block-end: 8px;
+  border-block-end: 1px solid var(--bbb-border-color);
+}
+
+.checkQuestion {
+  font-size: var(--bbb-text-0);
+}
+
+.checkNumbers {
+  grid-column: 1;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.check > :global(span[data-part='badge']) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+}
+
+.studyLine {
+  margin: 8px 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.studyColumns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .studyColumns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.studyHead {
+  margin: 0 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 600;
+}
+
+.studyList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--bbb-text-n1);
+}
+
+.studyList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-block: 2px;
+}
+
+.studyScore {
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+.discrepancy {
+  margin: 12px 0 0;
+  padding: 8px 10px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+/* ── 밝힘과 곁들임 ── */
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.noteTitle {
+  margin: 10px 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+}
+
+.notes .noteTitle {
+  margin-block-start: 0;
+}
+
+.noteList {
+  margin: 0;
+  padding-inline-start: 18px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.datasetFacts {
+  margin: 12px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.relatedLink {
+  color: var(--bbb-accent);
+  text-underline-offset: 2px;
+}

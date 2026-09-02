@@ -24,10 +24,12 @@ import { Fence, fenceNode } from './fence';
 import { Grip, gripNode } from './grip';
 import { Hidden, hiddenNode } from './hidden';
 import { Mist, mistNode } from './mist';
+import { Mouse, mouseNode } from './mouse';
 import { Reliability, projectionNode } from './projection';
 import { Rhythm, rhythmNode } from './rhythm';
 import { Route, routeNode } from './route';
 import { Rulers, rulersNode } from './rulers';
+import { Script, scriptNode } from './script';
 import { Space, spaceNode } from './space';
 import { Moment, momentNode } from './moment';
 import { Nudge, nudgeNode } from './nudge';
@@ -81,8 +83,10 @@ const PAGE_MODULES: PageModule[] = [
   { node: channelNode, Page: Channel },
   { node: distanceNode, Page: Distance },
   { node: hiddenNode, Page: Hidden },
+  { node: mouseNode, Page: Mouse },
   { node: fenceNode, Page: Fence },
   { node: whisperNode, Page: Whisper },
+  { node: scriptNode, Page: Script },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

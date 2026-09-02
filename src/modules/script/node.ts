@@ -1,0 +1,86 @@
+/**
+ * 대본 진단 페이지의 트리 노드.
+ * 루트에서 갈라진 서른 번째 가지(만드는 사람의 책상 위)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { scriptDictionary } from './dictionary';
+
+export const scriptNode: PageNode = {
+  id: 'howto-information-types',
+  slug: 'script',
+  parentId: ROOT_ID,
+  title: {
+    ko: scriptDictionary.ko.title,
+    en: scriptDictionary.en.title,
+    ja: scriptDictionary.ja.title,
+  },
+  summary: {
+    ko: scriptDictionary.ko.summary,
+    en: scriptDictionary.en.summary,
+    ja: scriptDictionary.ja.summary,
+  },
+  capability: {
+    ko: scriptDictionary.ko.capability,
+    en: scriptDictionary.en.capability,
+    ja: scriptDictionary.ja.capability,
+  },
+  look: 'reel',
+  keywords: [
+    '대본', '하우투', '영상', '유튜브', '분류', '라벨', '작가', '편집',
+    'script', 'how-to', 'video', 'taxonomy', 'label', 'creator', 'annotate',
+    '台本', 'ハウツー', '動画', '分類',
+  ],
+  traits: {
+    domain: ['design', 'education', 'film'],
+    audience: ['professional', 'general'],
+    intent: ['teach', 'inform'],
+    stance: ['earnest'],
+    atmosphere: ['cozy', 'urban'],
+    temperature: ['warm'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['morning'],
+    layout: ['split-screen'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['url-state'],
+    tone: ['warm', 'technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

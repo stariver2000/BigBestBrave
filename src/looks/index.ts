@@ -22,6 +22,7 @@ import { glowVariables } from './glow';
 import { hushVariables } from './hush';
 import { lensVariables } from './lens';
 import { marginVariables } from './margin';
+import { matVariables } from './mat';
 import { pagerVariables } from './pager';
 import { mirageVariables } from './mirage';
 import { palmVariables } from './palm';
@@ -29,6 +30,7 @@ import { prismVariables } from './prism';
 import { proofVariables } from './proof';
 import { pulseVariables } from './pulse';
 import { quiltVariables } from './quilt';
+import { reelVariables } from './reel';
 import { rippleVariables } from './ripple';
 import { scaleVariables } from './scale';
 import { sereneVariables } from './serene';
@@ -72,6 +74,8 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   veil: veilVariables,
   hedge: hedgeVariables,
   hush: hushVariables,
+  reel: reelVariables,
+  mat: matVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

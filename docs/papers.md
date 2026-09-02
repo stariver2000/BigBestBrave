@@ -51,6 +51,7 @@
 | `/hidden` | GhostUI: Unveiling Hidden Interactions in Mobile UI | CHI 2026 (SNU) |
 | `/fence` | Good Fences Make Good Learning: How Self-Directed Language Learners Navigate LLM Delegation Decisions | CHI 2026 (SNU) |
 | `/whisper` | Chillbot: Content Moderation in the Backchannel | CSCW 2024 (KAIST·Stanford) |
+| `/script` | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -62,11 +63,18 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 1 | Beyond Instructions: A Taxonomy of Information Types in How-to Videos | CHI 2023 (KAIST) | 하우투 영상 속 정보의 갈래 |
+| 1 | HookLens: Visual Analytics for Understanding React Hooks Structures | PacificVis 2026 (SNU) | 훅 구조를 코드에서 뽑아 보여 주기 |
+| 2 | A Scoping Review on How HCI Researchers Visualize Thematic Analysis Results | CHI EA 2026 (SNU) | 주제 분석 결과를 그리는 방식의 갈래 |
+| 3 | Distortion-aware Brushing for Reliable Cluster Analysis in Multidimensional Projections | TVCG 2026 (SNU 외) | 왜곡을 아는 브러싱 |
+| 4 | Towards More Explainable Nonlinear Dimensionality Reduction: A Feature-Driven Interaction Approach | TVCG 2026 (SNU) | 특징으로 설명하는 투영 |
+| 5 | Readability vs. Faithfulness: Unveiling Correlations between Graph Aesthetics and DR Quality | EuroVis 2026 GDxDR (SNU) | 보기 좋음과 충실함의 상관 |
+| 6 | DirectVis: Editing Code-Based Interactive Visualization with Direct Manipulation | PacificVis 2026 (SNU) | 코드 시각화를 손으로 고치기 |
 
-2026-09-01에 두 연구실 발표 목록에서 다시 채웠다. 서울대 HCIL은 연구실이 PDF를 직접
-올려 두어(hcil.snu.ac.kr/cms/uploads/...) 전문 걱정이 없다. 목록 페이지는 클라이언트
-렌더링이라 curl로는 비어 나오고 헤드리스 크롬으로 열어야 한다.
+2026-09-02에 서울대 HCIL 목록에서 다시 채웠다(헤드리스 크롬으로 열어야 한다).
+같은 날 KAIST HCI 발표 목록(hci.kaist.ac.kr)은 학교 보안 정책 페이지가 떠서 열리지
+않았다. 우회하지 않는다 - KAIST 것은 다음에 목록이 열리거나 OpenAlex로 조회해 고른다.
+KIXLAB 논문은 연구실 사이트(kixlab.github.io/website-files/...)가 PDF를 직접 올려 두어
+전문 걱정이 없다. /script의 Beyond Instructions도 거기서 받았다.
 
 ## 건너뛴 것
 
