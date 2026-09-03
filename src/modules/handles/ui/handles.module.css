@@ -1,0 +1,317 @@
+/*
+ * 손으로 고치는 차트 페이지의 배치.
+ *
+ * 왼쪽은 작업대(그림·손잡이·코드), 오른쪽은 읽는 자리(시연·논문·밝힘).
+ * 잡을 수 있는 것은 보랏빛(accent), 코드 쪽 짝은 짙은 청록(second) -
+ * 룩(handle)이 변수로 들고 있다. 좁은 화면(<1080px)에서는 한 기둥으로 접힌다.
+ */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.workColumn,
+.sideColumn {
+  display: grid;
+  gap: 20px;
+  min-inline-size: 0;
+}
+
+@media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.caveat {
+  margin: 0;
+  padding: 10px 12px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.noteTitle {
+  margin: 14px 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+}
+
+/* ── 그림 ── */
+
+.plot {
+  inline-size: 100%;
+  max-inline-size: 420px;
+  block-size: auto;
+  background: var(--bbb-surface-raised);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  touch-action: none;
+}
+
+.chartTitle {
+  fill: var(--bbb-fg);
+  font-size: 11px;
+  text-anchor: middle;
+  cursor: pointer;
+}
+
+.chartTitle[data-picked] {
+  fill: var(--bbb-accent);
+  font-weight: 700;
+}
+
+.axis {
+  stroke: var(--bbb-border-strong);
+  stroke-width: 1.2;
+  cursor: pointer;
+}
+
+.axis[data-picked] {
+  stroke: var(--bbb-accent);
+  stroke-width: 2.4;
+}
+
+.bar {
+  cursor: grab;
+  transition: opacity var(--bbb-duration-fast) var(--bbb-easing);
+}
+
+.bar[data-picked] {
+  stroke: var(--bbb-accent);
+  stroke-width: 1.6;
+}
+
+.bar[data-dragging] {
+  opacity: 0.55;
+  cursor: grabbing;
+}
+
+.tick {
+  fill: var(--bbb-fg-muted);
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.dropHint {
+  fill: var(--bbb-accent);
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 10px 0 0;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n1);
+}
+
+.legend[data-picked] {
+  border-color: var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendSwatch {
+  inline-size: 10px;
+  block-size: 10px;
+  border-radius: 2px;
+}
+
+.pickedLine {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-accent);
+}
+
+/* ── 손잡이 ── */
+
+.editRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lastEdit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 0;
+  font-size: var(--bbb-text-n1);
+}
+
+/* ── 코드 ── */
+
+.lineCount {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.codeList {
+  display: grid;
+  gap: 6px;
+}
+
+.codeBlock {
+  display: grid;
+  gap: 3px;
+  inline-size: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--bbb-border-color);
+  border-inline-start: 3px solid var(--bbb-second-color);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-fg);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.codeBlock[data-picked] {
+  border-color: var(--bbb-accent);
+  border-inline-start-color: var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+}
+
+.codeLabel {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  color: var(--bbb-second-color);
+}
+
+.codeBlock[data-picked] .codeLabel {
+  color: var(--bbb-accent);
+}
+
+.codeText {
+  margin: 0;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.notRun {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 시연 ── */
+
+.demoLine {
+  margin: 0 0 8px;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+.demoButton {
+  padding: 6px 14px;
+  border: 1px solid var(--bbb-accent);
+  border-radius: var(--bbb-radius-pill, 999px);
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.demoDone {
+  margin: 0;
+  font-size: var(--bbb-text-0);
+  color: var(--bbb-second-color);
+  font-weight: 700;
+}
+
+.handOver {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-inline-start: 3px solid var(--bbb-second-color);
+  background: var(--bbb-second-soft);
+  font-size: var(--bbb-text-n1);
+}
+
+/* ── 논문이 잰 것 ── */
+
+.mixed {
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  font-size: var(--bbb-text-n1);
+}
+
+.studyLine {
+  margin: 0 0 8px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.goalList {
+  margin: 12px 0 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 4px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 밝힘과 곁들임 ── */
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.notes .noteTitle {
+  margin-block-start: 0;
+}
+
+.noteList {
+  margin: 0;
+  padding-inline-start: 18px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.relatedLink {
+  color: var(--bbb-accent);
+  text-underline-offset: 2px;
+}

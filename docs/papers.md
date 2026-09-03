@@ -58,6 +58,7 @@
 | `/brush` | Distortion-aware Brushing for Reliable Cluster Analysis in Multidimensional Projections | IEEE TVCG 2026 (SNU·QCRI·Oklahoma) |
 | `/focus` | Towards More Explainable Nonlinear Dimensionality Reduction: A Feature-Driven Interaction Approach | IEEE TVCG 2026 (SNU) |
 | `/layout` | Readability vs. Faithfulness: Unveiling Correlations between Graph Aesthetics and DR Quality | EuroVis 2026 GDxDR (KAIST·SNU) |
+| `/handles` | DirectVis: Editing Code-Based Interactive Visualization with Direct Manipulation | PacificVis 2026 (SNU) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -69,7 +70,12 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 6 | DirectVis: Editing Code-Based Interactive Visualization with Direct Manipulation | PacificVis 2026 (SNU) | 코드 시각화를 손으로 고치기 |
+| (비어 있음) | | | |
+
+2026-09-04에 목록이 비었다. 다음 회차는 서울대 HCIL(hcil.snu.ac.kr/publications,
+클라이언트 렌더링이라 헤드리스 크롬으로 열어야 한다)과 OpenAlex에서 다시 채운다.
+KAIST 발표 목록(hci.kaist.ac.kr)은 2026-09-02에 학교 보안 페이지가 떠서 열리지
+않았다 - 우회하지 않고, 열리면 그때 집는다.
 
 2026-09-02에 서울대 HCIL 목록에서 다시 채웠다(헤드리스 크롬으로 열어야 한다).
 같은 날 KAIST HCI 발표 목록(hci.kaist.ac.kr)은 학교 보안 정책 페이지가 떠서 열리지

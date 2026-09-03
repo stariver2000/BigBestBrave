@@ -16,6 +16,7 @@ import { dossierVariables } from './dossier';
 import { dyadVariables } from './dyad';
 import { galleryVariables } from './gallery';
 import { gaugeVariables } from './gauge';
+import { handleVariables } from './handle';
 import { hedgeVariables } from './hedge';
 import { hindsightVariables } from './hindsight';
 import { gardenVariables } from './garden';
@@ -83,6 +84,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   plate: plateVariables,
   aperture: apertureVariables,
   truss: trussVariables,
+  handle: handleVariables,
   mat: matVariables,
   board: boardVariables,
   slide: slideVariables,

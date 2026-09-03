@@ -1,0 +1,86 @@
+/**
+ * 손으로 고치는 차트 페이지의 트리 노드.
+ * 루트에서 갈라진 가지 - 그림과 코드가 한 자리에서 만나는 작업대다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { handlesDictionary } from './dictionary';
+
+export const handlesNode: PageNode = {
+  id: 'direct-manipulation-charts',
+  slug: 'handles',
+  parentId: ROOT_ID,
+  title: {
+    ko: handlesDictionary.ko.title,
+    en: handlesDictionary.en.title,
+    ja: handlesDictionary.ja.title,
+  },
+  summary: {
+    ko: handlesDictionary.ko.summary,
+    en: handlesDictionary.en.summary,
+    ja: handlesDictionary.ja.summary,
+  },
+  capability: {
+    ko: handlesDictionary.ko.capability,
+    en: handlesDictionary.en.capability,
+    ja: handlesDictionary.ja.capability,
+  },
+  look: 'handle',
+  keywords: [
+    '차트', '편집', '직접조작', '코드', '시각화', '막대', '상호작용', '저작',
+    'chart', 'editing', 'direct manipulation', 'code', 'visualization', 'authoring',
+    'チャート', '編集', '直接操作', 'コード',
+  ],
+  traits: {
+    domain: ['data', 'design', 'dev-tools'],
+    audience: ['professional', 'general'],
+    intent: ['teach', 'explore'],
+    stance: ['earnest'],
+    atmosphere: ['futuristic', 'cozy'],
+    temperature: ['cool'],
+    brightness: ['bright'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['noon'],
+    layout: ['split-screen'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['url-state'],
+    tone: ['technical', 'warm'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['none'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
