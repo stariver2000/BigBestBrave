@@ -25,6 +25,7 @@ import { Fence, fenceNode } from './fence';
 import { Figure, figureNode } from './figure';
 import { Focus, focusNode } from './focus';
 import { Grip, gripNode } from './grip';
+import { Layout, layoutNode } from './layout';
 import { Hidden, hiddenNode } from './hidden';
 import { Hooks, hooksNode } from './hooks';
 import { Mist, mistNode } from './mist';
@@ -93,6 +94,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: scriptNode, Page: Script },
   { node: figureNode, Page: Figure },
   { node: focusNode, Page: Focus },
+  { node: layoutNode, Page: Layout },
   { node: hooksNode, Page: Hooks },
   { node: brushNode, Page: Brush },
 ];

@@ -1,0 +1,49 @@
+/*
+ * 'truss' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 제도판: 짙은 청록 지면에 옅은 모눈, 각진 모서리, 조용한 그림자.
+ */
+
+[data-look='truss'][data-part='frame']::before {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgb(230 240 240 / 0.028) 31px 32px),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgb(230 240 240 / 0.028) 31px 32px);
+}
+
+[data-look='truss'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='truss'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='truss'] [data-part='input'],
+[data-look='truss'] [data-part='segmented'] {
+  background: #0B1517;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+[data-look='truss'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #CB975C;
+  font-weight: 700;
+}
+
+[data-look='truss'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}
+
+[data-look='truss'] [data-part='badge'] {
+  border-radius: var(--bbb-radius-sm);
+}

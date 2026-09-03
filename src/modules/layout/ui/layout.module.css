@@ -1,0 +1,362 @@
+/*
+ * 배치의 두 얼굴 페이지의 배치.
+ *
+ * 왼쪽은 제도판(그래프와 두 눈금), 오른쪽은 읽는 자리(네 갈래·밝힘).
+ * 두 강조색은 룩(truss)이 변수로 들고 있다 - 호박빛은 보기 좋음,
+ * 청록빛은 속이지 않음. 좁은 화면(<1080px)에서는 한 기둥으로 접힌다.
+ */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.stageColumn,
+.sideColumn {
+  display: grid;
+  gap: 20px;
+  min-inline-size: 0;
+}
+
+@media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.caveat {
+  margin: 0;
+  padding: 10px 12px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+.noteTitle {
+  margin: 14px 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+}
+
+.hint {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 배치 판 ── */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 좁은 화면에서 둘을 나란히 두면 각자 좁아져 세로로 접힌다.
+   세로로 쌓아 각 줄이 폭을 다 쓰게 하면 선택지가 가로로 펴진다. */
+@media (max-width: 700px) {
+  .controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.goalWhat {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.stageRow {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  margin-block-start: 12px;
+}
+
+@media (max-width: 620px) {
+  .stageRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.plot {
+  inline-size: 100%;
+  max-inline-size: 300px;
+  block-size: auto;
+  aspect-ratio: 1;
+  background: var(--bbb-bg);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.edge {
+  stroke: var(--bbb-border-strong);
+  stroke-width: 1;
+  opacity: 0.75;
+}
+
+.node {
+  fill: var(--bbb-second-color);
+}
+
+.stageSide {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.countLine {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+}
+
+.runRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stepLine {
+  margin: 0;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 두 눈금 ── */
+
+.gaugeColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.gaugeHead {
+  margin: 0 0 6px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+}
+
+.gaugeList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.gaugeRow {
+  display: grid;
+  grid-template-columns: minmax(7em, 1.4fr) minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--bbb-text-n1);
+}
+
+@media (max-width: 560px) {
+  .gaugeRow {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .gaugeBarWrap {
+    grid-column: 1 / -1;
+  }
+}
+
+.gaugeName {
+  color: var(--bbb-fg);
+}
+
+.gaugeBarWrap {
+  block-size: 6px;
+  border-radius: 999px;
+  background: var(--bbb-bg);
+  border: 1px solid var(--bbb-border-color);
+  overflow: hidden;
+}
+
+.gaugeBar {
+  display: block;
+  block-size: 100%;
+}
+
+.gaugeValue {
+  font-family: var(--bbb-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+  min-inline-size: 3.6em;
+  text-align: end;
+}
+
+.gaugeDelta {
+  font-family: var(--bbb-font-mono);
+  font-variant-numeric: tabular-nums;
+  min-inline-size: 4em;
+  text-align: end;
+  color: var(--bbb-fg-muted);
+}
+
+.gaugeDelta[data-direction='up'] {
+  color: var(--bbb-second-color);
+}
+
+.gaugeDelta[data-direction='down'] {
+  color: var(--bbb-accent);
+}
+
+.gaugeEmpty {
+  grid-column: 2 / -1;
+  color: var(--bbb-fg-muted);
+}
+
+.deltaHint {
+  margin: 12px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 네 갈래 ── */
+
+.groupList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.group {
+  padding: 10px 12px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  background: var(--bbb-surface-raised);
+}
+
+/* 그룹 3(해가 되는 것)과 4(무관한 것)를 색으로 갈라 둔다. */
+.group[data-group='3'] {
+  border-inline-start: 3px solid var(--bbb-accent);
+}
+
+.group[data-group='4'] {
+  border-inline-start: 3px solid var(--bbb-border-strong);
+}
+
+.groupName {
+  margin: 0 0 6px;
+  font-size: var(--bbb-text-0);
+  font-weight: 700;
+  display: grid;
+  gap: 1px;
+}
+
+.groupOriginal {
+  font-size: var(--bbb-text-n1);
+  font-weight: 400;
+  color: var(--bbb-fg-muted);
+}
+
+.metricList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+  font-size: var(--bbb-text-n1);
+}
+
+.metric {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--bbb-fg-muted);
+}
+
+.metric[data-measured] {
+  color: var(--bbb-fg);
+}
+
+.metricRow {
+  font-family: var(--bbb-font-mono);
+  color: var(--bbb-fg-muted);
+  min-inline-size: 1.4em;
+}
+
+.metricTag {
+  margin-inline-start: auto;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.metric[data-measured] .metricTag {
+  color: var(--bbb-second-color);
+}
+
+.findingList {
+  margin: 14px 0 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.methodLine {
+  margin: 12px 0 0;
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  overflow-wrap: anywhere;
+}
+
+.revealBody {
+  margin: 0 0 8px;
+  font-size: var(--bbb-text-0);
+}
+
+.revealAverage {
+  margin: 0;
+  padding: 8px 10px;
+  border-inline-start: 3px solid var(--bbb-second-color);
+  background: var(--bbb-second-soft);
+  font-size: var(--bbb-text-n1);
+}
+
+/* ── 밝힘과 곁들임 ── */
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.notes .noteTitle {
+  margin-block-start: 0;
+}
+
+.noteList {
+  margin: 0;
+  padding-inline-start: 18px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.relatedLink {
+  color: var(--bbb-accent);
+  text-underline-offset: 2px;
+}

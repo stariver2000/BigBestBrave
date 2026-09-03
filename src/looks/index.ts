@@ -40,6 +40,7 @@ import { sereneVariables } from './serene';
 import { slideVariables } from './slide';
 import { threadVariables } from './thread';
 import { signalVariables } from './signal';
+import { trussVariables } from './truss';
 import { vaultVariables } from './vault';
 import { veilVariables } from './veil';
 
@@ -81,6 +82,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   reel: reelVariables,
   plate: plateVariables,
   aperture: apertureVariables,
+  truss: trussVariables,
   mat: matVariables,
   board: boardVariables,
   slide: slideVariables,

@@ -1,0 +1,86 @@
+/**
+ * 배치의 두 얼굴 페이지의 트리 노드.
+ * 루트에서 갈라진 가지 - 제도판 위에서 두 가치를 저울질하는 자리다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { layoutDictionary } from './dictionary';
+
+export const layoutNode: PageNode = {
+  id: 'graph-aesthetics-faithfulness',
+  slug: 'layout',
+  parentId: ROOT_ID,
+  title: {
+    ko: layoutDictionary.ko.title,
+    en: layoutDictionary.en.title,
+    ja: layoutDictionary.ja.title,
+  },
+  summary: {
+    ko: layoutDictionary.ko.summary,
+    en: layoutDictionary.en.summary,
+    ja: layoutDictionary.ja.summary,
+  },
+  capability: {
+    ko: layoutDictionary.ko.capability,
+    en: layoutDictionary.en.capability,
+    ja: layoutDictionary.ja.capability,
+  },
+  look: 'truss',
+  keywords: [
+    '그래프', '배치', '가독성', '충실도', '미학', '지표', '네트워크', '제도',
+    'graph', 'layout', 'readability', 'faithfulness', 'aesthetics', 'metric', 'network',
+    'グラフ', '配置', '可読性', '忠実度',
+  ],
+  traits: {
+    domain: ['data', 'science', 'design'],
+    audience: ['professional', 'academic'],
+    intent: ['teach', 'explore'],
+    stance: ['earnest'],
+    atmosphere: ['austere', 'futuristic'],
+    temperature: ['cool'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['split-screen'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['url-state'],
+    tone: ['technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};
