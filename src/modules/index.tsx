@@ -15,6 +15,7 @@ import { Redactor, redactorNode } from './redactor';
 import { Again, againNode } from './again';
 import { Areca, arecaNode } from './areca';
 import { Beeper, beeperNode } from './beeper';
+import { Brush, brushNode } from './brush';
 import { Channel, channelNode } from './channel';
 import { ChartAudit, chartNode } from './chart';
 import { Checkup, checkupNode } from './checkup';
@@ -91,6 +92,7 @@ const PAGE_MODULES: PageModule[] = [
   { node: scriptNode, Page: Script },
   { node: figureNode, Page: Figure },
   { node: hooksNode, Page: Hooks },
+  { node: brushNode, Page: Brush },
 ];
 
 const componentByNodeId = new Map<string, ComponentType<PageProps>>();

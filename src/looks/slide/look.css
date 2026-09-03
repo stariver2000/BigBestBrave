@@ -1,0 +1,45 @@
+/*
+ * 'slide' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 현미경 시야의 감각: 가라앉은 검푸른 지면, 가운데로 모이는 옅은 빛, 얇은 테.
+ */
+
+[data-look='slide'][data-part='frame']::before {
+  background:
+    radial-gradient(90% 60% at 50% -10%, rgb(240 180 41 / 0.06), transparent 60%),
+    radial-gradient(120% 70% at 50% 110%, rgb(116 131 154 / 0.06), transparent 60%);
+}
+
+[data-look='slide'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='slide'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='slide'] [data-part='input'],
+[data-look='slide'] [data-part='segmented'] {
+  background: #0B1016;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+[data-look='slide'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #C8941F;
+  font-weight: 700;
+}
+
+[data-look='slide'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}

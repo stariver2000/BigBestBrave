@@ -36,6 +36,7 @@ import { reelVariables } from './reel';
 import { rippleVariables } from './ripple';
 import { scaleVariables } from './scale';
 import { sereneVariables } from './serene';
+import { slideVariables } from './slide';
 import { threadVariables } from './thread';
 import { signalVariables } from './signal';
 import { vaultVariables } from './vault';
@@ -80,6 +81,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   plate: plateVariables,
   mat: matVariables,
   board: boardVariables,
+  slide: slideVariables,
 };
 
 /** 룩 id에 해당하는 변수. 알 수 없는 id면 기본 룩으로 떨어진다. */

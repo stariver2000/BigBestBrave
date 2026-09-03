@@ -1,0 +1,87 @@
+/**
+ * 왜곡을 아는 붓 페이지의 트리 노드.
+ * 루트에서 갈라진 서른네 번째 가지(눌린 그림이 하는 거짓말을 손으로 되돌리는 자리)다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { brushDictionary } from './dictionary';
+
+export const brushNode: PageNode = {
+  id: 'distortion-aware-brushing',
+  slug: 'brush',
+  parentId: ROOT_ID,
+  title: {
+    ko: brushDictionary.ko.title,
+    en: brushDictionary.en.title,
+    ja: brushDictionary.ja.title,
+  },
+  summary: {
+    ko: brushDictionary.ko.summary,
+    en: brushDictionary.en.summary,
+    ja: brushDictionary.ja.summary,
+  },
+  capability: {
+    ko: brushDictionary.ko.capability,
+    en: brushDictionary.en.capability,
+    ja: brushDictionary.ja.capability,
+  },
+  look: 'slide',
+  keywords: [
+    '차원 축소', '브러싱', '왜곡', '가짜 이웃', '군집', '투영', '시각 분석',
+    'dimensionality reduction', 'brushing', 'distortion', 'false neighbors', 'cluster',
+    'projection', 'visual analytics', 'SNN',
+    '次元削減', 'ブラッシング', '歪み',
+  ],
+  traits: {
+    domain: ['design', 'ai', 'dev-tools'],
+    audience: ['general', 'professional'],
+    intent: ['entertain', 'teach', 'inform'],
+    stance: ['earnest'],
+    atmosphere: ['mysterious', 'cozy'],
+    temperature: ['warm'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['single-column'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['glass'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['none'],
+    tone: ['warm', 'technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['rule-lines'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

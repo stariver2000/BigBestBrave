@@ -1,0 +1,163 @@
+/*
+ * 왜곡을 아는 붓 화면 스타일.
+ * 무리의 색과 렌즈 경계의 색은 config의 CLUSTER_COLORS·LENS_COLORS가 들고 있고,
+ * 여기는 배치와 토큰 변수만 다룬다.
+ */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-5, 20px);
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.targetPick {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--bbb-text-n1);
+}
+
+.targetLabel {
+  color: var(--bbb-fg-muted);
+}
+
+.swatchRow {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.targetSwatch {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+
+.targetSwatch[data-active] {
+  box-shadow: 0 0 0 2px var(--bbb-accent);
+  border-color: var(--bbb-accent);
+}
+
+/* ── 그림판 ─────────────────────────────────────────── */
+
+.board {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  background: #0b1016;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-md);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.point {
+  /* 재배치가 눈에 보이게 옮겨야 "빨려 들어온다"는 것이 읽힌다. */
+  transition: cx 260ms ease-out, cy 260ms ease-out, r 140ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .point {
+    transition: none;
+  }
+}
+
+.painter {
+  fill: rgb(240 180 41 / 0.08);
+  stroke: var(--bbb-accent);
+  stroke-width: 1.2;
+  pointer-events: none;
+}
+
+.lensRing {
+  fill: none;
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+  pointer-events: none;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.ring {
+  width: 12px;
+  height: 12px;
+  border: 1.5px dashed;
+  border-radius: 50%;
+}
+
+.score {
+  margin: 12px 0 0;
+  font-size: var(--bbb-text-0);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg);
+}
+
+/* ── 네 걸음 ────────────────────────────────────────── */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+
+.step dt {
+  font-weight: 700;
+  color: var(--bbb-fg);
+}
+
+.step dd {
+  margin: 4px 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.6;
+  color: var(--bbb-fg-muted);
+}
+
+.findings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
