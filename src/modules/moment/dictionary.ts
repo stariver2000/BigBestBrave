@@ -4,9 +4,15 @@ import type { Dictionary } from '../../core/i18n';
 
 export type MomentKey =
   | 'title' | 'summary' | 'capability' | 'paper-label' | 'full-text'
-  | 'demo-title' | 'demo-note' | 'demo-launch' | 'demo-overlay-title' | 'demo-overlay-body'
-  | 'demo-typed' | 'demo-continue' | 'demo-leave' | 'demo-wrong' | 'demo-left' | 'demo-continued'
-  | 'demo-again' | 'demo-why' | 'demo-why-note' | 'demo-more' | 'demo-less' | 'demo-mine'
+  | 'demo-title' | 'demo-note' | 'demo-overlay-title' | 'demo-overlay-body'
+  | 'demo-typed' | 'demo-continue' | 'demo-leave' | 'demo-wrong'
+  | 'demo-why' | 'demo-why-note' | 'demo-mine' | 'ex-title'
+  | 'app-short-video' | 'app-social' | 'app-game' | 'app-reading'
+  | 'band-morning' | 'band-afternoon' | 'band-evening' | 'band-night'
+  | 'day-for' | 'day-min' | 'day-score' | 'day-threshold' | 'day-urge'
+  | 'day-learned' | 'day-nothing' | 'day-accepted' | 'day-dismissed' | 'day-quiet'
+  | 'day-interval' | 'day-cooldown'
+  | 'why-long' | 'why-night' | 'why-here' | 'why-mine'
   | 'ladder-title' | 'ladder-note'
   | 'c-control' | 'c-personalized' | 'c-adaptiveWoExp' | 'c-adaptiveWExp'
   | 'cd-control' | 'cd-personalized' | 'cd-adaptiveWoExp' | 'cd-adaptiveWExp'
@@ -29,26 +35,46 @@ export const momentDictionary: Dictionary<MomentKey> = {
     'paper-label': '바탕이 된 연구',
     'full-text': '전문',
 
-    'demo-title': '겪어 보십시오',
+    'demo-title':
+      '당신이 가르치는 하루',
     'demo-note':
-      '이 논문의 개입은 이렇게 생겼습니다. 계속 보려면 열두 자리 숫자를 그대로 쳐야 합니다. 열두 자리는 논문이 정한 값입니다 - 선행 연구가 10~20자리를 중간 부담이라 했고, 이 마찰이 형벌이 아니라 지연이 되도록 고른 수입니다.',
-    'demo-launch': '앱을 계속 쓰려던 참이라고 치고, 개입을 띄워 봅니다',
+      '하루가 스스로 흐릅니다. 화면은 다섯 걸음마다 지금이 끼어들 때인지 다시 재고, 그렇다 싶으면 말을 겁니다. 계속 보려면 열두 자리 숫자를 그대로 쳐야 합니다 — 논문이 정한 값입니다. 당신이 어떻게 답하는지를 보고 화면이 배웁니다.',
     'demo-overlay-title': '지금 많이 보고 계십니다',
     'demo-overlay-body': '계속 보시려면 아래 숫자를 그대로 입력해 주세요.',
     'demo-typed': '입력',
     'demo-continue': '계속 쓰기',
     'demo-leave': '그만 보기',
     'demo-wrong': '숫자가 다릅니다. 다시 확인해 주세요.',
-    'demo-left': '내려놓으셨습니다. 실험에서는 이 선택이 수용도로 기록되었습니다.',
-    'demo-continued': '계속 쓰기를 고르셨습니다. 열두 자리를 다 치고도 계속 보는 것, 그것도 실험이 기록한 선택지였습니다.',
-    'demo-again': '다시 겪어 보기',
     'demo-why': '왜 지금인가',
     'demo-why-note':
-      '실제 시스템은 SHAP으로 계산한 상위 세 갈래를 여기 보여 줍니다. 다섯 갈래 가운데 어느 셋인지 고르는 것이 모델의 몫이었는데, 이 화면에는 모델이 없으므로 세 갈래를 골라 둔 채 보여 드립니다.',
-    'demo-more': '자세히 보기',
-    'demo-less': '접기',
+      '논문의 시스템은 SHAP으로 상위 세 갈래를 골라 사람에게 보여 주었습니다. 아래는 논문 표 2가 실은 아홉 예시로, 갈래와 사람이 읽을 말과 모델이 쓰던 이름의 세 층입니다. 이 화면의 개입이 대는 까닭은 이것이 아니라 이 화면 자신의 것입니다.',
     'demo-mine':
-      '이 시연은 예측하지 않습니다. 단추를 눌러야 뜹니다. 언제 띄울지 아는 것이 이 논문의 알맹이인데, 그 앎은 모델 안에 있고 모델은 여기 없습니다.',
+      '논문의 모델(XGBoost와 SHAP)은 여기 없습니다. 여기서 배우는 것은 규칙 하나뿐입니다 — 자리마다 당신이 받아들인 비율을 세고, 그 비율로 말을 걸지 말지 정합니다. 브라우저 안에서 돌고 아무것도 밖으로 나가지 않습니다. 논문에서 가져온 것은 두 값입니다:',
+    'ex-title': '논문은 이렇게 설명했다',
+    'app-short-video': '짧은 동영상',
+    'app-social': '소셜',
+    'app-game': '게임',
+    'app-reading': '읽기',
+    'band-morning': '아침',
+    'band-afternoon': '낮',
+    'band-evening': '저녁',
+    'band-night': '밤',
+    'day-for': '이어서',
+    'day-min': '분',
+    'day-score': '지금 점수',
+    'day-threshold': '말 거는 선',
+    'day-urge': '규칙이 낸 값',
+    'day-learned': '당신에게서 배운 것',
+    'day-nothing': '아직 아무것도 배우지 않았습니다. 처음에는 어느 자리에서나 반반으로 놓고 시작합니다.',
+    'day-accepted': '받아들임',
+    'day-dismissed': '넘김',
+    'day-quiet': '이제 이 자리에서는 말을 걸지 않습니다 —',
+    'day-interval': '다시 재는 간격',
+    'day-cooldown': '개입 뒤 쉬는 시간',
+    'why-long': '이어서 본 시간',
+    'why-night': '밤입니다',
+    'why-here': '이 자리에서 받아들이신 비율',
+    'why-mine': '이 까닭은 이 화면이 실제로 셈에 쓴 것입니다. 논문의 SHAP 계산이 아닙니다.',
 
     'ladder-title': '네 단계의 사다리',
     'ladder-note':
@@ -117,26 +143,46 @@ export const momentDictionary: Dictionary<MomentKey> = {
     'paper-label': 'The study behind this page',
     'full-text': 'Full text',
 
-    'demo-title': 'Go through it',
+    'demo-title':
+      'A day you teach',
     'demo-note':
-      'This is what the paper’s intervention looks like. To keep using the app you must retype twelve digits. Twelve is the paper’s number: prior work called 10 to 20 digits a medium load, chosen so the friction delays rather than punishes.',
-    'demo-launch': 'Say you were about to keep scrolling. Bring up the intervention.',
+      'The day runs on its own. Every five steps the screen asks itself whether now is the moment, and speaks up if it thinks so. To keep going you must type twelve digits exactly — the number the paper chose. How you answer is what it learns from.',
     'demo-overlay-title': 'You have been on this a while',
     'demo-overlay-body': 'To continue, type the digits below exactly.',
     'demo-typed': 'Your input',
     'demo-continue': 'Continue using',
     'demo-leave': 'Leave the app',
     'demo-wrong': 'The digits do not match. Check again.',
-    'demo-left': 'You put it down. In the experiment, this choice was recorded as receptivity.',
-    'demo-continued': 'You chose to continue. Typing all twelve digits and staying anyway was also a recorded outcome.',
-    'demo-again': 'Go through it again',
     'demo-why': 'Why now',
     'demo-why-note':
-      'The real system shows the top three feature categories computed with SHAP. Choosing which three was the model’s job; there is no model here, so three are shown pre-chosen.',
-    'demo-more': 'See more',
-    'demo-less': 'Fold',
+      'The real system used SHAP to pick the top three categories to show. Below are the nine examples from the paper’s Table 2 — the category, the readable phrase, and the model’s own feature name. The reasons this page gives are its own, not these.',
     'demo-mine':
-      'This demonstration predicts nothing. It appears when you press the button. Knowing when to appear is the heart of the paper, and that knowledge lives in the model, which is not here.',
+      'The paper’s model (XGBoost and SHAP) is not here. What learns here is a single rule: count how often you accepted in each situation, and let that ratio decide whether to speak. It runs inside your browser and nothing leaves it. Two values come from the paper:',
+    'ex-title': 'How the paper explained itself',
+    'app-short-video': 'Short video',
+    'app-social': 'Social',
+    'app-game': 'Game',
+    'app-reading': 'Reading',
+    'band-morning': 'Morning',
+    'band-afternoon': 'Afternoon',
+    'band-evening': 'Evening',
+    'band-night': 'Night',
+    'day-for': 'for',
+    'day-min': ' min',
+    'day-score': 'Score now',
+    'day-threshold': 'Speaks above',
+    'day-urge': 'from the rule',
+    'day-learned': 'What it learned from you',
+    'day-nothing': 'Nothing learned yet. Every situation starts at fifty-fifty.',
+    'day-accepted': 'accepted',
+    'day-dismissed': 'dismissed',
+    'day-quiet': 'It will not speak here any more —',
+    'day-interval': 'asks again every',
+    'day-cooldown': 'rests after each interruption for',
+    'why-long': 'Time in this app',
+    'why-night': 'It is night',
+    'why-here': 'You accepted here',
+    'why-mine': 'These reasons are the ones this page actually used. They are not the paper’s SHAP values.',
 
     'ladder-title': 'A ladder of four',
     'ladder-note':
@@ -205,26 +251,46 @@ export const momentDictionary: Dictionary<MomentKey> = {
     'paper-label': 'もとになった研究',
     'full-text': '全文',
 
-    'demo-title': '経験してみてください',
+    'demo-title':
+      'あなたが教える一日',
     'demo-note':
-      'この論文の介入はこういう姿です。使い続けるには十二桁の数字をそのまま打たなければなりません。十二桁は論文が決めた値です。先行研究が10〜20桁を中程度の負荷と呼び、この摩擦が罰ではなく遅延になるよう選ばれた数です。',
-    'demo-launch': 'アプリを使い続けようとしていたとして、介入を出してみます',
+      '一日がひとりでに流れます。画面は五歩ごとに今が割り込むときかを測り直し、そうだと思えば話しかけます。続けて見るには十二桁の数字をそのまま打たねばなりません — 論文が定めた値です。あなたの答え方から画面が学びます。',
     'demo-overlay-title': 'ずいぶん長く見ています',
     'demo-overlay-body': '続けるには、下の数字をそのまま入力してください。',
     'demo-typed': '入力',
     'demo-continue': '使い続ける',
     'demo-leave': 'やめる',
     'demo-wrong': '数字が違います。もう一度確かめてください。',
-    'demo-left': '手放しました。実験ではこの選択が受容度として記録されました。',
-    'demo-continued': '使い続けるを選びました。十二桁を打ち切ってなお見続けること、それも実験が記録した選択肢でした。',
-    'demo-again': 'もう一度経験する',
     'demo-why': 'なぜ今か',
     'demo-why-note':
-      '実際の仕組みはSHAPで計算した上位三つの区分をここに示します。どの三つかを選ぶのはモデルの仕事でしたが、この画面にモデルはないので、三つを選び置いたまま示します。',
-    'demo-more': '詳しく見る',
-    'demo-less': '畳む',
+      '実際のシステムはSHAPで上位三つの分類を選んで見せていました。以下は論文の表2にある九つの例で、分類・人が読める言い方・モデルが使う名前の三層です。この画面が挙げる理由はこれではなく、この画面自身のものです。',
     'demo-mine':
-      'この実演は予測しません。ボタンを押すと現れます。いつ現れるべきかを知ることこそこの論文の核心で、その知はモデルの中にあり、モデルはここにありません。',
+      '論文のモデル（XGBoostとSHAP）はここにありません。ここで学ぶのは規則ひとつだけです — 場面ごとにあなたが受け入れた割合を数え、その割合で話しかけるかどうかを決めます。ブラウザの中で回り、何も外に出ません。論文から受け取ったのは二つの値です:',
+    'ex-title': '論文はこう説明した',
+    'app-short-video': 'ショート動画',
+    'app-social': 'ソーシャル',
+    'app-game': 'ゲーム',
+    'app-reading': '読みもの',
+    'band-morning': '朝',
+    'band-afternoon': '昼',
+    'band-evening': '夕方',
+    'band-night': '夜',
+    'day-for': '続けて',
+    'day-min': '分',
+    'day-score': '今の点数',
+    'day-threshold': '話しかける線',
+    'day-urge': '規則が出した値',
+    'day-learned': 'あなたから学んだこと',
+    'day-nothing': 'まだ何も学んでいません。どの場面も最初は五分五分から始めます。',
+    'day-accepted': '受け入れ',
+    'day-dismissed': '無視',
+    'day-quiet': 'この場面ではもう話しかけません —',
+    'day-interval': '測り直す間隔',
+    'day-cooldown': '介入のあと休む時間',
+    'why-long': '続けて見た時間',
+    'why-night': '夜です',
+    'why-here': 'この場面で受け入れた割合',
+    'why-mine': 'この理由は、この画面が実際に計算に使ったものです。論文のSHAPではありません。',
 
     'ladder-title': '四つの段',
     'ladder-note':

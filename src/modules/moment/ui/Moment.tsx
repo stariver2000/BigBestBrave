@@ -24,20 +24,17 @@ import {
   SCALE,
   VISIT_REDUCTION,
   accuracyComposition,
-  digitsMatch,
   feedbackRate,
   fourWayAccuracyComposition,
-  frictionDigits,
   ratio,
   receptivityGain,
   type ConditionId,
 } from '../../../core/jitai';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { DEMO_CATEGORIES, PAPER } from '../config';
+import { PAPER } from '../config';
 import { momentDictionary, type MomentKey } from '../dictionary';
+import { Day } from './Day';
 import styles from './moment.module.css';
-
-type DemoState = 'idle' | 'shown' | 'left' | 'continued';
 
 /** 문구의 {자리}를 코어 값으로 채운다. 숫자를 사전에 박아 두면 코어와 어긋나도 아무도 모른다. */
 function fill(text: string, values: Record<string, string | number>): string {
@@ -53,34 +50,11 @@ const BAR_MAX = 2.1;
 export function Moment({ locale }: { locale: Locale }) {
   const t = createTranslator(momentDictionary, locale);
 
-  const [demo, setDemo] = useState<DemoState>('idle');
-  const [seed, setSeed] = useState(1);
-  const [typed, setTyped] = useState('');
-  const [wrong, setWrong] = useState(false);
-  const [detail, setDetail] = useState(false);
   const [condition, setCondition] = useState<ConditionId>('adaptiveWExp');
 
-  const digits = useMemo(() => frictionDigits(seed), [seed]);
   const compose3 = useMemo(() => accuracyComposition(), []);
   const compose4 = useMemo(() => fourWayAccuracyComposition(), []);
   const gain = useMemo(() => receptivityGain(), []);
-
-  const explaining = condition === 'adaptiveWExp';
-  const demoExamples = EXPLANATION_EXAMPLES.filter((entry) =>
-    (DEMO_CATEGORIES as readonly string[]).includes(entry.high),
-  );
-
-  const launch = () => {
-    setSeed((prev) => prev + 1);
-    setTyped('');
-    setWrong(false);
-    setDemo('shown');
-  };
-
-  const tryContinue = () => {
-    if (digitsMatch(digits, typed)) setDemo('continued');
-    else setWrong(true);
-  };
 
   /** 막대 하나. 값이 없으면(Control) 1.0이다. */
   const bar = (value: number, kind: 'accuracy' | 'receptivity') => (
@@ -116,77 +90,19 @@ export function Moment({ locale }: { locale: Locale }) {
       />
 
       <Panel title={t('demo-title')} note={t('demo-note')}>
-        <div className={styles.phone}>
-          {demo === 'idle' && (
-            <div className={styles.phoneIdle}>
-              <Button onClick={launch} variant="primary">
-                {t('demo-launch')}
-              </Button>
-            </div>
-          )}
+        <Day locale={locale} />
+      </Panel>
 
-          {demo === 'shown' && (
-            <div className={styles.overlay}>
-              <p className={styles.overlayTitle}>{t('demo-overlay-title')}</p>
-              {explaining && (
-                <div className={styles.why}>
-                  <span className={styles.whyLabel}>{t('demo-why')}</span>
-                  <div className={styles.whyChips}>
-                    {DEMO_CATEGORIES.map((category) => (
-                      <span key={category} className={styles.whyChip}>
-                        {category}
-                      </span>
-                    ))}
-                  </div>
-                  {detail && (
-                    <ul className={styles.whyDetail}>
-                      {demoExamples.map((entry) => (
-                        <li key={entry.feature}>
-                          <span className={styles.whyLow}>{entry.low}</span>
-                          <code className={styles.whyFeature}>{entry.feature}</code>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <button type="button" className={styles.whyToggle} onClick={() => setDetail(!detail)}>
-                    {detail ? t('demo-less') : t('demo-more')}
-                  </button>
-                  <p className={styles.fine}>{t('demo-why-note')}</p>
-                </div>
-              )}
-              <p className={styles.overlayBody}>{t('demo-overlay-body')}</p>
-              <p className={styles.digits}>{digits.replace(/(\d{4})(?=\d)/g, '$1 ')}</p>
-              <input
-                className={styles.digitInput}
-                value={typed}
-                inputMode="numeric"
-                autoComplete="off"
-                placeholder={t('demo-typed')}
-                onChange={(event) => {
-                  setTyped(event.target.value);
-                  setWrong(false);
-                }}
-              />
-              {wrong && <p className={styles.wrong}>{t('demo-wrong')}</p>}
-              <div className={styles.overlayActions}>
-                <Button onClick={tryContinue}>{t('demo-continue')}</Button>
-                <Button onClick={() => setDemo('left')} variant="primary">
-                  {t('demo-leave')}
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {(demo === 'left' || demo === 'continued') && (
-            <div className={styles.phoneIdle}>
-              <p className={styles.outcome} data-kind={demo}>
-                {demo === 'left' ? t('demo-left') : t('demo-continued')}
-              </p>
-              <Button onClick={launch}>{t('demo-again')}</Button>
-            </div>
-          )}
-        </div>
-        <p className={styles.note}>{t('demo-mine')}</p>
+      <Panel title={t('ex-title')} note={t('demo-why-note')}>
+        <ul className={styles.exList}>
+          {EXPLANATION_EXAMPLES.map((entry) => (
+            <li key={entry.feature} className={styles.exRow}>
+              <span className={styles.exHigh}>{entry.high}</span>
+              <span className={styles.exLow}>{entry.low}</span>
+              <code className={styles.whyFeature}>{entry.feature}</code>
+            </li>
+          ))}
+        </ul>
       </Panel>
 
       <Panel

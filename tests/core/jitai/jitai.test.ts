@@ -9,7 +9,22 @@
 import { describe, expect, it } from 'vitest';
 import {
   ACCURACY,
+  APPS,
+  bandOf,
   CONDITIONS,
+  contextOf,
+  EMPTY_MEMORY,
+  LOOP,
+  nextUse,
+  remember,
+  scoreOf,
+  shouldSpeak,
+  silenced,
+  urge,
+  weightOf,
+  type AppKind,
+  type Memory,
+  type Use,
   DESIGN,
   EFFECT_SIZES,
   EXPLANATION_EXAMPLES,
@@ -168,5 +183,141 @@ describe('마찰 과제', () => {
 
   it('쉬는 시간이 재는 간격보다 길다 - 개입 직후에 또 개입하지 않기 위해서다', () => {
     expect(DESIGN.cooldownMin).toBeGreaterThan(DESIGN.predictionIntervalMin);
+  });
+});
+
+/**
+ * 가장 작은 고리. 이 페이지가 오래 비워 두었던 자리다 — 논문의 알맹이는 "언제 끼어들지"를
+ * 사람에게서 배우는 것인데, 화면에는 그 결과만 있고 배우는 일이 없었다.
+ * 아래 시험이 붙드는 것은 하나다: 사람이 답한 대로 기계의 행동이 정말 달라지는가.
+ */
+describe('가장 작은 고리', () => {
+  const at = (hour: number, minutesInApp: number, app: AppKind = APPS[0]): Use => ({
+    atMin: hour * 60,
+    app,
+    minutesInApp,
+  });
+
+  it('하루를 네 시간대로 가른다', () => {
+    expect(bandOf(9 * 60)).toBe('morning');
+    expect(bandOf(14 * 60)).toBe('afternoon');
+    expect(bandOf(20 * 60)).toBe('evening');
+    expect(bandOf(23 * 60 + 30)).toBe('night');
+  });
+
+  it('맥락은 시간대와 앱 둘로만 가른다', () => {
+    expect(contextOf(at(20, 10, 'social'))).toBe('evening:social');
+    // 같은 시간대 안에서는 몇 분을 보았든 같은 맥락이다. 그래야 배울 거리가 쌓인다.
+    expect(contextOf(at(20, 40, 'social'))).toBe(contextOf(at(19, 5, 'social')));
+  });
+
+  it('오래 볼수록 과사용 쪽 점수가 오른다', () => {
+    expect(urge(at(14, 5))).toBeLessThan(urge(at(14, 30)));
+    expect(urge(at(14, LOOP.longMin))).toBe(1);
+  });
+
+  it('밤에는 같은 시간을 보아도 점수가 더 높다', () => {
+    expect(urge(at(23, 10))).toBeGreaterThan(urge(at(14, 10)));
+  });
+
+  it('아직 아무것도 묻지 않았으면 무게는 반이다', () => {
+    expect(weightOf(EMPTY_MEMORY, 'evening:social')).toBe(0.5);
+  });
+
+  it('넘길수록 그 자리에서 조용해지고, 받아들일수록 일찍 말을 건다', () => {
+    const use = at(20, 30, 'social');
+    let quiet: Memory = EMPTY_MEMORY;
+    let loud: Memory = EMPTY_MEMORY;
+    for (let i = 0; i < 4; i += 1) {
+      quiet = { ...remember(quiet, use, false), lastAtMin: null };
+      loud = { ...remember(loud, use, true), lastAtMin: null };
+    }
+    expect(scoreOf(quiet, use)).toBeLessThan(scoreOf(EMPTY_MEMORY, use));
+    expect(scoreOf(loud, use)).toBeGreaterThan(scoreOf(EMPTY_MEMORY, use));
+  });
+
+  it('배운 것은 그 맥락에만 남는다', () => {
+    const evening = at(20, 30, 'social');
+    const morning = at(9, 30, 'social');
+    const after = { ...remember(EMPTY_MEMORY, evening, false), lastAtMin: null };
+    expect(scoreOf(after, evening)).toBeLessThan(scoreOf(EMPTY_MEMORY, evening));
+    expect(scoreOf(after, morning)).toBe(scoreOf(EMPTY_MEMORY, morning));
+  });
+
+  it('개입 뒤 냉각 시간 안에는 아무리 점수가 높아도 말을 걸지 않는다', () => {
+    const use = at(20, LOOP.longMin, 'social');
+    expect(shouldSpeak(EMPTY_MEMORY, use)).toBe(true);
+    const justSpoke: Memory = { counts: {}, lastAtMin: use.atMin - (DESIGN.cooldownMin - 1) };
+    expect(shouldSpeak(justSpoke, use)).toBe(false);
+    const cooled: Memory = { counts: {}, lastAtMin: use.atMin - DESIGN.cooldownMin };
+    expect(shouldSpeak(cooled, use)).toBe(true);
+  });
+
+  it('넘기기를 되풀이하면 말을 걸던 자리에서 조용해진다', () => {
+    const use = at(20, LOOP.longMin, 'social');
+    let memory: Memory = EMPTY_MEMORY;
+    let quieted = false;
+    for (let i = 0; i < 6 && !quieted; i += 1) {
+      const after = remember(memory, use, false);
+      quieted = silenced(memory, after, use);
+      memory = after;
+    }
+    expect(quieted).toBe(true);
+  });
+
+  it('한 번의 대답으로는 배웠다고 하지 않는다', () => {
+    const use = at(20, LOOP.longMin, 'social');
+    const after = remember(EMPTY_MEMORY, use, false);
+    expect(silenced(EMPTY_MEMORY, after, use)).toBe(false);
+  });
+
+  it('냉각 때문에 잠깐 쉬는 것은 배워서 조용해진 것이 아니다', () => {
+    const use = at(20, LOOP.longMin, 'social');
+    const before: Memory = { counts: {}, lastAtMin: null };
+    const after: Memory = { counts: {}, lastAtMin: use.atMin };
+    expect(silenced(before, after, use)).toBe(false);
+  });
+
+  it('받아들인 자리에서는 조용해지지 않는다', () => {
+    const use = at(20, LOOP.longMin, 'social');
+    let memory: Memory = EMPTY_MEMORY;
+    for (let i = 0; i < 6; i += 1) {
+      const after = remember(memory, use, true);
+      expect(silenced(memory, after, use)).toBe(false);
+      memory = after;
+    }
+  });
+
+  it('흉내 낸 하루는 논문이 정한 간격만큼씩 흐른다', () => {
+    const first = { atMin: LOOP.startMin, app: APPS[0], minutesInApp: 0 };
+    const second = nextUse(first, 1, APPS);
+    expect(second.atMin - first.atMin).toBe(DESIGN.predictionIntervalMin);
+  });
+
+  it('같은 걸음이면 같은 하루가 나온다', () => {
+    const start = { atMin: LOOP.startMin, app: APPS[0], minutesInApp: 0 };
+    const once = nextUse(start, 7, APPS);
+    const twice = nextUse(start, 7, APPS);
+    expect(once).toEqual(twice);
+  });
+
+  it('앱을 바꾸면 이어 본 시간이 처음으로 돌아가고, 아니면 쌓인다', () => {
+    let use: Use = { atMin: LOOP.startMin, app: APPS[0], minutesInApp: 0 };
+    let switched = 0;
+    let stayed = 0;
+    for (let step = 0; step < 120; step += 1) {
+      const before = use;
+      use = nextUse(use, step, APPS);
+      if (use.app === before.app) {
+        expect(use.minutesInApp).toBe(before.minutesInApp + DESIGN.predictionIntervalMin);
+        stayed += 1;
+      } else {
+        expect(use.minutesInApp).toBe(DESIGN.predictionIntervalMin);
+        switched += 1;
+      }
+    }
+    // 하루가 한 앱에만 머물러도, 매 걸음 앱이 튀어도 볼 것이 없다.
+    expect(switched).toBeGreaterThan(0);
+    expect(stayed).toBeGreaterThan(switched);
   });
 });

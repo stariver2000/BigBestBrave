@@ -99,7 +99,7 @@
   color: var(--bbb-danger);
 }
 
-/* 왜 지금인지. 설명이 개입의 절반이므로 접었다 펴도 자리를 지킨다. */
+/* 왜 지금인지. 설명이 개입의 절반이므로 개입 화면 안에 늘 자리를 잡는다. */
 .why {
   display: flex;
   flex-direction: column;
@@ -131,47 +131,11 @@
   color: var(--bbb-accent);
 }
 
-.whyDetail {
-  margin: 0;
-  padding-inline-start: var(--bbb-space-3);
-  font-size: var(--bbb-text-n2);
-  line-height: 1.7;
-  color: var(--bbb-fg-muted);
-}
-
-.whyLow {
-  color: var(--bbb-fg);
-}
-
 .whyFeature {
   font-family: var(--bbb-font-mono);
   color: var(--bbb-fg-muted);
-}
-
-.whyToggle {
-  align-self: flex-start;
-  padding: 0;
-  border: none;
-  background: none;
-  color: var(--bbb-accent);
-  font-family: inherit;
-  font-size: var(--bbb-text-n2);
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-/* 결과 한 줄. 붙잡혔는지 놓여났는지가 색으로 갈린다. */
-.outcome {
-  margin: 0;
-  font-size: var(--bbb-text-1);
-}
-
-.outcome[data-kind='stopped'] {
-  color: var(--bbb-accent);
-}
-
-.outcome[data-kind='passed'] {
-  color: var(--look-warm, var(--bbb-fg-muted));
+  /* 띄어쓰기가 없는 식별자다. 끊어 주지 않으면 좁은 화면을 통째로 밀어낸다. */
+  overflow-wrap: anywhere;
 }
 
 /* ── 개입 방식의 사다리 ─────────────────────────────────── */
@@ -398,4 +362,146 @@
   align-items: center;
   gap: 8px;
   inline-size: 100%;
+}
+
+/* ── 흉내 낸 하루 ───────────────────────────────────────── */
+
+.dayHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-3);
+  margin-bottom: var(--bbb-space-3);
+}
+
+.clock {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-2);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-accent);
+}
+
+.dayNow {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.dayApp {
+  margin: 0;
+  font-size: var(--bbb-text-1);
+  font-weight: 600;
+}
+
+/* 점수 막대. 말을 거는 선이 어디인지 함께 그어 둔다. */
+.meter {
+  position: relative;
+  display: block;
+  inline-size: min(260px, 100%);
+  block-size: 10px;
+  border-radius: var(--bbb-radius-pill);
+  background: var(--bbb-surface);
+  border: 1px solid var(--bbb-border-color);
+  overflow: hidden;
+}
+
+.meterFill {
+  display: block;
+  block-size: 100%;
+  background: var(--bbb-accent);
+  transition: width 300ms ease-out;
+}
+
+.meterLine {
+  position: absolute;
+  inset-block: 0;
+  inline-size: 2px;
+  background: var(--bbb-border-strong);
+}
+
+.learned {
+  margin-top: var(--bbb-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bbb-space-2);
+}
+
+.learnedList {
+  margin: 0;
+  display: grid;
+  gap: var(--bbb-space-2);
+}
+
+.learnedRow {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr;
+  gap: var(--bbb-space-3);
+  align-items: center;
+  font-size: var(--bbb-text-n1);
+}
+
+.learnedRow dt {
+  color: var(--bbb-fg-muted);
+}
+
+.learnedRow dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bbb-space-2);
+}
+
+.learnedRow[data-quiet] dt {
+  color: var(--bbb-accent);
+  font-weight: 600;
+}
+
+.learnedCount {
+  color: var(--bbb-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.quietLine {
+  margin: 0;
+  font-size: var(--bbb-text-0);
+  color: var(--bbb-accent);
+}
+
+/* 논문 표 2의 아홉 예시. 갈래 · 읽을 수 있는 말 · 모델이 쓰던 이름. */
+.exList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--bbb-space-2);
+}
+
+.exRow {
+  display: grid;
+  /* 좁은 화면에서는 세 층을 위아래로 쌓는다. 모델이 쓰던 이름은 띄어쓰기가 없어 줄을 나눌 수 없다. */
+  grid-template-columns: 1fr;
+  gap: 4px;
+  align-items: baseline;
+  font-size: var(--bbb-text-n1);
+  padding-bottom: var(--bbb-space-2);
+  border-bottom: 1px solid var(--bbb-border-color);
+}
+
+@media (min-width: 720px) {
+  .exRow {
+    grid-template-columns: minmax(96px, auto) minmax(160px, 1fr) minmax(0, 1.4fr);
+    gap: var(--bbb-space-3);
+  }
+}
+
+.exRow:last-child {
+  border-bottom: none;
+}
+
+.exHigh {
+  color: var(--bbb-accent);
+}
+
+.exLow {
+  color: var(--bbb-fg);
 }
