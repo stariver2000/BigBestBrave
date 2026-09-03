@@ -3,6 +3,10 @@
 /**
  * 과제가 벌어지는 띠.
  *
+ * 사람이 시작하기 전에는 규칙으로 움직이는 손이 이 띠 위에서 같은 과제를 한다. 그 손이
+ * 만드는 좌표도 사람의 좌표와 똑같이 step()을 지나므로, 크로싱이 어긋나는 자리는 흉내가
+ * 아니라 규칙에서 그대로 나온다. 기계 손의 선택은 성적에 넣지 않는다 — 사람의 기록이 아니다.
+ *
  * 포인터의 가로 위치만 읽어 0~1로 옮기고, 화면 새로고침마다 방아쇠 상태 기계를 한 걸음 굴린다.
  * 매 프레임 굴리는 이유는 드웰 때문이다. 드웰은 **아무 일도 일어나지 않는 동안** 시간이 차야
  * 당겨지므로, 포인터 이벤트만 듣고 있으면 손을 멈춘 순간 시계도 멈춘다.
@@ -15,10 +19,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   beginSelection,
   DWELL_MS,
+  HAND,
+  handSettled,
+  handStep,
   initialState,
+  newHand,
   step,
   type Fire,
   type FullState,
+  type Hand,
   type Target,
   type Trigger,
 } from '../../../core/selection';
@@ -40,6 +49,10 @@ export interface LaneProps {
   /** 방금 고른 결과. 맞았으면 true. 잠깐 띠에 남긴다. */
   flash: 'ok' | 'miss' | null;
   haptics: boolean;
+  /** 사람이 시작하기 전, 규칙으로 움직이는 손이 대신 할 것인가. */
+  demo: boolean;
+  /** 기계 손이 한 번 골랐다. 노린 과녁을 골랐는지 알린다. */
+  onDemoFire: (hit: boolean) => void;
 }
 
 export function Lane({
@@ -52,12 +65,17 @@ export function Lane({
   selectionKey,
   flash,
   haptics,
+  demo,
+  onDemoFire,
 }: LaneProps) {
   const laneRef = useRef<HTMLDivElement>(null);
   const stateRef = useRef<FullState>(initialState(0));
   const pointerRef = useRef<{ x: number; pinched: boolean } | null>(null);
   const engagedRef = useRef(false);
   const insideRef = useRef<number | null>(null);
+  const handRef = useRef<Hand | null>(null);
+  const demoStateRef = useRef<FullState>(initialState(0, true));
+  const restRef = useRef(0);
   const [cursor, setCursor] = useState<number | null>(null);
   const [dwellProgress, setDwellProgress] = useState(0);
   const [trail, setTrail] = useState<{ x: number; at: number }[]>([]);
@@ -166,11 +184,66 @@ export function Lane({
     return () => cancelAnimationFrame(raf);
   }, [running, trigger, targets, onFire, onEngage, haptics]);
 
+  useEffect(() => {
+    if (!demo || running) return undefined;
+    let raf = 0;
+    let last = performance.now();
+    handRef.current = null;
+    demoStateRef.current = initialState(0, true);
+
+    const tick = (now: number) => {
+      raf = requestAnimationFrame(tick);
+      const dt = Math.min(50, now - last);
+      last = now;
+
+      if (handRef.current === null) {
+        const first = targets[0];
+        handRef.current = newHand(first.center, targets[targets.length - 1].id, Math.floor(now));
+        demoStateRef.current = initialState(first.center, true);
+        return;
+      }
+
+      const hand = handStep(handRef.current, targets, trigger, dt);
+      handRef.current = hand;
+      const result = step(trigger, demoStateRef.current, { x: hand.x, time: now, pinched: hand.pinch }, targets);
+      demoStateRef.current = result.state;
+
+      setCursor(hand.x);
+      setTrail((old) => [...old, { x: hand.x, at: now }].filter((p) => now - p.at < TRAIL_MS).slice(-90));
+      setDwellProgress(
+        trigger === 'dwell' && result.state.insideId !== null && result.state.armed
+          ? Math.min(1, (now - result.state.enteredAt) / DWELL_MS)
+          : 0,
+      );
+
+      if (result.fire) {
+        onDemoFire(result.fire.targetId === hand.askedId);
+        restRef.current = now;
+        handRef.current = null;
+        return;
+      }
+      // 다 하고도 아무 일이 없으면(크로싱이 취소된 때) 잠깐 쉬었다가 다시 시작한다.
+      if (handSettled(hand, trigger) && now - restRef.current > HAND.restMs) {
+        restRef.current = now;
+        handRef.current = null;
+      }
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      handRef.current = null;
+      setCursor(null);
+      setTrail([]);
+      setDwellProgress(0);
+    };
+  }, [demo, running, trigger, targets, onDemoFire]);
+
   return (
     <div
       ref={laneRef}
       className={styles.lane}
-      data-running={running || undefined}
+      data-running={running || demo || undefined}
       data-flash={flash ?? undefined}
       style={{ height: LANE.height }}
     >

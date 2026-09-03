@@ -2,16 +2,22 @@ import { describe, expect, it } from 'vitest';
 import {
   beginSelection,
   buildTrials,
+  comparable,
   conditionPoints,
   DWELL_MS,
+  handSettled,
+  handStep,
   initialState,
+  MIN_SELECTIONS,
   MULTI,
+  newHand,
   report,
   step,
   type FullState,
   type Selection,
   type Target,
   type Trigger,
+  type TriggerReport,
 } from '../../../src/core/selection';
 
 const TARGETS: Target[] = [
@@ -368,5 +374,146 @@ describe('판이 바뀔 때의 잠금', () => {
   it('잠그지 않으면 예전처럼 곧바로 반응한다', () => {
     const result = step('pinch', initialState(0.3), { x: 0.3, time: 0, pinched: true }, TARGETS);
     expect(result.fire).not.toBeNull();
+  });
+});
+
+/**
+ * 스스로 움직이는 손. 이 손이 있는 까닭은 성적을 내려는 것이 아니라, 과녁이 셋일 때
+ * 크로싱이 어긋나는 자리를 보이려는 것이다. 그러니 시험이 붙들 것도 성적이 아니라
+ * **손이 규칙대로 움직이는가**와 **그 어긋남이 실제로 일어나는가**다.
+ */
+describe('스스로 움직이는 손', () => {
+  const three: Target[] = [
+    { id: 0, center: 0.26, width: 0.06 },
+    { id: 1, center: 0.5, width: 0.06 },
+    { id: 2, center: 0.74, width: 0.06 },
+  ];
+
+  /** 손이 한 과녁을 마칠 때까지 굴린다. 판정은 사람이 할 때와 같은 step()이 한다. */
+  function run(trigger: Trigger, targets: readonly Target[], askedId: number, startX: number, seed: number) {
+    let hand = newHand(startX, askedId, seed);
+    // 사람이 할 때와 같게 잠근 채 시작한다. 시작 자리에 있던 과녁에서 나오는 것은 선택이 아니다.
+    let state: FullState = initialState(startX, true);
+    let time = 0;
+    let fired: { targetId: number | null } | null = null;
+    for (let guard = 0; guard < 600 && fired === null; guard += 1) {
+      time += 16;
+      hand = handStep(hand, targets, trigger, 16);
+      const result = step(trigger, state, { x: hand.x, time, pinched: hand.pinch }, targets);
+      state = result.state;
+      if (result.fire) fired = { targetId: result.fire.targetId };
+      if (handSettled(hand, trigger) && trigger !== 'cross') break;
+      if (trigger === 'cross' && hand.x <= 0.001) break;
+    }
+    return { fired, hand };
+  }
+
+  it('손은 노리는 과녁 쪽으로 간다', () => {
+    let hand = newHand(0.1, 2, 1);
+    for (let i = 0; i < 10; i += 1) hand = handStep(hand, three, 'dwell', 16);
+    expect(hand.x).toBeGreaterThan(0.1);
+    expect(hand.x).toBeLessThanOrEqual(three[2].center);
+  });
+
+  it('같은 걸음이면 같은 손이 나온다', () => {
+    const once = handStep(newHand(0.1, 1, 7), three, 'cross', 16);
+    const twice = handStep(newHand(0.1, 1, 7), three, 'cross', 16);
+    expect(once).toEqual(twice);
+  });
+
+  it('없는 과녁을 노리면 가만히 있는다', () => {
+    const hand = handStep(newHand(0.4, 99, 1), three, 'cross', 16);
+    expect(hand.x).toBe(0.4);
+  });
+
+  it('드웰은 가운데에 서서 기다린다', () => {
+    let hand = newHand(0.1, 1, 3);
+    for (let i = 0; i < 200 && !handSettled(hand, 'dwell'); i += 1) hand = handStep(hand, three, 'dwell', 16);
+    expect(Math.abs(hand.x - three[1].center)).toBeLessThan(0.02);
+    expect(hand.waited).toBeGreaterThanOrEqual(DWELL_MS);
+  });
+
+  it('핀치는 가운데에 닿은 뒤에야 신호를 보낸다', () => {
+    let hand = newHand(0.1, 1, 3);
+    let pinchedBeforeArriving = false;
+    for (let i = 0; i < 60; i += 1) {
+      hand = handStep(hand, three, 'pinch', 16);
+      if (hand.pinch && Math.abs(hand.x - three[1].center) > 0.02) pinchedBeforeArriving = true;
+      if (hand.pinch) break;
+    }
+    expect(pinchedBeforeArriving).toBe(false);
+    expect(hand.pinch).toBe(true);
+  });
+
+  it('크로싱은 들어온 쪽으로 되나온다', () => {
+    let hand = newHand(0.1, 1, 5);
+    for (let i = 0; i < 200 && !hand.leaving; i += 1) hand = handStep(hand, three, 'cross', 16);
+    const turned = hand.x;
+    for (let i = 0; i < 40; i += 1) hand = handStep(hand, three, 'cross', 16);
+    // 되돌아 나오므로 자리가 다시 작아진다.
+    expect(hand.x).toBeLessThan(turned);
+  });
+
+  it('과녁이 둘이면 크로싱이 노린 과녁을 고른다', () => {
+    const two: Target[] = [
+      { id: 0, center: 0.3, width: 0.06 },
+      { id: 1, center: 0.7, width: 0.06 },
+    ];
+    let picked = 0;
+    for (let seed = 0; seed < 12; seed += 1) {
+      const { fired } = run('cross', two, 1, 0.3, seed);
+      if (fired?.targetId === 1) picked += 1;
+    }
+    expect(picked).toBe(12);
+  });
+
+  it('과녁이 셋이면 지나가던 과녁이 골라지는 일이 생긴다', () => {
+    // 이것이 논문이 글로만 적어 둔 자리다. 맨 왼쪽에서 맨 오른쪽으로 가려면 가운데를 지나야 하고,
+    // 지나가던 손이 잠깐 뒤로 흔들리면 크로싱은 그것을 '골랐다'로 읽는다.
+    let wrong = 0;
+    for (let seed = 0; seed < 200; seed += 1) {
+      const { fired } = run('cross', three, 2, 0.26, seed);
+      if (fired !== null && fired.targetId !== 2) wrong += 1;
+    }
+    expect(wrong).toBeGreaterThan(0);
+  });
+
+  it('드웰은 지나가던 과녁을 고르지 않는다', () => {
+    // 드웰은 머물러야 당겨지므로 지나가는 것만으로는 아무 일도 없다.
+    for (let seed = 0; seed < 12; seed += 1) {
+      const { fired } = run('dwell', three, 2, 0.26, seed);
+      expect(fired?.targetId).toBe(2);
+    }
+  });
+});
+
+describe('견줄 수 있게 되었는가', () => {
+  const made = (trigger: Trigger, selectionCount: number): TriggerReport => ({
+    trigger,
+    intercept: 0,
+    slope: 0,
+    rSquared: 0,
+    throughput: 0,
+    movementTime: 0,
+    errorRate: 0,
+    reentries: 0,
+    points: [],
+    selectionCount,
+  });
+
+  it('방아쇠 하나만으로는 순서를 말할 수 없다', () => {
+    expect(comparable([made('cross', 24)])).toBe(false);
+  });
+
+  it('둘을 끝까지 해 보면 견줄 수 있다', () => {
+    expect(comparable([made('cross', MIN_SELECTIONS), made('dwell', MIN_SELECTIONS)])).toBe(true);
+  });
+
+  it('몇 번 골라 보다 만 것은 해 본 것이 아니다', () => {
+    expect(comparable([made('cross', 24), made('dwell', MIN_SELECTIONS - 1)])).toBe(false);
+  });
+
+  it('아무것도 없으면 견줄 것도 없다', () => {
+    expect(comparable([])).toBe(false);
   });
 });

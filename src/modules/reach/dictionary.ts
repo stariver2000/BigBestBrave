@@ -11,6 +11,7 @@ export type ReachKey =
   | 'h-cross' | 'h-dwell' | 'h-pinch'
   | 'lane-title' | 'lane-note' | 'start' | 'stop' | 'restart'
   | 'idle' | 'warmup' | 'progress' | 'done' | 'pinch-hint' | 'move-hint'
+  | 'hand-slip' | 'hand-mine' | 'both-done'
   | 'results-title' | 'results-note' | 'results-empty'
   | 'col-trigger' | 'col-mt' | 'col-er' | 'col-tp' | 'col-model' | 'col-fit' | 'col-tre' | 'col-n'
   | 'mine' | 'theirs'
@@ -54,12 +55,16 @@ export const reachDictionary: Dictionary<ReachKey> = {
     start: '시작',
     stop: '그만',
     restart: '다시',
-    idle: '시작을 누르고 띠 위로 커서를 옮기세요.',
+    idle: '규칙으로 움직이는 손이 대신 해 보고 있습니다. 시작을 누르면 당신 차례입니다.',
     warmup: '연습 판입니다. 성적에 넣지 않습니다.',
     progress: '판',
     done: '끝났습니다. 아래에서 성적을 보세요.',
     'pinch-hint': '과녁 위에서 누르거나 스페이스를 치세요.',
     'move-hint': '켜진 과녁으로 옮기세요.',
+
+    'hand-slip': '지나가던 과녁이 골라졌습니다. 크로싱은 들어온 모서리로 되나오면 고른 것으로 읽는데, 지나가던 손이 잠깐 뒤로 흔들리면 그 모양이 됩니다.',
+    'hand-mine': '이 손의 빠르기와 떨림은 이 페이지가 정한 값입니다. 여기서 나오는 어긋남의 잦기는 잰 값이 아니므로 논문의 오류율과 견주지 마세요. 기계 손의 선택은 아래 성적에 넣지 않습니다.',
+    'both-done': '이제 두 방식을 견줄 수 있습니다. 이 페이지가 견줄 수 있다고 한 것은 방식들 사이의 순서뿐입니다.',
 
     'results-title': '내 수치',
     'results-note':
@@ -132,12 +137,16 @@ export const reachDictionary: Dictionary<ReachKey> = {
     start: 'Start',
     stop: 'Stop',
     restart: 'Again',
-    idle: 'Press start, then move onto the lane.',
+    idle: 'A rule-driven hand is having a go. Press start and the lane is yours.',
     warmup: 'Practice trial — not counted.',
     progress: 'trial',
     done: 'Finished. Your numbers are below.',
     'pinch-hint': 'Click over the target, or press space.',
     'move-hint': 'Move to the lit target.',
+
+    'hand-slip': 'A target it was only passing over got selected. Crossing counts a return through the entry edge as a choice, and a hand that wobbles backwards while passing makes exactly that shape.',
+    'hand-mine': 'This hand’s speed and tremor are values this page chose. How often it slips is not a measurement, so do not compare it with the paper’s error rates. Nothing the hand selects is counted in the results below.',
+    'both-done': 'You can compare two methods now. The only comparison this page allows is the ordering between methods.',
 
     'results-title': 'Your numbers',
     'results-note':
@@ -210,12 +219,16 @@ export const reachDictionary: Dictionary<ReachKey> = {
     start: '開始',
     stop: 'やめる',
     restart: 'もう一度',
-    idle: '開始を押して、帯の上にカーソルを移してください。',
+    idle: '規則で動く手が代わりにやっています。開始を押せばあなたの番です。',
     warmup: '練習回です。成績には入れません。',
     progress: '回',
     done: '終わりました。下で成績をご覧ください。',
     'pinch-hint': '的の上で押すか、スペースを打ってください。',
     'move-hint': '光った的へ移してください。',
+
+    'hand-slip': '通り過ぎるだけの的が選ばれました。クロッシングは入った端から戻ることを「選んだ」と読むので、通りがかりに手が少し後ろへ揺れると、その形になります。',
+    'hand-mine': 'この手の速さと震えはこのページが決めた値です。ここでのずれの頻度は測った値ではないので、論文の誤り率と比べないでください。機械の手が選んだものは下の成績に入れません。',
+    'both-done': 'これで二つの方式を比べられます。このページが比べてよいと言ったのは、方式どうしの順序だけです。',
 
     'results-title': 'あなたの数値',
     'results-note':

@@ -10,6 +10,7 @@ export {
   BINARY_SELECTIONS,
   DWELL_MS,
   EFFECTIVE_WIDTH_FACTOR,
+  HAND,
   HAPTIC_MS,
   MULTI,
   PAPER_BINARY,
@@ -21,6 +22,8 @@ export {
 export { conditionPoints, report } from './fitts';
 export { buildTrials, type TaskKind, type Trial } from './task';
 export { beginSelection, initialState, step, type FullState, type StepResult } from './triggers';
+export { handSettled, handStep, newHand, type Hand } from './hand';
+export { comparable, MIN_SELECTIONS, MIN_TRIGGERS } from './compare';
 export type {
   ConditionPoint,
   Fire,

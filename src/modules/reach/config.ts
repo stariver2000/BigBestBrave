@@ -73,3 +73,6 @@ export const TRAIL_MS = 700;
 
 /** 방금 고른 결과를 띠에 남겨 두는 시간(ms). */
 export const FLASH_MS = 450;
+
+/** 기계 손이 지나가던 과녁을 골랐을 때, 그 사실을 띄워 두는 시간(ms). 이 페이지가 정한 값이다. */
+export const SLIP_MS = 4500;

@@ -8,8 +8,8 @@
  * 두 수치가 같은 조건에서 나온 것이 아니어서 눈이 먼저 견주면 안 되기 때문이다.
  */
 
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { Panel, PaperCard } from '../../../kit';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Panel, PaperCard, useReach } from '../../../kit';
 import {
   buildTrials,
   PAPER_BINARY,
@@ -22,9 +22,10 @@ import {
   type TaskKind,
   type Trigger,
   type TriggerReport,
+  comparable,
 } from '../../../core/selection';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { FLASH_MS, PAPER, TRIALS } from '../config';
+import { FLASH_MS, PAPER, SLIP_MS, TRIALS } from '../config';
 import { reachDictionary, type ReachKey } from '../dictionary';
 import { Lane } from './Lane';
 import { Scatter } from './Scatter';
@@ -51,6 +52,11 @@ export function Reach({ locale }: { locale: Locale }) {
   const [at, setAt] = useState<Cursor>({ trial: 0, selection: 0 });
   const [flash, setFlash] = useState<'ok' | 'miss' | null>(null);
   const [records, setRecords] = useState<Record<string, Selection[]>>({});
+  /** 기계 손이 방금 지나가던 과녁을 골랐는가. 잠깐 띄웠다 지운다. */
+  const [handSlip, setHandSlip] = useState(false);
+  const [compared, setCompared] = useState(false);
+  const slipTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reachPoint = useReach();
 
   // 앞선 선택이 끝난 시각과 자리. 이동 시간과 실제 이동 거리를 여기서 잰다.
   const lastRef = useRef<{ time: number; x: number } | null>(null);
@@ -111,6 +117,13 @@ export function Reach({ locale }: { locale: Locale }) {
     [askedId, isWarmup, task, trigger, trial, trials.length],
   );
 
+  const onDemoFire = useCallback((hit: boolean) => {
+    if (hit) return;
+    setHandSlip(true);
+    if (slipTimer.current) clearTimeout(slipTimer.current);
+    slipTimer.current = setTimeout(() => setHandSlip(false), SLIP_MS);
+  }, []);
+
   /** 이번 과제에서 방아쇠마다의 성적. 기록이 없는 방아쇠는 표에 나오지 않는다. */
   const reports = useMemo(
     () =>
@@ -119,6 +132,13 @@ export function Reach({ locale }: { locale: Locale }) {
         .map((entry) => report(entry.id, entry.data)),
     [records, task],
   );
+
+  // 알아차리는 자리 — 이 페이지가 견줄 수 있다고 한 것(방식들 사이의 순서)이 처음으로 손에 들어온 때.
+  useEffect(() => {
+    if (compared || !comparable(reports)) return;
+    setCompared(true);
+    reachPoint();
+  }, [reports, compared, reachPoint]);
 
   const paperOf = (id: Trigger) =>
     task === 'binary' ? PAPER_BINARY[id] : id === 'pinch' ? null : PAPER_MULTI[id];
@@ -233,7 +253,12 @@ export function Reach({ locale }: { locale: Locale }) {
           selectionKey={at.trial * 100 + at.selection}
           flash={flash}
           haptics={haptics}
+          demo={!running}
+          onDemoFire={onDemoFire}
         />
+        {!running && handSlip && <p className={styles.slip}>{t('hand-slip')}</p>}
+        {!running && <p className={styles.quiet}>{t('hand-mine')}</p>}
+        {compared && <p className={styles.slip} data-good>{t('both-done')}</p>}
       </Panel>
 
       <Panel title={t('results-title')} note={t('results-note')}>

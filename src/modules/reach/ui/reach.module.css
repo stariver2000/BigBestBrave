@@ -433,3 +433,15 @@
   color: var(--bbb-fg-muted);
   max-width: 68ch;
 }
+
+/* 기계 손이 어긋났을 때 잠깐 뜨는 줄. 성적이 아니라 규칙을 가리키는 말이다. */
+.slip {
+  margin: var(--bbb-space-2) 0 0;
+  font-size: var(--bbb-text-n1);
+  line-height: 1.7;
+  color: var(--bbb-accent);
+}
+
+.slip[data-good] {
+  color: var(--bbb-fg);
+}
