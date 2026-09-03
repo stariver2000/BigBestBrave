@@ -383,3 +383,86 @@
   font-size: var(--bbb-text-1);
   font-variant-numeric: tabular-nums;
 }
+
+/* ── 옆에서 계속 도는 대화 ──────────────────────────────── */
+
+.streamHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--bbb-space-3);
+  margin-bottom: var(--bbb-space-3);
+}
+
+.tally {
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+}
+
+.stream {
+  margin: 0 0 var(--bbb-space-3);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 한 번의 다시 묻기. 풀린 줄만 색을 얻는다 — 대부분은 얻지 못한다. */
+.turn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--bbb-space-2);
+  padding: 8px 12px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n1);
+}
+
+.turn[data-solved] {
+  border-color: var(--bbb-accent);
+}
+
+.turnSaid {
+  color: var(--bbb-fg);
+}
+
+.turnMark {
+  font-size: var(--bbb-text-n2);
+  letter-spacing: 0.06em;
+  color: var(--bbb-fg-muted);
+}
+
+.turn[data-solved] .turnMark {
+  color: var(--bbb-accent);
+}
+
+.compare {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bbb-space-5);
+  margin: var(--bbb-space-3) 0;
+}
+
+.compareCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.compareValue {
+  font-size: var(--bbb-text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.compareCell[data-mine] .compareValue {
+  color: var(--bbb-accent);
+}
+
+.outdid {
+  margin: 0 0 var(--bbb-space-3);
+  font-size: var(--bbb-text-0);
+  color: var(--bbb-accent);
+}

@@ -23,3 +23,13 @@ export {
 } from './config';
 export { chiSquare, impliedTotal, percentOf, type ChiSquareResult, type ContingencyRow } from './stats';
 export { gapFor, rankCodes, severest, shareOf, type GapReport, type RankedCode } from './tactics';
+export {
+  crowdEffect,
+  meanEffect,
+  MIN_PICKS,
+  outdoesCrowd,
+  pickCode,
+  resolved,
+  resolveRate,
+  shareOfCode,
+} from './conversation';

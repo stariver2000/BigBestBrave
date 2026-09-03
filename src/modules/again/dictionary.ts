@@ -13,6 +13,8 @@ export type AgainKey =
   | 't-repeat' | 't-specify' | 't-error' | 't-adapt' | 't-none'
   | 'unresolved-title' | 'unresolved-body' | 'nothing-share' | 'resolved-share'
   | 'ask-title' | 'ask-note' | 'ask-mine' | 'ask-copy' | 'ask-copied' | 'ask-empty' | 'ask-lead'
+  | 'stream-asked' | 'stream-solved' | 'stream-paper' | 'stream-waiting' | 'stream-fixed'
+  | 'stream-still' | 'stream-mine' | 'crowd-effect' | 'mine-effect' | 'outdid'
   | 'effect' | 'from-n' | 'thin-sample' | 'pooled'
   | 'c-T1' | 'c-T2' | 'c-T3' | 'c-T4' | 'c-T5' | 'c-T6' | 'c-T7'
   | 'c-T8' | 'c-T9' | 'c-T10' | 'c-T11' | 'c-T12' | 'c-T13'
@@ -87,7 +89,7 @@ export const againDictionary: Dictionary<AgainKey> = {
 
     'ask-title': '이렇게 다시 물어보십시오',
     'ask-note':
-      '효과 점수가 높았던 순서입니다. 눌러서 넣고 빼실 수 있습니다. 다섯 건이 안 되는 표본에서 나온 점수는 순위의 맨 뒤로 보냈습니다.',
+      '옆에서는 사람들이 계속 다시 묻고 있습니다. 어떤 수법을 쓰는지, 그래서 풀리는지 세어 보세요. 그 아래에서 당신은 잘 들었던 쪽을 골라 문장을 만들 수 있습니다. 효과 점수가 높았던 순서이고, 다섯 건이 안 되는 표본에서 나온 점수는 순위의 맨 뒤로 보냈습니다.',
     'ask-mine':
       '문장은 제가 썼습니다. 논문은 열세 가지 수법이 무엇인지 적었을 뿐 문장을 주지 않았습니다.',
     'ask-copy': '문장 복사',
@@ -99,6 +101,17 @@ export const againDictionary: Dictionary<AgainKey> = {
     'from-n': '건에서',
     'thin-sample': '표본이 적습니다',
     pooled: '이 무리의 표본이 적어 전체 값을 씁니다',
+
+    'stream-asked': '물어봄',
+    'stream-solved': '풀림',
+    'stream-paper': '논문',
+    'stream-waiting': '곧 누군가 다시 묻습니다.',
+    'stream-fixed': '풀렸다',
+    'stream-still': '그대로',
+    'stream-mine': '이 대화는 지어낸 것입니다. 어떤 수법이 나올지는 논문 표 3의 개수대로 뽑고, 풀렸는지는 논문이 밝힌 비율(전체 28%, 지식 높음 29%, 낮음 23.5%)로 굴립니다. 수법별 해결률은 논문에 그림으로만 실려 있어 어떤 수법을 골라도 같은 비율로 굴립니다.',
+    'crowd-effect': '사람들이 고른 대로',
+    'mine-effect': '당신이 고른 대로',
+    'outdid': '방금 사람들이 고르던 것보다 잘 들었던 쪽을 고르셨습니다. 위에서 흘러가는 문장 대부분은 그 반대쪽입니다.',
 
     'c-T1': '같은 것을 그대로 다시',
     'c-T2': '"다른 걸로" 한마디',
@@ -213,7 +226,7 @@ export const againDictionary: Dictionary<AgainKey> = {
 
     'ask-title': 'Try asking again like this',
     'ask-note':
-      'Ordered by the effectiveness people rated. Tap to add or drop. Scores drawn from fewer than five cases are pushed to the bottom.',
+      'Beside you, people keep asking again. Count what they reach for and how often it works. Below that you can pick the ones that scored higher and build a sentence. They are ordered by effect, and scores from fewer than five cases are pushed to the back.',
     'ask-mine':
       'The sentences are mine. The paper names the thirteen tactics but does not write them out.',
     'ask-copy': 'Copy the prompt',
@@ -225,6 +238,17 @@ export const againDictionary: Dictionary<AgainKey> = {
     'from-n': 'cases',
     'thin-sample': 'thin sample',
     pooled: 'too few cases in this group, using the overall figure',
+
+    'stream-asked': 'asked',
+    'stream-solved': 'solved',
+    'stream-paper': 'paper',
+    'stream-waiting': 'Someone is about to ask again.',
+    'stream-fixed': 'solved',
+    'stream-still': 'still wrong',
+    'stream-mine': 'This conversation is invented. Which tactic comes up is drawn by the counts in the paper’s Table 3, and whether it got solved is rolled at the rate the paper reports (28% overall, 29% for high knowledge, 23.5% for low). Per-tactic solve rates appear only inside the paper’s figures, so every tactic here is rolled at the same rate.',
+    'crowd-effect': 'The way people chose',
+    'mine-effect': 'The way you chose',
+    'outdid': 'You just picked higher-scoring ground than what people actually reached for. Most of the sentences drifting past above are the other kind.',
 
     'c-T1': 'Send the same thing again',
     'c-T2': 'Just say "another one"',
@@ -339,7 +363,7 @@ export const againDictionary: Dictionary<AgainKey> = {
 
     'ask-title': 'こう聞き直してみてください',
     'ask-note':
-      '効果の点数が高かった順です。押して入れたり外したりできます。5件に満たない標本から出た点数は末尾に回しました。',
+      'すぐ横で、人がずっと聞き直しています。どの手を使い、それで解決するのかを数えてみてください。その下で、あなたはよく効いた側を選んで文を作れます。効果の高い順で、五件に満たない標本から出た点数は末尾に回しています。',
     'ask-mine':
       '文は私が書きました。論文は十三の手立てが何かを記しただけで、文そのものは与えていません。',
     'ask-copy': '文をコピー',
@@ -351,6 +375,17 @@ export const againDictionary: Dictionary<AgainKey> = {
     'from-n': '件から',
     'thin-sample': '標本が少ない',
     pooled: 'この群は標本が少ないため全体の値を使います',
+
+    'stream-asked': '聞いた回数',
+    'stream-solved': '解決',
+    'stream-paper': '論文',
+    'stream-waiting': 'まもなく誰かが聞き直します。',
+    'stream-fixed': '解決した',
+    'stream-still': 'そのまま',
+    'stream-mine': 'この会話は作りものです。どの聞き直し方が出るかは論文の表3の件数どおりに引き、解決したかどうかは論文が示した割合（全体28%、知識が高い群29%、低い群23.5%）で振ります。聞き直し方ごとの解決率は論文では図の中にしかないため、どれを選んでも同じ割合で振ります。',
+    'crowd-effect': '人が選んだとおり',
+    'mine-effect': 'あなたが選んだとおり',
+    'outdid': '今、人が実際に選んでいたものより効いた側を選びました。上を流れていく文のほとんどは、その反対側です。',
 
     'c-T1': '同じものをそのまま',
     'c-T2': '「別のを」の一言',

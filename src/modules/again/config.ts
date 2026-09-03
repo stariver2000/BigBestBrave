@@ -71,3 +71,9 @@ export const BAR = { width: 168, height: 8 } as const;
 
 /** 권하는 수법을 몇 개까지 보여 줄 것인가. 다 보여 주면 고르지 못한다. */
 export const SUGGEST_LIMIT = 4;
+
+/**
+ * 옆에서 계속 도는 대화의 속도와 길이. 이 페이지가 정한 값이며 논문의 것이 아니다.
+ * 한 줄을 읽을 만큼 느리게, 화면을 넘기지 않을 만큼 짧게 잡았다.
+ */
+export const STREAM = { tickMs: 1600, keep: 6 } as const;

@@ -9,11 +9,19 @@
 import { describe, expect, it } from 'vitest';
 import {
   CODE_CATEGORY,
+  crowdEffect,
   DISSATISFACTION,
   DISSATISFACTION_BY_KNOWLEDGE,
   DISSATISFACTION_IDS,
+  meanEffect,
   MIN_COUNT_FOR_RANK,
+  MIN_PICKS,
+  outdoesCrowd,
+  pickCode,
   PROSE_PREFERENCE,
+  resolved,
+  resolveRate,
+  shareOfCode,
   REPORTED,
   TACTIC_CATEGORY,
   TACTIC_CATEGORY_BY_KNOWLEDGE,
@@ -306,5 +314,73 @@ describe('무엇을 권할 것인가', () => {
     expect(severest(DISSATISFACTION_IDS)).toBe('accuracy');
     expect(DISSATISFACTION.accuracy.count).toBeLessThan(DISSATISFACTION.intent.count);
     expect(severest([])).toBeNull();
+  });
+});
+
+/**
+ * 다시 묻는 일을 옆에서 세어 보는 자리. 여기서 지켜야 할 것은 하나다 —
+ * 굴림에 쓰는 숫자가 모두 논문의 숫자여야 하고, 논문에 없는 것을 굴림이 만들어 내면 안 된다.
+ */
+describe('다시 묻는 대화', () => {
+  it('수법을 뽑는 무게는 표 3의 개수 그대로다', () => {
+    // T4가 122건으로 가장 많다. 뽑히는 몫도 그 비율이어야 한다.
+    expect(shareOfCode('T4')).toBeCloseTo(122 / 336, 6);
+    const sum = (['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12','T13'] as const)
+      .reduce((total, code) => total + shareOfCode(code), 0);
+    expect(sum).toBeCloseTo(1, 9);
+  });
+
+  it('굴림의 처음과 끝은 첫 수법과 마지막 수법이다', () => {
+    expect(pickCode(0)).toBe('T1');
+    expect(pickCode(0.9999999)).toBe('T13');
+  });
+
+  it('많이 고른 수법이 많이 뽑힌다', () => {
+    const tally = new Map<string, number>();
+    for (let i = 0; i < 1000; i += 1) {
+      const code = pickCode(i / 1000);
+      tally.set(code, (tally.get(code) ?? 0) + 1);
+    }
+    // 고르게 훑었으므로 몫이 그대로 개수 비율로 나온다.
+    expect((tally.get('T4') ?? 0) / 1000).toBeCloseTo(shareOfCode('T4'), 2);
+    expect(tally.get('T4') ?? 0).toBeGreaterThan(tally.get('T1') ?? 0);
+  });
+
+  it('풀리는 비율은 논문이 밝힌 값이다', () => {
+    expect(resolveRate(null)).toBe(REPORTED.resolved);
+    expect(resolveRate('high')).toBe(REPORTED.resolvedHigh);
+    expect(resolveRate('low')).toBe(REPORTED.resolvedLow);
+    expect(resolved(REPORTED.resolved - 0.001, null)).toBe(true);
+    expect(resolved(REPORTED.resolved, null)).toBe(false);
+  });
+
+  it('열 번 물으면 일곱 번쯤은 그대로다', () => {
+    let solved = 0;
+    for (let i = 0; i < 1000; i += 1) if (resolved(i / 1000, null)) solved += 1;
+    expect(solved / 1000).toBeCloseTo(REPORTED.resolved, 2);
+  });
+
+  it('사람들이 고른 대로의 평균 효과는 표본이 넉넉한 칸에서만 낸다', () => {
+    const crowd = crowdEffect();
+    // 두 건에서 나온 8.00(T12)이 평균을 끌어올리지 못해야 한다.
+    expect(crowd).toBeGreaterThan(4);
+    expect(crowd).toBeLessThan(TACTIC_CODE.T12.mean as number);
+  });
+
+  it('잘 드는 수법만 고르면 사람들이 고른 대로를 넘어선다', () => {
+    // T6(6.45)과 T4(6.25)는 표본도 넉넉하고 점수도 높다.
+    expect(meanEffect(['T4', 'T6'])).toBeGreaterThan(crowdEffect());
+    expect(outdoesCrowd(['T4', 'T6'])).toBe(true);
+  });
+
+  it('그냥 다시 묻는 쪽만 고르면 넘어서지 못한다', () => {
+    expect(outdoesCrowd(['T1', 'T2'])).toBe(false);
+  });
+
+  it('하나만 고른 것은 고르는 방식이라 하지 않는다', () => {
+    expect(MIN_PICKS).toBe(2);
+    expect(outdoesCrowd(['T12'])).toBe(false);
+    expect(outdoesCrowd([])).toBe(false);
+    expect(meanEffect([])).toBeNull();
   });
 });

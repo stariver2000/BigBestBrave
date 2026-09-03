@@ -12,7 +12,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Badge, Button, Panel, PaperCard, Segmented, useClipboard, type SegmentedOption } from '../../../kit';
+import { Badge, Panel, PaperCard, Segmented, type SegmentedOption } from '../../../kit';
 import {
   DISSATISFACTION,
   DISSATISFACTION_BY_KNOWLEDGE,
@@ -23,17 +23,16 @@ import {
   TACTIC_IDS,
   chiSquare,
   gapFor,
-  rankCodes,
   severest,
   shareOf,
   type ContingencyRow,
   type DissatisfactionId,
   type Knowledge,
-  type TacticCode,
 } from '../../../core/dissatisfaction';
 import { createTranslator, type Locale } from '../../../core/i18n';
-import { BAR, PAPER, SCALE, SUGGEST_LIMIT } from '../config';
+import { BAR, PAPER, SCALE } from '../config';
 import { againDictionary, type AgainKey } from '../dictionary';
+import { Stream } from './Stream';
 import styles from './again.module.css';
 
 type Group = 'all' | Knowledge;
@@ -45,11 +44,9 @@ function scoreWidth(score: number): number {
 
 export function Again({ locale }: { locale: Locale }) {
   const t = createTranslator(againDictionary, locale);
-  const { copy, copiedKey } = useClipboard();
 
   const [picked, setPicked] = useState<DissatisfactionId[]>(['accuracy']);
   const [group, setGroup] = useState<Group>('all');
-  const [codes, setCodes] = useState<TacticCode[]>(['T4', 'T6']);
 
   const knowledge: Knowledge | null = group === 'all' ? null : group;
   const table = knowledge ? DISSATISFACTION_BY_KNOWLEDGE[knowledge] : DISSATISFACTION;
@@ -58,9 +55,6 @@ export function Again({ locale }: { locale: Locale }) {
 
   const focus = severest(picked);
   const gap = focus ? gapFor(focus, knowledge) : null;
-  const ranked = useMemo(() => rankCodes(knowledge), [knowledge]);
-  const suggestions = useMemo(() => ranked.filter((entry) => !entry.thin).slice(0, SUGGEST_LIMIT), [ranked]);
-
   const share = shareOf(picked, REPORTED.dissatisfactionTotal);
 
   // 우리가 옮겨 적은 표에서 논문의 검정값을 되짚는다. 맞는 것과 안 맞는 것이 하나씩 나온다.
@@ -86,14 +80,6 @@ export function Again({ locale }: { locale: Locale }) {
     ].map((row) => ({ ...row, agrees: Math.abs(row.ours - row.theirs) < 0.1 }));
   }, []);
 
-  const prompt = useMemo(() => {
-    if (codes.length === 0) return '';
-    const ordered = [...codes].sort(
-      (a, b) => ranked.findIndex((e) => e.code === a) - ranked.findIndex((e) => e.code === b),
-    );
-    return [t('ask-lead'), ...ordered.map((code) => t(`s-${code}` as AgainKey))].join(' ');
-  }, [codes, ranked, t]);
-
   const groupOptions: SegmentedOption<Group>[] = [
     { value: 'all', label: t('know-all') },
     { value: 'high', label: t('know-high') },
@@ -102,9 +88,6 @@ export function Again({ locale }: { locale: Locale }) {
 
   const toggle = (id: DissatisfactionId) =>
     setPicked((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-
-  const toggleCode = (code: TacticCode) =>
-    setCodes((prev) => (prev.includes(code) ? prev.filter((x) => x !== code) : [...prev, code]));
 
   return (
     <div className={styles.layout}>
@@ -223,51 +206,8 @@ export function Again({ locale }: { locale: Locale }) {
         </Panel>
       </div>
 
-      <Panel
-        title={t('ask-title')}
-        note={t('ask-note')}
-        actions={
-          prompt === '' ? null : (
-            <Button onClick={() => void copy(prompt, 'prompt')} variant="primary">
-              {copiedKey === 'prompt' ? t('ask-copied') : t('ask-copy')}
-            </Button>
-          )
-        }
-      >
-        <div className={styles.tactics}>
-          {suggestions.map((entry) => {
-            const on = codes.includes(entry.code);
-            return (
-              <button
-                key={entry.code}
-                type="button"
-                className={styles.tactic}
-                data-on={on}
-                aria-pressed={on}
-                onClick={() => toggleCode(entry.code)}
-              >
-                <span className={styles.tacticHead}>
-                  <span className={styles.tacticName}>{t(`c-${entry.code}` as AgainKey)}</span>
-                  <span className={styles.tacticScore}>{entry.effect.toFixed(2)}</span>
-                </span>
-                <span className={styles.bar} style={{ width: BAR.width }}>
-                  <span className={styles.barFill} style={{ width: `${scoreWidth(entry.effect) * 100}%` }} />
-                </span>
-                <span className={styles.tacticFine}>
-                  {t(`t-${entry.category}` as AgainKey)} · {entry.count} {t('from-n')}
-                  {entry.pooled ? ` · ${t('pooled')}` : ''}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {prompt === '' ? (
-          <p className={styles.empty}>{t('ask-empty')}</p>
-        ) : (
-          <p className={styles.prompt}>{prompt}</p>
-        )}
-        <p className={styles.note}>{t('ask-mine')}</p>
+      <Panel title={t('ask-title')} note={t('ask-note')}>
+        <Stream locale={locale} knowledge={knowledge} />
       </Panel>
 
       <Panel title={t('check-title')} note={t('check-note')}>
