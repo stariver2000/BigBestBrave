@@ -6,6 +6,7 @@
  * 이 계층이 있어야 페이지가 수백 개로 늘어도 "공식이 뽑아낸 밋밋한 화면"이 반복되지 않는다.
  */
 
+import { apertureVariables } from './aperture';
 import { atlasVariables } from './atlas';
 import { benchVariables } from './bench';
 import { blueprintVariables } from './blueprint';
@@ -79,6 +80,7 @@ const LOOKS: Record<string, () => Record<string, string>> = {
   hush: hushVariables,
   reel: reelVariables,
   plate: plateVariables,
+  aperture: apertureVariables,
   mat: matVariables,
   board: boardVariables,
   slide: slideVariables,

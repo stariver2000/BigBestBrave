@@ -1,0 +1,49 @@
+/*
+ * 'aperture' 룩의 부품 스타일.
+ * 이 파일은 이 룩만 소유한다(AGENTS.md 6.2-1).
+ *
+ * 광학대: 어두운 판, 호박빛 초점, 위쪽에서 비스듬히 드는 빛 한 줄기.
+ */
+
+[data-look='aperture'][data-part='frame']::before {
+  background:
+    radial-gradient(120% 60% at 78% -10%, rgb(233 180 76 / 0.10), transparent 62%),
+    radial-gradient(90% 45% at 8% 2%, rgb(111 197 232 / 0.06), transparent 58%);
+}
+
+[data-look='aperture'] [data-part='panel'] {
+  background: var(--bbb-surface);
+  border-color: var(--bbb-border-color);
+  box-shadow: var(--bbb-shadow-md);
+}
+
+[data-look='aperture'] [data-part='panel-title'] {
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--bbb-fg-muted);
+}
+
+[data-look='aperture'] [data-part='input'],
+[data-look='aperture'] [data-part='segmented'] {
+  background: #0E1217;
+  border-color: var(--bbb-border-color);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+[data-look='aperture'] [data-part='button'][data-variant='primary'] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  border-color: #C4933A;
+  font-weight: 700;
+}
+
+[data-look='aperture'] [data-part='segment'][data-active] {
+  background: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+}
+
+[data-look='aperture'] [data-part='badge'] {
+  border-radius: var(--bbb-radius-sm);
+}

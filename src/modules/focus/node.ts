@@ -1,0 +1,86 @@
+/**
+ * 초점 맞추기 페이지의 트리 노드.
+ * 루트에서 갈라진 가지 - 광학대 위에서 상을 맺히게 하는 자리다.
+ */
+
+import { ROOT_ID } from '../../core/tree';
+import type { PageNode } from '../../core/tree';
+import { focusDictionary } from './dictionary';
+
+export const focusNode: PageNode = {
+  id: 'feature-driven-projection',
+  slug: 'focus',
+  parentId: ROOT_ID,
+  title: {
+    ko: focusDictionary.ko.title,
+    en: focusDictionary.en.title,
+    ja: focusDictionary.ja.title,
+  },
+  summary: {
+    ko: focusDictionary.ko.summary,
+    en: focusDictionary.en.summary,
+    ja: focusDictionary.ja.summary,
+  },
+  capability: {
+    ko: focusDictionary.ko.capability,
+    en: focusDictionary.en.capability,
+    ja: focusDictionary.ja.capability,
+  },
+  look: 'aperture',
+  keywords: [
+    '차원축소', '투영', '특징', '가중치', '군집', '설명', '탐색', '산점도',
+    'projection', 'feature', 'weight', 'cluster', 'explainable', 'search', 'scatterplot',
+    '次元削減', '投影', '特徴', '重み',
+  ],
+  traits: {
+    domain: ['data', 'science', 'ai'],
+    audience: ['professional', 'academic'],
+    intent: ['teach', 'explore'],
+    stance: ['earnest'],
+    atmosphere: ['futuristic', 'austere'],
+    temperature: ['cool'],
+    brightness: ['dim'],
+    intensity: ['restrained'],
+    tension: ['calm'],
+    daytime: ['night'],
+    layout: ['split-screen'],
+    density: ['comfortable'],
+    rhythm: ['modular'],
+    alignment: ['left'],
+    grid: ['col-12'],
+    corner: ['rounded'],
+    border: ['hairline'],
+    elevation: ['subtle'],
+    surface: ['plain'],
+    'type-voice': ['grotesk'],
+    'type-scale': ['minor-third'],
+    'type-contrast': ['strong'],
+    tracking: ['normal'],
+    leading: ['normal'],
+    casing: ['sentence'],
+    'motion-character': ['subtle-fade'],
+    'motion-duration': ['quick'],
+    easing: ['ease-out'],
+    entrance: ['fade'],
+    paradigm: ['direct-manipulation'],
+    navigation: ['tree', 'breadcrumb'],
+    feedback: ['responsive'],
+    persistence: ['url-state'],
+    tone: ['technical'],
+    person: ['second'],
+    'copy-length': ['medium'],
+    jargon: ['explained'],
+    'data-presence': ['central'],
+    imagery: ['diagram'],
+    ornament: ['none'],
+    'number-format': ['tabular'],
+    'render-mode': ['client'],
+    'compute-budget': ['zero'],
+    'llm-usage': ['none'],
+    'state-scope': ['stateless'],
+    offline: ['full'],
+    'contrast-policy': ['apca-body', 'wcag-aa'],
+    'motion-policy': ['respect-reduced'],
+    'focus-style': ['ring'],
+  },
+};

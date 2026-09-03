@@ -56,6 +56,7 @@
 | `/mouse` | Optimal Sensor Position for a Computer Mouse | CHI 2020 (Aalto·KAIST·DGIST) |
 | `/hooks` | HookLens: Visual Analytics for Understanding React Hooks Structures | PacificVis 2026 (SNU) |
 | `/brush` | Distortion-aware Brushing for Reliable Cluster Analysis in Multidimensional Projections | IEEE TVCG 2026 (SNU·QCRI·Oklahoma) |
+| `/focus` | Towards More Explainable Nonlinear Dimensionality Reduction: A Feature-Driven Interaction Approach | IEEE TVCG 2026 (SNU) |
 
 `/`(개인정보 지우개)와 `/color`(크로마 랩)는 논문에서 나온 페이지가 아니다.
 
@@ -67,7 +68,6 @@
 
 | # | 논문 | 학회 | 페이지로 옮길 것 |
 | --- | --- | --- | --- |
-| 4 | Towards More Explainable Nonlinear Dimensionality Reduction: A Feature-Driven Interaction Approach | TVCG 2026 (SNU) | 특징으로 설명하는 투영 |
 | 5 | Readability vs. Faithfulness: Unveiling Correlations between Graph Aesthetics and DR Quality | EuroVis 2026 GDxDR (SNU) | 보기 좋음과 충실함의 상관 |
 | 6 | DirectVis: Editing Code-Based Interactive Visualization with Direct Manipulation | PacificVis 2026 (SNU) | 코드 시각화를 손으로 고치기 |
 

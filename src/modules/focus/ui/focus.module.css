@@ -1,0 +1,386 @@
+/*
+ * 초점 맞추기 페이지의 배치.
+ *
+ * 왼쪽은 광학대(그림과 손잡이), 오른쪽은 읽는 자리(부탁·논문·밝힘)다.
+ * 세 무리의 색은 config.ts의 GROUP_COLORS에서 인라인으로 들어온다.
+ * 좁은 화면(<1080px)에서는 한 기둥으로 접힌다.
+ */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.stageColumn,
+.sideColumn {
+  display: grid;
+  gap: 20px;
+  min-inline-size: 0;
+}
+
+@media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.caveat {
+  margin: 0;
+  padding: 10px 12px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  border-radius: var(--bbb-radius-sm);
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg);
+}
+
+.empty {
+  margin: 8px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.noteTitle {
+  margin: 14px 0 4px;
+  font-size: var(--bbb-text-n1);
+  font-weight: 700;
+}
+
+/* ── 산점도 ── */
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 620px) {
+  .stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.plot {
+  inline-size: 100%;
+  max-inline-size: 320px;
+  block-size: auto;
+  aspect-ratio: 1;
+  background: var(--bbb-bg);
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+}
+
+.gridLine {
+  stroke: var(--bbb-border-color);
+  stroke-width: 0.5;
+  opacity: 0.6;
+}
+
+.scores {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.score {
+  display: grid;
+  gap: 2px;
+}
+
+.scoreName {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.scoreValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-2);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-accent);
+}
+
+.kRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-block: 2px;
+}
+
+.kButtons {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.kButton {
+  min-inline-size: 2em;
+  padding: 3px 7px;
+  border: 1px solid var(--bbb-border-color);
+  border-radius: var(--bbb-radius-sm);
+  background: var(--bbb-surface-raised);
+  color: var(--bbb-fg-muted);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.kButton[data-active] {
+  background: var(--bbb-accent);
+  border-color: var(--bbb-accent);
+  color: var(--bbb-accent-fg);
+  font-weight: 700;
+}
+
+.scoreHint {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.boundNote {
+  margin: 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 12px 0 0;
+  padding: 0;
+  font-size: var(--bbb-text-n1);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendDot {
+  inline-size: 9px;
+  block-size: 9px;
+  border-radius: 50%;
+}
+
+/* ── 손잡이 ── */
+
+.knobActions {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.knobList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.knob {
+  display: grid;
+  grid-template-columns: minmax(6em, 1fr) minmax(0, 2fr) auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .knob {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .slider {
+    grid-column: 1 / -1;
+  }
+}
+
+.knobLabel {
+  display: grid;
+  gap: 1px;
+  cursor: pointer;
+}
+
+.knobName {
+  font-size: var(--bbb-text-0);
+}
+
+.knobHint {
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.slider {
+  inline-size: 100%;
+  accent-color: var(--bbb-accent);
+  cursor: pointer;
+}
+
+.knobValue {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+  min-inline-size: 3em;
+  text-align: end;
+}
+
+.onlyThis {
+  padding: 3px 8px;
+  border: 1px solid var(--bbb-border-strong);
+  border-radius: var(--bbb-radius-sm);
+  background: none;
+  color: var(--bbb-fg-muted);
+  font: inherit;
+  font-size: var(--bbb-text-n1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.keyboardHint {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 부탁 ── */
+
+.queryWhat {
+  margin: 10px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.queryRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-block-start: 12px;
+}
+
+.stepLine {
+  font-family: var(--bbb-font-mono);
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+  color: var(--bbb-fg-muted);
+}
+
+/* 탐색이 도는 동안 도는 것이 보이게 한다. 움직임을 줄이려는 사람에게는 멈춘다. */
+.pulse {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--bbb-accent);
+  animation: focusPulse 1.1s ease-in-out infinite;
+}
+
+@keyframes focusPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.movedList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.movedItem {
+  display: grid;
+  gap: 3px;
+}
+
+.movedName {
+  font-size: var(--bbb-text-n1);
+  font-variant-numeric: tabular-nums;
+}
+
+.movedBar {
+  block-size: 4px;
+  border-radius: 999px;
+  background: var(--bbb-accent);
+  min-inline-size: 3px;
+}
+
+.movedBar[data-direction='down'] {
+  background: var(--bbb-border-strong);
+}
+
+.handOver {
+  margin: 12px 0 0;
+  padding: 8px 10px;
+  border-inline-start: 3px solid var(--bbb-accent);
+  background: var(--bbb-accent-soft);
+  font-size: var(--bbb-text-n1);
+}
+
+.iterationNote {
+  margin: 14px 0 0;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+/* ── 논문이 잰 것 ── */
+
+.studyLine {
+  margin: 0 0 8px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.kindList {
+  margin: 8px 0;
+  padding-inline-start: 18px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+  display: grid;
+  gap: 3px;
+}
+
+/* ── 밝힘과 곁들임 ── */
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.notes .noteTitle {
+  margin-block-start: 0;
+}
+
+.noteList {
+  margin: 0;
+  padding-inline-start: 18px;
+  font-size: var(--bbb-text-n1);
+  color: var(--bbb-fg-muted);
+}
+
+.related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: var(--bbb-text-n1);
+}
+
+.relatedLink {
+  color: var(--bbb-accent);
+  text-underline-offset: 2px;
+}
